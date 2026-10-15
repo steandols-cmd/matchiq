@@ -146,6 +146,8 @@ def gates(model_summary: dict, v2_summary: dict | None, base_summary: dict | Non
     add("holdout", selection_locked_before_test, "Modellval låst före orörd slutsäsong")
     t1 = test.get("1x2") or {}
     for ref_name, ref in (("V2", v2_summary), ("baslinje", base_summary)):
+        if ref is None:  # ingen jämförelse mot sig själv (V2 bedöms bara mot baslinjen)
+            continue
         r1 = ((ref or {}).get("by_split", {}).get("test", {}) or {}).get("1x2") or {}
         ok = (t1.get("logloss") is not None and r1.get("logloss") is not None and t1["logloss"] < r1["logloss"]
               and t1["brier"] < r1["brier"])

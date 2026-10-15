@@ -159,6 +159,9 @@ def build_report(snapshots: list[dict], out_path: Path, *, kind: str, created_at
     W = A4[0] - 28 * mm
     kind_label = {"T-30": "T−30-RAPPORT", "late": "SEN RAPPORT – MISSAD DEADLINE", "test": "TESTRAPPORT",
                   "manual": "MANUELL PROGNOS"}.get(kind, kind)
+    simulated = any(s.get("clock") == "simulated" for s in snapshots)
+    if simulated:
+        kind_label += " · SIMULERAD KLOCKA"
     kickoff = parse_iso(match["kickoff_utc"])
     cutoff = parse_iso(first["data_cutoff_utc"])
     story: list = []
@@ -176,6 +179,8 @@ def build_report(snapshots: list[dict], out_path: Path, *, kind: str, created_at
         timing = "Test – simulerad klocka" if first.get("clock") == "simulated" else "Test"
     else:
         timing = f"I tid – {mins_before:.0f} min före avspark"
+    if simulated:
+        timing += "<br/><font size=7 color='#7A5AF8'>Skapad med simulerad klocka (test av T−30-flödet)</font>"
     boxes = [
         [Paragraph("<b>Rapport skapad</b>", S["cell"]), Paragraph("<b>Datagräns (cutoff)</b>", S["cell"]),
          Paragraph("<b>Avspark</b>", S["cell"]), Paragraph("<b>Tidsstatus</b>", S["cell"])],
@@ -305,6 +310,10 @@ def build_report(snapshots: list[dict], out_path: Path, *, kind: str, created_at
     # ---- källor och modeller
     story.append(Paragraph("Källor, licenser och modellversioner", S["h2"]))
     src_txt = "<b>Träningsdata från:</b> " + (", ".join(pl.get("training_sources") or []) or "ingen")
+    for t in pl.get("training_detail") or []:
+        if t.get("policy") != "allowed" and t.get("approval_note"):
+            src_txt += (f"<br/><font color='#B7791F'>{t['name']}: används efter användarens dokumenterade beslut "
+                        f"({fmt_local(t.get('approved_at_utc'))}) – ”{t['approval_note']}”</font>")
     if pl.get("blocked_sources"):
         src_txt += "<br/><b>Spärrade från träning:</b> " + "; ".join(
             f"{b['name']} – {b['reason']}" for b in pl["blocked_sources"])

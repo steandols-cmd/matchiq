@@ -1,0 +1,9 @@
+# Körtidsberoenden för backend (paketeras med PyInstaller)
+starlette>=0.40
+uvicorn>=0.30
+requests>=2.32
+numpy>=2.0
+openpyxl>=3.1
+reportlab>=4.2
+keyring>=25.0
+tzdata>=2024.1

@@ -44,6 +44,8 @@ def get_store(app: App, comp: str) -> HistoryStore:
 
 def match_info(app: App, match_id: int) -> dict:
     r = app.db.one("""SELECT m.*, co.code AS comp_code, co.name AS comp_name, h.name AS home_name, a.name AS away_name,
+        h.color_primary AS home_c1, h.color_secondary AS home_c2, h.crest_path AS home_crest,
+        a.color_primary AS away_c1, a.color_secondary AS away_c2, a.crest_path AS away_crest,
         s.label AS season FROM matches m JOIN competitions co ON co.id=m.competition_id
         JOIN teams h ON h.id=m.home_team_id JOIN teams a ON a.id=m.away_team_id
         LEFT JOIN seasons s ON s.id=m.season_id WHERE m.id=?""", (match_id,))
@@ -99,6 +101,9 @@ def compute(app: App, match_id: int, cutoff: datetime, families: tuple[str, ...]
         results[fam] = res
     sources_rows = [dict(r) for r in app.db.query("SELECT * FROM sources")]
     training = [s["id"] for s in sources_rows if catalog.training_allowed(s)]
+    training_detail = [{"id": s["id"], "name": s["name"], "policy": s["training_policy"],
+                        "approval_note": s["training_approval_note"], "approved_at_utc": s["training_approval_at_utc"]}
+                       for s in sources_rows if catalog.training_allowed(s)]
     blocked = [{"id": s["id"], "name": s["name"], "reason": catalog.training_status_text(s)}
                for s in sources_rows if not catalog.training_allowed(s)
                and any(k in (s["data_kinds"] or "") for k in ("results", "team_stats", "events"))]
@@ -147,6 +152,7 @@ def compute(app: App, match_id: int, cutoff: datetime, families: tuple[str, ...]
         "lineups": lineups,
         "absences": absences,
         "training_sources": training,
+        "training_detail": training_detail,
         "blocked_sources": blocked,
         "sources_used": used,
         "flags": flags,

@@ -1,0 +1,205 @@
+name: Bygg och testa MatchIQ
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: "3.12"
+  NODE_VERSION: "22"
+
+jobs:
+  backend-tests:
+    name: Backend-tester (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Installera beroenden
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt -r backend/requirements-dev.txt
+      - name: Kör tester
+        working-directory: backend
+        env:
+          MATCHIQ_SECRETS: memory
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+  web-typecheck:
+    # Egen kontroll (blockerar inte installationspaketen) – typfel visas tydligt i körningen.
+    name: Gränssnitt (typkontroll)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm install
+      - run: npm --workspace apps/web run typecheck
+
+  web:
+    name: Gränssnitt (bygge)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm install
+      - run: npm --workspace apps/web run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: apps/web/dist
+
+  ui-check:
+    name: UI-kontroll och skärmbilder (stående + liggande)
+    needs: web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-dist
+          path: apps/web/dist
+      - name: Installera beroenden
+        run: |
+          pip install -r backend/requirements.txt -r backend/requirements-dev.txt playwright pillow
+          python -m playwright install --with-deps chromium
+      - name: Kör UI-kontroll
+        env:
+          MATCHIQ_SECRETS: memory
+        run: python scripts/ui_check.py --out ui-check --mockups docs/mockups
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-check
+          path: ui-check
+
+  desktop-test:
+    name: Sidecar-test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: pip install -r backend/requirements.txt
+      - run: npm install
+      - name: Typkontroll av Electron-koden
+        run: npm --workspace apps/desktop exec -- tsc -p tsconfig.json --noEmit
+      - name: Starta backend som sidecar och verifiera tokenskydd
+        env:
+          MATCHIQ_PYTHON: python
+        run: npm --workspace apps/desktop run test
+
+  package:
+    name: Installationspaket (${{ matrix.name }})
+    needs: [backend-tests, web, desktop-test]
+    runs-on: ${{ matrix.os }}
+    env:
+      HAS_SIGNING_CERT: ${{ secrets.CSC_LINK != '' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macOS (Apple Silicon)
+            os: macos-latest
+            target: --mac --arm64
+          # Intel-Mac: lägg till en rad med en Intel-runner (t.ex. macos-13 så länge den finns) och --mac --x64.
+          - name: Windows
+            os: windows-latest
+            target: --win --x64
+          - name: Linux
+            os: ubuntu-latest
+            target: --linux --x64
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Bygg backend-sidecar (PyInstaller)
+        working-directory: backend
+        run: |
+          pip install -r requirements.txt -r requirements-dev.txt
+          pyinstaller --noconfirm matchiq-backend.spec
+      - name: Röktest av den paketerade backend
+        working-directory: backend
+        shell: bash
+        env:
+          MATCHIQ_TOKEN: ci-token
+          MATCHIQ_SECRETS: memory
+        run: |
+          EXE=dist/matchiq-backend/matchiq-backend
+          [ -f "$EXE.exe" ] && EXE="$EXE.exe"
+          "$EXE" --data-dir "$RUNNER_TEMP/mq" --port 8799 --no-sync > "$RUNNER_TEMP/mq.log" 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -sf -H "Authorization: Bearer ci-token" http://127.0.0.1:8799/api/meta > /dev/null; then echo "Backend svarar"; exit 0; fi
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/mq.log"; exit 1
+      - run: npm install
+      - run: npm --workspace apps/web run build
+      - name: Bygg installationspaket
+        working-directory: apps/desktop
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Valfri kodsignering: lägg in CSC_LINK/CSC_KEY_PASSWORD (och APPLE_ID m.fl. för notarisering) som secrets.
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          if [ -z "$CSC_LINK" ]; then export CSC_IDENTITY_AUTO_DISCOVERY=false; fi
+          npm run build
+          npx electron-builder ${{ matrix.target }} --publish never
+      - name: Ad hoc-signering (macOS utan certifikat)
+        # Apple Silicon kräver en signatur för att appen ska starta. Utan Developer ID-certifikat signeras appen
+        # ad hoc och dmg/zip byggs om. Gatekeeper kräver då "Öppna ändå" första gången (se README).
+        if: runner.os == 'macOS' && env.HAS_SIGNING_CERT != 'true'
+        working-directory: apps/desktop
+        shell: bash
+        run: |
+          APP=$(ls -d release/mac*/MatchIQ.app | head -1)
+          codesign --force --deep --sign - "$APP"
+          codesign --verify --deep --verbose=2 "$APP"
+          VER=$(node -p "require('./package.json').version")
+          ARCH=$(basename "$(dirname "$APP")" | sed 's/^mac-\{0,1\}//'); ARCH=${ARCH:-x64}
+          rm -f release/*.dmg release/*.zip
+          hdiutil create -volname "MatchIQ $VER" -srcfolder "$APP" -ov -format UDZO "release/MatchIQ-$VER-mac-$ARCH.dmg"
+          ditto -c -k --keepParent "$APP" "release/MatchIQ-$VER-mac-$ARCH.zip"
+          ls -la release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MatchIQ-${{ matrix.os }}
+          path: |
+            apps/desktop/release/*.dmg
+            apps/desktop/release/*.zip
+            apps/desktop/release/*.exe
+            apps/desktop/release/*.msi
+            apps/desktop/release/*.AppImage
+          if-no-files-found: error

@@ -1,0 +1,3 @@
+# Test och paketering
+pdfplumber>=0.11
+pyinstaller>=6.10

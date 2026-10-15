@@ -75,6 +75,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--dev-token", action="store_true", help="skriv ut en genererad token (endast utveckling)")
     ap.add_argument("--no-scheduler", action="store_true")
     ap.add_argument("--no-sync", action="store_true")
+    ap.add_argument("--web-dir", default=os.environ.get("MATCHIQ_WEB_DIR"),
+                    help="servera byggt gränssnitt från samma port (webbläsarläge)")
     ap.add_argument("--simulated-now", help="starta med simulerad klocka (UTC ISO), kräver MATCHIQ_ALLOW_SIMULATION=1")
     args = ap.parse_args(argv)
 
@@ -112,7 +114,7 @@ def main(argv: list[str] | None = None) -> None:
     if not args.no_sync and not clock.simulated:
         SyncThread(app).start()
 
-    asgi = create_app(app, token, allow_simulation=allow_sim)
+    asgi = create_app(app, token, allow_simulation=allow_sim, web_dir=args.web_dir)
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     sock.bind(("127.0.0.1", args.port))

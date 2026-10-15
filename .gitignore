@@ -1,7 +1,6 @@
 node_modules/
 dist/
 release/
-build/
 *.pyc
 __pycache__/
 .venv/
@@ -13,3 +12,5 @@ backend/build/
 .DS_Store
 apps/web/dist/
 apps/desktop/dist/
+dist-test/
+apps/desktop/release/

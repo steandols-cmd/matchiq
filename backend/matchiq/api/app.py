@@ -102,7 +102,8 @@ class SecurityMiddleware:
         return await self.app(scope, receive, send_wrapper)
 
 
-def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, allow_simulation: bool = False):
+def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, allow_simulation: bool = False,
+               web_dir: str | None = None):
     jobs = JobManager(ctx)
     ctx.extras["jobs"] = jobs
 
@@ -194,6 +195,24 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
         snaps = _latest_snaps([r["id"] for r in data])
         for r in data:
             r["snapshots"] = snaps.get(r["id"], {})
+        if qp.get("preview") == "1":
+            # Förhandsvisning (ej fryst) för kommande matcher utan fryst prognos – cachas per datum/dataversion.
+            now = ctx.clock.now()
+            cache = ctx.extras.setdefault("quick_cache", {})
+            n = 0
+            for r in data:
+                if n >= 40 or r["status"] not in ("scheduled", "unknown") or r["snapshots"]:
+                    continue
+                ko = parse_iso(r["kickoff_utc"])
+                cutoff = min(now, ko)  # type: ignore[type-var]
+                key = (r["id"], forecast._data_version(ctx), to_iso(cutoff)[:13])
+                if key not in cache:
+                    pl = forecast.compute(ctx, r["id"], cutoff, families=("V2", "V3"))
+                    cache[key] = {f: {"probs": m.get("probs"), "status": m.get("status")} for f, m in pl["models"].items()}
+                    if len(cache) > 500:
+                        cache.clear()
+                r["preview"] = cache[key]
+                n += 1
         return JSON(data)
 
     def _preview_cache_key(mid: int) -> tuple:
@@ -321,9 +340,11 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
     # ------------------------------------------------------------------ lag
     async def teams(request: Request):
         q = request.query_params.get("q", "")
-        rows = ctx.db.query("""SELECT t.*, (SELECT COUNT(*) FROM matches m WHERE t.id IN (m.home_team_id, m.away_team_id))
-            AS matches FROM teams t WHERE t.name LIKE ? OR t.id IN (SELECT team_id FROM team_aliases WHERE alias LIKE ?)
-            ORDER BY needs_review DESC, matches DESC LIMIT 300""", (f"%{q}%", f"%{q}%"))
+        rows = ctx.db.query("""SELECT t.*, COALESCE(c.n, 0) AS matches FROM teams t
+            LEFT JOIN (SELECT team_id, COUNT(*) n FROM (SELECT home_team_id team_id FROM matches
+                       UNION ALL SELECT away_team_id FROM matches) GROUP BY team_id) c ON c.team_id = t.id
+            WHERE t.name LIKE ? OR t.id IN (SELECT team_id FROM team_aliases WHERE alias LIKE ?)
+            ORDER BY t.needs_review DESC, matches DESC LIMIT 300""", (f"%{q}%", f"%{q}%"))
         return JSON(rows_to_dicts(rows))
 
     async def team_detail(request: Request):
@@ -769,5 +790,10 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
         Route("/api/db/export", db_export, methods=["POST"]), Route("/api/db/import", db_import, methods=["POST"]),
         Route("/api/jobs", jobs_list), Route("/api/jobs/{jid}", job_get),
     ]
+    if web_dir:
+        # Webbläsarläge/utveckling: servera det byggda gränssnittet från samma ursprung (ingen CORS behövs).
+        from starlette.routing import Mount
+        from starlette.staticfiles import StaticFiles
+        routes.append(Mount("/", app=StaticFiles(directory=web_dir, html=True), name="web"))
     star = Starlette(routes=routes)
     return SecurityMiddleware(star, token, extra_hosts)

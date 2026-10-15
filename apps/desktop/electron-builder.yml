@@ -1,0 +1,50 @@
+# Paketering av MatchIQ. Backend (PyInstaller, onedir) och det byggda gränssnittet läggs i resources/.
+appId: se.matchiq.desktop
+productName: MatchIQ
+copyright: "© MatchIQ"
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**
+  - package.json
+extraResources:
+  - from: ../web/dist
+    to: web
+  - from: ../../backend/dist/matchiq-backend
+    to: backend
+  - from: build/tray.png
+    to: tray.png
+asar: true
+mac:
+  target:
+    - target: dmg
+    - target: zip
+  category: public.app-category.sports
+  icon: build/icon.png
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  artifactName: "MatchIQ-${version}-mac-${arch}.${ext}"
+dmg:
+  title: "MatchIQ ${version}"
+win:
+  target:
+    - target: nsis
+    - target: msi
+  icon: build/icon.png
+  artifactName: "MatchIQ-${version}-win-${arch}.${ext}"
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  shortcutName: MatchIQ
+msi:
+  perMachine: false
+linux:
+  target: [AppImage]
+  category: Sports
+  icon: build/icon.png
+  artifactName: "MatchIQ-${version}-linux-${arch}.${ext}"

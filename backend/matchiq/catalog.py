@@ -37,7 +37,7 @@ SOURCES: list[dict] = [
         "min_interval_seconds": 2.0,
         "daily_quota": 500,
         "data_kinds": ["fixtures", "results"],
-        "notes": "Rå filer hämtas från raw.githubusercontent.com. Saknade filer loggas med HTTP-status.",
+        "notes": "Filerna hämtas via GitHubs dokumenterade REST-API (60 anrop/timme utan token). Saknade filer loggas med HTTP-status.",
     },
     {
         "id": "statsbomb_open",
@@ -364,7 +364,17 @@ def training_allowed(source: dict) -> bool:
     return False
 
 
+TRAINING_TEXT_OVERRIDE = {
+    "workbook_legacy": "Prognoser – används aldrig som träningsdata",
+    "sofascore_reference": "Ingen data samlas in",
+    "the_odds_api": "Odds används aldrig för modellträning",
+    "statmuse_legacy": "Endast rimlighetskontroll – aldrig träningsdata",
+}
+
+
 def training_status_text(source: dict) -> str:
+    if source.get("id") in TRAINING_TEXT_OVERRIDE and not training_allowed(source):
+        return TRAINING_TEXT_OVERRIDE[source["id"]]
     if training_allowed(source):
         if source["training_policy"] == "allowed":
             return "Tillåten (licens)"

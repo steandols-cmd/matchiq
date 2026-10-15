@@ -1,0 +1,12 @@
+{
+  "name": "matchiq",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": ["apps/web", "apps/desktop"],
+  "scripts": {
+    "web:build": "npm --workspace apps/web run build",
+    "desktop:start": "npm --workspace apps/web run build && npm --workspace apps/desktop run start",
+    "test:backend": "cd backend && python -m unittest discover -s tests -p \"test_*.py\"",
+    "test:desktop": "npm --workspace apps/desktop run test"
+  }
+}
