@@ -19,10 +19,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: datarapport
-  cancel-in-progress: false
-
 env:
   PYTHON_VERSION: "3.12"
 
@@ -76,6 +72,11 @@ jobs:
     name: Hämta StatsBomb Open Data (täckningsrapport)
     needs: oppen-data
     runs-on: ubuntu-latest
+    # Lång körning (flera timmar p.g.a. GitHubs anropsgräns) – bara manuellt eller enligt schema
+    if: github.event_name != 'push'
+    concurrency:
+      group: statsbomb-hamtning
+      cancel-in-progress: true
     timeout-minutes: 330
     steps:
       - uses: actions/checkout@v5
