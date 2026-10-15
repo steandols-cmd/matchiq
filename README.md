@@ -89,9 +89,11 @@ Appen startar och fungerar utan arbetsboken.
 *Data & källor → Källor & licenser.* Källor med oklara eller villkorade rättigheter är **spärrade från
 modellträning** tills du dokumenterar ett beslut (anteckning krävs och loggas).
 
-> **Viktigt om arbetsbokens CL-historik:** de 2 024 CL-matcherna kommer från UEFA. UEFA-data är spärrad från
-> träning i en ny installation. Utan ditt beslut tränas V2/V3 bara på tillåtna källor (OpenFootball m.fl.) och
-> UEFA-data används endast för visning och utvärdering. Läs UEFA:s villkor innan du godkänner.
+> **Viktigt om arbetsbokens CL-historik:** de 2 024 CL-matcherna kommer från UEFA. UEFA:s allmänna villkor
+> ([avsnitt 6.2](https://www.uefa.com/termsconditions/)) förbjuder automatisk insamling och att innehållet används
+> för att utveckla eller träna mjukvara, modeller eller AI. UEFA-data visas därför i appen men används aldrig för
+> träning eller utvärdering, och hämtas aldrig automatiskt. Ett tidigare godkännande återkallas automatiskt vid
+> uppdatering. Träning kan bara aktiveras med en referens till ett skriftligt tillstånd från UEFA.
 
 ### 5. Kör modellval och validering
 
@@ -213,7 +215,7 @@ Fullständigt register: **[docs/KALLREGISTER.md](docs/KALLREGISTER.md)** (genere
 | Wyscout öppna händelsedata (CC BY 4.0) | Skott, skott på mål, hörnor, spelare och startelvor 2017/18 i de fem stora ligorna | Tillåten |
 | Manuell inmatning | Utfall, startelvor | Tillåten |
 | StatsBomb Open Data | Urval av matcher med händelsedata (attribution krävs) | Spärrad tills villkoren godkänts |
-| UEFA | Förstahandskälla; automatisk hämtning avstängd (odokumenterade endpoints) | Spärrad tills dokumenterat beslut |
+| UEFA | Endast visning av data du själv importerat. Villkoren förbjuder automatisk insamling och träning | Spärrad – kräver skriftligt tillstånd |
 | API-Football, football-data.org | Fixturer, startelvor, frånvaro, statistik (API-nyckel) | Spärrad tills villkoren godkänts |
 | Football-Data.co.uk | Endast visning/jämförelse; villkoren utesluter AI-träning | Spärrad – kräver skriftligt tillstånd |
 | The Odds API | Odds för jämförelse | Aldrig träning |
@@ -258,8 +260,8 @@ GitHub Actions (*Datakällor – inventering och nedladdning*) vid ändringar oc
   CL 2011/12–2025/26).
 * **Allsvenskan finns bara delvis.** Den finns för 2023–2025, och 2025 bara till och med maj.
 * **Hörnor och skott finns bara för äldre säsonger.** Det gäller Wyscout 2017/18 och StatsBomb för valda
-  matcher, och den datan är äldre än 450 dagar. För aktuella säsonger krävs API-Football. För CL krävs ditt
-  beslut om UEFA-datan i arbetsboken.
+  matcher, och den datan är äldre än 450 dagar. För aktuella säsonger, även i Champions League, krävs
+  API-Football.
 
 ---
 
@@ -294,8 +296,8 @@ låst modellval före orörd slutsäsong, bättre än V2 och baslinjen på holdo
 *kandidat*, men saknar ännu prospektiva T−30-prognoser. V3 kan därför inte sättas i produktion och visas som
 **experimentell** överallt. Produktion kan bara sättas manuellt, och bara när alla grindar är gröna.
 
-> Siffrorna ovan kommer från demodatabasen, där UEFA-data godkänts för träning med en dokumenterad anteckning.
-> I en ny installation, där UEFA är spärrad, blir underlaget ett annat. Kör då om valideringen under
+> Siffrorna ovan kommer från demodatabasen, där UEFA-data godkänts för träning innan villkoren granskades.
+> UEFA:s villkor förbjuder sådan användning, och i appen är UEFA nu spärrad, så underlaget blir ett annat. Kör om valideringen under
 > *Utvärdering*.
 
 ---
@@ -419,7 +421,6 @@ Allt fungerar utan nycklar. Det här låser upp mer data:
 | **GitHub-token** (valfri, gratis, inga behörigheter behövs) | Filerna hämtas från raw.githubusercontent.com utan anropsgräns, men filträden och reservvägen går via GitHubs API (60 anrop/timme utan token). En token behövs bara om den gränsen nås ofta | Inställningar → API-nycklar |
 | **football-data.org-nyckel** | Fler fixturer och resultat | Som ovan |
 | **The Odds API-nyckel** | Oddsjämförelse (aldrig träning) | Som ovan |
-| **Beslut om UEFA-data** | Arbetsbokens CL-historik får användas för träning först efter ditt dokumenterade beslut | Data & källor → UEFA → Godkänn för träning |
 | **Beslut om StatsBomb Open Data** | Kräver att du godkänner StatsBombs användarvillkor | Data & källor → StatsBomb |
 | **Skriftligt tillstånd från Football-Data.co.uk** | Endast om du vill använda deras data för träning | Data & källor (referens krävs) |
 | **Kodsigneringscertifikat** (Apple Developer ID / Windows) | Inga Gatekeeper-/SmartScreen-varningar | GitHub-secrets, se ovan |
@@ -464,8 +465,9 @@ python scripts/gen_docs.py                         # uppdaterar docs/KALLREGISTE
 * **Klubbmärken:** officiella klubbmärken är varumärkesskyddade och följer inte med. Appen ritar en sköld i
   klubbens färger med initialer. Du kan ladda upp ett märke per lag under *Lag & spelare*.
 * **Odds:** oddsfliken är tom tills en oddskälla med nyckel aktiverats. Inga odds hittas på.
-* **UEFA:** automatisk hämtning är avstängd eftersom endpoints är odokumenterade och villkoren oklara. Data
-  importeras via arbetsboken eller en fil.
+* **UEFA:** UEFA:s villkor förbjuder automatisk insamling och träning av modeller. Data som du själv importerat
+  (arbetsboken) visas, men används inte av modellerna. Champions League-statistik för modellerna kräver
+  API-Football.
 * **Arbetsboken V3** innehåller inte bladen för trupp/målskyttar, Football-Data, football.json, Europe, StatsBomb
   och manifestet över misslyckade hämtningar. De kontrollvärdena redovisas som *saknas i filen*. De som finns
   stämmer exakt (2 024 CL-matcher, 15 340 inhemska matcher och alla kontrollerade saknade värden).
