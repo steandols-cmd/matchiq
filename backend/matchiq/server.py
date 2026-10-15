@@ -69,6 +69,8 @@ class SyncThread(threading.Thread):
 
 
 def main(argv: list[str] | None = None) -> None:
+    from matchiq.config import ensure_utf8_stdio
+    ensure_utf8_stdio()
     ap = argparse.ArgumentParser(prog="matchiq-backend")
     ap.add_argument("--port", type=int, default=int(os.environ.get("MATCHIQ_PORT", "0")))
     ap.add_argument("--data-dir", default=os.environ.get("MATCHIQ_DATA_DIR"))

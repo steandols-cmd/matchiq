@@ -19,8 +19,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - name: Installera beroenden
@@ -29,18 +29,26 @@ jobs:
           pip install -r backend/requirements.txt -r backend/requirements-dev.txt
       - name: Kör tester
         working-directory: backend
+        shell: bash
         env:
           MATCHIQ_SECRETS: memory
           PYTHONPATH: .
-        run: python -m unittest discover -s tests -p "test_*.py" -v
+          PYTHONIOENCODING: utf-8
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -p "test_*.py" -v 2>&1 | tee "$RUNNER_TEMP/test-output.txt"
+      - name: Visa testfel som anteckningar
+        if: failure()
+        shell: bash
+        run: python scripts/ci_annotate.py "$RUNNER_TEMP/test-output.txt" "Backend-tester"
 
   web-typecheck:
     # Egen kontroll (blockerar inte installationspaketen) – typfel visas tydligt i körningen.
     name: Gränssnitt (typkontroll)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install
@@ -50,8 +58,8 @@ jobs:
     name: Gränssnitt (bygge)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install
@@ -66,8 +74,8 @@ jobs:
     needs: web
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - uses: actions/download-artifact@v4
@@ -96,11 +104,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: pip install -r backend/requirements.txt
@@ -108,9 +116,16 @@ jobs:
       - name: Typkontroll av Electron-koden
         run: npm --workspace apps/desktop exec -- tsc -p tsconfig.json --noEmit
       - name: Starta backend som sidecar och verifiera tokenskydd
+        shell: bash
         env:
           MATCHIQ_PYTHON: python
-        run: npm --workspace apps/desktop run test
+        run: |
+          set -o pipefail
+          npm --workspace apps/desktop run test 2>&1 | tee "$RUNNER_TEMP/desktop-test.txt"
+      - name: Visa testfel som anteckningar
+        if: failure()
+        shell: bash
+        run: python scripts/ci_annotate.py "$RUNNER_TEMP/desktop-test.txt" "Sidecar-test"
 
   package:
     name: Installationspaket (${{ matrix.name }})
@@ -133,11 +148,11 @@ jobs:
             os: ubuntu-latest
             target: --linux --x64
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Bygg backend-sidecar (PyInstaller)

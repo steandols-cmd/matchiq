@@ -24,6 +24,8 @@ from .timeutil import FakeClock, parse_iso
 
 
 def main(argv: list[str] | None = None) -> None:
+    from matchiq.config import ensure_utf8_stdio
+    ensure_utf8_stdio()
     ap = argparse.ArgumentParser(prog="matchiq")
     ap.add_argument("--data-dir")
     sub = ap.add_subparsers(dest="cmd", required=True)

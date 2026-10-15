@@ -19,7 +19,8 @@ test("backend startar, binds till 127.0.0.1 och kräver token", { timeout: 90_00
     const meta = await apiGet<any>(b, "/meta");
     assert.equal(meta.status, 200);
     assert.equal(meta.body.app, "MatchIQ");
-    assert.equal(meta.body.data_dir, fs.realpathSync(dataDir));
+    // Jämför kanoniska sökvägar (macOS: /var → /private/var, Windows: korta 8.3-namn).
+    assert.equal(fs.realpathSync.native(meta.body.data_dir), fs.realpathSync.native(dataDir));
     const unauth = await apiGet<any>({ port: b.port, token: "fel" }, "/meta");
     assert.equal(unauth.status, 401);
     const sched = await apiGet<any>(b, "/scheduler");

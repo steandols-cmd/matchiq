@@ -83,4 +83,15 @@ class Paths:
 
 
 def get_paths(root: Path | None = None) -> Paths:
-    return Paths(root or default_data_dir()).ensure()
+    # Kanonisk sökväg (t.ex. /var → /private/var på macOS) så att samma mapp alltid rapporteras likadant.
+    return Paths(Path(root).expanduser().resolve() if root else default_data_dir()).ensure()
+
+
+def ensure_utf8_stdio() -> None:
+    """Skriv stdout/stderr som UTF-8 även i Windows-konsoler (cp1252 klarar inte t.ex. "−" och "→")."""
+    import sys
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[union-attr]
+        except (AttributeError, ValueError):
+            pass
