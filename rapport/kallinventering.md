@@ -1,4 +1,4 @@
-# Källinventering (2026-10-15T12:38:52Z)
+# Källinventering (2026-10-15T12:46:27Z)
 
 Allt nedan är räknat ur källornas egna filer av `scripts/inventera_kallor.py` i GitHub Actions.
 
