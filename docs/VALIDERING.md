@@ -137,6 +137,10 @@ Endast ögonblicksbilder som frystes före avspark (förmatchsbehöriga). Progno
 
 Arbetsbokens V2-resultat reproduceras exakt av MatchIQ:s V2 (automatiskt test `test_v2_benchmark_reproduced`, körs när `MATCHIQ_WORKBOOK` pekar på arbetsboken): **517 matcher, Brier 0,556 mot baslinjens 0,616 och log loss 0,940 mot 1,020.** Arbetsbokens V3 var en skuggprototyp utan godkännande och importeras som arkiverad (LEGACY-V3). MatchIQ:s V3 är en ny modell som valideras ovan.
 
+## Ligorna
+
+Modellvalet ovan gäller Champions League. Walk-forward per liga (Premier League, La Liga, Bundesliga, Serie A, Ligue 1, Allsvenskan) med samma parametrar körs i GitHub Actions på öppen data och publiceras i [datarapporten](https://github.com/steandols-cmd/matchiq/blob/datarapport/rapport/oppen_data.md). Den 15 oktober 2026 hade V3 lägre Brier än V2 i 20 av 23 ligasäsonger. Hörnor och skott kunde bara kontrolleras på 2017/18 (Wyscout).
+
 ## Tolkning och förbehåll
 
 - V3 klarar alla backtest-grindar men saknar ännu ≥ 200 frysta T−30-prognoser med facit. Status är därför *kandidat*, och modellen visas som **experimentell** i hela appen. Produktion kan bara sättas manuellt när alla grindar är gröna.

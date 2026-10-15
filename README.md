@@ -194,7 +194,7 @@ backend/
     scheduler.py          T−30-jobb, sena rapporter, utfallshämtning
     reports/pdf.py        PDF-rapporten
     secrets_store.py      Nyckelring / Autentiseringshanteraren
-  tests/                  65 automatiska tester (unittest)
+  tests/                  automatiska tester (unittest)
 apps/web/                 React-gränssnittet
 apps/desktop/             Electron-skalet och electron-builder-konfiguration
 scripts/                  byggskript, UI-kontroll, demo, simulering, dokumentationsgenerator
@@ -209,7 +209,8 @@ Fullständigt register: **[docs/KALLREGISTER.md](docs/KALLREGISTER.md)** (genere
 
 | Källa | Användning | Träning som standard |
 |---|---|---|
-| OpenFootball (CC0) | Fixturer och resultat, hämtas automatiskt via GitHubs API | Tillåten |
+| OpenFootball (CC0) | Fixturer och resultat för alla säsonger i källan, hämtas via GitHubs API | Tillåten |
+| Wyscout öppna händelsedata (CC BY 4.0) | Skott, skott på mål, hörnor, spelare och startelvor 2017/18 i de fem stora ligorna | Tillåten |
 | Manuell inmatning | Utfall, startelvor | Tillåten |
 | StatsBomb Open Data | Urval av matcher med händelsedata (attribution krävs) | Spärrad tills villkoren godkänts |
 | UEFA | Förstahandskälla; automatisk hämtning avstängd (odokumenterade endpoints) | Spärrad tills dokumenterat beslut |
@@ -232,6 +233,33 @@ Principer som är inbyggda i koden:
   eller liga. Nya namn som liknar befintliga lag flaggas för granskning – inget slås ihop automatiskt.
 * **90 min, förlängning och straffar lagras separat.** Matcher som avgjorts i förlängning används inte som
   90-minutersobservationer i träningen.
+
+### Historikhämtning och driftstatus
+
+*Data & källor → Hämta historik* hämtar historik från de valda källorna i ordningen OpenFootball, Wyscout,
+StatsBomb och API-Football. Samma vy visar driftstatus per serie och mått. *Operativ* betyder minst 100 spelade
+matcher med värde de senaste 450 dagarna från en källa som får användas för träning.
+
+* **Lagkoppling via matcher.** En källas lag-ID kopplas till ett befintligt lag när källans matcher motsvarar
+  befintliga matcher, alltså samma tävling, datum ±1 dygn och samma 90-minutersresultat. Namnlikhet används inte.
+* **Oförändrade filer hämtas inte igen.** Det avgör blob-SHA från GitHub.
+* **Avbruten hämtning återupptas av sig själv.** Det gäller när en anropsgräns eller dygnskvot stoppar
+  hämtningen.
+* **API-Footballs abonnemang styr säsongerna.** Säsonger som abonnemanget inte omfattar markeras med källans eget
+  meddelande. Matchdetaljer hämtas för upp till 20 matcher per anrop.
+* **Gammal data för räknemått används inte.** Skott, skott på mål och hörnor äldre än 450 dagar ingår inte
+  (inställbart). Värdet visas då som saknat, med orsak.
+
+Täckningen i siffror finns på grenen
+[`datarapport`](https://github.com/steandols-cmd/matchiq/tree/datarapport/rapport). Den uppdateras av
+GitHub Actions (*Datakällor – inventering och nedladdning*) vid ändringar och varje måndag:
+
+* **Öppna källor ger 1X2.** Det blir operativt för CL och de fem stora ligorna (OpenFootball 2010/11–2026/27,
+  CL 2011/12–2025/26).
+* **Allsvenskan finns bara delvis.** Den finns för 2023–2025, och 2025 bara till och med maj.
+* **Hörnor och skott finns bara för äldre säsonger.** Det gäller Wyscout 2017/18 och StatsBomb för valda
+  matcher, och den datan är äldre än 450 dagar. För aktuella säsonger krävs API-Football. För CL krävs ditt
+  beslut om UEFA-datan i arbetsboken.
 
 ---
 
@@ -368,14 +396,16 @@ cd backend && MATCHIQ_SECRETS=memory PYTHONPATH=. python -m unittest discover -s
 | 8. V2/V3-status, källvillkor och täckning syns i UI | `scripts/ui_check.py` kontrollerar obligatoriska texter i varje vy | Lokalt + CI |
 | 9. UI jämfört med mockuperna, stående + liggande | Sida-vid-sida-montage och mått i [docs/VISUELL-JAMFORELSE.md](docs/VISUELL-JAMFORELSE.md) | Lokalt + CI |
 
-**Testat i utvecklingsmiljön (Linux):** alla 65 backendtester, arbetsboksimporten med kontrollvärden,
+**Testat i utvecklingsmiljön (Linux):** alla backendtester (78 st), arbetsboksimporten med kontrollvärden,
 V2-benchmarken, modellvalet, MD3-simuleringen med 15 PDF:er, databasexport och -import, sidecar-protokollet
 (Node-test), gränssnittet i Chromium och en typkontroll av gränssnittskoden mot förenklade React-typer.
 
-**Inte testat här:** Electron-fönstret, PyInstaller-paketet och installerarna för macOS och Windows. Miljön
-saknade åtkomst till npm- och PyPI-registren, så Electron, Vite och PyInstaller kunde inte installeras. Dessa
-steg är konfigurerade i CI och byggskripten men har inte körts än. Första CI-körningen eller
-`scripts/build-mac.sh` är därför det första riktiga provet av paketeringen.
+**Testat i GitHub Actions:** backendtesterna på Linux, macOS och Windows, typkontroll och bygge av gränssnittet,
+UI-kontrollen och sidecar-testet på alla tre plattformarna. Dessutom byggs PyInstaller-backend med röktest och
+installationspaketen `.dmg`/`.zip` (Apple Silicon), `.exe`/`.msi` och `.AppImage`.
+
+**Inte testat automatiskt:** att Electron-fönstret startar och fungerar på en riktig Mac eller Windows-dator,
+alltså fönster, systemfält, autostart och aviseringar. Det prövas först vid installationen.
 
 ---
 
@@ -385,14 +415,14 @@ Allt fungerar utan nycklar. Det här låser upp mer data:
 
 | Vad | Varför | Var |
 |---|---|---|
-| **API-Football-nyckel** (api-football.com) | Bekräftade startelvor före avspark, frånvaro, matchstatistik (hörnor/skott) för alla sju ligor | Inställningar → API-nycklar, aktivera källan under Data & källor |
+| **API-Football-nyckel** (api-football.com) | Bekräftade startelvor, frånvaro och matchstatistik (hörnor och skott) för alla sju tävlingar, plus Allsvenskans spelschema. Krävs för att hörnor och skott ska bli operativa i ligorna. Gratisnivån har 100 anrop/dygn och ett begränsat urval säsonger. Appen visar vilka säsonger ditt abonnemang omfattar | Inställningar → API-nycklar, sedan Data & källor → Hämta historik |
+| **GitHub-token** (gratis, inga behörigheter behövs) | Höjer GitHubs gräns från 60 till 5 000 anrop/timme, så att OpenFootball- och StatsBomb-hämtningen går på minuter i stället för timmar | Inställningar → API-nycklar |
 | **football-data.org-nyckel** | Fler fixturer och resultat | Som ovan |
 | **The Odds API-nyckel** | Oddsjämförelse (aldrig träning) | Som ovan |
 | **Beslut om UEFA-data** | Arbetsbokens CL-historik får användas för träning först efter ditt dokumenterade beslut | Data & källor → UEFA → Godkänn för träning |
 | **Beslut om StatsBomb Open Data** | Kräver att du godkänner StatsBombs användarvillkor | Data & källor → StatsBomb |
 | **Skriftligt tillstånd från Football-Data.co.uk** | Endast om du vill använda deras data för träning | Data & källor (referens krävs) |
 | **Kodsigneringscertifikat** (Apple Developer ID / Windows) | Inga Gatekeeper-/SmartScreen-varningar | GitHub-secrets, se ovan |
-| **GitHub-repo** | För att CI ska bygga installationspaketen | Pusha koden och aktivera Actions |
 
 ---
 
