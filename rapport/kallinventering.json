@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-15T13:11:59Z",
+ "generated_utc": "2026-10-15T13:22:49Z",
  "openfootball": {
   "repos": {
    "clubs": {
@@ -2375,33 +2375,6 @@
    }
   ]
  },
- "robots": {
-  "https://api.github.com": {
-   "status": 404,
-   "robots_txt": "",
-   "matchiq_allowed": true
-  },
-  "https://raw.githubusercontent.com": {
-   "status": 404,
-   "robots_txt": "",
-   "matchiq_allowed": true
-  },
-  "https://api.figshare.com": {
-   "status": 404,
-   "robots_txt": "",
-   "matchiq_allowed": true
-  },
-  "https://ndownloader.figshare.com": {
-   "status": 404,
-   "robots_txt": "",
-   "matchiq_allowed": true
-  },
-  "https://v3.football.api-sports.io": {
-   "status": 403,
-   "robots_txt": "",
-   "matchiq_allowed": true
-  }
- },
  "http_log": [
   {
    "url": "https://api.github.com/orgs/openfootball/repos?per_page=100&page=1",
@@ -3212,31 +3185,6 @@
    "url": "https://api.figshare.com/v2/articles/7770422",
    "status": 200,
    "bytes": 7087
-  },
-  {
-   "url": "https://api.github.com/robots.txt",
-   "status": 404,
-   "bytes": 106
-  },
-  {
-   "url": "https://raw.githubusercontent.com/robots.txt",
-   "status": 404,
-   "bytes": 14
-  },
-  {
-   "url": "https://api.figshare.com/robots.txt",
-   "status": 404,
-   "bytes": 466
-  },
-  {
-   "url": "https://ndownloader.figshare.com/robots.txt",
-   "status": 404,
-   "bytes": 163
-  },
-  {
-   "url": "https://v3.football.api-sports.io/robots.txt",
-   "status": 403,
-   "bytes": 219
   }
  ]
 }

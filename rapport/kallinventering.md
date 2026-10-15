@@ -1,4 +1,4 @@
-# Källinventering (2026-10-15T13:11:59Z)
+# Källinventering (2026-10-15T13:22:49Z)
 
 Allt nedan är räknat ur källornas egna filer av `scripts/inventera_kallor.py` i GitHub Actions.
 
@@ -177,18 +177,5 @@ Villkor (utdrag ur README):
 - **Events** – licens CC BY 4.0 – events.zip (77.3 MB)
 - **Matches** – licens CC BY 4.0 – matches.zip (0.6 MB)
 
-## robots.txt för värdar som används
+## Anrop: 162 totalt, 0 utan HTTP 200
 
-- **https://api.github.com** – HTTP 404, MatchIQ tillåten: ja
-- **https://raw.githubusercontent.com** – HTTP 404, MatchIQ tillåten: ja
-- **https://api.figshare.com** – HTTP 404, MatchIQ tillåten: ja
-- **https://ndownloader.figshare.com** – HTTP 404, MatchIQ tillåten: ja
-- **https://v3.football.api-sports.io** – HTTP 403, MatchIQ tillåten: ja
-
-## Anrop: 167 totalt, 5 utan HTTP 200
-
-- 404 https://api.github.com/robots.txt
-- 404 https://raw.githubusercontent.com/robots.txt
-- 404 https://api.figshare.com/robots.txt
-- 404 https://ndownloader.figshare.com/robots.txt
-- 403 https://v3.football.api-sports.io/robots.txt
