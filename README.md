@@ -416,7 +416,7 @@ Allt fungerar utan nycklar. Det här låser upp mer data:
 | Vad | Varför | Var |
 |---|---|---|
 | **API-Football-nyckel** (api-football.com) | Bekräftade startelvor, frånvaro och matchstatistik (hörnor och skott) för alla sju tävlingar, plus Allsvenskans spelschema. Krävs för att hörnor och skott ska bli operativa i ligorna. Gratisnivån har 100 anrop/dygn och ett begränsat urval säsonger. Appen visar vilka säsonger ditt abonnemang omfattar | Inställningar → API-nycklar, sedan Data & källor → Hämta historik |
-| **GitHub-token** (gratis, inga behörigheter behövs) | Höjer GitHubs gräns från 60 till 5 000 anrop/timme, så att OpenFootball- och StatsBomb-hämtningen går på minuter i stället för timmar | Inställningar → API-nycklar |
+| **GitHub-token** (valfri, gratis, inga behörigheter behövs) | Filerna hämtas från raw.githubusercontent.com utan anropsgräns, men filträden och reservvägen går via GitHubs API (60 anrop/timme utan token). En token behövs bara om den gränsen nås ofta | Inställningar → API-nycklar |
 | **football-data.org-nyckel** | Fler fixturer och resultat | Som ovan |
 | **The Odds API-nyckel** | Oddsjämförelse (aldrig träning) | Som ovan |
 | **Beslut om UEFA-data** | Arbetsbokens CL-historik får användas för träning först efter ditt dokumenterade beslut | Data & källor → UEFA → Godkänn för träning |

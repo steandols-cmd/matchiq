@@ -2,7 +2,9 @@
 
 * Filträdet hämtas med ett anrop (git/trees, recursive) – ger varje fils blob-SHA, så oförändrade
   filer kan hoppas över utan att laddas ner igen.
-* Filinnehåll hämtas med contents-endpointen och ``Accept: application/vnd.github.raw``.
+* Filinnehåll hämtas från GitHubs värd för rå filer (raw.githubusercontent.com), som inte omfattas av
+  API:ts gräns på 60 anrop/timme och saknar robots.txt-begränsningar (kontrolleras i källinventeringen).
+  Svarar den med något annat än 200/404 används contents-endpointen med ``Accept: application/vnd.github.raw``.
 * Anropsgränsen följs: när GitHub svarar att kvoten är slut avbryts körningen med ett tydligt
   meddelande om när den kan återupptas (``SourceBlocked``). En GitHub-token (Inställningar →
   API-nycklar, eller miljövariabeln GITHUB_TOKEN i CI) höjer gränsen från 60 till 5 000 anrop/timme.
@@ -16,6 +18,7 @@ from .. import secrets_store
 from .http import FetchResult, HttpClient, SourceBlocked
 
 API = "https://api.github.com"
+RAW = "https://raw.githubusercontent.com"
 
 
 def github_token() -> str | None:
@@ -70,7 +73,14 @@ class GitHubRepo:
         return {t["path"]: t["sha"] for t in data.get("tree", []) if t.get("type") == "blob"}
 
     def file(self, path: str, job: str, *, archive: str = "full", timeout: float = 60) -> FetchResult:
+        br = self.branch(job)
+        # Inga villkorliga anrop här: oförändrade filer hoppas över via blob-SHA eller redan importerade
+        # matcher, och ett 304-svar utan innehåll skulle annars tolkas som en tom fil.
+        res = self.http.get(self.source_id, f"{RAW}/{self.owner}/{self.repo}/{br}/{path}", job=job,
+                            archive=archive, timeout=timeout, conditional=False)
+        if res.status in (200, 404):
+            return res
         res = self.http.get(self.source_id, f"{API}/repos/{self.owner}/{self.repo}/contents/{path}", job=job,
-                            headers=self._headers(raw=True), archive=archive, timeout=timeout)
+                            headers=self._headers(raw=True), archive=archive, timeout=timeout, conditional=False)
         self._check_limit(res)
         return res

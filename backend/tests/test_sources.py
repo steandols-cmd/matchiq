@@ -39,7 +39,7 @@ EPL_JSON = {"name": "English Premier League 2026/27", "matches": [
 
 
 def gh(repo, path):
-    return f"https://api.github.com/repos/openfootball/{repo}/contents/{path}"
+    return f"https://raw.githubusercontent.com/openfootball/{repo}/master/{path}"
 
 
 def of_routes(files: dict, sha_suffix: str = "1") -> dict:
@@ -107,7 +107,7 @@ class OpenFootballTests(unittest.TestCase):
         self.assertEqual(n1["matches"], 6)  # 2015/16 ingår inte i det dagliga jobbet
         # Andra körningen: bara repo + filträd (6 anrop) – oförändrade filer (samma blob-SHA) hämtas inte igen
         self.assertEqual(len(self.session.calls) - calls_first, 6)
-        f = self.app.db.query("SELECT * FROM fetches WHERE source_id='openfootball' AND url LIKE '%/contents/%'")
+        f = self.app.db.query("SELECT * FROM fetches WHERE source_id='openfootball' AND url LIKE '%raw.githubusercontent%'")
         self.assertTrue(all(r["sha256"] and r["http_status"] == 200 for r in f))
         self.assertTrue(all(r["parser_status"] in ("ok", "partial") for r in f))
         # Liverpool i CL (TXT) och i PL (JSON) blir samma lag via exakta alias
@@ -116,10 +116,10 @@ class OpenFootballTests(unittest.TestCase):
         st = self.app.db.scalar("""SELECT m.status FROM matches m JOIN teams h ON h.id=m.home_team_id
                                    WHERE h.name='Fenerbahçe'""")
         self.assertEqual(st, "scheduled")
-        # GitHub REST API används (ingen skrapning); filinnehåll med raw-accept
-        self.assertTrue(all("api.github.com" in c[0] for c in self.session.calls))
-        contents = [c for c in self.session.calls if "/contents/" in c[0]]
-        self.assertTrue(contents and all(c[2]["Accept"] == "application/vnd.github.raw" for c in contents))
+        # GitHubs API för filträdet, GitHubs värd för rå filer för innehållet (ingen skrapning av webbsidor)
+        self.assertTrue(all(c[0].startswith(("https://api.github.com/", "https://raw.githubusercontent.com/"))
+                            for c in self.session.calls))
+        self.assertTrue(any("/git/trees/" in c[0] for c in self.session.calls))
 
     def test_backfill_takes_all_seasons_and_changed_files_only(self):
         OpenFootballAdapter(self.app, self.http).run("backfill", competitions=["ENG1"])
@@ -129,13 +129,13 @@ class OpenFootballTests(unittest.TestCase):
         session2 = FakeSession(of_routes(self.files, sha_suffix="2"))
         OpenFootballAdapter(self.app, HttpClient(self.app, session2, sleep=lambda s: None)).run(
             "backfill", competitions=["ENG1"])
-        self.assertEqual(len([c for c in session2.calls if "/contents/" in c[0]]), 2)
+        self.assertEqual(len([c for c in session2.calls if "raw.githubusercontent" in c[0]]), 2)
 
     def test_missing_file_logged_not_hidden(self):
         files = {("europe", "sweden/2026_se1.txt"): FakeResponse(404)}
         http = HttpClient(self.app, FakeSession(of_routes(files)), sleep=lambda s: None)
         OpenFootballAdapter(self.app, http).run(competitions=["SWE1"])
-        f = self.app.db.one("SELECT * FROM fetches WHERE source_id='openfootball' AND url LIKE '%/contents/%'")
+        f = self.app.db.one("SELECT * FROM fetches WHERE source_id='openfootball' AND url LIKE '%raw.githubusercontent%'")
         self.assertEqual(f["http_status"], 404)
         self.assertEqual(f["parser_status"], "error")
 
@@ -301,7 +301,7 @@ class StatsBombTests(unittest.TestCase):
 
     def test_statsbomb_adapter_imports_match(self):
         app, _, _ = make_app()
-        base = "https://api.github.com/repos/statsbomb/open-data/contents/data/"
+        base = "https://raw.githubusercontent.com/statsbomb/open-data/master/data/"
         comps = [{"competition_id": 16, "season_id": 4, "competition_name": "Champions League",
                   "season_name": "2018/2019"}]
         matches = [{"match_id": 22912, "match_date": "2019-06-01", "kick_off": "21:00:00.000",
@@ -314,7 +314,8 @@ class StatsBombTests(unittest.TestCase):
                    "player": {"id": 100, "name": "L0"}, "shot": {"statsbomb_xg": 0.76, "outcome": {"name": "Goal"}}},
                   {"type": {"name": "Shot"}, "team": {"id": 24, "name": "Liverpool"}, "period": 2, "minute": 87,
                    "player": {"id": 101, "name": "L1"}, "shot": {"statsbomb_xg": 0.2, "outcome": {"name": "Goal"}}}]
-        sess = FakeSession({base + "competitions.json": FakeResponse(200, comps),
+        sess = FakeSession({"https://api.github.com/repos/statsbomb/open-data": FakeResponse(200, {"default_branch": "master"}),
+                            base + "competitions.json": FakeResponse(200, comps),
                             base + "matches/16/4.json": FakeResponse(200, matches),
                             base + "events/22912.json": FakeResponse(200, events)})
         StatsBombAdapter(app, HttpClient(app, sess, sleep=lambda s: None)).run(competitions=["UCL"])
