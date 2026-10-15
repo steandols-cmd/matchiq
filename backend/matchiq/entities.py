@@ -362,6 +362,9 @@ class Repo:
         name = (name or "").strip()
         if not name:
             return None
+        if not source_player_id:
+            # Utan käll-ID: ett stabilt ID ur namnet inom källan (annars skapas en ny spelare vid varje anrop)
+            source_player_id = "namn:" + normalize_name(name)
         with self.db.tx() as c:
             if source_player_id:
                 r = c.execute("SELECT player_id FROM player_source_ids WHERE source_id=? AND source_player_id=?",

@@ -4,7 +4,7 @@ import { navigate, type Competition, type Route } from "../App";
 import { fmtFull, num, pct } from "../format";
 import { ErrorBox, Icon, Loading, Meter, Modal, Panel, StatusBadge, Switch } from "../ui";
 
-const TABS: [string, string][] = [["kallor", "Källor & licenser"], ["tackning", "Täckning"], ["import", "Import"], ["hamtlogg", "Hämtlogg"], ["andringar", "Ändringslogg"]];
+const TABS: [string, string][] = [["kallor", "Källor & licenser"], ["historik", "Hämta historik"], ["tackning", "Täckning"], ["import", "Import"], ["hamtlogg", "Hämtlogg"], ["andringar", "Ändringslogg"]];
 
 export function DataView({ route, comps, onChanged }: { route: Route; comps: Competition[]; onChanged: () => void }) {
   const tab = route.params.get("tab") || "kallor";
@@ -13,6 +13,7 @@ export function DataView({ route, comps, onChanged }: { route: Route; comps: Com
       <div className="tabs">{TABS.map(([k, l]) => (
         <button key={k} className={`tab ${tab === k ? "active" : ""}`} onClick={() => navigate(`data?tab=${k}`)}>{l}</button>))}</div>
       {tab === "kallor" && <Sources />}
+      {tab === "historik" && <History comps={comps} onChanged={onChanged} />}
       {tab === "tackning" && <Coverage comps={comps} route={route} />}
       {tab === "import" && <Import onChanged={onChanged} />}
       {tab === "hamtlogg" && <FetchLog />}
@@ -108,6 +109,115 @@ function Sources() {
             <div className="row"><button className="btn primary" onClick={submit}>Bekräfta</button><button className="btn" onClick={() => setDialog(null)}>Avbryt</button></div>
           </div>
         </Modal>)}
+    </div>
+  );
+}
+
+const OP_KIND: Record<string, "ok" | "warn" | "err" | "info"> = { operativ: "ok", "begränsad": "warn", "spärrad": "info", inaktuell: "err", saknas: "err" };
+const OP_LABEL: Record<string, string> = { operativ: "Operativ", "begränsad": "Begränsad", "spärrad": "Spärrad (licens)", inaktuell: "Inaktuell data", saknas: "Ingen data" };
+const BACKFILL_SOURCES: { id: string; what: string }[] = [
+  { id: "openfootball", what: "Spelscheman och resultat för alla säsonger som finns i källan (CC0). Grund för lagkopplingen – körs först." },
+  { id: "wyscout_public", what: "Skott, skott på mål, hörnor, spelare och startelvor för säsongen 2017/18 i de fem stora ligorna (CC BY 4.0, cirka 77 MB)." },
+  { id: "statsbomb_open", what: "Händelsedata för utvalda matcher och säsonger. Långsam utan GitHub-token (60 anrop/timme) – återupptas automatiskt." },
+  { id: "api_football", what: "Lagstatistik per match (skott, skott på mål, hörnor), startelvor och spelarstatistik för alla sju tävlingar. Kräver API-nyckel; abonnemanget avgör vilka säsonger som ingår." },
+];
+
+export function OperationalGrid({ comps, compact = false }: { comps: Competition[]; compact?: boolean }) {
+  const [op, setOp] = useState<any>(null);
+  useEffect(() => { api("/operational").then(setOp).catch(() => setOp({ competitions: [] })); }, []);
+  if (!op) return <Loading />;
+  const name = (c: string) => comps.find((x) => x.code === c)?.name || c;
+  const keys = ["goals", "corners", "shots", "sot"];
+  return (
+    <div className="scroll-x"><table className="t">
+      <thead><tr><th>Tävling</th>{keys.map((k) => <th key={k}>{op.competitions[0]?.metrics[k]?.label || k}</th>)}</tr></thead>
+      <tbody>{op.competitions.map((c: any) => (
+        <tr key={c.competition}><td><b>{name(c.competition)}</b></td>
+          {keys.map((k) => { const m = c.metrics[k]; return (
+            <td key={k} title={[m.reason, ...(m.needs || [])].join("\n")}>
+              <StatusBadge kind={OP_KIND[m.status] || "neutral"}>{OP_LABEL[m.status] || m.status}</StatusBadge>
+              {!compact && <div className="tiny muted" style={{ marginTop: 3 }}>{m.recent_allowed} i fönstret{m.last_allowed ? ` · senast ${m.last_allowed.slice(0, 10)}` : ""}</div>}
+            </td>); })}
+        </tr>))}</tbody></table>
+      {!compact && <div className="small muted panel-pad">Operativ = minst {op.operative_min} spelade matcher med värde från en källa som får användas för träning de senaste {op.max_age_days} dagarna. Äldre räknemått används inte – prognosen visas då som saknad i stället för att bygga på inaktuell data. Håll muspekaren över en status för orsak och vad som behövs.</div>}
+    </div>
+  );
+}
+
+function History({ comps, onChanged }: { comps: Competition[]; onChanged: () => void }) {
+  const [srcs, setSrcs] = useState<any[] | null>(null);
+  const [state, setState] = useState<any>(null);
+  const [sel, setSel] = useState<string[]>(["openfootball", "wyscout_public", "statsbomb_open"]);
+  const [compSel, setCompSel] = useState<string[]>([]);
+  const [job, setJob] = useState<any>(null);
+  const [result, setResult] = useState<any[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [quota, setQuota] = useState("");
+  const [maxAge, setMaxAge] = useState<string>("");
+  const [rev, setRev] = useState(0);
+  useEffect(() => {
+    api("/sources").then((r) => { setSrcs(r); const af = r.find((x: any) => x.id === "api_football"); setQuota(af?.quota_override ? String(af.quota_override) : ""); });
+    api("/backfill/state").then(setState).catch(() => setState(null));
+    api("/settings").then((s) => setMaxAge(String(s.counts_max_age_days ?? 450)));
+  }, [rev]);
+  const tabComps = comps.filter((c) => c.show_in_tabs).sort((a, b) => (a.tab_order || 99) - (b.tab_order || 99));
+  const start = async () => {
+    setError(null); setResult(null);
+    try {
+      const { job_id } = await api("/backfill", { body: { sources: sel, competitions: compSel.length ? [...compSel, ...(compSel.includes("UCL") ? ["UCLQ"] : [])] : null } });
+      const r = await pollJob<any[]>(job_id, setJob);
+      setResult(r); setJob(null); setRev((x) => x + 1); onChanged();
+    } catch (e: any) { setError(e.message); setJob(null); }
+  };
+  const src = (id: string) => srcs?.find((s) => s.id === id);
+  const toggle = (arr: string[], v: string) => (arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
+  return (
+    <div className="col" style={{ gap: 14 }}>
+      <Panel title="Driftstatus per serie och mått" icon={Icon.check()} key={`op-${rev}`}>
+        <OperationalGrid comps={comps} />
+        <div className="row wrap panel-pad small">
+          <span>Maxålder för skott, skott på mål och hörnor:</span>
+          <input className="in" style={{ width: 90 }} value={maxAge} onChange={(e) => setMaxAge(e.target.value)} /> dagar
+          <button className="btn sm" onClick={async () => { try { await api("/settings", { method: "PUT", body: { counts_max_age_days: Number(maxAge) } }); setRev((x) => x + 1); } catch (e: any) { setError(e.message); } }}>Spara</button>
+        </div>
+      </Panel>
+      <Panel title="Hämta historik" icon={Icon.refresh()} right={<span className="small muted">Varje källa följer sina villkor och anropsgränser</span>}>
+        <div className="panel-pad col" style={{ gap: 10 }}>
+          {!srcs ? <Loading /> : BACKFILL_SOURCES.map(({ id, what }) => { const s = src(id); if (!s) return null; const blocked = !s.enabled || (s.requires_api_key && !s.api_key_configured); return (
+            <label key={id} className="row" style={{ alignItems: "flex-start", gap: 10, opacity: blocked ? 0.65 : 1 }}>
+              <input type="checkbox" disabled={blocked} checked={sel.includes(id) && !blocked} onChange={() => setSel(toggle(sel, id))} style={{ marginTop: 4 }} />
+              <div><b>{s.name}</b> {trainingBadge(s)}
+                <div className="small">{what}</div>
+                <div className="tiny muted">Licens: {s.license}{blocked ? (s.enabled ? " · API-nyckel saknas (Inställningar → API-nycklar)" : " · källan är avstängd") : ""}</div></div>
+            </label>); })}
+          <div className="row wrap"><span className="small">Tävlingar:</span>
+            {tabComps.map((c) => <button key={c.code} className={`chip ${compSel.includes(c.code) ? "on" : ""}`} onClick={() => setCompSel(toggle(compSel, c.code))}>{c.name}</button>)}
+            <span className="tiny muted">{compSel.length ? "" : "(alla)"}</span></div>
+          <div className="row"><button className="btn primary" disabled={!!job || sel.length === 0} onClick={start}>{Icon.refresh(16)} Starta hämtningen</button>
+            <span className="small muted">Körs i bakgrunden och kan avbrytas av anropsgränser – en ny körning fortsätter där den slutade. Redan hämtade filer och matcher hämtas inte igen.</span></div>
+          {job && <div className="col" style={{ gap: 4 }}><Meter value={job.total ? job.done / job.total : null} /><div className="small">{job.message || "Startar…"}</div></div>}
+          {error && <div className="callout err small">{error}</div>}
+          {result && <table className="t"><thead><tr><th>Källa</th><th>Status</th><th>Resultat</th></tr></thead><tbody>{result.map((r: any) => (
+            <tr key={r.source}><td>{src(r.source)?.name || r.source}</td><td><StatusBadge kind={r.status === "ok" ? "ok" : r.status === "blocked" ? "warn" : r.status === "skipped" ? "neutral" : "err"}>{r.status}</StatusBadge>{r.error && <div className="tiny muted">{r.error}</div>}</td>
+              <td className="tiny mono" style={{ whiteSpace: "normal" }}>{Object.entries(r.result || {}).filter(([k]) => k !== "event_kinds").map(([k, v]) => `${k}: ${v}`).join(" · ")}</td></tr>))}</tbody></table>}
+        </div>
+      </Panel>
+      <Panel title="Hämtad historik per källa" icon={Icon.db()}>
+        {!state ? <Loading /> : (<div className="panel-pad col" style={{ gap: 10 }}>
+          <table className="t"><thead><tr><th>Källa</th><th className="num">Matcher</th><th className="num">Med lagstatistik</th><th className="num">Spelarrader</th></tr></thead>
+            <tbody>{state.per_source.map((r: any) => <tr key={r.source_id}><td>{src(r.source_id)?.name || r.source_id}</td><td className="num">{r.matches}</td><td className="num">{r.with_stats}</td><td className="num">{r.player_rows}</td></tr>)}</tbody></table>
+          {state.files.length > 0 && <div className="small muted">Spårade källfiler: {state.files.map((f: any) => `${src(f.source_id)?.name || f.source_id}: ${f.n} (senast ${fmtFull(f.last)})`).join(" · ")}</div>}
+          <div><b>API-Football – säsonger</b> <span className="small muted">{state.ids_supported === false ? "Abonnemanget tillåter inte ids-batchning – ett anrop per match används." : ""}</span></div>
+          {state.scopes.filter((x: any) => x.source_id === "api_football").length === 0 ? <div className="small muted">Ingen historik hämtad från API-Football ännu.</div> : (
+            <table className="t"><thead><tr><th>Tävling:säsong</th><th>Status</th><th>Meddelande från källan</th></tr></thead><tbody>
+              {state.scopes.filter((x: any) => x.source_id === "api_football").map((x: any) => (
+                <tr key={x.scope}><td>{x.scope}</td><td><StatusBadge kind={x.last_status === "ok" ? "ok" : x.last_status === "plan_restricted" ? "warn" : "err"}>{x.last_status === "plan_restricted" ? "Ingår inte i abonnemanget" : x.last_status}</StatusBadge></td><td className="small">{x.last_error || ""}</td></tr>))}</tbody></table>)}
+          <div className="row wrap small"><span>Dygnskvot för API-Football (ditt abonnemang):</span>
+            <input className="in" style={{ width: 110 }} placeholder="100" value={quota} onChange={(e) => setQuota(e.target.value)} />
+            <button className="btn sm" onClick={async () => { try { await api("/sources/api_football/quota", { method: "PUT", body: { value: quota || null } }); setRev((x) => x + 1); } catch (e: any) { setError(e.message); } }}>Spara</button>
+            <button className="btn sm" onClick={async () => { await api("/sources/api_football/backfill/reset", { body: {} }); setRev((x) => x + 1); }} title="Använd efter byte av abonnemang">Pröva säsongerna igen</button></div>
+        </div>)}
+      </Panel>
     </div>
   );
 }

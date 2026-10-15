@@ -61,7 +61,7 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: |
           python scripts/hamta_oppen_data.py --data-dir work --sources openfootball,wyscout_public \
-            --out rapport --name oppen_data --export "$RUNNER_TEMP/matchiq-oppen-data.zip"
+            --out rapport --name oppen_data --export "$RUNNER_TEMP/matchiq-oppen-data.zip" --evaluate
       - name: Publicera rapport
         if: always()
         run: bash scripts/publicera_rapport.sh rapport "Öppen data"
@@ -89,7 +89,7 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: |
           python scripts/hamta_oppen_data.py --data-dir work --sources openfootball,wyscout_public,statsbomb_open \
-            --out rapport --name statsbomb
+            --out rapport --name statsbomb --evaluate
       - name: Publicera rapport
         if: always()
         run: bash scripts/publicera_rapport.sh rapport "StatsBomb"

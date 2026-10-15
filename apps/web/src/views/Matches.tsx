@@ -225,11 +225,24 @@ function Standings({ comp }: { comp: string }) {
   );
 }
 
+const OP_KIND: Record<string, "ok" | "warn" | "err" | "info"> = { operativ: "ok", "begränsad": "warn", "spärrad": "info", inaktuell: "err", saknas: "err" };
+const OP_LABEL: Record<string, string> = { operativ: "Operativ", "begränsad": "Begränsad", "spärrad": "Spärrad (licens)", inaktuell: "Inaktuell data", saknas: "Ingen data" };
+
 function CoverageMini({ comp }: { comp: string }) {
   const [cov, setCov] = useState<any>(null);
+  const [op, setOp] = useState<any>(null);
   useEffect(() => { api(`/coverage?competition=${comp}`).then(setCov).catch(() => setCov({ seasons: [] })); }, [comp]);
+  useEffect(() => { api(`/operational?competitions=${comp}`).then(setOp).catch(() => setOp(null)); }, [comp]);
   if (!cov) return <Loading />;
+  const m = op?.competitions?.[0]?.metrics;
   return (
+    <div className="col" style={{ gap: 14 }}>
+    {m && <Panel title="Driftstatus för prognosmodulen" icon={Icon.check()} right={<a className="btn sm" href="#/data?tab=historik">Hämta historik</a>}>
+      <div className="panel-pad col" style={{ gap: 8 }}>{["goals", "corners", "shots", "sot"].map((k) => (
+        <div key={k} className="row" style={{ alignItems: "flex-start" }}><span style={{ width: 120 }}><b>{m[k].label}</b></span>
+          <StatusBadge kind={OP_KIND[m[k].status] || "neutral"}>{OP_LABEL[m[k].status] || m[k].status}</StatusBadge>
+          <span className="small muted">{m[k].reason}{m[k].needs?.length ? ` ${m[k].needs[0]}` : ""}</span></div>))}</div>
+    </Panel>}
     <Panel title="Datatäckning per säsong" icon={Icon.db()} right={<a className="btn sm" href="#/data?tab=tackning">Detaljer</a>}>
       {cov.seasons.length === 0 ? <div className="empty">Ingen data.</div> : (
         <div className="scroll-x"><table className="t">
@@ -243,5 +256,6 @@ function CoverageMini({ comp }: { comp: string }) {
             </tr>))}</tbody></table></div>)}
       <div className="small muted panel-pad">Första siffran = andel matcher med värde från källor som får användas för träning; inom parentes = alla källor. Saknade värden lagras tomma, aldrig som 0.</div>
     </Panel>
+    </div>
   );
 }

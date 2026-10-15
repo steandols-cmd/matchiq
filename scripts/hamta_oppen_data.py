@@ -88,6 +88,46 @@ def link_checks(app) -> dict:
             "result_conflicts_total": len(conflicts)}
 
 
+def evaluate_leagues(app, comps: list[str]) -> dict:
+    """Walk-forward per tävling (expanderande fönster per matchdag) för V2, V3 och baslinjen på de
+    säsonger där det finns data. Parametrarna är de som finns i databasen (V3: valda på UCL) – detta är
+    alltså en kontroll av hur modellerna fungerar i ligorna, inte ett nytt modellval."""
+    import json as _json
+
+    from matchiq.catalog import training_source_ids
+    from matchiq.models import baseline, v2, v3
+    from matchiq.models.data import HistoryStore
+    from matchiq.models.evaluate import build_targets, evaluation_source_ids, summarize, walk_forward
+    out = {}
+    max_age = app.get_setting("counts_max_age_days")
+    row = app.db.one("SELECT params_json FROM model_versions WHERE id='V3-3.0'")
+    v3_params = _json.loads(row["params_json"]) if row and row["params_json"] else None
+    for comp in comps:
+        try:
+            train = HistoryStore.load(app.db, training_source_ids(app.db), competitions=[comp],
+                                      counts_max_age_days=max_age)
+            ev = HistoryStore.load(app.db, evaluation_source_ids(app.db), competitions=[comp])
+            a = ev.a
+            seasons_counts = sorted({str(a.season[i]) for i in range(len(a.match_id))
+                                     if not (a.vals_h["corners"][i] != a.vals_h["corners"][i])})
+            seasons_all = sorted({str(s) for s in a.season if s})
+            # 1X2: de tre senaste säsongerna med resultat; räknemått: alla säsonger med hörndata
+            recent = [s for s in seasons_all if s][-4:-1] if len(seasons_all) > 3 else seasons_all[-3:]
+            seasons = sorted(set(recent) | set(seasons_counts))
+            targets = build_targets(ev, comp, seasons)
+            res = {"seasons_1x2": recent, "seasons_counts": seasons_counts, "n_targets": len(targets)}
+            v3.clear_cache()
+            for name, mod, params in (("V2", v2, None), ("V3", v3, v3_params), ("BASE", baseline, None)):
+                rows = walk_forward(train, mod.predict, params, targets, "test")
+                summ = summarize(rows)
+                res[name] = {"by_season": summ.get("by_season", {}), "all": summ.get("all", {})}
+            out[comp] = res
+            print(f"Utvärdering {comp}: {len(targets)} matcher", flush=True)
+        except Exception as e:  # noqa: BLE001
+            out[comp] = {"error": repr(e)[:500]}
+    return out
+
+
 def write_md(rep: dict, path: Path) -> None:
     L = [f"# Hämtad data – {rep['name']} ({rep['finished_utc']})", "",
          "Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i GitHub Actions.", "",
@@ -129,6 +169,28 @@ def write_md(rep: dict, path: Path) -> None:
         "matches_only_in_event_source_where_openfootball_covers_season"]] or ["- inga"]
     L += ["", "Lag som skapades av händelsekällor (ej kopplade):", ""]
     L += [f"- {r['name']} ({r['src']})" for r in lc["teams_created_by_event_sources"][:150]] or ["- inga"]
+    if rep.get("evaluation"):
+        L += ["", "## Walk-forward per tävling (V3-parametrar valda på Champions League)", "",
+              "| Tävling | Säsong | Modell | n 1X2 | Brier | Log loss | Hörnor MAE / täckn. 80 % (n) | "
+              "Skott MAE / täckn. (n) | Skott på mål MAE / täckn. (n) |", "|---|---|---|---|---|---|---|---|---|"]
+        f3 = (lambda v, d=3: "–" if v is None else f"{v:.{d}f}".replace(".", ","))
+        pc = (lambda v: "–" if v is None else f"{round(v * 100)} %")
+        for comp, r in rep["evaluation"].items():
+            if "error" in r:
+                L.append(f"| {comp} | – | – | – | – | – | fel: {r['error'][:120]} | | |")
+                continue
+            for season in sorted(set(r["seasons_1x2"]) | set(r["seasons_counts"])):
+                for mname in ("V2", "V3", "BASE"):
+                    s_ = r[mname]["by_season"].get(season)
+                    if not s_:
+                        continue
+                    x = s_.get("1x2") or {}
+                    cells = []
+                    for m in ("corners", "shots", "sot"):
+                        y = s_.get(m) or {}
+                        cells.append(f"{f3(y.get('mae'), 2)} / {pc(y.get('coverage'))} ({y.get('n', 0)})" if y.get("n") else "–")
+                    L.append(f"| {comp} | {season} | {mname} | {x.get('n', 0)} | {f3(x.get('brier'))} | "
+                             f"{f3(x.get('logloss'))} | " + " | ".join(cells) + " |")
     if lc["result_conflicts_between_sources"]:
         L += ["", "Resultatkonflikter (första 50):", ""]
         L += [f"- match {r['match_id']}: {r['s1']} {r['h1']}–{r['a1']} / {r['s2']} {r['h2']}–{r['a2']}"
@@ -143,6 +205,7 @@ def main() -> None:
     ap.add_argument("--out", default="rapport")
     ap.add_argument("--name", default="oppen_data")
     ap.add_argument("--export")
+    ap.add_argument("--evaluate", action="store_true", help="walk-forward per tävling efter hämtningen")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -179,6 +242,8 @@ def main() -> None:
            "fetches": {r["source_id"]: {"n": r["n"], "failed": r["failed"], "bytes": r["b"]} for r in app.db.query(
                """SELECT source_id, COUNT(*) n, SUM(CASE WHEN http_status IS NULL OR http_status>=400 THEN 1 ELSE 0 END)
                failed, SUM(COALESCE(bytes,0)) b FROM fetches GROUP BY source_id""")}}
+    if a.evaluate:
+        rep["evaluation"] = evaluate_leagues(app, ["ENG1", "ESP1", "GER1", "ITA1", "FRA1", "SWE1"])
     (out / f"{a.name}.json").write_text(json.dumps(rep, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
     write_md(rep, out / f"{a.name}.md")
     if a.export:

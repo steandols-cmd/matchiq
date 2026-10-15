@@ -140,11 +140,19 @@ def compute(app: App, match_id: int, cutoff: datetime, families: tuple[str, ...]
     for fam, res in results.items():
         for w in res.get("warnings", []):
             flags.append({"level": "info", "code": f"{fam}_warning", "text": f"{fam}: {w}"})
+    missing: dict[str, int] = {}
+    for fam, res in results.items():
         for metric, cov in res.get("coverage", {}).items():
             if cov.get("status") in ("spärrad", "otillräcklig"):
-                flags.append({"level": "warning", "code": f"{fam}_{metric}_missing",
-                              "text": f"{fam}: {metric} saknas – {cov['league_n']} matcher med tillåten träningsdata "
-                                      f"(kräver ≥ 20). Värdet visas som saknat, aldrig som 0."})
+                missing[metric] = min(missing.get(metric, 10 ** 9), int(cov.get("league_n") or 0))
+    labels = {"goals": "Mål och 1X2", "corners": "Hörnor", "shots": "Skott", "sot": "Skott på mål"}
+    max_age = app.get_setting("counts_max_age_days")
+    for metric, n in missing.items():
+        window = "" if metric == "goals" else f" de senaste {max_age} dagarna"
+        flags.append({"level": "warning", "code": f"{metric}_missing",
+                      "text": f"{labels.get(metric, metric)} visas inte: {n} matcher i {info['comp_name']} med "
+                              f"tillåten data{window} (modellerna kräver minst 20). Värdet visas som saknat, aldrig "
+                              "som 0. Se Data & källor → Hämta historik för vad som behövs."})
     return {
         "match": {k: info[k] for k in ("id", "comp_code", "comp_name", "home_team_id", "away_team_id", "home_name",
                                        "away_name", "kickoff_utc", "season", "matchday", "stage", "status")},

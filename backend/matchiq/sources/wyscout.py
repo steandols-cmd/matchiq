@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import csv
 import io
+import re
 import json
 import zipfile
 from collections import Counter, defaultdict
@@ -29,38 +30,54 @@ NEEDED = ("competitions.json", "teams.json", "players.json", "matches.zip", "eve
 SHOT_SUBEVENTS = {"free kick shot", "penalty"}
 
 
+def _norm_label(label: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", label.lower())
+
+
 def tag_ids(csv_text: str) -> dict[str, int]:
-    """{etikett (gemener): tagg-ID} ur källans tags2name.csv."""
-    rows = list(csv.reader(io.StringIO(csv_text)))
+    """{normaliserad etikett: tagg-ID} ur källans tags2name.csv (gemener, utan mellanslag och tecken)."""
+    sample = csv_text[:2000]
+    delim = ";" if sample.count(";") > sample.count(",") else ","
+    rows = list(csv.reader(io.StringIO(csv_text), delimiter=delim))
     if not rows:
         raise ValueError("tags2name.csv är tom")
     head = [h.strip().lower() for h in rows[0]]
-    i_id = next(i for i, h in enumerate(head) if h in ("tag", "id", "tagid", "tag_id"))
-    i_lab = next(i for i, h in enumerate(head) if h in ("label", "name", "tagname", "tag_name"))
+    try:
+        i_id = next(i for i, h in enumerate(head) if h in ("tag", "id", "tagid", "tag_id", "wyid"))
+        i_lab = next(i for i, h in enumerate(head) if h in ("label", "name", "tagname", "tag_name", "description"))
+    except StopIteration:
+        raise ValueError(f"Okända kolumner i tags2name.csv: {rows[0]}") from None
     out = {}
     for r in rows[1:]:
         if len(r) > max(i_id, i_lab) and r[i_id].strip().isdigit():
-            out[r[i_lab].strip().lower()] = int(r[i_id])
+            out[_norm_label(r[i_lab])] = int(r[i_id])
     return out
 
 
-def required_tags(tags: dict[str, int]) -> dict[str, int]:
-    """Plocka ut de taggar som behövs; saknas någon avbryts importen i stället för att gissa."""
-    def find(*labels: str) -> int:
+def required_tags(tags: dict[str, int]) -> dict[str, int | None]:
+    """Taggar som behövs. "goal" och "accurate" är nödvändiga (skott på mål); saknas de avbryts importen.
+    Övriga är valfria – saknas de lagras värdet som NULL, aldrig som 0."""
+    def find(*labels: str, required: bool = False) -> int | None:
         for lab in labels:
-            if lab in tags:
-                return tags[lab]
-        raise ValueError(f"Taggen {labels[0]!r} finns inte i tags2name.csv – importen avbryts")
-    return {"goal": find("goal"), "accurate": find("accurate"), "key_pass": find("key_pass", "key pass"),
-            "yellow": find("yellow_card", "yellow card"), "red": find("red_card", "red card"),
-            "second_yellow": find("second_yellow_card", "second yellow card")}
+            if _norm_label(lab) in tags:
+                return tags[_norm_label(lab)]
+        if required:
+            raise ValueError(f"Taggen {labels[0]!r} finns inte i tags2name.csv – importen avbryts. "
+                             f"Etiketter i filen: {sorted(tags)[:60]}")
+        return None
+    return {"goal": find("goal", required=True), "accurate": find("accurate", required=True),
+            "key_pass": find("key_pass", "keypass", "key pass"),
+            "yellow": find("yellow_card", "yellow"), "red": find("red_card", "red"),
+            "second_yellow": find("second_yellow_card", "second_yellow", "2nd yellow")}
 
 
 def aggregate_events(events, tag: dict[str, int], match_ids: set[int]):
     """Lag- och spelarstatistik per match ur en ström av Wyscout-händelser (endast 1H/2H)."""
-    team = defaultdict(lambda: {"shots": 0, "shots_on_target": 0, "corners": 0, "fouls": 0, "yellow_cards": 0,
-                                "red_cards": 0, "passes": 0})
-    player = defaultdict(lambda: {"shots": 0, "shots_on_target": 0, "goals": 0, "passes": 0, "key_passes": 0,
+    cards0 = 0 if tag["yellow"] is not None and tag["red"] is not None else None  # okänd tagg => NULL
+    kp0 = 0 if tag["key_pass"] is not None else None
+    team = defaultdict(lambda: {"shots": 0, "shots_on_target": 0, "corners": 0, "fouls": 0, "yellow_cards": cards0,
+                                "red_cards": cards0, "passes": 0})
+    player = defaultdict(lambda: {"shots": 0, "shots_on_target": 0, "goals": 0, "passes": 0, "key_passes": kp0,
                                   "fouls": 0})
     seen = set()
     kinds: Counter = Counter()
@@ -90,15 +107,17 @@ def aggregate_events(events, tag: dict[str, int], match_ids: set[int]):
             t["passes"] += 1
             if p is not None:
                 p["passes"] += 1
-                p["key_passes"] += int(tag["key_pass"] in tags)
+                if kp0 is not None:
+                    p["key_passes"] += int(tag["key_pass"] in tags)
         elif name == "foul":
             t["fouls"] += 1
             if p is not None:
                 p["fouls"] += 1
-            if tag["yellow"] in tags:
-                t["yellow_cards"] += 1
-            if tag["red"] in tags or tag["second_yellow"] in tags:
-                t["red_cards"] += 1
+            if cards0 is not None:
+                if tag["yellow"] in tags:
+                    t["yellow_cards"] += 1
+                if tag["red"] in tags or (tag["second_yellow"] is not None and tag["second_yellow"] in tags):
+                    t["red_cards"] += 1
     return dict(team), dict(player), seen, kinds
 
 
@@ -159,6 +178,7 @@ class WyscoutAdapter(Adapter):
             step(f"Wyscout: hämtar {name}", i, 6)
             dl[name] = self._download(urls[name], job)
         tag = required_tags(tag_ids(dl["tags2name.csv"].text()))
+        self._kp_known = tag["key_pass"] is not None
         comps = {c["wyId"]: AREA_TO_COMP.get((c.get("area") or {}).get("name")) for c in dl["competitions.json"].json()
                  if c.get("type") == "club"}
         teams = {t["wyId"]: t for t in dl["teams.json"].json()}
@@ -287,7 +307,7 @@ class WyscoutAdapter(Adapter):
                         key_passes, fouls, available_at_utc, observed_at_utc) VALUES (?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?)""",
                               (mid, our, tid, self.source_id, fetch_id, mv["started"], mv["minutes"], st.get("goals", 0),
                                st.get("shots", 0), st.get("shots_on_target", 0), st.get("passes", 0),
-                               st.get("key_passes", 0), st.get("fouls", 0), to_iso(avail), to_iso(self.now())))
+                               st.get("key_passes", 0 if self._kp_known else None), st.get("fouls", 0), to_iso(avail), to_iso(self.now())))
                     if mv["started"]:
                         starters.append({"name": name, "player_id": our, "is_starter": True,
                                          "position": (pl.get("role") or {}).get("name")})
