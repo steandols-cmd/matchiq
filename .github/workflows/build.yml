@@ -175,7 +175,15 @@ jobs:
             sleep 1
           done
           cat "$RUNNER_TEMP/mq.log"; exit 1
-      - run: npm install
+      - name: npm install (med nya försök vid tillfälliga nätverksfel)
+        shell: bash
+        run: |
+          for i in 1 2 3; do
+            npm install && exit 0
+            echo "::warning::npm install misslyckades (försök $i av 3), försöker igen om 30 s"
+            sleep 30
+          done
+          exit 1
       - run: npm --workspace apps/web run build
       - name: Bygg installationspaket
         working-directory: apps/desktop
