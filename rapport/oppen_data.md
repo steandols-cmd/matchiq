@@ -1,4 +1,4 @@
-# Hämtad data – oppen_data (2026-10-15T13:31:10Z)
+# Hämtad data – oppen_data (2026-10-15T15:11:10Z)
 
 Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i GitHub Actions.
 

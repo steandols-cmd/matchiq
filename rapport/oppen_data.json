@@ -1,6 +1,6 @@
 {
  "name": "oppen_data",
- "finished_utc": "2026-10-15T13:31:10Z",
+ "finished_utc": "2026-10-15T15:11:10Z",
  "runs": [
   {
    "source": "openfootball",
@@ -14,7 +14,7 @@
     "skipped": 0,
     "files_imported": 96
    },
-   "next_run_utc": "2026-10-16T01:30:33Z",
+   "next_run_utc": "2026-10-16T03:10:34Z",
    "seconds": 202
   },
   {
@@ -73,7 +73,7 @@
      "Foul / Violent Foul": 74
     }
    },
-   "next_run_utc": "2026-10-16T01:31:10Z",
+   "next_run_utc": "2026-10-16T03:11:10Z",
    "seconds": 37
   }
  ],
@@ -81,7 +81,7 @@
   "max_age_days": 450,
   "operative_min": 100,
   "limited_min": 20,
-  "as_of_utc": "2026-10-15T13:31:10Z",
+  "as_of_utc": "2026-10-15T15:11:10Z",
   "competitions": [
    {
     "competition": "UCL",
