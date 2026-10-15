@@ -16,6 +16,8 @@ extraResources:
   - from: build/tray.png
     to: tray.png
 asar: true
+# Ingen automatisk publicering eller uppdateringsfeed (appen uppdateras via nya installationspaket).
+publish: null
 mac:
   target:
     - target: dmg
