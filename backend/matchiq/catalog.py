@@ -87,23 +87,28 @@ SOURCES: list[dict] = [
         "name": "UEFA – officiella tävlings- och matchdata",
         "owner": "UEFA",
         "url": "https://www.uefa.com/uefachampionsleague/",
-        "terms_url": "https://www.uefa.com/",
-        "license": "UEFA:s innehållsrättigheter. Matchdomänens endpoints är inte en publicerad API-produkt.",
+        "terms_url": "https://www.uefa.com/termsconditions/",
+        "license": "UEFA:s allmänna villkor, avsnitt 6.2: innehållet får bara användas privat och icke-kommersiellt "
+                   "för egen visning; systematisk insamling och automatiska verktyg (robotar, spindlar, skript) är "
+                   "förbjudna; innehållet får inte användas för att utveckla eller träna mjukvara, modeller, "
+                   "algoritmer eller AI-verktyg.",
         "attribution": "Källa: UEFA",
-        "allowed_uses": ["display", "evaluation"],
-        "training_policy": "unclear",
-        "automated_fetch": "disabled",
+        "allowed_uses": ["display"],
+        "training_policy": "blocked",
+        "automated_fetch": "manual_only",
         "enabled": 0,
         "requires_api_key": 0,
-        "update_frequency": "Löpande under matchdagar",
-        "coverage": "Förstahandskälla för Champions League: fixtures, resultat, startelvor, bänk, målskyttar, "
-                    "lagstatistik (skott, skott på mål, hörnor) per match-ID.",
+        "update_frequency": "–",
+        "coverage": "Förstahandskälla för Champions League. I MatchIQ finns UEFA-data endast om användaren själv "
+                    "importerat den (t.ex. den tidigare arbetsboken) – den visas, men används inte för träning "
+                    "eller utvärdering och hämtas aldrig automatiskt.",
         "min_interval_seconds": 5.0,
-        "daily_quota": 300,
+        "daily_quota": 0,
         "data_kinds": ["fixtures", "results", "lineups", "team_stats"],
-        "notes": "Automatisk hämtning är AVSTÄNGD som standard: villkoren för automatiserad åtkomst och "
-                 "vidareanvändning är inte granskade och odokumenterade endpoints kan ändras. Använd "
-                 "importvägen (Excel/CSV) eller aktivera först efter egen granskning.",
+        "notes": "Granskat 2026-10-15 mot https://www.uefa.com/termsconditions/: automatisk insamling och användning "
+                 "för att träna modeller är uttryckligen förbjudna. Träning kan bara aktiveras med en referens till "
+                 "ett skriftligt tillstånd från UEFA. Lagliga alternativ: API-Football (licensierat API) för "
+                 "Champions League-statistik och startelvor, OpenFootball (CC0) för spelschema och resultat.",
     },
     {
         "id": "football_data_couk",
@@ -348,10 +353,27 @@ def seed(db: Database, now: datetime) -> None:
                 s.get("notes"), ts,
             )
             if existing:
+                old = c.execute("SELECT training_policy, training_approval, automated_fetch, enabled FROM sources "
+                                "WHERE id=?", (s["id"],)).fetchone()
                 c.execute("""UPDATE sources SET name=?, owner=?, url=?, terms_url=?, license=?, attribution=?,
                     allowed_uses=?, training_policy=?, automated_fetch=?, requires_api_key=?, update_frequency=?,
                     coverage=?, min_interval_seconds=?, daily_quota=?, data_kinds=?, notes=?, updated_at_utc=?
                     WHERE id=?""", values + (s["id"],))
+                # Strängare villkor efter granskning: ett godkännande som gavs under svagare villkor återkallas
+                # automatiskt (kravet: spärra data från träning när rättigheter saknas), med revisionspost.
+                if s["training_policy"] == "blocked" and old[0] != "blocked" and old[1] == "approved":
+                    c.execute("UPDATE sources SET training_approval='revoked' WHERE id=?", (s["id"],))
+                    msg = (f"Villkoren för {s['name']} har granskats och förbjuder träning. Det tidigare "
+                           "godkännandet återkallades automatiskt. Kräver skriftligt tillstånd från rättighetsägaren.")
+                    c.execute("INSERT INTO source_audit (source_id, action, detail, at_utc) VALUES (?,?,?,?)",
+                              (s["id"], "träning återkallad (villkor)", msg, ts))
+                    c.execute("INSERT INTO notifications (created_at_utc, level, title, body) VALUES (?,?,?,?)",
+                              (ts, "warning", f"{s['name']}: spärrad från träning", msg))
+                if s["automated_fetch"] == "manual_only" and old[3]:
+                    c.execute("UPDATE sources SET enabled=0 WHERE id=?", (s["id"],))
+                    c.execute("INSERT INTO source_audit (source_id, action, detail, at_utc) VALUES (?,?,?,?)",
+                              (s["id"], "automatisk hämtning avstängd (villkor)",
+                               "Källans villkor tillåter inte automatisk hämtning – använd importvägen.", ts))
             else:
                 c.execute("""INSERT INTO sources (name, owner, url, terms_url, license, attribution, allowed_uses,
                     training_policy, automated_fetch, requires_api_key, update_frequency, coverage,
@@ -388,6 +410,7 @@ def training_allowed(source: dict) -> bool:
 
 
 TRAINING_TEXT_OVERRIDE = {
+    "uefa": "Spärrad – UEFA:s villkor förbjuder träning av modeller (kräver skriftligt tillstånd)",
     "workbook_legacy": "Prognoser – används aldrig som träningsdata",
     "sofascore_reference": "Ingen data samlas in",
     "the_odds_api": "Odds används aldrig för modellträning",

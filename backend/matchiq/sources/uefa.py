@@ -1,4 +1,9 @@
-"""UEFA:s matchdomän – EXPERIMENTELL adapter, AVSTÄNGD som standard.
+"""UEFA:s matchdomän – AVSTÄNGD. UEFA:s allmänna villkor (avsnitt 6.2, granskade 2026-10-15) förbjuder
+automatiska verktyg för att samla in innehåll och användning för att träna modeller. Adaptern körs därför
+aldrig: källan är "endast import" i källregistret och HttpClient stoppar alla anrop. Koden finns kvar för
+det fall att ett skriftligt avtal med UEFA tecknas.
+
+Ursprunglig beskrivning:
 
 UEFA är förstahandskälla för Champions League, men matchdomänens endpoints är inte en publicerad
 API-produkt, formatet kan ändras och villkoren för automatiserad hämtning är inte granskade.
@@ -21,7 +26,9 @@ class UefaAdapter(Adapter):
     jobs = ("lineups",)
 
     def run(self, job: str = "lineups", match_id: int | None = None) -> dict:
-        if match_id is None:
+        from .http import SourceBlocked
+        raise SourceBlocked("UEFA:s villkor förbjuder automatisk insamling – använd API-Football eller import.")
+        if match_id is None:  # noqa: unreachable – behålls för ett eventuellt avtal
             return {"skipped": "kräver match_id"}
         m = self.app.db.one("SELECT official_match_id, home_team_id, away_team_id FROM matches WHERE id=?", (match_id,))
         if not m or not m["official_match_id"]:

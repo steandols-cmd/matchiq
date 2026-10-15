@@ -15,7 +15,7 @@ import re
 import sys
 import time
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -115,6 +115,12 @@ def openfootball(net: Net) -> dict:
             else:
                 rows = parse_football_txt(r.text, int(f["season"][:4]))
             ok = [x for x in rows if "unparsed" not in x]
+            today = datetime.now(timezone.utc).date()
+            soon = [{"date": x["date"], "time": x.get("time"), "home": x["team1"], "away": x["team2"],
+                     "round": x.get("round"), "competition": f["competition"]}
+                    for x in ok if today.isoformat() <= x["date"] <= (today + timedelta(days=7)).isoformat()]
+            if soon:
+                out.setdefault("upcoming", []).extend(soon)
             f.update({"status": 200, "matches": len(ok), "with_score": sum(1 for x in ok if x.get("ft")),
                       "unparsed_lines": len(rows) - len(ok),
                       "first_date": min((x["date"] for x in ok), default=None),
@@ -206,6 +212,12 @@ def write_md(rep: dict, path: Path) -> None:
                  f"{f.get('with_score', '–')} | {f.get('first_date') or '–'} | {f.get('last_date') or '–'} | "
                  f"{f.get('teams', '–')} | {f.get('unparsed_lines', f.get('status'))} |")
     L += ["", f"Repon i organisationen: {len(of['repos'])}. Fel: {of['errors'] or 'inga'}", ""]
+    up = sorted(of.get("upcoming", []), key=lambda x: (x["date"], x.get("time") or "", x["competition"]))
+    L += [f"### Matcher idag och kommande 7 dagar enligt OpenFootball ({len(up)} st)", "",
+          "| Datum | Tid (lokal) | Tävling | Hemma | Borta | Omgång |", "|---|---|---|---|---|---|"]
+    L += [f"| {x['date']} | {x.get('time') or '–'} | {x['competition']} | {x['home']} | {x['away']} | "
+          f"{x.get('round') or '–'} |" for x in up] or ["| – | – | – | inga matcher | | |"]
+    L += [""]
     sb = rep["statsbomb"]
     L += ["## StatsBomb Open Data", "", "| Tävling | Säsong | Matcher | Lag | Första | Sista |", "|---|---|---|---|---|---|"]
     for c in sorted(sb.get("competitions", []), key=lambda x: (x["competition"], x["season"])):

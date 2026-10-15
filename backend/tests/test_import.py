@@ -116,8 +116,11 @@ class WorkbookImportTests(unittest.TestCase):
         from matchiq.models.data import HistoryStore
         from matchiq.models.evaluate import build_targets, evaluation_source_ids, summarize, walk_forward
         from matchiq.timeutil import UTC
+        # Reproduktion av arbetsbokens egna siffror (körs bara lokalt när MATCHIQ_WORKBOOK anges). Källorna anges
+        # uttryckligen: i appen används UEFA-data varken för träning eller utvärdering (UEFA:s villkor 6.2).
         train = HistoryStore.load(self.app.db, {"uefa", "openfootball"}, competitions=["UCL"])
-        ev = HistoryStore.load(self.app.db, evaluation_source_ids(self.app.db), competitions=["UCL"])
+        ev = HistoryStore.load(self.app.db, {"uefa", "openfootball"}, competitions=["UCL"])
+        _ = evaluation_source_ids
         tg = [t for t in build_targets(ev, "UCL", ["2023/24", "2024/25", "2025/26", "2026/27"])
               if not (t.season == "2026/27" and t.kickoff_ts > dt(2026, 9, 12, tzinfo=UTC).timestamp())]
         self.assertEqual(len(tg), 517)
