@@ -1,6 +1,6 @@
 {
  "name": "statsbomb",
- "finished_utc": "2026-10-15T13:22:27Z",
+ "finished_utc": "2026-10-15T14:08:02Z",
  "runs": [
   {
    "source": "openfootball",
@@ -14,16 +14,67 @@
     "skipped": 0,
     "files_imported": 96
    },
-   "next_run_utc": "2026-10-16T00:47:08Z",
+   "next_run_utc": "2026-10-16T01:32:00Z",
    "seconds": 202
   },
   {
    "source": "wyscout_public",
-   "status": "error",
-   "error": "ValueError(\"Taggen 'key_pass' finns inte i tags2name.csv – importen avbryts\")",
-   "result": {},
-   "next_run_utc": "2026-10-16T00:47:25Z",
-   "seconds": 17
+   "status": "ok",
+   "error": null,
+   "result": {
+    "matches_in_source": 1826,
+    "teams_linked_ENG1": 20,
+    "teams_unlinked": 0,
+    "link_conflicts": 0,
+    "teams_linked_FRA1": 20,
+    "teams_linked_GER1": 18,
+    "teams_linked_ITA1": 20,
+    "teams_linked_ESP1": 20,
+    "match_unchanged": 1803,
+    "match_updated": 23,
+    "teamstats_inserted": 3652,
+    "lineups": 3652,
+    "event_kinds": {
+     "Pass / Simple pass": 1207448,
+     "Duel / Ground attacking duel": 265456,
+     "Duel / Ground defending duel": 264552,
+     "Others on the ball / Touch": 165296,
+     "Duel / Air duel": 158186,
+     "Duel / Ground loose ball duel": 143861,
+     "Interruption / Ball out of the field": 129179,
+     "Pass / High pass": 123214,
+     "Pass / Head pass": 91194,
+     "Free Kick / Throw in": 80305,
+     "Pass / Cross": 58634,
+     "Others on the ball / Clearance": 53165,
+     "Foul / Foul": 44293,
+     "Free Kick / Free Kick": 43544,
+     "Pass / Launch": 43303,
+     "Shot / Shot": 40461,
+     "Free Kick / Goal kick": 29725,
+     "Pass / Smart pass": 28428,
+     "Others on the ball / Acceleration": 24376,
+     "Free Kick / Corner": 18181,
+     "Pass / Hand pass": 13135,
+     "Save attempt / Reflexes": 10192,
+     "Free Kick / Free kick cross": 8134,
+     "Offside / ": 7821,
+     "Save attempt / Save attempt": 6375,
+     "Goalkeeper leaving line / Goalkeeper leaving line": 5779,
+     "Free Kick / Free kick shot": 2038,
+     "Foul / Hand foul": 1941,
+     "Interruption / Whistle": 917,
+     "Foul / Protest": 561,
+     "Free Kick / Penalty": 541,
+     "Foul / Out of game foul": 473,
+     "Foul / Late card foul": 300,
+     "Foul / Time lost foul": 205,
+     "Foul / Simulation": 108,
+     "Foul / Violent Foul": 74
+    }
+   },
+   "next_run_utc": "2026-10-16T01:32:49Z",
+   "seconds": 49
   },
   {
    "source": "statsbomb_open",
@@ -36,15 +87,15 @@
     "events_imported": 1954,
     "match_inserted": 283
    },
-   "next_run_utc": "2026-10-16T01:22:27Z",
-   "seconds": 2102
+   "next_run_utc": "2026-10-16T02:08:02Z",
+   "seconds": 2112
   }
  ],
  "operational": {
   "max_age_days": 450,
   "operative_min": 100,
   "limited_min": 20,
-  "as_of_utc": "2026-10-15T13:22:27Z",
+  "as_of_utc": "2026-10-15T14:08:02Z",
   "competitions": [
    {
     "competition": "UCL",
@@ -195,55 +246,59 @@
       "last_any": "2026-09-20T15:30:00Z",
       "by_source": {
        "OpenFootball (football.json, champions-league, europe m.fl.)": 6098,
-       "StatsBomb Open Data (Hudl)": 418
+       "StatsBomb Open Data (Hudl)": 418,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "corners": {
       "label": "Hörnor",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-13 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
-      "last_any": "2016-05-17T19:00:00Z",
+      "total_allowed": 380,
+      "last_allowed": "2018-05-13T14:00:00Z",
+      "last_any": "2018-05-13T14:00:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 418
+       "StatsBomb Open Data (Hudl)": 418,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "shots": {
       "label": "Skott",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-13 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
-      "last_any": "2016-05-17T19:00:00Z",
+      "total_allowed": 380,
+      "last_allowed": "2018-05-13T14:00:00Z",
+      "last_any": "2018-05-13T14:00:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 418
+       "StatsBomb Open Data (Hudl)": 418,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "sot": {
       "label": "Skott på mål",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-13 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
-      "last_any": "2016-05-17T19:00:00Z",
+      "total_allowed": 380,
+      "last_allowed": "2018-05-13T14:00:00Z",
+      "last_any": "2018-05-13T14:00:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 418
+       "StatsBomb Open Data (Hudl)": 418,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      }
     }
@@ -263,55 +318,59 @@
       "last_any": "2026-09-20T19:00:00Z",
       "by_source": {
        "OpenFootball (football.json, champions-league, europe m.fl.)": 5359,
-       "StatsBomb Open Data (Hudl)": 867
+       "StatsBomb Open Data (Hudl)": 867,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "corners": {
       "label": "Hörnor",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-20 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 380,
+      "last_allowed": "2018-05-20T18:45:00Z",
       "last_any": "2021-05-16T16:30:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 867
+       "StatsBomb Open Data (Hudl)": 867,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "shots": {
       "label": "Skott",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-20 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 380,
+      "last_allowed": "2018-05-20T18:45:00Z",
       "last_any": "2021-05-16T16:30:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 867
+       "StatsBomb Open Data (Hudl)": 867,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "sot": {
       "label": "Skott på mål",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-20 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 380,
+      "last_allowed": "2018-05-20T18:45:00Z",
       "last_any": "2021-05-16T16:30:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 867
+       "StatsBomb Open Data (Hudl)": 867,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      }
     }
@@ -331,54 +390,58 @@
       "last_any": "2026-09-20T17:30:00Z",
       "by_source": {
        "OpenFootball (football.json, champions-league, europe m.fl.)": 4917,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 306,
        "StatsBomb Open Data (Hudl)": 68
       }
      },
      "corners": {
       "label": "Hörnor",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-12 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 306,
+      "last_allowed": "2018-05-12T13:30:00Z",
       "last_any": "2024-05-18T13:30:00Z",
       "by_source": {
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 306,
        "StatsBomb Open Data (Hudl)": 68
       }
      },
      "shots": {
       "label": "Skott",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-12 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 306,
+      "last_allowed": "2018-05-12T13:30:00Z",
       "last_any": "2024-05-18T13:30:00Z",
       "by_source": {
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 306,
        "StatsBomb Open Data (Hudl)": 68
       }
      },
      "sot": {
       "label": "Skott på mål",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-12 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 306,
+      "last_allowed": "2018-05-12T13:30:00Z",
       "last_any": "2024-05-18T13:30:00Z",
       "by_source": {
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 306,
        "StatsBomb Open Data (Hudl)": 68
       }
      }
@@ -399,54 +462,58 @@
       "last_any": "2026-09-20T18:45:00Z",
       "by_source": {
        "OpenFootball (football.json, champions-league, europe m.fl.)": 4944,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
        "StatsBomb Open Data (Hudl)": 148
       }
      },
      "corners": {
       "label": "Hörnor",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-20 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
-      "last_any": "2016-05-15T18:45:00Z",
+      "total_allowed": 380,
+      "last_allowed": "2018-05-20T18:45:00Z",
+      "last_any": "2018-05-20T18:45:00Z",
       "by_source": {
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
        "StatsBomb Open Data (Hudl)": 148
       }
      },
      "shots": {
       "label": "Skott",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-20 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
-      "last_any": "2016-05-15T18:45:00Z",
+      "total_allowed": 380,
+      "last_allowed": "2018-05-20T18:45:00Z",
+      "last_any": "2018-05-20T18:45:00Z",
       "by_source": {
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
        "StatsBomb Open Data (Hudl)": 148
       }
      },
      "sot": {
       "label": "Skott på mål",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-20 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
-      "last_any": "2016-05-15T18:45:00Z",
+      "total_allowed": 380,
+      "last_allowed": "2018-05-20T18:45:00Z",
+      "last_any": "2018-05-20T18:45:00Z",
       "by_source": {
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
        "StatsBomb Open Data (Hudl)": 148
       }
      }
@@ -467,55 +534,59 @@
       "last_any": "2026-09-20T18:45:00Z",
       "by_source": {
        "OpenFootball (football.json, champions-league, europe m.fl.)": 4254,
-       "StatsBomb Open Data (Hudl)": 435
+       "StatsBomb Open Data (Hudl)": 435,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "corners": {
       "label": "Hörnor",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-19 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 380,
+      "last_allowed": "2018-05-19T19:00:00Z",
       "last_any": "2023-06-03T19:00:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 435
+       "StatsBomb Open Data (Hudl)": 435,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "shots": {
       "label": "Skott",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-19 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 380,
+      "last_allowed": "2018-05-19T19:00:00Z",
       "last_any": "2023-06-03T19:00:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 435
+       "StatsBomb Open Data (Hudl)": 435,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      },
      "sot": {
       "label": "Skott på mål",
-      "status": "saknas",
-      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2018-05-19 – äldre än 450 dagar och används därför inte.",
       "needs": [
        "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
       ],
       "recent_allowed": 0,
       "recent_any": 0,
-      "total_allowed": 0,
-      "last_allowed": null,
+      "total_allowed": 380,
+      "last_allowed": "2018-05-19T19:00:00Z",
       "last_any": "2023-06-03T19:00:00Z",
       "by_source": {
-       "StatsBomb Open Data (Hudl)": 435
+       "StatsBomb Open Data (Hudl)": 435,
+       "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380
       }
      }
     }
@@ -652,7 +723,24 @@
    "first": "2017-08-11",
    "last": "2018-05-13",
    "results": {
-    "openfootball": 380
+    "openfootball": 380,
+    "wyscout_public": 380
+   },
+   "corners": {
+    "wyscout_public": 380
+   },
+   "shots": {
+    "wyscout_public": 380
+   },
+   "sot": {
+    "wyscout_public": 380
+   },
+   "players": {
+    "wyscout_public": {
+     "matches": 380,
+     "players": 515,
+     "rows": 10443
+    }
    }
   },
   {
@@ -1146,22 +1234,31 @@
    "last": "2018-05-20",
    "results": {
     "openfootball": 380,
-    "statsbomb_open": 36
+    "statsbomb_open": 36,
+    "wyscout_public": 380
    },
    "corners": {
-    "statsbomb_open": 36
+    "statsbomb_open": 36,
+    "wyscout_public": 380
    },
    "shots": {
-    "statsbomb_open": 36
+    "statsbomb_open": 36,
+    "wyscout_public": 380
    },
    "sot": {
-    "statsbomb_open": 36
+    "statsbomb_open": 36,
+    "wyscout_public": 380
    },
    "players": {
     "statsbomb_open": {
      "matches": 36,
      "players": 365,
      "rows": 1002
+    },
+    "wyscout_public": {
+     "matches": 380,
+     "players": 557,
+     "rows": 10555
     }
    }
   },
@@ -1373,7 +1470,24 @@
    "first": "2017-08-04",
    "last": "2018-05-19",
    "results": {
-    "openfootball": 380
+    "openfootball": 380,
+    "wyscout_public": 380
+   },
+   "corners": {
+    "wyscout_public": 380
+   },
+   "shots": {
+    "wyscout_public": 380
+   },
+   "sot": {
+    "wyscout_public": 380
+   },
+   "players": {
+    "wyscout_public": {
+     "matches": 380,
+     "players": 542,
+     "rows": 10515
+    }
    }
   },
   {
@@ -1611,7 +1725,24 @@
    "first": "2017-08-18",
    "last": "2018-05-12",
    "results": {
-    "openfootball": 306
+    "openfootball": 306,
+    "wyscout_public": 306
+   },
+   "corners": {
+    "wyscout_public": 306
+   },
+   "shots": {
+    "wyscout_public": 306
+   },
+   "sot": {
+    "wyscout_public": 306
+   },
+   "players": {
+    "wyscout_public": {
+     "matches": 306,
+     "players": 472,
+     "rows": 8501
+    }
    }
   },
   {
@@ -1799,7 +1930,24 @@
    "first": "2017-08-19",
    "last": "2018-05-20",
    "results": {
-    "openfootball": 380
+    "openfootball": 380,
+    "wyscout_public": 380
+   },
+   "corners": {
+    "wyscout_public": 380
+   },
+   "shots": {
+    "wyscout_public": 380
+   },
+   "sot": {
+    "wyscout_public": 380
+   },
+   "players": {
+    "wyscout_public": {
+     "matches": 380,
+     "players": 534,
+     "rows": 10573
+    }
    }
   },
   {
@@ -2536,7 +2684,8 @@
   },
   "team_ids_linked_by_source": {
    "statsbomb_open": 143,
-   "uefa": 114
+   "uefa": 114,
+   "wyscout_public": 98
   },
   "teams_needing_review": 68,
   "matches_only_in_event_source_where_openfootball_covers_season": [
@@ -2696,9 +2845,6532 @@
    "bytes": 6031887889
   },
   "wyscout_public": {
-   "n": 18,
+   "n": 19,
    "failed": 0,
-   "bytes": 2484422
+   "bytes": 79807835
+  }
+ },
+ "evaluation": {
+  "ENG1": {
+   "seasons_1x2": [
+    "2023/24",
+    "2024/25",
+    "2025/26"
+   ],
+   "seasons_counts": [
+    "2003/04",
+    "2015/16",
+    "2017/18"
+   ],
+   "n_targets": 1911,
+   "V2": {
+    "by_season": {
+     "2003/04": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6207593033989658,
+       "logloss": 1.0355984978058514,
+       "hit_rate": 0.49473684210526314
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9443540987267968,
+       "rmse": 1.1813099016306978,
+       "bias": -0.05105942835524541,
+       "coverage": 0.9407894736842105,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5866387493927696,
+       "logloss": 0.9837909691626451,
+       "hit_rate": 0.5210526315789473
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9347554260463236,
+       "rmse": 1.1827222047434283,
+       "bias": 0.005415307162180809,
+       "coverage": 0.9276315789473685,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 3.3568821184365856,
+       "rmse": 4.249121353779243,
+       "bias": 0.17226814979020605,
+       "coverage": 0.7763888888888889,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.7386609185842568,
+       "rmse": 2.222258055262573,
+       "bias": 0.003971975823039781,
+       "coverage": 0.8486111111111111,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.194382636971048,
+       "rmse": 2.7195038439737713,
+       "bias": 0.09603312425987764,
+       "coverage": 0.7805555555555556,
+       "coverage_n": 720
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5672748726433112,
+       "logloss": 0.960607186064354,
+       "hit_rate": 0.5684210526315789
+      },
+      "goals": {
+       "n": 760,
+       "mae": 1.0035789261624672,
+       "rmse": 1.2541161141452444,
+       "bias": 0.026600998205765655,
+       "coverage": 0.9407894736842105,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5978348762199565,
+       "logloss": 0.9991283901416137,
+       "hit_rate": 0.5026315789473684
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9672072372416037,
+       "rmse": 1.2090651585054975,
+       "bias": 0.1070347206284665,
+       "coverage": 0.9368421052631579,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 353,
+       "brier": 0.6071682377896269,
+       "logloss": 1.0153261794726838,
+       "hit_rate": 0.5212464589235127
+      },
+      "goals": {
+       "n": 706,
+       "mae": 0.8790405465168453,
+       "rmse": 1.0889522568808845,
+       "bias": 0.01344506501301644,
+       "coverage": 0.953257790368272,
+       "coverage_n": 706
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1873,
+      "brier": 0.5957732795347782,
+      "logloss": 0.9986533143407121,
+      "hit_rate": 0.5216230646022424
+     },
+     "goals": {
+      "n": 3746,
+      "mae": 0.9467494257489476,
+      "rmse": 1.1857856899225319,
+      "bias": 0.020385966392545894,
+      "coverage": 0.9396689802455953,
+      "coverage_n": 3746
+     },
+     "shots": {
+      "n": 720,
+      "mae": 3.3568821184365856,
+      "rmse": 4.249121353779243,
+      "bias": 0.17226814979020605,
+      "coverage": 0.7763888888888889,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.7386609185842568,
+      "rmse": 2.222258055262573,
+      "bias": 0.003971975823039781,
+      "coverage": 0.8486111111111111,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.194382636971048,
+      "rmse": 2.7195038439737713,
+      "bias": 0.09603312425987764,
+      "coverage": 0.7805555555555556,
+      "coverage_n": 720
+     }
+    }
+   },
+   "V3": {
+    "by_season": {
+     "2003/04": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6256334748917792,
+       "logloss": 1.0414220368807259,
+       "hit_rate": 0.4710526315789474
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9404522579975529,
+       "rmse": 1.167948474868163,
+       "bias": -0.025388433184318982,
+       "coverage": 0.9486842105263158,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5694798508012334,
+       "logloss": 0.9598709931781954,
+       "hit_rate": 0.5421052631578948
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9100822864571811,
+       "rmse": 1.1553749131473705,
+       "bias": 0.003061941721630287,
+       "coverage": 0.9302631578947368,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 3.2613049517052093,
+       "rmse": 4.19014488971941,
+       "bias": 0.24025118769419626,
+       "coverage": 0.8194444444444444,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.7014585870702812,
+       "rmse": 2.1942303237356873,
+       "bias": -0.03131031584708675,
+       "coverage": 0.85,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.189375312315772,
+       "rmse": 2.713209208505435,
+       "bias": 0.12701578350797618,
+       "coverage": 0.8041666666666667,
+       "coverage_n": 720
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5464976023762524,
+       "logloss": 0.9284668348861915,
+       "hit_rate": 0.5894736842105263
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9590423043267913,
+       "rmse": 1.2339524501702164,
+       "bias": -0.18949458650643233,
+       "coverage": 0.9263157894736842,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5922570712818307,
+       "logloss": 0.9909953521647066,
+       "hit_rate": 0.5210526315789473
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9272632581490047,
+       "rmse": 1.17478081585443,
+       "bias": 0.02843412856540674,
+       "coverage": 0.9407894736842105,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 353,
+       "brier": 0.5963657521060446,
+       "logloss": 0.9982319516212368,
+       "hit_rate": 0.5042492917847026
+      },
+      "goals": {
+       "n": 706,
+       "mae": 0.8590462796737125,
+       "rmse": 1.0616144407733366,
+       "bias": -0.0061573566543280745,
+       "coverage": 0.9603399433427762,
+       "coverage_n": 706
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1873,
+      "brier": 0.5858979979961827,
+      "logloss": 0.9835893547378687,
+      "hit_rate": 0.5258942872397224
+     },
+     "goals": {
+      "n": 3746,
+      "mae": 0.9200440882853294,
+      "rmse": 1.161424464567729,
+      "bias": -0.03836657110111544,
+      "coverage": 0.9410037373198078,
+      "coverage_n": 3746
+     },
+     "shots": {
+      "n": 720,
+      "mae": 3.2613049517052093,
+      "rmse": 4.19014488971941,
+      "bias": 0.24025118769419626,
+      "coverage": 0.8194444444444444,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.7014585870702812,
+      "rmse": 2.1942303237356873,
+      "bias": -0.03131031584708675,
+      "coverage": 0.85,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.189375312315772,
+      "rmse": 2.713209208505435,
+      "bias": 0.12701578350797618,
+      "coverage": 0.8041666666666667,
+      "coverage_n": 720
+     }
+    }
+   },
+   "BASE": {
+    "by_season": {
+     "2003/04": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6594771897081926,
+       "logloss": 1.0879748842669439,
+       "hit_rate": 0.4131578947368421
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9779013376838834,
+       "rmse": 1.2041343787033103,
+       "bias": 0.01882324019867897,
+       "coverage": 0.9473684210526315,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6443934412987555,
+       "logloss": 1.0667146039965079,
+       "hit_rate": 0.45526315789473687
+      },
+      "goals": {
+       "n": 760,
+       "mae": 1.008418385516646,
+       "rmse": 1.2604911479926966,
+       "bias": 0.03183152277000446,
+       "coverage": 0.925,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 4.219592822681094,
+       "rmse": 5.191839797566732,
+       "bias": 0.25774283356199085,
+       "coverage": 0.6430555555555556,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.9721925322497125,
+       "rmse": 2.486336049620088,
+       "bias": -0.03819994838850538,
+       "coverage": 0.8041666666666667,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.3220108361349325,
+       "rmse": 2.8876791535852138,
+       "bias": 0.13541045539684785,
+       "coverage": 0.7361111111111112,
+       "coverage_n": 720
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.637668462917511,
+       "logloss": 1.055148626099772,
+       "hit_rate": 0.4605263157894737
+      },
+      "goals": {
+       "n": 760,
+       "mae": 1.0513533273387747,
+       "rmse": 1.3447117338833616,
+       "bias": -0.25393535035513154,
+       "coverage": 0.906578947368421,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6564144695777918,
+       "logloss": 1.0820484142510207,
+       "hit_rate": 0.40789473684210525
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9853706268144211,
+       "rmse": 1.2401985528279929,
+       "bias": -0.06778188362671311,
+       "coverage": 0.9289473684210526,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 353,
+       "brier": 0.6383089787696091,
+       "logloss": 1.056065679985598,
+       "hit_rate": 0.45892351274787535
+      },
+      "goals": {
+       "n": 706,
+       "mae": 0.8977405210280031,
+       "rmse": 1.102298045317635,
+       "bias": -0.0766200453022513,
+       "coverage": 0.9560906515580736,
+       "coverage_n": 706
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1873,
+      "brier": 0.6473814328011358,
+      "logloss": 1.0697854062511098,
+      "hit_rate": 0.4388681260010678
+     },
+     "goals": {
+      "n": 3746,
+      "mae": 0.985402563436893,
+      "rmse": 1.2346790896320983,
+      "bias": -0.06943439133833208,
+      "coverage": 0.9324612920448478,
+      "coverage_n": 3746
+     },
+     "shots": {
+      "n": 720,
+      "mae": 4.219592822681094,
+      "rmse": 5.191839797566732,
+      "bias": 0.25774283356199085,
+      "coverage": 0.6430555555555556,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.9721925322497125,
+      "rmse": 2.486336049620088,
+      "bias": -0.03819994838850538,
+      "coverage": 0.8041666666666667,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.3220108361349325,
+      "rmse": 2.8876791535852138,
+      "bias": 0.13541045539684785,
+      "coverage": 0.7361111111111112,
+      "coverage_n": 720
+     }
+    }
+   }
+  },
+  "ESP1": {
+   "seasons_1x2": [
+    "2023/24",
+    "2024/25",
+    "2025/26"
+   ],
+   "seasons_counts": [
+    "1973/1974",
+    "2004/05",
+    "2005/06",
+    "2006/07",
+    "2007/08",
+    "2008/09",
+    "2009/10",
+    "2010/11",
+    "2011/12",
+    "2012/13",
+    "2013/14",
+    "2014/15",
+    "2015/16",
+    "2016/17",
+    "2017/18",
+    "2018/19",
+    "2019/20",
+    "2020/21"
+   ],
+   "n_targets": 4763,
+   "V2": {
+    "by_season": {
+     "1973/1974": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2004/05": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2005/06": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2006/07": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2007/08": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2008/09": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2009/10": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2010/11": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2011/12": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2012/13": {
+      "1x2": {
+       "n": 361,
+       "brier": 0.5812867218253688,
+       "logloss": 0.9768739344297745,
+       "hit_rate": 0.5401662049861495
+      },
+      "goals": {
+       "n": 722,
+       "mae": 0.9619559469811239,
+       "rmse": 1.2024333471070343,
+       "bias": -0.016972019438030037,
+       "coverage": 0.9390581717451524,
+       "coverage_n": 722
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2013/14": {
+      "1x2": {
+       "n": 381,
+       "brier": 0.5809511008125585,
+       "logloss": 0.977430695536614,
+       "hit_rate": 0.5459317585301837
+      },
+      "goals": {
+       "n": 762,
+       "mae": 0.9716091973420895,
+       "rmse": 1.2169919628782315,
+       "bias": 0.03991936986454223,
+       "coverage": 0.9448818897637795,
+       "coverage_n": 762
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2014/15": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.556006490164434,
+       "logloss": 0.9396545274389937,
+       "hit_rate": 0.5605263157894737
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8831124439555356,
+       "rmse": 1.1810622916713989,
+       "bias": -0.06824810753926666,
+       "coverage": 0.9342105263157895,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5788128238450204,
+       "logloss": 0.9747231318409509,
+       "hit_rate": 0.5078947368421053
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9076888818899823,
+       "rmse": 1.192826991095239,
+       "bias": 0.001954655136841709,
+       "coverage": 0.9342105263157895,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2016/17": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.5611450496430703,
+       "logloss": 0.9499144671192229,
+       "hit_rate": 0.5497382198952879
+      },
+      "goals": {
+       "n": 764,
+       "mae": 0.9557747098607404,
+       "rmse": 1.2217512856878374,
+       "bias": -0.027370180392786207,
+       "coverage": 0.9319371727748691,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.5828655014333977,
+       "logloss": 0.9784235217132751,
+       "hit_rate": 0.5471204188481675
+      },
+      "goals": {
+       "n": 764,
+       "mae": 0.9399136431448474,
+       "rmse": 1.2074767914968028,
+       "bias": 0.0233784189731295,
+       "coverage": 0.9240837696335078,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 722,
+       "mae": 2.964766714925859,
+       "rmse": 3.7882551585198674,
+       "bias": -0.15104381563228844,
+       "coverage": 0.8033240997229917,
+       "coverage_n": 722
+      },
+      "sot": {
+       "n": 722,
+       "mae": 1.7197987725877615,
+       "rmse": 2.183776468061049,
+       "bias": -0.029110875987548374,
+       "coverage": 0.8448753462603878,
+       "coverage_n": 722
+      },
+      "corners": {
+       "n": 722,
+       "mae": 1.9757099425312008,
+       "rmse": 2.465180528839601,
+       "bias": -0.026514340753465582,
+       "coverage": 0.8254847645429363,
+       "coverage_n": 722
+      }
+     },
+     "2018/19": {
+      "1x2": {
+       "n": 384,
+       "brier": 0.6175984482352209,
+       "logloss": 1.0303739318580458,
+       "hit_rate": 0.4765625
+      },
+      "goals": {
+       "n": 768,
+       "mae": 0.8721882802981159,
+       "rmse": 1.1146634845768986,
+       "bias": -0.004501463025783731,
+       "coverage": 0.9466145833333334,
+       "coverage_n": 768
+      },
+      "shots": {
+       "n": 68,
+       "mae": 3.7896390979938883,
+       "rmse": 4.716020567249703,
+       "bias": -0.38193945033057425,
+       "coverage": 0.7058823529411765,
+       "coverage_n": 68
+      },
+      "sot": {
+       "n": 68,
+       "mae": 2.151802837373419,
+       "rmse": 2.6994887351356827,
+       "bias": -0.22821990722128274,
+       "coverage": 0.7352941176470589,
+       "coverage_n": 68
+      },
+      "corners": {
+       "n": 68,
+       "mae": 2.2047445927349894,
+       "rmse": 2.7445441049079164,
+       "bias": 0.1885549231332733,
+       "coverage": 0.8088235294117647,
+       "coverage_n": 68
+      }
+     },
+     "2019/20": {
+      "1x2": {
+       "n": 384,
+       "brier": 0.6148541098990628,
+       "logloss": 1.02429132861009,
+       "hit_rate": 0.4869791666666667
+      },
+      "goals": {
+       "n": 768,
+       "mae": 0.8726090528322494,
+       "rmse": 1.1045974748853007,
+       "bias": 0.008646521040283642,
+       "coverage": 0.94140625,
+       "coverage_n": 768
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2020/21": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6129710126851223,
+       "logloss": 1.0213603670117077,
+       "hit_rate": 0.5105263157894737
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.849936221945812,
+       "rmse": 1.090875219911708,
+       "bias": -0.03966506298330669,
+       "coverage": 0.9315789473684211,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5933844088415997,
+       "logloss": 0.9929837571891016,
+       "hit_rate": 0.5
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9240065818088496,
+       "rmse": 1.161124185940131,
+       "bias": -0.01916149394759772,
+       "coverage": 0.9342105263157895,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 370,
+       "brier": 0.5881537070199281,
+       "logloss": 0.9882531335232907,
+       "hit_rate": 0.527027027027027
+      },
+      "goals": {
+       "n": 740,
+       "mae": 0.8311895211375195,
+       "rmse": 1.0774519324281624,
+       "bias": 0.0014035032494751048,
+       "coverage": 0.9472972972972973,
+       "coverage_n": 740
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 365,
+       "brier": 0.5837354868643301,
+       "logloss": 0.984665028451081,
+       "hit_rate": 0.536986301369863
+      },
+      "goals": {
+       "n": 730,
+       "mae": 0.8163127143149698,
+       "rmse": 1.029162578565338,
+       "bias": -0.0016511711666404015,
+       "coverage": 0.958904109589041,
+       "coverage_n": 730
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 4529,
+      "brier": 0.5877207800021902,
+      "logloss": 0.9866725170221519,
+      "hit_rate": 0.5239567233384853
+     },
+     "goals": {
+      "n": 9058,
+      "mae": 0.8990287835309408,
+      "rmse": 1.151998408136697,
+      "bias": -0.008496302606240286,
+      "coverage": 0.9389489953632149,
+      "coverage_n": 9058
+     },
+     "shots": {
+      "n": 790,
+      "mae": 3.035768388405133,
+      "rmse": 3.8768562069204853,
+      "bias": -0.17091837659365994,
+      "coverage": 0.7949367088607595,
+      "coverage_n": 790
+     },
+     "sot": {
+      "n": 790,
+      "mae": 1.7569839325946282,
+      "rmse": 2.2328568853361617,
+      "bias": -0.04624937487855333,
+      "coverage": 0.8354430379746836,
+      "coverage_n": 790
+     },
+     "corners": {
+      "n": 790,
+      "mae": 1.9954243174854507,
+      "rmse": 2.4904599184043845,
+      "bias": -0.008002049684733614,
+      "coverage": 0.8240506329113924,
+      "coverage_n": 790
+     }
+    }
+   },
+   "V3": {
+    "by_season": {
+     "1973/1974": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2004/05": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2005/06": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2006/07": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2007/08": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2008/09": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2009/10": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2010/11": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2011/12": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2012/13": {
+      "1x2": {
+       "n": 361,
+       "brier": 0.5796823779764226,
+       "logloss": 0.9735080543372479,
+       "hit_rate": 0.5401662049861495
+      },
+      "goals": {
+       "n": 722,
+       "mae": 0.9646407023823855,
+       "rmse": 1.2088767850742774,
+       "bias": -0.0037632355785473114,
+       "coverage": 0.9335180055401662,
+       "coverage_n": 722
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2013/14": {
+      "1x2": {
+       "n": 381,
+       "brier": 0.575323172201738,
+       "logloss": 0.9697707141573256,
+       "hit_rate": 0.5485564304461942
+      },
+      "goals": {
+       "n": 762,
+       "mae": 0.9456715643432779,
+       "rmse": 1.1813094128093538,
+       "bias": 0.054370480331023596,
+       "coverage": 0.9422572178477691,
+       "coverage_n": 762
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2014/15": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5439087187933668,
+       "logloss": 0.9223696949356791,
+       "hit_rate": 0.5736842105263158
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8712000975648129,
+       "rmse": 1.1334355453394431,
+       "bias": 0.012054470023761622,
+       "coverage": 0.9473684210526315,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5672761760446813,
+       "logloss": 0.9534054002061246,
+       "hit_rate": 0.5289473684210526
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8758299114448239,
+       "rmse": 1.148872097175329,
+       "bias": -0.02882517241683215,
+       "coverage": 0.9421052631578948,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2016/17": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.5439505012851342,
+       "logloss": 0.9215918527815448,
+       "hit_rate": 0.5575916230366492
+      },
+      "goals": {
+       "n": 764,
+       "mae": 0.9121481286412646,
+       "rmse": 1.1730368278718852,
+       "bias": -0.10172431678611585,
+       "coverage": 0.9358638743455497,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.5755543597763877,
+       "logloss": 0.9675681052880114,
+       "hit_rate": 0.5654450261780105
+      },
+      "goals": {
+       "n": 764,
+       "mae": 0.9254538574875965,
+       "rmse": 1.1844554276466173,
+       "bias": 0.012445336317639817,
+       "coverage": 0.9332460732984293,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 722,
+       "mae": 2.9299360299690083,
+       "rmse": 3.7206168511261626,
+       "bias": -0.02553893200519956,
+       "coverage": 0.7977839335180056,
+       "coverage_n": 722
+      },
+      "sot": {
+       "n": 722,
+       "mae": 1.7114151750167845,
+       "rmse": 2.169137747022504,
+       "bias": 0.05749220550816399,
+       "coverage": 0.8518005540166205,
+       "coverage_n": 722
+      },
+      "corners": {
+       "n": 722,
+       "mae": 1.9680049044197159,
+       "rmse": 2.4492448193158705,
+       "bias": 0.024610436282190774,
+       "coverage": 0.8365650969529086,
+       "coverage_n": 722
+      }
+     },
+     "2018/19": {
+      "1x2": {
+       "n": 384,
+       "brier": 0.6033800795719405,
+       "logloss": 1.010205766816628,
+       "hit_rate": 0.4817708333333333
+      },
+      "goals": {
+       "n": 768,
+       "mae": 0.8692225127872336,
+       "rmse": 1.1101587672721798,
+       "bias": 0.056484073573627086,
+       "coverage": 0.9505208333333334,
+       "coverage_n": 768
+      },
+      "shots": {
+       "n": 68,
+       "mae": 3.6229521043527524,
+       "rmse": 4.43788220643041,
+       "bias": -0.552730537257235,
+       "coverage": 0.7794117647058824,
+       "coverage_n": 68
+      },
+      "sot": {
+       "n": 68,
+       "mae": 2.117011550457884,
+       "rmse": 2.6127201554129504,
+       "bias": -0.10741168849850352,
+       "coverage": 0.7352941176470589,
+       "coverage_n": 68
+      },
+      "corners": {
+       "n": 68,
+       "mae": 2.138242854018093,
+       "rmse": 2.694427732028455,
+       "bias": 0.013679641478801996,
+       "coverage": 0.8676470588235294,
+       "coverage_n": 68
+      }
+     },
+     "2019/20": {
+      "1x2": {
+       "n": 384,
+       "brier": 0.5907155878691159,
+       "logloss": 0.98743481605347,
+       "hit_rate": 0.5104166666666666
+      },
+      "goals": {
+       "n": 768,
+       "mae": 0.8577980111576125,
+       "rmse": 1.0713746676360607,
+       "bias": 0.061811944756043014,
+       "coverage": 0.9544270833333334,
+       "coverage_n": 768
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2020/21": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6026686938062299,
+       "logloss": 1.0087432179926197,
+       "hit_rate": 0.5026315789473684
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.836433878093814,
+       "rmse": 1.0666816756575572,
+       "bias": 0.015594907873899689,
+       "coverage": 0.9565789473684211,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5744402613666497,
+       "logloss": 0.9658088666585857,
+       "hit_rate": 0.5394736842105263
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8918366049999598,
+       "rmse": 1.130702819238723,
+       "bias": -0.05419312301512677,
+       "coverage": 0.9342105263157895,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 370,
+       "brier": 0.5790486251664557,
+       "logloss": 0.9756487620410946,
+       "hit_rate": 0.527027027027027
+      },
+      "goals": {
+       "n": 740,
+       "mae": 0.8141544441264251,
+       "rmse": 1.0582152625789198,
+       "bias": -0.02904621246777389,
+       "coverage": 0.95,
+       "coverage_n": 740
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 365,
+       "brier": 0.5714680815648348,
+       "logloss": 0.9662182544761199,
+       "hit_rate": 0.5534246575342465
+      },
+      "goals": {
+       "n": 730,
+       "mae": 0.7905313066008444,
+       "rmse": 1.0194372966733256,
+       "bias": -0.07699431189058614,
+       "coverage": 0.9493150684931507,
+       "coverage_n": 730
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 4529,
+      "brier": 0.5756309481934475,
+      "logloss": 0.9685264232004213,
+      "hit_rate": 0.5356590858909251
+     },
+     "goals": {
+      "n": 9058,
+      "mae": 0.8796801187251616,
+      "rmse": 1.1254330973713453,
+      "bias": -0.0064500961921557685,
+      "coverage": 0.944137778759108,
+      "coverage_n": 9058
+     },
+     "shots": {
+      "n": 790,
+      "mae": 2.989588046498243,
+      "rmse": 3.7877024360984306,
+      "bias": -0.07091744992562792,
+      "coverage": 0.7962025316455696,
+      "coverage_n": 790
+     },
+     "sot": {
+      "n": 790,
+      "mae": 1.7463272680927275,
+      "rmse": 2.21082301355728,
+      "bias": 0.043297946277210314,
+      "coverage": 0.8417721518987342,
+      "coverage_n": 790
+     },
+     "corners": {
+      "n": 790,
+      "mae": 1.9826582975497027,
+      "rmse": 2.4713061447220035,
+      "bias": 0.023669557742152226,
+      "coverage": 0.839240506329114,
+      "coverage_n": 790
+     }
+    }
+   },
+   "BASE": {
+    "by_season": {
+     "1973/1974": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2004/05": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2005/06": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2006/07": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2007/08": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2008/09": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2009/10": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2010/11": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2011/12": {
+      "1x2": {
+       "n": 0,
+       "brier": null,
+       "logloss": null,
+       "hit_rate": null
+      },
+      "goals": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2012/13": {
+      "1x2": {
+       "n": 361,
+       "brier": 0.629401175445849,
+       "logloss": 1.045727491986572,
+       "hit_rate": 0.4986149584487535
+      },
+      "goals": {
+       "n": 722,
+       "mae": 1.021651054577984,
+       "rmse": 1.2851360345694647,
+       "bias": -0.005384596989719265,
+       "coverage": 0.9182825484764543,
+       "coverage_n": 722
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2013/14": {
+      "1x2": {
+       "n": 381,
+       "brier": 0.6363316568889134,
+       "logloss": 1.0541987941703874,
+       "hit_rate": 0.47244094488188976
+      },
+      "goals": {
+       "n": 762,
+       "mae": 1.0476158091273873,
+       "rmse": 1.3141032753353736,
+       "bias": 0.05717773264449297,
+       "coverage": 0.9212598425196851,
+       "coverage_n": 762
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2014/15": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6454076478639015,
+       "logloss": 1.0671633358825952,
+       "hit_rate": 0.45
+      },
+      "goals": {
+       "n": 760,
+       "mae": 1.009434018458577,
+       "rmse": 1.3186740877326684,
+       "bias": 0.059262085826809204,
+       "coverage": 0.9342105263157895,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6340642326933009,
+       "logloss": 1.0522737584574053,
+       "hit_rate": 0.48157894736842105
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.992709921500915,
+       "rmse": 1.3070999265429395,
+       "bias": -2.0242868746344594e-05,
+       "coverage": 0.9355263157894737,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2016/17": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.6355624570828607,
+       "logloss": 1.0535549741098478,
+       "hit_rate": 0.4738219895287958
+      },
+      "goals": {
+       "n": 764,
+       "mae": 1.0202212320144552,
+       "rmse": 1.3273155698989603,
+       "bias": -0.08892658977313593,
+       "coverage": 0.9175392670157068,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.6355876012329134,
+       "logloss": 1.0530028562434346,
+       "hit_rate": 0.4712041884816754
+      },
+      "goals": {
+       "n": 764,
+       "mae": 1.014480001316668,
+       "rmse": 1.2843296785492702,
+       "bias": 0.0448791599896434,
+       "coverage": 0.9345549738219895,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 722,
+       "mae": 3.2885075767136827,
+       "rmse": 4.239096034699537,
+       "bias": -0.012789302601939731,
+       "coverage": 0.7534626038781164,
+       "coverage_n": 722
+      },
+      "sot": {
+       "n": 722,
+       "mae": 1.8946054004232846,
+       "rmse": 2.3902014925837793,
+       "bias": 0.06553539741633502,
+       "coverage": 0.8240997229916898,
+       "coverage_n": 722
+      },
+      "corners": {
+       "n": 722,
+       "mae": 2.0452081540904334,
+       "rmse": 2.5543997395409357,
+       "bias": 0.03940243005486229,
+       "coverage": 0.8047091412742382,
+       "coverage_n": 722
+      }
+     },
+     "2018/19": {
+      "1x2": {
+       "n": 384,
+       "brier": 0.6526979996444332,
+       "logloss": 1.0797926565708897,
+       "hit_rate": 0.4427083333333333
+      },
+      "goals": {
+       "n": 768,
+       "mae": 0.9108920653707502,
+       "rmse": 1.1446653691254913,
+       "bias": 0.09076887849120391,
+       "coverage": 0.95703125,
+       "coverage_n": 768
+      },
+      "shots": {
+       "n": 68,
+       "mae": 4.335784675448572,
+       "rmse": 5.492483498663194,
+       "bias": -1.8562961014286385,
+       "coverage": 0.5588235294117647,
+       "coverage_n": 68
+      },
+      "sot": {
+       "n": 68,
+       "mae": 2.5678634847008217,
+       "rmse": 3.2237706841385614,
+       "bias": -1.0299921911009344,
+       "coverage": 0.6470588235294118,
+       "coverage_n": 68
+      },
+      "corners": {
+       "n": 68,
+       "mae": 2.206823730966882,
+       "rmse": 2.781413350006093,
+       "bias": 0.01961317594481132,
+       "coverage": 0.7352941176470589,
+       "coverage_n": 68
+      }
+     },
+     "2019/20": {
+      "1x2": {
+       "n": 384,
+       "brier": 0.6449233872392099,
+       "logloss": 1.0682197397263373,
+       "hit_rate": 0.4583333333333333
+      },
+      "goals": {
+       "n": 768,
+       "mae": 0.9145402206017997,
+       "rmse": 1.139310838430222,
+       "bias": 0.11843305236730106,
+       "coverage": 0.9518229166666666,
+       "coverage_n": 768
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2020/21": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6607300806169705,
+       "logloss": 1.0899845499938712,
+       "hit_rate": 0.41578947368421054
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8995107087002459,
+       "rmse": 1.1322301445397043,
+       "bias": 0.09647498756065694,
+       "coverage": 0.9513157894736842,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6512273359920122,
+       "logloss": 1.076694923543955,
+       "hit_rate": 0.4394736842105263
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9763522905378303,
+       "rmse": 1.2190268073173218,
+       "bias": 0.007238268621086957,
+       "coverage": 0.9460526315789474,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 370,
+       "brier": 0.6470821271974966,
+       "logloss": 1.0701456163187126,
+       "hit_rate": 0.44594594594594594
+      },
+      "goals": {
+       "n": 740,
+       "mae": 0.902414843929218,
+       "rmse": 1.157952437926068,
+       "bias": 0.01963886592221202,
+       "coverage": 0.9486486486486486,
+       "coverage_n": 740
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 365,
+       "brier": 0.6222461345681243,
+       "logloss": 1.0349145051688848,
+       "hit_rate": 0.5095890410958904
+      },
+      "goals": {
+       "n": 730,
+       "mae": 0.850267930571217,
+       "rmse": 1.0780035618476074,
+       "bias": -0.07347687317426176,
+       "coverage": 0.9561643835616438,
+       "coverage_n": 730
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 4529,
+      "brier": 0.6413789974727669,
+      "logloss": 1.0622921582639215,
+      "hit_rate": 0.46301611834842127
+     },
+     "goals": {
+      "n": 9058,
+      "mae": 0.9635821255759587,
+      "rmse": 1.2290161739083025,
+      "bias": 0.027758569055503286,
+      "coverage": 0.9393905939500994,
+      "coverage_n": 9058
+     },
+     "shots": {
+      "n": 790,
+      "mae": 3.3786529472376987,
+      "rmse": 4.3611743144848365,
+      "bias": -0.17147090047563027,
+      "coverage": 0.7367088607594937,
+      "coverage_n": 790
+     },
+     "sot": {
+      "n": 790,
+      "mae": 1.9525567291965409,
+      "rmse": 2.4730279286337655,
+      "bias": -0.028763179823126116,
+      "coverage": 0.8088607594936709,
+      "coverage_n": 790
+     },
+     "corners": {
+      "n": 790,
+      "mae": 2.059119368302584,
+      "rmse": 2.5747275614528973,
+      "bias": 0.03769905122007309,
+      "coverage": 0.7987341772151899,
+      "coverage_n": 790
+     }
+    }
+   }
+  },
+  "GER1": {
+   "seasons_1x2": [
+    "2023/24",
+    "2024/25",
+    "2025/26"
+   ],
+   "seasons_counts": [
+    "2015/16",
+    "2017/18",
+    "2023/24"
+   ],
+   "n_targets": 1522,
+   "V2": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 310,
+       "brier": 0.6065012888405572,
+       "logloss": 1.0132294596971076,
+       "hit_rate": 0.4870967741935484
+      },
+      "goals": {
+       "n": 620,
+       "mae": 0.949787807338926,
+       "rmse": 1.200386036911167,
+       "bias": -0.06146513353458414,
+       "coverage": 0.9290322580645162,
+       "coverage_n": 620
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6224169072626389,
+       "logloss": 1.0364592433164095,
+       "hit_rate": 0.47058823529411764
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9438661849141727,
+       "rmse": 1.1842411071785603,
+       "bias": 0.022932338360482488,
+       "coverage": 0.946078431372549,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 562,
+       "mae": 3.213690928105492,
+       "rmse": 4.083382191452446,
+       "bias": 0.13373595301337915,
+       "coverage": 0.7846975088967971,
+       "coverage_n": 562
+      },
+      "sot": {
+       "n": 562,
+       "mae": 1.81683678718875,
+       "rmse": 2.248439738357347,
+       "bias": -0.07815161299208648,
+       "coverage": 0.8594306049822064,
+       "coverage_n": 562
+      },
+      "corners": {
+       "n": 562,
+       "mae": 1.9810798840917285,
+       "rmse": 2.4627335801391808,
+       "bias": 0.02052750237715589,
+       "coverage": 0.797153024911032,
+       "coverage_n": 562
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.583567198175254,
+       "logloss": 0.9808549078510285,
+       "hit_rate": 0.5522875816993464
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9819144297385047,
+       "rmse": 1.274974930360454,
+       "bias": -0.008460047089370714,
+       "coverage": 0.9264705882352942,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6356915706551125,
+       "logloss": 1.0552234531823004,
+       "hit_rate": 0.45751633986928103
+      },
+      "goals": {
+       "n": 612,
+       "mae": 1.0633168479146278,
+       "rmse": 1.2946481159777459,
+       "bias": 0.055086978324111524,
+       "coverage": 0.9183006535947712,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 294,
+       "brier": 0.5732069674476881,
+       "logloss": 0.9709045359983963,
+       "hit_rate": 0.5680272108843537
+      },
+      "goals": {
+       "n": 588,
+       "mae": 0.9934829684337546,
+       "rmse": 1.2422154686759745,
+       "bias": 0.0019610168526343797,
+       "coverage": 0.935374149659864,
+       "coverage_n": 588
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1522,
+      "brier": 0.6045275984590359,
+      "logloss": 1.0116580637455006,
+      "hit_rate": 0.5065703022339028
+     },
+     "goals": {
+      "n": 3044,
+      "mae": 0.986321968817468,
+      "rmse": 1.2398904192815443,
+      "bias": 0.0018446018758815747,
+      "coverage": 0.931011826544021,
+      "coverage_n": 3044
+     },
+     "shots": {
+      "n": 562,
+      "mae": 3.213690928105492,
+      "rmse": 4.083382191452446,
+      "bias": 0.13373595301337915,
+      "coverage": 0.7846975088967971,
+      "coverage_n": 562
+     },
+     "sot": {
+      "n": 562,
+      "mae": 1.81683678718875,
+      "rmse": 2.248439738357347,
+      "bias": -0.07815161299208648,
+      "coverage": 0.8594306049822064,
+      "coverage_n": 562
+     },
+     "corners": {
+      "n": 562,
+      "mae": 1.9810798840917285,
+      "rmse": 2.4627335801391808,
+      "bias": 0.02052750237715589,
+      "coverage": 0.797153024911032,
+      "coverage_n": 562
+     }
+    }
+   },
+   "V3": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 310,
+       "brier": 0.5867570970642458,
+       "logloss": 0.9842333962325227,
+       "hit_rate": 0.4935483870967742
+      },
+      "goals": {
+       "n": 620,
+       "mae": 0.9362898917134166,
+       "rmse": 1.1735646108822928,
+       "bias": -0.020452222106448457,
+       "coverage": 0.9338709677419355,
+       "coverage_n": 620
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6072666811393649,
+       "logloss": 1.015783208139052,
+       "hit_rate": 0.4934640522875817
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9220012165621151,
+       "rmse": 1.153278419660037,
+       "bias": 0.03002324613180794,
+       "coverage": 0.9444444444444444,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 562,
+       "mae": 3.194466722808022,
+       "rmse": 4.028762750775183,
+       "bias": 0.26081012482590116,
+       "coverage": 0.8096085409252669,
+       "coverage_n": 562
+      },
+      "sot": {
+       "n": 562,
+       "mae": 1.790317296238307,
+       "rmse": 2.2302068071381864,
+       "bias": -0.07961630239865998,
+       "coverage": 0.8576512455516014,
+       "coverage_n": 562
+      },
+      "corners": {
+       "n": 562,
+       "mae": 1.982782376862162,
+       "rmse": 2.4703696006150295,
+       "bias": 0.035889468017998055,
+       "coverage": 0.8202846975088968,
+       "coverage_n": 562
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.5868717433565752,
+       "logloss": 0.9847422680850082,
+       "hit_rate": 0.5196078431372549
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9663821286316434,
+       "rmse": 1.237229941987041,
+       "bias": 0.003140772570920455,
+       "coverage": 0.9379084967320261,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6120626433940807,
+       "logloss": 1.0224832953689715,
+       "hit_rate": 0.48366013071895425
+      },
+      "goals": {
+       "n": 612,
+       "mae": 1.0215055500863381,
+       "rmse": 1.2469289144648161,
+       "bias": 0.02577951737382711,
+       "coverage": 0.9330065359477124,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 294,
+       "brier": 0.5635053458562641,
+       "logloss": 0.9555839226685988,
+       "hit_rate": 0.5782312925170068
+      },
+      "goals": {
+       "n": 588,
+       "mae": 0.9590834957684559,
+       "rmse": 1.207705764916483,
+       "bias": -0.10733694940111435,
+       "coverage": 0.935374149659864,
+       "coverage_n": 588
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1522,
+      "brier": 0.5914998676386362,
+      "logloss": 0.9928348950092759,
+      "hit_rate": 0.5131406044678055
+     },
+     "goals": {
+      "n": 3044,
+      "mae": 0.9610029015392868,
+      "rmse": 1.204171272293331,
+      "bias": -0.013048968421485325,
+      "coverage": 0.9369250985545335,
+      "coverage_n": 3044
+     },
+     "shots": {
+      "n": 562,
+      "mae": 3.194466722808022,
+      "rmse": 4.028762750775183,
+      "bias": 0.26081012482590116,
+      "coverage": 0.8096085409252669,
+      "coverage_n": 562
+     },
+     "sot": {
+      "n": 562,
+      "mae": 1.790317296238307,
+      "rmse": 2.2302068071381864,
+      "bias": -0.07961630239865998,
+      "coverage": 0.8576512455516014,
+      "coverage_n": 562
+     },
+     "corners": {
+      "n": 562,
+      "mae": 1.982782376862162,
+      "rmse": 2.4703696006150295,
+      "bias": 0.035889468017998055,
+      "coverage": 0.8202846975088968,
+      "coverage_n": 562
+     }
+    }
+   },
+   "BASE": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 310,
+       "brier": 0.6446668841787878,
+       "logloss": 1.0655994331708154,
+       "hit_rate": 0.44516129032258067
+      },
+      "goals": {
+       "n": 620,
+       "mae": 1.0232718610804412,
+       "rmse": 1.2526657909302394,
+       "bias": 0.0403257934311141,
+       "coverage": 0.9387096774193548,
+       "coverage_n": 620
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6465926385249006,
+       "logloss": 1.070625657824874,
+       "hit_rate": 0.4542483660130719
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9779061893331218,
+       "rmse": 1.2107883294038149,
+       "bias": 0.048253524958461934,
+       "coverage": 0.9411764705882353,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 562,
+       "mae": 3.48964295580921,
+       "rmse": 4.412145026219379,
+       "bias": 0.27900653867090025,
+       "coverage": 0.7348754448398577,
+       "coverage_n": 562
+      },
+      "sot": {
+       "n": 562,
+       "mae": 1.8632495735444705,
+       "rmse": 2.315288184864068,
+       "bias": -0.08511930555289789,
+       "coverage": 0.8505338078291815,
+       "coverage_n": 562
+      },
+      "corners": {
+       "n": 562,
+       "mae": 2.0317947351367756,
+       "rmse": 2.501900925792204,
+       "bias": 0.03953590828616799,
+       "coverage": 0.802491103202847,
+       "coverage_n": 562
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.650642149076114,
+       "logloss": 1.0756165198262402,
+       "hit_rate": 0.43790849673202614
+      },
+      "goals": {
+       "n": 612,
+       "mae": 1.0525145810856213,
+       "rmse": 1.343032980179031,
+       "bias": -0.11087384994989687,
+       "coverage": 0.9166666666666666,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6639228053745576,
+       "logloss": 1.0926051243736918,
+       "hit_rate": 0.38562091503267976
+      },
+      "goals": {
+       "n": 612,
+       "mae": 1.0987322499546848,
+       "rmse": 1.3350582894511454,
+       "bias": -0.06194284702127076,
+       "coverage": 0.9068627450980392,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 294,
+       "brier": 0.6389871664345236,
+       "logloss": 1.056887605396954,
+       "hit_rate": 0.4557823129251701
+      },
+      "goals": {
+       "n": 588,
+       "mae": 1.0495672751948641,
+       "rmse": 1.327698728877683,
+       "bias": -0.1720282238786853,
+       "coverage": 0.9098639455782312,
+       "coverage_n": 588
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1522,
+      "brier": 0.6490296875674765,
+      "logloss": 1.072370600978481,
+      "hit_rate": 0.435611038107753
+     },
+     "goals": {
+      "n": 3044,
+      "mae": 1.040281130142244,
+      "rmse": 1.2945484607675124,
+      "bias": -0.05006020531706703,
+      "coverage": 0.9227989487516426,
+      "coverage_n": 3044
+     },
+     "shots": {
+      "n": 562,
+      "mae": 3.48964295580921,
+      "rmse": 4.412145026219379,
+      "bias": 0.27900653867090025,
+      "coverage": 0.7348754448398577,
+      "coverage_n": 562
+     },
+     "sot": {
+      "n": 562,
+      "mae": 1.8632495735444705,
+      "rmse": 2.315288184864068,
+      "bias": -0.08511930555289789,
+      "coverage": 0.8505338078291815,
+      "coverage_n": 562
+     },
+     "corners": {
+      "n": 562,
+      "mae": 2.0317947351367756,
+      "rmse": 2.501900925792204,
+      "bias": 0.03953590828616799,
+      "coverage": 0.802491103202847,
+      "coverage_n": 562
+     }
+    }
+   }
+  },
+  "ITA1": {
+   "seasons_1x2": [
+    "2023/24",
+    "2024/25",
+    "2025/26"
+   ],
+   "seasons_counts": [
+    "2015/16",
+    "2017/18"
+   ],
+   "n_targets": 1854,
+   "V2": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5966134587231682,
+       "logloss": 0.9993850747152192,
+       "hit_rate": 0.5026315789473684
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.889104420110154,
+       "rmse": 1.1241549643396804,
+       "bias": 0.02765709487788789,
+       "coverage": 0.9421052631578948,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5611989124682548,
+       "logloss": 0.9494605848457421,
+       "hit_rate": 0.5657894736842105
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9278222408987636,
+       "rmse": 1.1685353933611207,
+       "bias": 0.0937407241202669,
+       "coverage": 0.9434210526315789,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 3.4332331633724325,
+       "rmse": 4.451794213886395,
+       "bias": 0.21905208045726315,
+       "coverage": 0.7597222222222222,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.876203897644089,
+       "rmse": 2.384299761458078,
+       "bias": 0.05149714540770457,
+       "coverage": 0.8347222222222223,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.1561667802055333,
+       "rmse": 2.7039107912185862,
+       "bias": 0.009555966903421491,
+       "coverage": 0.7972222222222223,
+       "coverage_n": 720
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5976312657540759,
+       "logloss": 1.0009498820523337,
+       "hit_rate": 0.531578947368421
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.851980239359618,
+       "rmse": 1.0959577958693283,
+       "bias": -0.028572791490612554,
+       "coverage": 0.9394736842105263,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 370,
+       "brier": 0.5979299857544076,
+       "logloss": 0.9983737586254171,
+       "hit_rate": 0.518918918918919
+      },
+      "goals": {
+       "n": 740,
+       "mae": 0.859911623571839,
+       "rmse": 1.0818120195398169,
+       "bias": 0.025770074927448615,
+       "coverage": 0.95,
+       "coverage_n": 740
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 344,
+       "brier": 0.5844583391517415,
+       "logloss": 0.9824705281901966,
+       "hit_rate": 0.561046511627907
+      },
+      "goals": {
+       "n": 688,
+       "mae": 0.8387748969863256,
+       "rmse": 1.0637597847178044,
+       "bias": -0.05867973725384326,
+       "coverage": 0.9491279069767442,
+       "coverage_n": 688
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1854,
+      "brier": 0.5875708443563211,
+      "logloss": 0.9861329332264747,
+      "hit_rate": 0.5355987055016181
+     },
+     "goals": {
+      "n": 3708,
+      "mae": 0.8742667138214238,
+      "rmse": 1.1084176449299088,
+      "bias": 0.013280802891423926,
+      "coverage": 0.9447141316073355,
+      "coverage_n": 3708
+     },
+     "shots": {
+      "n": 720,
+      "mae": 3.4332331633724325,
+      "rmse": 4.451794213886395,
+      "bias": 0.21905208045726315,
+      "coverage": 0.7597222222222222,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.876203897644089,
+      "rmse": 2.384299761458078,
+      "bias": 0.05149714540770457,
+      "coverage": 0.8347222222222223,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.1561667802055333,
+      "rmse": 2.7039107912185862,
+      "bias": 0.009555966903421491,
+      "coverage": 0.7972222222222223,
+      "coverage_n": 720
+     }
+    }
+   },
+   "V3": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5888954224420957,
+       "logloss": 0.9883133668451537,
+       "hit_rate": 0.5210526315789473
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8690095752366657,
+       "rmse": 1.0940236545181121,
+       "bias": 0.03202110085708759,
+       "coverage": 0.9460526315789474,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5393548124071277,
+       "logloss": 0.9166450678309386,
+       "hit_rate": 0.5710526315789474
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9035556190037414,
+       "rmse": 1.1397517630848306,
+       "bias": 0.05974186726923246,
+       "coverage": 0.9434210526315789,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 3.39400473071571,
+       "rmse": 4.3685877590793245,
+       "bias": 0.46676471666534547,
+       "coverage": 0.7791666666666667,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.8429238420924674,
+       "rmse": 2.3361448306877075,
+       "bias": 0.15261858553397237,
+       "coverage": 0.8458333333333333,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.125750039317148,
+       "rmse": 2.677417967093626,
+       "bias": -0.019081544316439342,
+       "coverage": 0.8138888888888889,
+       "coverage_n": 720
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.590453030558171,
+       "logloss": 0.9894190675758274,
+       "hit_rate": 0.5342105263157895
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8429774507290431,
+       "rmse": 1.0630413921812347,
+       "bias": 0.027756463953238653,
+       "coverage": 0.9473684210526315,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 370,
+       "brier": 0.5816488013773892,
+       "logloss": 0.9741448300891808,
+       "hit_rate": 0.5243243243243243
+      },
+      "goals": {
+       "n": 740,
+       "mae": 0.8361468919769774,
+       "rmse": 1.0659144618249605,
+       "bias": 0.03379060458922685,
+       "coverage": 0.9486486486486486,
+       "coverage_n": 740
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 344,
+       "brier": 0.5668466247662466,
+       "logloss": 0.9576731072482054,
+       "hit_rate": 0.5784883720930233
+      },
+      "goals": {
+       "n": 688,
+       "mae": 0.8382166484101851,
+       "rmse": 1.0483590716552271,
+       "bias": -0.015863632770895066,
+       "coverage": 0.9563953488372093,
+       "coverage_n": 688
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1854,
+      "brier": 0.5735234823538473,
+      "logloss": 0.9653379648770813,
+      "hit_rate": 0.5453074433656958
+     },
+     "goals": {
+      "n": 3708,
+      "mae": 0.8584827843435686,
+      "rmse": 1.0834470255133088,
+      "bias": 0.028297097203375584,
+      "coverage": 0.948220064724919,
+      "coverage_n": 3708
+     },
+     "shots": {
+      "n": 720,
+      "mae": 3.39400473071571,
+      "rmse": 4.3685877590793245,
+      "bias": 0.46676471666534547,
+      "coverage": 0.7791666666666667,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.8429238420924674,
+      "rmse": 2.3361448306877075,
+      "bias": 0.15261858553397237,
+      "coverage": 0.8458333333333333,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.125750039317148,
+      "rmse": 2.677417967093626,
+      "bias": -0.019081544316439342,
+      "coverage": 0.8138888888888889,
+      "coverage_n": 720
+     }
+    }
+   },
+   "BASE": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6431174907671766,
+       "logloss": 1.0648604006092761,
+       "hit_rate": 0.4605263157894737
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.926620003190141,
+       "rmse": 1.1526847208519648,
+       "bias": 0.05235857227411649,
+       "coverage": 0.9513157894736842,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6480509618060913,
+       "logloss": 1.0698524474533149,
+       "hit_rate": 0.43157894736842106
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9964843630304334,
+       "rmse": 1.2517120658015508,
+       "bias": 0.030335880198586705,
+       "coverage": 0.9394736842105263,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 4.235780980724785,
+       "rmse": 5.354347934220225,
+       "bias": 0.4996382528767097,
+       "coverage": 0.6486111111111111,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 2.128526956441819,
+       "rmse": 2.6791424575141507,
+       "bias": 0.1719062383809455,
+       "coverage": 0.7666666666666667,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.3134124206652755,
+       "rmse": 2.9034881707199114,
+       "bias": -0.016104925043648417,
+       "coverage": 0.7680555555555556,
+       "coverage_n": 720
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6585924286290238,
+       "logloss": 1.0877620020254213,
+       "hit_rate": 0.41842105263157897
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9450215969866415,
+       "rmse": 1.156221479380267,
+       "bias": 0.08187418385170646,
+       "coverage": 0.9526315789473684,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 370,
+       "brier": 0.6615614780122754,
+       "logloss": 1.091489124694169,
+       "hit_rate": 0.4027027027027027
+      },
+      "goals": {
+       "n": 740,
+       "mae": 0.9246842916642429,
+       "rmse": 1.1441379033555847,
+       "bias": 0.10841233790316565,
+       "coverage": 0.9621621621621622,
+       "coverage_n": 740
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 344,
+       "brier": 0.6423677423479436,
+       "logloss": 1.0603207314063605,
+       "hit_rate": 0.43023255813953487
+      },
+      "goals": {
+       "n": 688,
+       "mae": 0.9131577344491043,
+       "rmse": 1.1182708450629855,
+       "bias": 0.033147592427331236,
+       "coverage": 0.9636627906976745,
+       "coverage_n": 688
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 1854,
+      "brier": 0.6508421710297224,
+      "logloss": 1.0750494880119068,
+      "hit_rate": 0.42880258899676377
+     },
+     "goals": {
+      "n": 3708,
+      "mae": 0.9418270305204983,
+      "rmse": 1.16650723004553,
+      "bias": 0.06151640702397459,
+      "coverage": 0.95361380798274,
+      "coverage_n": 3708
+     },
+     "shots": {
+      "n": 720,
+      "mae": 4.235780980724785,
+      "rmse": 5.354347934220225,
+      "bias": 0.4996382528767097,
+      "coverage": 0.6486111111111111,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 2.128526956441819,
+      "rmse": 2.6791424575141507,
+      "bias": 0.1719062383809455,
+      "coverage": 0.7666666666666667,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.3134124206652755,
+      "rmse": 2.9034881707199114,
+      "bias": -0.016104925043648417,
+      "coverage": 0.7680555555555556,
+      "coverage_n": 720
+     }
+    }
+   }
+  },
+  "FRA1": {
+   "seasons_1x2": [
+    "2023/24",
+    "2024/25",
+    "2025/26"
+   ],
+   "seasons_counts": [
+    "2015/16",
+    "2017/18",
+    "2021/22",
+    "2022/23"
+   ],
+   "n_targets": 2417,
+   "V2": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.624685050615522,
+       "logloss": 1.0373997125117052,
+       "hit_rate": 0.4710526315789474
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9122933409065672,
+       "rmse": 1.1687575840106417,
+       "bias": 6.949952713299667e-05,
+       "coverage": 0.9315789473684211,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.587100177053712,
+       "logloss": 0.9869173730517713,
+       "hit_rate": 0.5394736842105263
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8890700549674753,
+       "rmse": 1.138058878401031,
+       "bias": -0.006383902695968507,
+       "coverage": 0.9381578947368421,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 3.399255253166525,
+       "rmse": 4.294395504118432,
+       "bias": -0.18119382727157374,
+       "coverage": 0.7611111111111111,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.8004457791095958,
+       "rmse": 2.298079132873984,
+       "bias": -0.08124401689622193,
+       "coverage": 0.8472222222222222,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.166525130057761,
+       "rmse": 2.752185954415457,
+       "bias": 0.01048396356601366,
+       "coverage": 0.7847222222222222,
+       "coverage_n": 720
+      }
+     },
+     "2021/22": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.6187017825855631,
+       "logloss": 1.033883721494338,
+       "hit_rate": 0.48429319371727747
+      },
+      "goals": {
+       "n": 764,
+       "mae": 0.9347454621126479,
+       "rmse": 1.1940532483502424,
+       "bias": -0.00613257477940384,
+       "coverage": 0.9319371727748691,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2022/23": {
+      "1x2": {
+       "n": 381,
+       "brier": 0.5839745188404485,
+       "logloss": 0.9807084489190734,
+       "hit_rate": 0.5301837270341208
+      },
+      "goals": {
+       "n": 762,
+       "mae": 0.901178541770007,
+       "rmse": 1.1792862797470258,
+       "bias": 0.05520784447418314,
+       "coverage": 0.9409448818897638,
+       "coverage_n": 762
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6461602730584823,
+       "logloss": 1.068883046525126,
+       "hit_rate": 0.4444444444444444
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9235955635708377,
+       "rmse": 1.158106962299604,
+       "bias": -0.03707143485737388,
+       "coverage": 0.9362745098039216,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.5783564306293068,
+       "logloss": 0.9738260404260395,
+       "hit_rate": 0.5686274509803921
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9857250798501571,
+       "rmse": 1.225798080669804,
+       "bias": 0.05227546092183902,
+       "coverage": 0.946078431372549,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 282,
+       "brier": 0.5778354747998655,
+       "logloss": 0.9716299069017299,
+       "hit_rate": 0.5460992907801419
+      },
+      "goals": {
+       "n": 564,
+       "mae": 1.025949410694823,
+       "rmse": 1.2633201136430952,
+       "bias": 0.06300484722313016,
+       "coverage": 0.9308510638297872,
+       "coverage_n": 564
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 2417,
+      "brier": 0.6028003617551637,
+      "logloss": 1.0082344259480633,
+      "hit_rate": 0.5109640049648324
+     },
+     "goals": {
+      "n": 4834,
+      "mae": 0.9344268647398861,
+      "rmse": 1.1870937657383969,
+      "bias": 0.01601649601465581,
+      "coverage": 0.9364915184112537,
+      "coverage_n": 4834
+     },
+     "shots": {
+      "n": 720,
+      "mae": 3.399255253166525,
+      "rmse": 4.294395504118432,
+      "bias": -0.18119382727157374,
+      "coverage": 0.7611111111111111,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.8004457791095958,
+      "rmse": 2.298079132873984,
+      "bias": -0.08124401689622193,
+      "coverage": 0.8472222222222222,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.166525130057761,
+      "rmse": 2.752185954415457,
+      "bias": 0.01048396356601366,
+      "coverage": 0.7847222222222222,
+      "coverage_n": 720
+     }
+    }
+   },
+   "V3": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6193028782757768,
+       "logloss": 1.0275946719822384,
+       "hit_rate": 0.4710526315789474
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8973558141548276,
+       "rmse": 1.1551959057359902,
+       "bias": -0.04396676785974063,
+       "coverage": 0.925,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.5754561708187399,
+       "logloss": 0.9684066514064122,
+       "hit_rate": 0.5473684210526316
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.8681942915519908,
+       "rmse": 1.1173810907074146,
+       "bias": -0.04951914157228856,
+       "coverage": 0.9315789473684211,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 3.366151092367766,
+       "rmse": 4.260562164746977,
+       "bias": -0.18839221407745457,
+       "coverage": 0.7888888888888889,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.7706150525094069,
+       "rmse": 2.278233341414302,
+       "bias": -0.1206259007410341,
+       "coverage": 0.8444444444444444,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.184717396865204,
+       "rmse": 2.770451983625252,
+       "bias": -0.0014976154913458038,
+       "coverage": 0.8236111111111111,
+       "coverage_n": 720
+      }
+     },
+     "2021/22": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.6057565103990344,
+       "logloss": 1.01176950963537,
+       "hit_rate": 0.5078534031413613
+      },
+      "goals": {
+       "n": 764,
+       "mae": 0.9171951211831229,
+       "rmse": 1.1775807777178111,
+       "bias": -0.050546562341244855,
+       "coverage": 0.93717277486911,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2022/23": {
+      "1x2": {
+       "n": 381,
+       "brier": 0.5878038058859656,
+       "logloss": 0.9885933992922445,
+       "hit_rate": 0.5170603674540682
+      },
+      "goals": {
+       "n": 762,
+       "mae": 0.881512261375653,
+       "rmse": 1.154817965152688,
+       "bias": -0.017212853078561335,
+       "coverage": 0.9409448818897638,
+       "coverage_n": 762
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6225908301334923,
+       "logloss": 1.034729536082226,
+       "hit_rate": 0.477124183006536
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.894502730590458,
+       "rmse": 1.1148876478468812,
+       "bias": -0.012232222027967065,
+       "coverage": 0.9477124183006536,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.5748052142497622,
+       "logloss": 0.9689130704654795,
+       "hit_rate": 0.5522875816993464
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9469196920660153,
+       "rmse": 1.205084717447786,
+       "bias": -0.08690299650479416,
+       "coverage": 0.9330065359477124,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 282,
+       "brier": 0.569960595497623,
+       "logloss": 0.9599604906125164,
+       "hit_rate": 0.5673758865248227
+      },
+      "goals": {
+       "n": 564,
+       "mae": 0.9914319841542328,
+       "rmse": 1.244762889361788,
+       "bias": -0.050591129452530983,
+       "coverage": 0.9237588652482269,
+       "coverage_n": 564
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 2417,
+      "brier": 0.5943288180316533,
+      "logloss": 0.9952230188891483,
+      "hit_rate": 0.5184112536201904
+     },
+     "goals": {
+      "n": 4834,
+      "mae": 0.9102990603678287,
+      "rmse": 1.1651115645560235,
+      "bias": -0.043853373933842435,
+      "coverage": 0.9342159702110053,
+      "coverage_n": 4834
+     },
+     "shots": {
+      "n": 720,
+      "mae": 3.366151092367766,
+      "rmse": 4.260562164746977,
+      "bias": -0.18839221407745457,
+      "coverage": 0.7888888888888889,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.7706150525094069,
+      "rmse": 2.278233341414302,
+      "bias": -0.1206259007410341,
+      "coverage": 0.8444444444444444,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.184717396865204,
+      "rmse": 2.770451983625252,
+      "bias": -0.0014976154913458038,
+      "coverage": 0.8236111111111111,
+      "coverage_n": 720
+     }
+    }
+   },
+   "BASE": {
+    "by_season": {
+     "2015/16": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.658923463879619,
+       "logloss": 1.0877201751058412,
+       "hit_rate": 0.42105263157894735
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9236767251074912,
+       "rmse": 1.2163488285404214,
+       "bias": -0.02835191503529627,
+       "coverage": 0.9039473684210526,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2017/18": {
+      "1x2": {
+       "n": 380,
+       "brier": 0.6441962326505367,
+       "logloss": 1.066248037184229,
+       "hit_rate": 0.45526315789473687
+      },
+      "goals": {
+       "n": 760,
+       "mae": 0.9483592573035017,
+       "rmse": 1.2431941174435375,
+       "bias": -0.08078899442355146,
+       "coverage": 0.9184210526315789,
+       "coverage_n": 760
+      },
+      "shots": {
+       "n": 720,
+       "mae": 3.5925443037484834,
+       "rmse": 4.584597255396,
+       "bias": -0.1823373427950233,
+       "coverage": 0.725,
+       "coverage_n": 720
+      },
+      "sot": {
+       "n": 720,
+       "mae": 1.8843866617315266,
+       "rmse": 2.4310619576534815,
+       "bias": -0.12342316929320189,
+       "coverage": 0.8416666666666667,
+       "coverage_n": 720
+      },
+      "corners": {
+       "n": 720,
+       "mae": 2.1677142366161606,
+       "rmse": 2.752735050231756,
+       "bias": 0.004669687911633572,
+       "coverage": 0.7611111111111111,
+       "coverage_n": 720
+      }
+     },
+     "2021/22": {
+      "1x2": {
+       "n": 382,
+       "brier": 0.6537028979839075,
+       "logloss": 1.079723570711846,
+       "hit_rate": 0.42670157068062825
+      },
+      "goals": {
+       "n": 764,
+       "mae": 0.9661351188020342,
+       "rmse": 1.2448813345626726,
+       "bias": -0.10464661101519594,
+       "coverage": 0.930628272251309,
+       "coverage_n": 764
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2022/23": {
+      "1x2": {
+       "n": 381,
+       "brier": 0.651234886194717,
+       "logloss": 1.0754732436116659,
+       "hit_rate": 0.42782152230971127
+      },
+      "goals": {
+       "n": 762,
+       "mae": 0.9522889124521209,
+       "rmse": 1.233961204364624,
+       "bias": -0.08143508030439064,
+       "coverage": 0.9435695538057742,
+       "coverage_n": 762
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2023/24": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6624720636472584,
+       "logloss": 1.0915215420062263,
+       "hit_rate": 0.39215686274509803
+      },
+      "goals": {
+       "n": 612,
+       "mae": 0.9536574650466705,
+       "rmse": 1.171554721970057,
+       "bias": -0.026603545143002484,
+       "coverage": 0.9558823529411765,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024/25": {
+      "1x2": {
+       "n": 306,
+       "brier": 0.6361265628612853,
+       "logloss": 1.05309193885777,
+       "hit_rate": 0.4673202614379085
+      },
+      "goals": {
+       "n": 612,
+       "mae": 1.0038200798389532,
+       "rmse": 1.2935751686097003,
+       "bias": -0.15604658741705357,
+       "coverage": 0.923202614379085,
+       "coverage_n": 612
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025/26": {
+      "1x2": {
+       "n": 282,
+       "brier": 0.6241515389860075,
+       "logloss": 1.0355578162350132,
+       "hit_rate": 0.5
+      },
+      "goals": {
+       "n": 564,
+       "mae": 1.009618590856974,
+       "rmse": 1.2971960622176089,
+       "bias": -0.18526972359240995,
+       "coverage": 0.9237588652482269,
+       "coverage_n": 564
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 2417,
+      "brier": 0.6480771191796307,
+      "logloss": 1.0711612163098274,
+      "hit_rate": 0.43980140670252377
+     },
+     "goals": {
+      "n": 4834,
+      "mae": 0.9627471806783118,
+      "rmse": 1.2419719430448157,
+      "bias": -0.09127526653478552,
+      "coverage": 0.9280099296648738,
+      "coverage_n": 4834
+     },
+     "shots": {
+      "n": 720,
+      "mae": 3.5925443037484834,
+      "rmse": 4.584597255396,
+      "bias": -0.1823373427950233,
+      "coverage": 0.725,
+      "coverage_n": 720
+     },
+     "sot": {
+      "n": 720,
+      "mae": 1.8843866617315266,
+      "rmse": 2.4310619576534815,
+      "bias": -0.12342316929320189,
+      "coverage": 0.8416666666666667,
+      "coverage_n": 720
+     },
+     "corners": {
+      "n": 720,
+      "mae": 2.1677142366161606,
+      "rmse": 2.752735050231756,
+      "bias": 0.004669687911633572,
+      "coverage": 0.7611111111111111,
+      "coverage_n": 720
+     }
+    }
+   }
+  },
+  "SWE1": {
+   "seasons_1x2": [
+    "2023",
+    "2024",
+    "2025"
+   ],
+   "seasons_counts": [],
+   "n_targets": 533,
+   "V2": {
+    "by_season": {
+     "2023": {
+      "1x2": {
+       "n": 218,
+       "brier": 0.6007925579826318,
+       "logloss": 1.0058486578221522,
+       "hit_rate": 0.5045871559633027
+      },
+      "goals": {
+       "n": 436,
+       "mae": 0.953498574077541,
+       "rmse": 1.2099007942858084,
+       "bias": -0.047579037802647425,
+       "coverage": 0.944954128440367,
+       "coverage_n": 436
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024": {
+      "1x2": {
+       "n": 240,
+       "brier": 0.6359036743977196,
+       "logloss": 1.0528724045952573,
+       "hit_rate": 0.475
+      },
+      "goals": {
+       "n": 480,
+       "mae": 0.975195863862473,
+       "rmse": 1.2281963783452046,
+       "bias": 0.06657676759152582,
+       "coverage": 0.9354166666666667,
+       "coverage_n": 480
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025": {
+      "1x2": {
+       "n": 53,
+       "brier": 0.5768733022471599,
+       "logloss": 0.9680365104861688,
+       "hit_rate": 0.5660377358490566
+      },
+      "goals": {
+       "n": 106,
+       "mae": 0.9520973581793629,
+       "rmse": 1.22300201404179,
+       "bias": -0.14851623895872784,
+       "coverage": 0.9056603773584906,
+       "coverage_n": 106
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 511,
+      "brier": 0.6148022397549234,
+      "logloss": 1.0240123670525594,
+      "hit_rate": 0.49706457925636005
+     },
+     "goals": {
+      "n": 1022,
+      "mae": 0.963543750409792,
+      "rmse": 1.219883608851411,
+      "bias": -0.0044328115143317404,
+      "coverage": 0.9363992172211351,
+      "coverage_n": 1022
+     },
+     "shots": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     },
+     "sot": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     },
+     "corners": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     }
+    }
+   },
+   "V3": {
+    "by_season": {
+     "2023": {
+      "1x2": {
+       "n": 218,
+       "brier": 0.6024247168719241,
+       "logloss": 1.0090934438506192,
+       "hit_rate": 0.5045871559633027
+      },
+      "goals": {
+       "n": 436,
+       "mae": 0.9585927138822112,
+       "rmse": 1.2157530314416054,
+       "bias": -0.049136683262637974,
+       "coverage": 0.9220183486238532,
+       "coverage_n": 436
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024": {
+      "1x2": {
+       "n": 240,
+       "brier": 0.6257926880471871,
+       "logloss": 1.038815698240853,
+       "hit_rate": 0.4666666666666667
+      },
+      "goals": {
+       "n": 480,
+       "mae": 0.9427261240883863,
+       "rmse": 1.2029627690076379,
+       "bias": -0.021989431433517555,
+       "coverage": 0.9354166666666667,
+       "coverage_n": 480
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025": {
+      "1x2": {
+       "n": 53,
+       "brier": 0.5914124465748365,
+       "logloss": 0.9879018763144233,
+       "hit_rate": 0.49056603773584906
+      },
+      "goals": {
+       "n": 106,
+       "mae": 0.9807422103725582,
+       "rmse": 1.2375257937656108,
+       "bias": 0.010683283868655422,
+       "coverage": 0.9339622641509434,
+       "coverage_n": 106
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 511,
+      "brier": 0.6122577163950501,
+      "logloss": 1.0208550641524543,
+      "hit_rate": 0.48532289628180036
+     },
+     "goals": {
+      "n": 1022,
+      "mae": 0.9534380010905682,
+      "rmse": 1.2120502764699754,
+      "bias": -0.030182086986811255,
+      "coverage": 0.9295499021526419,
+      "coverage_n": 1022
+     },
+     "shots": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     },
+     "sot": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     },
+     "corners": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     }
+    }
+   },
+   "BASE": {
+    "by_season": {
+     "2023": {
+      "1x2": {
+       "n": 218,
+       "brier": 0.6391708994351413,
+       "logloss": 1.0557407222632915,
+       "hit_rate": 0.45871559633027525
+      },
+      "goals": {
+       "n": 436,
+       "mae": 1.0054996292633867,
+       "rmse": 1.2596682492877977,
+       "bias": -0.04787464120482112,
+       "coverage": 0.9334862385321101,
+       "coverage_n": 436
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2024": {
+      "1x2": {
+       "n": 240,
+       "brier": 0.6402807708210856,
+       "logloss": 1.0586722044148666,
+       "hit_rate": 0.45416666666666666
+      },
+      "goals": {
+       "n": 480,
+       "mae": 0.9856922884591756,
+       "rmse": 1.231611565865501,
+       "bias": 0.004009086765145205,
+       "coverage": 0.9375,
+       "coverage_n": 480
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     },
+     "2025": {
+      "1x2": {
+       "n": 53,
+       "brier": 0.641899509293154,
+       "logloss": 1.0589987833535974,
+       "hit_rate": 0.4339622641509434
+      },
+      "goals": {
+       "n": 106,
+       "mae": 1.0543367605441187,
+       "rmse": 1.2658260578320772,
+       "bias": 0.012941605687162063,
+       "coverage": 0.9245283018867925,
+       "coverage_n": 106
+      },
+      "shots": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "sot": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      },
+      "corners": {
+       "n": 0,
+       "mae": null,
+       "rmse": null,
+       "bias": null,
+       "coverage": null,
+       "coverage_n": 0
+      }
+     }
+    },
+    "all": {
+     "1x2": {
+      "n": 511,
+      "brier": 0.6399751762553004,
+      "logloss": 1.0574554638565679,
+      "hit_rate": 0.45401174168297453
+     },
+     "goals": {
+      "n": 1022,
+      "mae": 1.0012620679421893,
+      "rmse": 1.2472163859070768,
+      "bias": -0.01719879815576628,
+      "coverage": 0.9344422700587084,
+      "coverage_n": 1022
+     },
+     "shots": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     },
+     "sot": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     },
+     "corners": {
+      "n": 0,
+      "mae": null,
+      "rmse": null,
+      "bias": null,
+      "coverage": null,
+      "coverage_n": 0
+     }
+    }
+   }
   }
  }
 }
