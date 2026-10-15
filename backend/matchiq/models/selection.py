@@ -54,7 +54,8 @@ def run_selection(app: App, competition: str = "UCL", validation: list[str] | No
     progress = progress or (lambda msg, done, total: None)
     t0 = time.time()
     leagues = sorted(set(team_league_map(app).values()))
-    train = HistoryStore.load(app.db, None, competitions=[competition] + leagues)
+    train = HistoryStore.load(app.db, None, competitions=[competition] + leagues,
+                              counts_max_age_days=app.get_setting("counts_max_age_days"))
     ev = HistoryStore.load(app.db, evaluation_source_ids(app.db), competitions=[competition])
     v3.clear_cache()
     v3.set_team_leagues(train, team_league_map(app))

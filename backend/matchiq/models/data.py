@@ -21,7 +21,8 @@ from ..db import Database
 from ..timeutil import parse_iso
 
 RESULT_PRIORITY = ["manual", "uefa", "api_football", "football_data_org", "openfootball", "statsbomb_open",
-                   "football_data_couk", "user_file"]
+                   "wyscout_public", "football_data_couk", "user_file"]
+COUNT_METRICS = ("shots", "sot", "corners")
 METRICS = ("goals", "shots", "sot", "corners")
 STAT_COLS = {"shots": "shots", "sot": "shots_on_target", "corners": "corners"}
 
@@ -49,13 +50,18 @@ class Arrays:
 
 
 class HistoryStore:
-    def __init__(self, arrays: Arrays, training_sources: set[str]):
+    """counts_max_age_days: räknemått (skott, skott på mål, hörnor) äldre än så många dagar före
+    datagränsen används inte. Lagens nivå i dessa mått förändras mellan säsonger; mycket gammal data
+    ska inte ge sken av en aktuell prognos. None = ingen gräns."""
+
+    def __init__(self, arrays: Arrays, training_sources: set[str], counts_max_age_days: float | None = None):
         self.a = arrays
         self.training_sources = training_sources
+        self.counts_max_age_days = counts_max_age_days
 
     @classmethod
     def load(cls, db: Database, training_sources: set[str] | None = None,
-             competitions: list[str] | None = None) -> "HistoryStore":
+             competitions: list[str] | None = None, counts_max_age_days: float | None = None) -> "HistoryStore":
         allowed = training_sources if training_sources is not None else training_source_ids(db)
         comp_filter = ""
         params: list = []
@@ -124,7 +130,7 @@ class HistoryStore:
             away=np.array([r["away_team_id"] for r in rows], dtype=np.int64),
             vals_h=vals_h, vals_a=vals_a, avail=avail, src=src,
             et=np.array([r["id"] in et_ids for r in rows], dtype=bool))
-        return cls(arrays, set(allowed))
+        return cls(arrays, set(allowed), counts_max_age_days)
 
     def view(self, cutoff: datetime, exclude_match_ids: set[int] | None = None,
              include_extra_time: bool = False) -> "DataView":
@@ -149,8 +155,11 @@ class DataView:
         if exclude:
             base &= ~np.isin(a.match_id, np.array(sorted(exclude), dtype=np.int64))
         self._masks = {}
+        max_age = store.counts_max_age_days
         for metric in METRICS:
             m = base & ~np.isnan(a.vals_h[metric]) & (a.avail[metric] <= cutoff_ts)
+            if max_age and metric in COUNT_METRICS:
+                m &= a.kickoff >= cutoff_ts - float(max_age) * 86400.0
             self._masks[metric] = m
 
     def metric(self, metric: str, competitions: tuple[str, ...] | None = None) -> dict[str, np.ndarray]:

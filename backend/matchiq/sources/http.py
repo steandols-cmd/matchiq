@@ -3,6 +3,7 @@ villkorliga anrop (ETag/Last-Modified), råfilsarkiv med SHA-256 och en loggrad 
 """
 from __future__ import annotations
 
+import gzip
 import hashlib
 import json
 import logging
@@ -83,8 +84,10 @@ class HttpClient:
         row = self.app.db.one("SELECT calls_today, calls_day FROM sync_state WHERE source_id=? AND job='_quota'",
                               (source_id,))
         calls = row["calls_today"] if row and row["calls_day"] == day else 0
-        if src["daily_quota"] is not None and calls >= src["daily_quota"]:
-            raise SourceBlocked(f"Dygnskvoten för {src['name']} ({src['daily_quota']} anrop) är förbrukad.")
+        quota = self.app.get_setting(f"quota_{source_id}") or src["daily_quota"]
+        if quota is not None and calls >= int(quota):
+            raise SourceBlocked(f"Dygnskvoten för {src['name']} ({quota} anrop) är förbrukad – hämtningen "
+                                "fortsätter automatiskt nästa dygn.")
         self.app.db.execute("""INSERT INTO sync_state (source_id, job, scope, calls_today, calls_day) VALUES (?,?,?,?,?)
             ON CONFLICT(source_id, job, scope) DO UPDATE SET calls_today=excluded.calls_today, calls_day=excluded.calls_day""",
                             (source_id, "_quota", "", calls + 1, day))
@@ -116,7 +119,10 @@ class HttpClient:
 
     # ---------------------------------------------------------------- fetch
     def get(self, source_id: str, url: str, *, job: str, params: dict | None = None, headers: dict | None = None,
-            respect_robots: bool = False, conditional: bool = True, redact: tuple[str, ...] = ()) -> FetchResult:
+            respect_robots: bool = False, conditional: bool = True, redact: tuple[str, ...] = (),
+            archive: str = "full", timeout: float = 30) -> FetchResult:
+        """archive: 'full' sparar råfilen, 'gzip' sparar den komprimerad, 'none' sparar bara SHA-256 och storlek
+        (för mycket stora filer som alltid kan hämtas igen från källan)."""
         src = self.check_allowed(source_id)
         if respect_robots and not self.robots_allowed(url):
             self._log_fetch(source_id, job, url, None, None, "skipped", error="Blockerad av robots.txt")
@@ -140,7 +146,7 @@ class HttpClient:
             attempt += 1
             self._rate_limit(source_id, float(src["min_interval_seconds"] or 0))
             try:
-                resp = self.session.get(url, params=params, headers=hdrs, timeout=30)
+                resp = self.session.get(url, params=params, headers=hdrs, timeout=timeout)
             except requests.RequestException as e:
                 last_err = repr(e)
                 self.sleep(delay)
@@ -154,12 +160,13 @@ class HttpClient:
                 continue
             if resp.status_code == 304:
                 fid = self._log_fetch(source_id, job, shown_url, 304, None, "not_modified", started=started,
-                                      attempt=attempt)
+                                      attempt=attempt, archive=archive)
                 return FetchResult(fid, 304, None, True, dict(resp.headers))
             content = resp.content if resp.status_code == 200 else None
             fid = self._log_fetch(source_id, job, shown_url, resp.status_code, content,
                                   "pending" if resp.status_code == 200 else "error", started=started, attempt=attempt,
-                                  error=None if resp.status_code == 200 else f"HTTP {resp.status_code}")
+                                  error=None if resp.status_code == 200 else f"HTTP {resp.status_code}",
+                                  archive=archive)
             if resp.status_code == 200 and conditional:
                 self.app.db.execute("""INSERT INTO sync_state (source_id, job, scope, etag, last_modified) VALUES
                     (?,?,?,?,?) ON CONFLICT(source_id, job, scope) DO UPDATE SET etag=excluded.etag,
@@ -172,15 +179,15 @@ class HttpClient:
         return FetchResult(fid, None, None, False, {})
 
     def _log_fetch(self, source_id, job, url, status, content, parser_status, *, started=None, attempt=1,
-                   error=None) -> int:
+                   error=None, archive: str = "full") -> int:
         sha = hashlib.sha256(content).hexdigest() if content else None
         raw_path = None
-        if content:
+        if content and archive in ("full", "gzip"):
             d = self.app.paths.raw / source_id / sha[:2]  # type: ignore[index]
             d.mkdir(parents=True, exist_ok=True)
-            p = d / f"{sha}.bin"
+            p = d / (f"{sha}.bin" if archive == "full" else f"{sha}.bin.gz")
             if not p.exists():
-                p.write_bytes(content)
+                p.write_bytes(content if archive == "full" else gzip.compress(content, 6))
             raw_path = str(p)
         cur = self.app.db.execute("""INSERT INTO fetches (source_id, job, url, started_at_utc, finished_at_utc,
             http_status, sha256, bytes, parser_status, attempt, error, raw_path) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",

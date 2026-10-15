@@ -11,11 +11,9 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from .. import secrets_store
 from ..timeutil import UTC
 from .base import Adapter
 
-API = "https://api.github.com/repos/statsbomb/open-data/contents/data/{path}"
 COMP_MAP = {  # StatsBomb competition_name -> vår kod
     "Champions League": "UCL", "Premier League": "ENG1", "La Liga": "ESP1", "1. Bundesliga": "GER1",
     "Serie A": "ITA1", "Ligue 1": "FRA1",
@@ -129,58 +127,81 @@ def player_stats_from_events(events: list[dict]) -> dict[int, dict]:
     return dict(ps)
 
 
+TZ = {"UCL": "Europe/Paris", "ENG1": "Europe/London", "ESP1": "Europe/Madrid", "GER1": "Europe/Berlin",
+      "ITA1": "Europe/Rome", "FRA1": "Europe/Paris"}
+
+
 class StatsBombAdapter(Adapter):
+    """Jobb: ``matches`` (veckovis, högst 60 nya matcher per körning) och ``backfill`` (alla matcher i
+    de tävlingar som MatchIQ följer). Redan importerade matcher hoppas över, så körningen kan avbrytas
+    (t.ex. när GitHubs anropsgräns nås) och fortsätta senare."""
     source_id = "statsbomb_open"
     label = "StatsBomb Open Data"
-    jobs = ("matches",)
+    jobs = ("matches", "backfill")
 
-    def _get(self, path: str, job: str):
-        headers = {"Accept": "application/vnd.github.raw", "X-GitHub-Api-Version": "2022-11-28"}
-        tok = secrets_store.get_secret("github_token")
-        if tok:
-            headers["Authorization"] = f"Bearer {tok}"
-        return self.http.get(self.source_id, API.format(path=path), job=job, headers=headers)
-
-    def run(self, job: str = "matches", max_matches: int = 60, competitions: list[str] | None = None) -> dict:
-        comps = self._get("competitions.json", job)
+    def run(self, job: str = "matches", max_matches: int | None = None, competitions: list[str] | None = None,
+            progress=None) -> dict:
+        from ..linking import link_source_teams
+        from .github import GitHubRepo
+        gh = GitHubRepo(self.http, self.source_id, "statsbomb", "open-data")
+        self._gh = gh
+        comps = gh.file("data/competitions.json", job)
         if comps.status != 200:
             return {"error": f"competitions.json HTTP {comps.status}"}
+        self.http.finish(comps.fetch_id, "ok")
         wanted = set(competitions or COMP_MAP.values())
         done_ids = {r["source_match_id"] for r in self.app.db.query(
             "SELECT source_match_id FROM match_source_ids WHERE source_id=?", (self.source_id,))}
-        budget = max_matches
+        budget = max_matches if max_matches is not None else (60 if job == "matches" else 100_000)
+        todo = []
         for c in comps.json():
             code = COMP_MAP.get(c.get("competition_name"))
-            if code not in wanted:
+            if code not in wanted or c.get("competition_gender", "male") != "male":
                 continue
-            ml = self._get(f"matches/{c['competition_id']}/{c['season_id']}.json", job)
+            ml = gh.file(f"data/matches/{c['competition_id']}/{c['season_id']}.json", job)
             if ml.status != 200:
+                self.counts["match_lists_missing"] += 1
                 continue
-            for m in ml.json():
-                if budget <= 0:
-                    return self.summary()
+            matches = ml.json() or []
+            self.http.finish(ml.fetch_id, "ok", {"inserted": len(matches)})
+            fx = [{"date": m["match_date"], "home_sid": m["home_team"]["home_team_id"],
+                   "away_sid": m["away_team"]["away_team_id"], "home_name": m["home_team"]["home_team_name"],
+                   "away_name": m["away_team"]["away_team_name"], "hg": m.get("home_score"),
+                   "ag": m.get("away_score")} for m in matches]
+            r = link_source_teams(self.app, self.source_id, code, fx)
+            self.counts["teams_linked"] += len(r["linked"])
+            for m in matches:
                 if str(m["match_id"]) in done_ids:
                     self.counts["unchanged"] += 1
-                    continue
-                self._import_match(m, code, c.get("season_name"), ml.fetch_id, job)
-                budget -= 1
+                else:
+                    todo.append((m, code, c.get("season_name"), ml.fetch_id))
+        self.counts["matches_todo"] = len(todo)
+        for i, (m, code, season_name, list_fetch) in enumerate(todo[:budget], 1):
+            if progress:
+                progress(f"StatsBomb {code} {season_name}: {m['home_team']['home_team_name']} – "
+                         f"{m['away_team']['away_team_name']}", i, min(len(todo), budget))
+            self._import_match(m, code, season_name, list_fetch, job)
+        self.counts["matches_remaining"] = max(0, len(todo) - budget)
         return self.summary()
 
     def _import_match(self, m: dict, comp: str, season_name: str | None, list_fetch: int, job: str) -> None:
         d = datetime.strptime(m["match_date"], "%Y-%m-%d")
         ko_t = (m.get("kick_off") or "20:00:00")[:5]
-        ko = d.replace(hour=int(ko_t[:2]), minute=int(ko_t[3:5]), tzinfo=ZoneInfo("Europe/Paris")).astimezone(UTC)
+        ko = d.replace(hour=int(ko_t[:2]), minute=int(ko_t[3:5]), tzinfo=ZoneInfo(TZ.get(comp, "Europe/Paris"))
+                       ).astimezone(UTC)
         home = m["home_team"]
         away = m["away_team"]
         hid = self.team(home["home_team_name"], context=comp, source_team_id=home["home_team_id"])
         aid = self.team(away["away_team_name"], context=comp, source_team_id=away["away_team_id"])
         season = (season_name or "").replace("/20", "/") if season_name and len(season_name) == 9 else season_name
+        # Historisk källa: avsparkstiden får inte skriva över en tid som redan finns från en annan källa
         mid, act = self.repo.upsert_match(competition_code=comp, kickoff_utc=ko, home_team_id=hid, away_team_id=aid,
                                           source_id=self.source_id, status="finished", season_label=season,
                                           source_match_id=str(m["match_id"]), fetch_id=list_fetch,
+                                          kickoff_time_known=False,
                                           stage=(m.get("competition_stage") or {}).get("name"))
         self.counts[f"match_{act}"] += 1
-        ev = self._get(f"events/{m['match_id']}.json", job)
+        ev = self._gh.file(f"data/events/{m['match_id']}.json", job, archive="none", timeout=120)
         if ev.status != 200:
             self.counts["events_missing"] += 1
             return

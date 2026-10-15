@@ -43,3 +43,53 @@ jobs:
         run: python scripts/inventera_kallor.py --out rapport
       - name: Publicera rapport
         run: bash scripts/publicera_rapport.sh rapport "Källinventering"
+
+  oppen-data:
+    name: Hämta öppen data (OpenFootball CC0 + Wyscout CC BY 4.0)
+    needs: inventering
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r backend/requirements.txt
+      - name: Hämta historik med appens källadaptrar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          python scripts/hamta_oppen_data.py --data-dir work --sources openfootball,wyscout_public \
+            --out rapport --name oppen_data --export "$RUNNER_TEMP/matchiq-oppen-data.zip"
+      - name: Publicera rapport
+        if: always()
+        run: bash scripts/publicera_rapport.sh rapport "Öppen data"
+      - name: Databasexport (endast CC0- och CC BY-data, med källa per rad)
+        uses: actions/upload-artifact@v4
+        with:
+          name: matchiq-oppen-data
+          path: ${{ runner.temp }}/matchiq-oppen-data.zip
+          retention-days: 30
+
+  statsbomb:
+    name: Hämta StatsBomb Open Data (täckningsrapport)
+    needs: oppen-data
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r backend/requirements.txt
+      - name: OpenFootball (grund för lagkoppling) och StatsBomb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          python scripts/hamta_oppen_data.py --data-dir work --sources openfootball,wyscout_public,statsbomb_open \
+            --out rapport --name statsbomb
+      - name: Publicera rapport
+        if: always()
+        run: bash scripts/publicera_rapport.sh rapport "StatsBomb"

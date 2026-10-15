@@ -14,12 +14,10 @@ import re
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from .. import secrets_store
 from ..timeutil import UTC, to_iso
 from .base import CALENDAR_LEAGUES, Adapter, season_label
 from .http import SourceBlocked
 
-API = "https://api.github.com/repos/openfootball/{repo}/contents/{path}"
 
 JSON_LEAGUES = {  # tävlingskod -> (football.json-kod, tidszon)
     "ENG1": ("en.1", "Europe/London"), "ESP1": ("es.1", "Europe/Madrid"), "GER1": ("de.1", "Europe/Berlin"),
@@ -78,8 +76,11 @@ def parse_football_json(data: dict) -> list[dict]:
     return out
 
 
-def parse_football_txt(text: str, default_year: int) -> list[dict]:
-    """Tolerant tolkning av Football.TXT. Rader som inte kan tolkas räknas och rapporteras."""
+def parse_football_txt(text: str, default_year: int, calendar: bool = False) -> list[dict]:
+    """Tolerant tolkning av Football.TXT. Rader som inte kan tolkas räknas och rapporteras.
+
+    calendar=True för ligor som spelas inom ett kalenderår (t.ex. Allsvenskan): då byts aldrig år
+    när månaden "går bakåt" (uppskjutna matcher listas ibland i annan ordning)."""
     out: list[dict] = []
     cur_date: tuple[int, int, int] | None = None
     cur_round = None
@@ -98,7 +99,7 @@ def parse_football_txt(text: str, default_year: int) -> list[dict]:
             mon = MONTHS[m.group(1).lower()[:3]]
             if m.group(3):
                 year = int(m.group(3))
-            elif last_month and mon < last_month and last_month >= 7 and mon <= 6:
+            elif not calendar and last_month and mon < last_month and last_month >= 7 and mon <= 6:
                 year += 1  # säsongen passerar nyår
             last_month = mon
             cur_date = (year, mon, int(m.group(2)))
@@ -153,52 +154,105 @@ def parse_football_txt(text: str, default_year: int) -> list[dict]:
         out.append({"round": cur_round, "date": "%04d-%02d-%02d" % cur_date,
                     "time": None if hh is None else f"{hh:02d}:{mi:02d}", "team1": t1c, "team2": t2c,
                     "country1": c1.group(1) if c1 else None, "country2": c2.group(1) if c2 else None,
-                    "ft": ft, "ht": ht, "et": et, "pens": pens})
+                    "ft": ft, "ht": ht, "et": et, "pens": pens, "line": line.strip()})
     return out
 
 
+# (repo, mönster) -> (tävlingskod, tidszon, kalenderår?)
+TARGETS = [
+    ("football.json", re.compile(r"^(\d{4})(?:-(\d{2}))?/([a-z]+\.1)\.json$")),
+    ("champions-league", re.compile(r"^(\d{4})-(\d{2})/(cl|clq)\.txt$")),
+    ("europe", re.compile(r"^sweden/(\d{4})_(se1)\.txt$")),
+]
+JSON_CODE_TO_COMP = {code: comp for comp, (code, _tz) in JSON_LEAGUES.items()}
+
+
+def classify(repo: str, path: str) -> dict | None:
+    """Vilken tävling och säsong en fil i ett OpenFootball-repo avser (None = inte relevant)."""
+    for r, rx in TARGETS:
+        if r != repo:
+            continue
+        m = rx.match(path)
+        if not m:
+            return None
+        if repo == "football.json":
+            comp = JSON_CODE_TO_COMP.get(m.group(3))
+            if comp is None:
+                return None
+            cal = m.group(2) is None
+            return {"comp": comp, "tz": JSON_LEAGUES[comp][1], "start": int(m.group(1)), "calendar": cal,
+                    "format": "json"}
+        if repo == "champions-league":
+            return {"comp": "UCL" if m.group(3) == "cl" else "UCLQ", "tz": "Europe/Paris", "start": int(m.group(1)),
+                    "calendar": False, "format": "txt"}
+        if repo == "europe":
+            return {"comp": "SWE1", "tz": "Europe/Stockholm", "start": int(m.group(1)), "calendar": True,
+                    "format": "txt"}
+    return None
+
+
 class OpenFootballAdapter(Adapter):
+    """Två jobb:
+
+    * ``fixtures_results`` – innevarande och föregående säsong (körs dagligen av synken).
+    * ``backfill`` – samtliga säsonger som finns i repona (historik).
+
+    Filträdet hämtas med ett anrop per repo; varje fils blob-SHA sparas, så en fil laddas bara ner
+    igen när den faktiskt har ändrats i källan.
+    """
     source_id = "openfootball"
     label = "OpenFootball"
-    jobs = ("fixtures_results",)
-
-    def _get(self, repo: str, path: str, job: str):
-        headers = {"Accept": "application/vnd.github.raw", "X-GitHub-Api-Version": "2022-11-28"}
-        tok = secrets_store.get_secret("github_token")
-        if tok:
-            headers["Authorization"] = f"Bearer {tok}"
-        return self.http.get(self.source_id, API.format(repo=repo, path=path), job=job, headers=headers)
+    jobs = ("fixtures_results", "backfill")
 
     def run(self, job: str = "fixtures_results", competitions: list[str] | None = None,
-            seasons: list[int] | None = None) -> dict:
+            seasons: list[int] | None = None, progress=None) -> dict:
+        from .github import GitHubRepo
         now = self.now()
-        comps = competitions or ["UCL", "ENG1", "ESP1", "GER1", "ITA1", "FRA1", "SWE1"]
-        for comp in comps:
-            cal = comp in CALENDAR_LEAGUES
-            start = now.year if cal else (now.year if now.month >= 7 else now.year - 1)
-            for sy in (seasons or [start]):
-                try:
-                    if comp == "UCL":
-                        res = self._get("champions-league", f"{season_path(sy, False)}/cl.txt", job)
-                        if res.status != 200:
-                            self.counts["missing_files"] += 1
-                            continue
-                        rows = parse_football_txt(res.text(), sy)
-                        self._store(rows, "UCL", "Europe/Paris", season_label(sy), res.fetch_id, context="UCL")
-                    elif comp in JSON_LEAGUES:
-                        code, tz = JSON_LEAGUES[comp]
-                        res = self._get("football.json", f"{season_path(sy, cal)}/{code}.json", job)
-                        if res.status != 200:
-                            self.counts["missing_files"] += 1
-                            continue
-                        rows = parse_football_json(res.json())
-                        self._store(rows, comp, tz, season_label(sy, cal), res.fetch_id, context=comp)
-                except SourceBlocked:
-                    raise
-                except Exception as e:  # noqa: BLE001 - parserfel loggas per fil
-                    self.counts["parse_errors"] += 1
-                    if "res" in locals() and getattr(res, "fetch_id", None):
-                        self.http.finish(res.fetch_id, "error", error=repr(e))
+        comps = set(competitions or ["UCL", "UCLQ", "ENG1", "ESP1", "GER1", "ITA1", "FRA1", "SWE1"])
+        plan = []
+        for repo in ("football.json", "champions-league", "europe"):
+            gh = GitHubRepo(self.http, self.source_id, "openfootball", repo)
+            for path, sha in sorted(gh.tree(job).items()):
+                info = classify(repo, path)
+                if not info or info["comp"] not in comps:
+                    continue
+                cur = now.year if info["calendar"] else (now.year if now.month >= 7 else now.year - 1)
+                if seasons is not None and info["start"] not in seasons:
+                    continue
+                if job == "fixtures_results" and seasons is None and info["start"] < cur - 1:
+                    continue
+                plan.append((gh, path, sha, info))
+        self.counts["files_in_scope"] = len(plan)
+        for i, (gh, path, sha, info) in enumerate(plan, 1):
+            if progress:
+                progress(f"OpenFootball {info['comp']} {path}", i, len(plan))
+            key = f"{gh.repo}/{path}"
+            st = self.app.db.one("SELECT etag FROM sync_state WHERE source_id=? AND job='_blob' AND scope=?",
+                                 (self.source_id, key))
+            if st and st["etag"] == sha:
+                self.counts["files_unchanged"] += 1
+                continue
+            res = gh.file(path, job)
+            if res.status != 200:
+                self.counts["missing_files"] += 1
+                continue
+            try:
+                if info["format"] == "json":
+                    rows = parse_football_json(res.json())
+                else:
+                    rows = parse_football_txt(res.text(), info["start"], calendar=info["calendar"])
+                label = season_label(info["start"], info["calendar"])
+                self._store(rows, info["comp"], info["tz"], label, res.fetch_id,
+                            context="UCL" if info["comp"] in ("UCL", "UCLQ") else info["comp"])
+                self.app.db.execute("""INSERT INTO sync_state (source_id, job, scope, etag, last_run_utc)
+                    VALUES (?,?,?,?,?) ON CONFLICT(source_id, job, scope) DO UPDATE SET etag=excluded.etag,
+                    last_run_utc=excluded.last_run_utc""", (self.source_id, "_blob", key, sha, to_iso(now)))
+                self.counts["files_imported"] += 1
+            except SourceBlocked:
+                raise
+            except Exception as e:  # noqa: BLE001 - parserfel loggas per fil
+                self.counts["parse_errors"] += 1
+                self.http.finish(res.fetch_id, "error", error=repr(e))
         return self.summary()
 
     def _store(self, rows: list[dict], comp: str, tz: str, season: str, fetch_id: int, context: str) -> None:

@@ -16,13 +16,17 @@ from .odds_api import OddsApiAdapter
 from .openfootball import OpenFootballAdapter
 from .statsbomb import StatsBombAdapter
 from .uefa import UefaAdapter
+from .wyscout import WyscoutAdapter
 
 log = logging.getLogger("matchiq.sync")
 ADAPTERS: dict[str, type[Adapter]] = {
     "openfootball": OpenFootballAdapter, "statsbomb_open": StatsBombAdapter,
     "football_data_couk": FootballDataCoUkAdapter, "football_data_org": FootballDataOrgAdapter,
     "api_football": ApiFootballAdapter, "the_odds_api": OddsApiAdapter, "uefa": UefaAdapter,
+    "wyscout_public": WyscoutAdapter,
 }
+# Historikhämtning: OpenFootball först (spelscheman och resultat som övriga källors lag kopplas mot).
+BACKFILL_ORDER = ["openfootball", "wyscout_public", "statsbomb_open", "api_football"]
 GLOBAL_JOBS = [("openfootball", "fixtures_results"), ("football_data_org", "fixtures"), ("api_football", "fixtures"),
                ("the_odds_api", "odds"), ("statsbomb_open", "matches"), ("football_data_couk", "results")]
 
@@ -81,13 +85,32 @@ def run_source(app: App, source_id: str, job: str | None = None, http: HttpClien
         res = ad.run(job, **scope)
         status, err = "ok", None
     except SourceBlocked as e:
-        res, status, err = {}, "blocked", str(e)
+        res, status, err = ad.summary(), "blocked", str(e)
     except Exception as e:  # noqa: BLE001
         log.error("Synk %s/%s misslyckades: %s", source_id, job, traceback.format_exc())
-        res, status, err = {}, "error", repr(e)
+        res, status, err = ad.summary(), "error", repr(e)
     nxt = app.clock.now() + interval_for(source_id, job, nearest_kickoff_delta(app))
     _save_state(app, source_id, job, str(scope.get("match_id") or ""), status, err, nxt)
     return {"status": status, "error": err, "result": res, "next_run_utc": to_iso(nxt)}
+
+
+def run_backfill(app: App, source_ids: list[str] | None = None, http: HttpClient | None = None, progress=None,
+                 competitions: list[str] | None = None, seasons: list[int] | None = None) -> list[dict]:
+    """Hämta historik från de valda källorna i rätt ordning. Avstängda källor och källor utan nyckel
+    redovisas med orsak i stället för att hoppas över tyst."""
+    enabled = {r["id"] for r in app.db.query("SELECT id FROM sources WHERE enabled=1")}
+    out = []
+    for sid in [s for s in BACKFILL_ORDER if source_ids is None or s in source_ids]:
+        if sid not in enabled:
+            out.append({"source": sid, "status": "skipped", "error": "Källan är inte aktiverad"})
+            continue
+        scope: dict = {"progress": progress}
+        if competitions:
+            scope["competitions"] = competitions
+        if seasons and sid in ("openfootball", "api_football"):
+            scope["seasons"] = seasons
+        out.append({"source": sid, **run_source(app, sid, "backfill", http, **scope)})
+    return out
 
 
 def sync_cycle(app: App, http: HttpClient | None = None) -> list[dict]:

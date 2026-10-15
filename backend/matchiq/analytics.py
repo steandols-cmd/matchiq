@@ -217,3 +217,99 @@ def prospective_evaluation(app: App, eligible_only: bool = True, competition: st
                       "calibration": calibration_bins(one_x_two, 5),
                       **{m: summarize_counts(v) for m, v in counts.items()}, "rows": table, "series": series}
     return out
+
+
+# ---------------------------------------------------------------------------------------------- driftstatus
+METRIC_LABELS = {"goals": "Mål / 1X2", "corners": "Hörnor", "shots": "Skott", "sot": "Skott på mål"}
+STAT_COL = {"corners": "corners", "shots": "shots", "sot": "shots_on_target"}
+OPERATIVE_MIN = 100   # matcher med värde inom tidsfönstret
+LIMITED_MIN = 20      # V2/V3 kräver minst 20 ligamatcher med värde
+
+
+def _metric_rows(app: App, comp: str, metric: str) -> list:
+    """(kickoff, källa) för varje avslutad match i tävlingen som har måttet för BÅDA lagen från en källa."""
+    if metric == "goals":
+        return app.db.query("""SELECT m.id i, m.kickoff_utc k, r.source_id s FROM matches m
+            JOIN competitions c ON c.id = m.competition_id JOIN match_results r ON r.match_id = m.id
+            WHERE c.code = ? AND m.status = 'finished' AND r.home_goals_90 IS NOT NULL
+              AND r.away_goals_90 IS NOT NULL AND COALESCE(r.decided_by, '') NOT IN ('extra_time', 'penalties')""",
+                            (comp,))
+    col = STAT_COL[metric]
+    return app.db.query(f"""SELECT m.id i, m.kickoff_utc k, t.source_id s FROM matches m
+        JOIN competitions c ON c.id = m.competition_id JOIN team_match_stats t ON t.match_id = m.id
+        WHERE c.code = ? AND m.status = 'finished' AND t.{col} IS NOT NULL
+        GROUP BY m.id, t.source_id HAVING COUNT(DISTINCT t.is_home) = 2""", (comp,))
+
+
+def operational_status(app: App, competitions: list[str] | None = None) -> dict:
+    """Är prognosmodulen operativ per tävling och mått? Bedöms enbart på faktiska data i databasen:
+    antal avslutade matcher med värde från källor som får användas för träning, inom samma tidsfönster
+    som modellerna använder (inställningen counts_max_age_days)."""
+    from datetime import timedelta
+
+    from .timeutil import parse_iso, to_iso
+    now = app.clock.now()
+    max_age = int(app.get_setting("counts_max_age_days") or 450)
+    since = to_iso(now - timedelta(days=max_age))
+    allowed = training_source_ids(app.db)
+    names = {r["id"]: r["name"] for r in app.db.query("SELECT id, name FROM sources")}
+    comps = competitions or [r["code"] for r in app.db.query(
+        "SELECT code FROM competitions WHERE show_in_tabs = 1 ORDER BY tab_order")]
+    out = []
+    for comp in comps:
+        row = {"competition": comp, "metrics": {}}
+        for metric in ("goals", "corners", "shots", "sot"):
+            rows = _metric_rows(app, comp, metric)
+            total_allowed_ids, recent_allowed_ids, recent_any_ids = set(), set(), set()
+            last_allowed = last_any = None
+            by_source: dict[str, set] = defaultdict(set)
+            blocked_recent: set = set()
+            for r in rows:
+                i, k, s = r["i"], r["k"], r["s"]
+                by_source[s].add(i)
+                last_any = max(last_any or k, k)
+                if k >= since:
+                    recent_any_ids.add(i)
+                if s in allowed:
+                    total_allowed_ids.add(i)
+                    last_allowed = max(last_allowed or k, k)
+                    if k >= since:
+                        recent_allowed_ids.add(i)
+                elif k >= since:
+                    blocked_recent.add(s)
+            matches_recent_allowed, matches_recent_any = recent_allowed_ids, recent_any_ids
+            total_allowed = len(total_allowed_ids)
+            recent_allowed, recent_any = len(matches_recent_allowed), len(matches_recent_any)
+            if recent_allowed >= OPERATIVE_MIN:
+                status, reason = "operativ", f"{recent_allowed} matcher med värde de senaste {max_age} dagarna."
+            elif recent_allowed >= LIMITED_MIN:
+                status, reason = "begränsad", (f"Bara {recent_allowed} matcher med värde de senaste {max_age} "
+                                               "dagarna – prognosen bygger mest på ligasnittet.")
+            elif recent_any >= LIMITED_MIN:
+                blocked = sorted(names.get(x, x) for x in blocked_recent)
+                status, reason = "spärrad", ("Aktuell data finns men källan är spärrad från träning: "
+                                             + ", ".join(blocked) + ". Godkänn villkoren under Källor & licenser.")
+            elif total_allowed:
+                status, reason = "inaktuell", (f"Senaste tillåtna data är från {last_allowed[:10]} – äldre än "
+                                               f"{max_age} dagar och används därför inte.")
+            else:
+                status, reason = "saknas", "Ingen data för måttet i någon tillåten källa."
+            needs = []
+            if status != "operativ":
+                if metric == "goals":
+                    needs.append("Kör historikhämtningen (OpenFootball, CC0) under Data & källor → Hämta historik.")
+                else:
+                    needs.append("API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). "
+                                 "Vilka säsonger abonnemanget omfattar visas efter första hämtningen.")
+                    if comp == "UCL":
+                        needs.append("UEFA-data från arbetsboken kan användas efter ditt beslut under "
+                                     "Källor & licenser.")
+            row["metrics"][metric] = {
+                "label": METRIC_LABELS[metric], "status": status, "reason": reason, "needs": needs,
+                "recent_allowed": recent_allowed, "recent_any": recent_any, "total_allowed": total_allowed,
+                "last_allowed": last_allowed, "last_any": last_any,
+                "by_source": {names.get(k, k): len(v) for k, v in sorted(by_source.items(), key=lambda x: -len(x[1]))}}
+        out.append(row)
+    _ = parse_iso
+    return {"max_age_days": max_age, "operative_min": OPERATIVE_MIN, "limited_min": LIMITED_MIN,
+            "as_of_utc": to_iso(now), "competitions": out}

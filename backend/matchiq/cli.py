@@ -7,6 +7,8 @@ Exempel:
     python -m matchiq.cli import-workbook --file UCL_….xlsx
     python -m matchiq.cli select-models
     python -m matchiq.cli simulate-t30 --match 123
+    python -m matchiq.cli backfill --sources openfootball,wyscout_public,statsbomb_open
+    python -m matchiq.cli operational
 """
 from __future__ import annotations
 
@@ -42,6 +44,11 @@ def main(argv: list[str] | None = None) -> None:
     t = sub.add_parser("simulate-t30", help="kör T−30-flödet för en match med simulerad klocka")
     t.add_argument("--match", type=int, required=True)
     sub.add_parser("tick")
+    bf = sub.add_parser("backfill", help="hämta historik från källorna (OpenFootball, Wyscout, StatsBomb, API-Football)")
+    bf.add_argument("--sources", help="kommaseparerat, t.ex. openfootball,wyscout_public")
+    bf.add_argument("--competitions", help="kommaseparerat, t.ex. UCL,SWE1")
+    bf.add_argument("--seasons", help="startår, kommaseparerat, t.ex. 2023,2024")
+    sub.add_parser("operational", help="driftstatus per tävling och mått")
     args = ap.parse_args(argv)
     data_dir = Path(args.data_dir) if args.data_dir else None
 
@@ -77,6 +84,19 @@ def main(argv: list[str] | None = None) -> None:
         print(json.dumps({"params": res["params"], "gates": res["gates"]}, ensure_ascii=False, indent=2))
     elif args.cmd == "tick":
         print(json.dumps(scheduler.tick(app), ensure_ascii=False, indent=2))
+    elif args.cmd == "backfill":
+        from .sources import sync
+        split = (lambda v: [x.strip() for x in v.split(",") if x.strip()] if v else None)
+        res = sync.run_backfill(app, split(args.sources), None, lambda m, d, t: print(f"[{d}/{t}] {m}", flush=True),
+                                split(args.competitions), [int(x) for x in split(args.seasons) or []] or None)
+        print(json.dumps(res, ensure_ascii=False, indent=2, default=str))
+    elif args.cmd == "operational":
+        from . import analytics
+        st = analytics.operational_status(app)
+        for c in st["competitions"]:
+            print(c["competition"])
+            for k, m in c["metrics"].items():
+                print(f"  {m['label']:<14} {m['status']:<10} {m['reason']}")
 
 
 if __name__ == "__main__":

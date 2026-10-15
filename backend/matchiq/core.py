@@ -24,6 +24,8 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "notify_os": True,
     "default_competition": "UCL",
     "first_run_done": False,
+    # Räknemått (skott, skott på mål, hörnor) äldre än så här används inte i prognoser och validering.
+    "counts_max_age_days": 450,
 }
 
 

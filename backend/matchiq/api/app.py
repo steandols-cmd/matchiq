@@ -448,6 +448,7 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
             r["training_status"] = catalog.training_status_text(r)
             r["api_key_configured"] = sec.get(key_for.get(r["id"], ""), None) if r["requires_api_key"] else None
             r["overview"] = over.get(r["id"])
+            r["quota_override"] = ctx.get_setting(f"quota_{r['id']}")
             r["audit"] = rows_to_dicts(ctx.db.query(
                 "SELECT action, detail, at_utc FROM source_audit WHERE source_id=? ORDER BY id DESC LIMIT 5", (r["id"],)))
         return JSON(rows)
@@ -475,6 +476,49 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
         b = await body(request)
         jid = jobs.start(f"sync:{sid}", lambda progress: sync.run_source(ctx, sid, b.get("job")))
         return JSON({"job_id": jid})
+
+    async def operational(request: Request):
+        comps = request.query_params.get("competitions")
+        return JSON(analytics.operational_status(ctx, comps.split(",") if comps else None))
+
+    async def backfill_start(request: Request):
+        b = await body(request)
+        srcs = b.get("sources") or None
+        comps = b.get("competitions") or None
+        seasons = [int(x) for x in (b.get("seasons") or [])] or None
+        jid = jobs.start("backfill", lambda progress: sync.run_backfill(ctx, srcs, None, progress, comps, seasons))
+        return JSON({"job_id": jid})
+
+    async def backfill_state(request: Request):
+        rows = rows_to_dicts(ctx.db.query("""SELECT source_id, scope, last_run_utc, last_status, last_error
+            FROM sync_state WHERE job='backfill' ORDER BY source_id, scope"""))
+        files = rows_to_dicts(ctx.db.query("""SELECT source_id, COUNT(*) n, MAX(last_run_utc) last
+            FROM sync_state WHERE job='_blob' GROUP BY source_id"""))
+        per_source = rows_to_dicts(ctx.db.query("""SELECT s.source_id, COUNT(DISTINCT s.match_id) matches,
+            (SELECT COUNT(DISTINCT match_id) FROM team_match_stats t WHERE t.source_id=s.source_id) with_stats,
+            (SELECT COUNT(*) FROM player_match_stats p WHERE p.source_id=s.source_id) player_rows
+            FROM match_source_ids s GROUP BY s.source_id"""))
+        return JSON({"scopes": rows, "files": files, "per_source": per_source,
+                     "ids_supported": ctx.get_setting("api_football_ids_supported")})
+
+    async def backfill_reset(request: Request):
+        sid = request.path_params["sid"]
+        ctx.db.execute("DELETE FROM sync_state WHERE source_id=? AND job='backfill'", (sid,))
+        if sid == "api_football":
+            ctx.set_setting("api_football_ids_supported", None)
+        return JSON({"ok": True})
+
+    async def source_quota(request: Request):
+        sid = request.path_params["sid"]
+        b = await body(request)
+        v = b.get("value")
+        if v in (None, ""):
+            ctx.set_setting(f"quota_{sid}", None)
+        else:
+            if not (1 <= int(v) <= 1_000_000):
+                return err("Ogiltig dygnskvot")
+            ctx.set_setting(f"quota_{sid}", int(v))
+        return JSON({"ok": True, "quota": ctx.get_setting(f"quota_{sid}")})
 
     async def fetches(request: Request):
         qp = request.query_params
@@ -685,11 +729,13 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
     async def settings_put(request: Request):
         b = await body(request)
         allowed = {"theme", "background_mode", "autostart", "report_offset_minutes", "notify_os",
-                   "default_competition", "first_run_done"}
+                   "default_competition", "first_run_done", "counts_max_age_days"}
         for k, v in b.items():
             if k in allowed:
                 if k == "report_offset_minutes" and int(v) != 30:
                     return err("Rapporttiden är låst till T−30 enligt kravspecifikationen.")
+                if k == "counts_max_age_days" and not (90 <= int(v) <= 3650):
+                    return err("Maxåldern för räknemått måste vara mellan 90 och 3 650 dagar.")
                 ctx.set_setting(k, v)
         return JSON(ctx.all_settings())
 
@@ -755,6 +801,10 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
 
     routes = [
         Route("/api/health", health), Route("/api/meta", meta),
+        Route("/api/operational", operational), Route("/api/backfill", backfill_start, methods=["POST"]),
+        Route("/api/backfill/state", backfill_state),
+        Route("/api/sources/{sid}/backfill/reset", backfill_reset, methods=["POST"]),
+        Route("/api/sources/{sid}/quota", source_quota, methods=["PUT"]),
         Route("/api/competitions", competitions), Route("/api/matches", matches),
         Route("/api/matches/{mid:int}", match_detail),
         Route("/api/matches/{mid:int}/freeze", match_freeze, methods=["POST"]),

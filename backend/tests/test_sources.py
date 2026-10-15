@@ -42,13 +42,41 @@ def gh(repo, path):
     return f"https://api.github.com/repos/openfootball/{repo}/contents/{path}"
 
 
+def of_routes(files: dict, sha_suffix: str = "1") -> dict:
+    """Bygger GitHub-svar (repo, filträd, filinnehåll) för OpenFootball-repona i testet."""
+    routes = {}
+    for repo in ("football.json", "champions-league", "europe"):
+        routes[f"https://api.github.com/repos/openfootball/{repo}"] = FakeResponse(200, {"default_branch": "master"})
+        tree = [{"path": p, "type": "blob", "sha": f"{abs(hash(p))}-{sha_suffix}"}
+                for (r, p) in files if r == repo]
+        routes[f"https://api.github.com/repos/openfootball/{repo}/git/trees/master"] = FakeResponse(
+            200, {"tree": tree, "truncated": False})
+    for (repo, path), body in files.items():
+        routes[gh(repo, path)] = body
+    return routes
+
+
+SWE_TXT = """= Allsvenskan 2023
+
+  Sat Apr 1
+    15:00  Malmö FF  v  IFK Göteborg   2-0
+  Sun Nov 12
+    15:00  AIK  v  Hammarby IF   1-1
+  Sat Jun 3
+    15:00  IFK Göteborg  v  AIK   0-1
+"""
+
+
 class OpenFootballTests(unittest.TestCase):
     def setUp(self):
         self.app, self.clock, _ = make_app(datetime(2026, 10, 15, 8, 0, tzinfo=UTC))
-        self.session = FakeSession({
-            gh("champions-league", "2026-27/cl.txt"): FakeResponse(200, CL_TXT.encode()),
-            gh("football.json", "2026-27/en.1.json"): FakeResponse(200, EPL_JSON),
-        })
+        self.files = {
+            ("champions-league", "2026-27/cl.txt"): FakeResponse(200, CL_TXT.encode()),
+            ("football.json", "2026-27/en.1.json"): FakeResponse(200, EPL_JSON),
+            ("football.json", "2015-16/en.1.json"): FakeResponse(200, {"matches": [
+                {"date": "2015-08-08", "team1": "Arsenal FC", "team2": "Brentford FC", "score": {"ft": [0, 2]}}]}),
+        }
+        self.session = FakeSession(of_routes(self.files))
         self.http = HttpClient(self.app, self.session, sleep=lambda s: None)
 
     def test_parsers(self):
@@ -61,15 +89,25 @@ class OpenFootballTests(unittest.TestCase):
         self.assertEqual(j[0]["ft"], [3, 1])
         self.assertIsNone(j[1]["ft"])
 
+    def test_calendar_league_never_rolls_year(self):
+        rows = parse_football_txt(SWE_TXT, 2023, calendar=True)
+        self.assertEqual([r["date"] for r in rows], ["2023-04-01", "2023-11-12", "2023-06-03"])
+        # Utan kalenderflagga skulle juni efter november tolkas som nästa år (höst–vår-säsong)
+        rows2 = parse_football_txt(SWE_TXT, 2023)
+        self.assertEqual(rows2[2]["date"], "2024-06-03")
+
     def test_sync_twice_no_duplicates_and_logged(self):
         ad = OpenFootballAdapter(self.app, self.http)
         ad.run(competitions=["UCL", "ENG1"])
         n1 = {t: self.app.db.scalar(f"SELECT COUNT(*) FROM {t}") for t in ("matches", "match_results", "teams")}
+        calls_first = len(self.session.calls)
         OpenFootballAdapter(self.app, self.http).run(competitions=["UCL", "ENG1"])
         n2 = {t: self.app.db.scalar(f"SELECT COUNT(*) FROM {t}") for t in ("matches", "match_results", "teams")}
         self.assertEqual(n1, n2)
-        self.assertEqual(n1["matches"], 6)
-        f = self.app.db.query("SELECT * FROM fetches WHERE source_id='openfootball'")
+        self.assertEqual(n1["matches"], 6)  # 2015/16 ingår inte i det dagliga jobbet
+        # Andra körningen: bara repo + filträd (6 anrop) – oförändrade filer (samma blob-SHA) hämtas inte igen
+        self.assertEqual(len(self.session.calls) - calls_first, 6)
+        f = self.app.db.query("SELECT * FROM fetches WHERE source_id='openfootball' AND url LIKE '%/contents/%'")
         self.assertTrue(all(r["sha256"] and r["http_status"] == 200 for r in f))
         self.assertTrue(all(r["parser_status"] in ("ok", "partial") for r in f))
         # Liverpool i CL (TXT) och i PL (JSON) blir samma lag via exakta alias
@@ -78,15 +116,37 @@ class OpenFootballTests(unittest.TestCase):
         st = self.app.db.scalar("""SELECT m.status FROM matches m JOIN teams h ON h.id=m.home_team_id
                                    WHERE h.name='Fenerbahçe'""")
         self.assertEqual(st, "scheduled")
-        # GitHub REST API används med raw-accept (ingen skrapning)
+        # GitHub REST API används (ingen skrapning); filinnehåll med raw-accept
         self.assertTrue(all("api.github.com" in c[0] for c in self.session.calls))
-        self.assertEqual(self.session.calls[0][2]["Accept"], "application/vnd.github.raw")
+        contents = [c for c in self.session.calls if "/contents/" in c[0]]
+        self.assertTrue(contents and all(c[2]["Accept"] == "application/vnd.github.raw" for c in contents))
+
+    def test_backfill_takes_all_seasons_and_changed_files_only(self):
+        OpenFootballAdapter(self.app, self.http).run("backfill", competitions=["ENG1"])
+        self.assertEqual(self.app.db.scalar("""SELECT COUNT(*) FROM matches m JOIN seasons s ON s.id=m.season_id
+                                               WHERE s.label='2015/16'"""), 1)
+        # Källan ändrar en fil (ny blob-SHA) -> bara den filen hämtas igen
+        session2 = FakeSession(of_routes(self.files, sha_suffix="2"))
+        OpenFootballAdapter(self.app, HttpClient(self.app, session2, sleep=lambda s: None)).run(
+            "backfill", competitions=["ENG1"])
+        self.assertEqual(len([c for c in session2.calls if "/contents/" in c[0]]), 2)
 
     def test_missing_file_logged_not_hidden(self):
-        OpenFootballAdapter(self.app, self.http).run(competitions=["SWE1"])
-        f = self.app.db.one("SELECT * FROM fetches WHERE source_id='openfootball'")
+        files = {("europe", "sweden/2026_se1.txt"): FakeResponse(404)}
+        http = HttpClient(self.app, FakeSession(of_routes(files)), sleep=lambda s: None)
+        OpenFootballAdapter(self.app, http).run(competitions=["SWE1"])
+        f = self.app.db.one("SELECT * FROM fetches WHERE source_id='openfootball' AND url LIKE '%/contents/%'")
         self.assertEqual(f["http_status"], 404)
         self.assertEqual(f["parser_status"], "error")
+
+    def test_github_rate_limit_stops_with_clear_message(self):
+        routes = of_routes(self.files)
+        routes["https://api.github.com/repos/openfootball/football.json"] = FakeResponse(
+            403, b"{}", headers={"X-RateLimit-Remaining": "0", "X-RateLimit-Reset": "1792065600"})
+        res = sync.run_source(self.app, "openfootball", "backfill",
+                              HttpClient(self.app, FakeSession(routes), sleep=lambda s: None))
+        self.assertEqual(res["status"], "blocked")
+        self.assertIn("anropsgräns", res["error"])
 
 
 class HttpPolicyTests(unittest.TestCase):

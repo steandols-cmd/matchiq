@@ -24,7 +24,7 @@ _store_lock = threading.Lock()
 
 def _data_version(app: App) -> tuple:
     return (app.db.scalar("SELECT MAX(id) FROM change_log") or 0,
-            tuple(sorted(catalog.training_source_ids(app.db))))
+            tuple(sorted(catalog.training_source_ids(app.db))), app.get_setting("counts_max_age_days"))
 
 
 def get_store(app: App, comp: str) -> HistoryStore:
@@ -35,7 +35,8 @@ def get_store(app: App, comp: str) -> HistoryStore:
         st = cache.get(key)
         if st is None:
             leagues = sorted(set(team_league_map(app).values()))
-            st = HistoryStore.load(app.db, None, competitions=sorted({comp, *leagues}))
+            st = HistoryStore.load(app.db, None, competitions=sorted({comp, *leagues}),
+                                   counts_max_age_days=app.get_setting("counts_max_age_days"))
             v3.set_team_leagues(st, team_league_map(app))
             cache.clear()
             cache[key] = st
