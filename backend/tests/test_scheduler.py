@@ -116,6 +116,46 @@ class SchedulerTests(unittest.TestCase):
         self.assertEqual([j["status"] for j in jobs], ["superseded", "pending"])
         self.assertEqual(jobs[1]["due_at_utc"], to_iso(new_ko - timedelta(minutes=30)))
 
+    def test_lineups_fetched_from_t40_until_confirmed(self):
+        calls = []
+
+        def sync_fn(mid):
+            calls.append((mid, self.clock.now()))
+        scheduler.tick(self.app, sync_fn)
+        self.assertEqual(scheduler.lineup_checkpoints(self.app), [40, 36, 32])
+        for minutes in (45, 41):
+            self.clock.set(self.ko - timedelta(minutes=minutes))
+            scheduler.tick(self.app, sync_fn)
+        self.assertEqual(calls, [])
+        self.clock.set(self.ko - timedelta(minutes=40))
+        scheduler.tick(self.app, sync_fn)
+        self.clock.set(self.ko - timedelta(minutes=39, seconds=45))
+        scheduler.tick(self.app, sync_fn)                       # samma kontrollpunkt: inget nytt anrop
+        self.assertEqual(len(calls), 1)
+        self.clock.set(self.ko - timedelta(minutes=36))
+        scheduler.tick(self.app, sync_fn)
+        self.assertEqual(len(calls), 2)
+        xi = [{"name": f"S {i}", "number": i, "position": None, "is_starter": True} for i in range(1, 12)]
+        for t in self.teams[:2]:
+            self.app.repo.upsert_lineup(self.mid, t, "manual", "confirmed", xi, fetched_at=self.clock.now())
+        self.clock.set(self.ko - timedelta(minutes=32))
+        scheduler.tick(self.app, sync_fn)                       # båda elvorna bekräftade: inget mer anrop
+        self.assertEqual(len(calls), 2)
+        self.clock.set(self.ko - timedelta(minutes=30))
+        scheduler.tick(self.app, sync_fn)
+        self.assertEqual(self.app.db.scalar("SELECT status FROM report_jobs WHERE match_id=?", (self.mid,)), "done")
+
+    def test_late_start_catches_up_with_one_lineup_call(self):
+        calls = []
+        scheduler.tick(self.app, calls.append)
+        self.clock.set(self.ko - timedelta(minutes=33))
+        scheduler.tick(self.app, calls.append)
+        scheduler.tick(self.app, calls.append)
+        self.assertEqual(calls, [self.mid])
+        self.clock.set(self.ko - timedelta(minutes=32))
+        scheduler.tick(self.app, calls.append)
+        self.assertEqual(calls, [self.mid, self.mid])
+
     def test_match_registered_after_deadline_gets_no_automatic_job(self):
         self.clock.set(self.ko + timedelta(minutes=1))
         mid, _ = self.app.repo.upsert_match(competition_code="UCL", kickoff_utc=self.ko, home_team_id=self.teams[2],

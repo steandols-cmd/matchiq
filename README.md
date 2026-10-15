@@ -224,6 +224,7 @@ Fullständigt register: **[docs/KALLREGISTER.md](docs/KALLREGISTER.md)** (genere
 | Football-Data.co.uk | Endast visning/jämförelse; villkoren utesluter AI-träning | Spärrad – kräver skriftligt tillstånd |
 | The Odds API | Odds för jämförelse | Aldrig träning |
 | StatMuse, Sofascore-bilden | Rimlighetskontroll respektive designförlaga – ingen insamling | Aldrig |
+| Sofascore, Forza Football | Hämtas inte. Inga villkor som tillåter att datan återanvänds har hittats | – |
 
 Principer som är inbyggda i koden:
 
@@ -266,6 +267,26 @@ GitHub Actions (*Datakällor – inventering och nedladdning*) vid ändringar oc
 * **Hörnor och skott finns bara för äldre säsonger.** Det gäller Wyscout 2017/18 och StatsBomb för valda
   matcher, och den datan är äldre än 450 dagar. För aktuella säsonger krävs API-Football. I Champions League
   räcker din importerade UEFA-data, efter ditt beslut.
+
+### Automatik varje matchdag och verifiering
+
+Visas under *Data & källor → Verifiering*. Allt körs i appen och kräver en API-Football-nyckel.
+
+* **Spelschema och resultat** hämtas oftare ju närmare avspark, var 15:e minut de sista tre timmarna.
+* **Startelvor från T−40.** API-Football publicerar elvorna 20–40 minuter före avspark. Appen frågar vid
+  T−40, T−36 och T−32 och slutar när båda elvorna är bekräftade. Startar appen sent tas de missade
+  kontrollpunkterna med ett enda anrop. Starttiden kan ställas in (T−90 till T−32). T−30-rapporten använder
+  bara det som fanns vid T−30.
+* **Efter slutsignal** importeras skott, skott på mål, hörnor, startelvor och spelarstatistik för matcher som
+  spelats de senaste sju dagarna. Appen försöker en gång i timmen tills uppgifterna finns, i högst två dygn.
+  Inga anrop görs när inget saknas.
+* **Verifiering mellan källor.** Varje spelad match jämförs mellan alla källor som har värden: resultat, hörnor,
+  skott, skott på mål och startelvor (på tröjnummer). Även din import och Eftermatch ingår. *Bekräftad* betyder
+  att minst två källor har samma värde. Vid *avvikelse* visas varje källas värde, inget räknas om, och du får en
+  avisering per match.
+* **Inte automatiskt från UEFA, Sofascore eller Forza Football.** UEFA:s villkor förbjuder automatiska verktyg
+  som samlar in innehåll. För Sofascore och Forza Football har inga villkor hittats som tillåter att datan
+  återanvänds, och Sofascores robots.txt spärrar bland annat äldre datumsidor och tabeller.
 
 ---
 
@@ -310,7 +331,7 @@ låst modellval före orörd slutsäsong, bättre än V2 och baslinjen på holdo
 
 * Varje kommande match får ett jobb med förfallotid **avspark − 30 min** (UTC). Ändrad avsparkstid ersätter
   väntande jobb.
-* Inför T−30 synkas matchens källor (startelvor, frånvaro). Vid T−30 beräknas V2, V3 och baslinjen med
+* Startelvor hämtas från T−40 (se *Automatik varje matchdag*) och frånvaro inför T−30. Vid T−30 beräknas V2, V3 och baslinjen med
   **datagräns = T−30**, ögonblicksbilderna sparas oföränderligt (match-ID, källor och hämttider, datagräns,
   modellversion, startelvans status) och PDF:en skapas och arkiveras. Avisering skickas.
 * **Startelvor:** *bekräftad*, *förväntad* eller *ej publicerad* vid datagränsen. Rapporten skapas även utan elva
@@ -401,8 +422,10 @@ cd backend && MATCHIQ_SECRETS=memory PYTHONPATH=. python -m unittest discover -s
 | 7. Saknad/sen startelva visas öppet | `test_lineup_states_and_no_fabrication`, `test_late_lineup_flagged_in_report` | Lokalt |
 | 8. V2/V3-status, källvillkor och täckning syns i UI | `scripts/ui_check.py` kontrollerar obligatoriska texter i varje vy | Lokalt + CI |
 | 9. UI jämfört med mockuperna, stående + liggande | Sida-vid-sida-montage och mått i [docs/VISUELL-JAMFORELSE.md](docs/VISUELL-JAMFORELSE.md) | Lokalt + CI |
+| 10. Startelvor från T−40 och import efter slutsignal | `test_lineups_fetched_from_t40_until_confirmed`, `test_late_start_catches_up_with_one_lineup_call`, `test_matchday_details_are_imported_automatically`, `test_unpublished_statistics_are_retried_for_two_days` | Lokalt + CI |
+| 11. Verifiering mellan källor | `test_agreeing_sources_confirm_and_differences_are_shown_per_source`, `test_lineups_compared_on_shirt_numbers`, `test_discrepancy_notified_once` | Lokalt + CI |
 
-**Testat i utvecklingsmiljön (Linux):** alla backendtester (78 st), arbetsboksimporten med kontrollvärden,
+**Testat i utvecklingsmiljön (Linux):** alla backendtester (87 st), arbetsboksimporten med kontrollvärden,
 V2-benchmarken, modellvalet, MD3-simuleringen med 15 PDF:er, databasexport och -import, sidecar-protokollet
 (Node-test), gränssnittet i Chromium och en typkontroll av gränssnittskoden mot förenklade React-typer.
 

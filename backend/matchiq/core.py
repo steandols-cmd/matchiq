@@ -26,6 +26,8 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "first_run_done": False,
     # Räknemått (skott, skott på mål, hörnor) äldre än så här används inte i prognoser och validering.
     "counts_max_age_days": 450,
+    # Startelvor hämtas från så här många minuter före avspark (kontrollpunkter T−40, T−36, T−32).
+    "lineup_fetch_minutes": 40,
 }
 
 

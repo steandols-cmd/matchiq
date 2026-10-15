@@ -2,7 +2,8 @@
 
 * Varje kommande match får ett jobb med förfallotid = officiell avspark − 30 min (UTC).
 * Vid T−30 fryses V2/V3/baslinje med datagräns exakt T−30 och en PDF arkiveras.
-  En sista datasynk görs strax före (T−32) så att elvor publicerade fram till T−30 kommer med.
+  Startelvor hämtas från T−40 (kontrollpunkter T−40, T−36, T−32) tills båda är bekräftade, så att elvor
+  publicerade fram till T−30 kommer med.
 * Om appen eller nätet var nere vid T−30 låtsas appen aldrig att rapporten skapades i tid:
   jobbet markeras som missat och en tydligt märkt SEN rapport skapas vid återhämtning med faktisk
   skapandetid och faktisk datagräns (aldrig senare än avspark).
@@ -24,7 +25,6 @@ from .timeutil import parse_iso, to_iso, to_stockholm
 
 log = logging.getLogger("matchiq.scheduler")
 GRACE = timedelta(minutes=3)            # jobbet räknas som "i tid" om det startar inom 3 min efter T−30
-PRE_SYNC = timedelta(minutes=2)          # sista synk före T−30
 HORIZON = timedelta(days=21)             # schemalägg rapporter för matcher inom 3 veckor
 
 
@@ -103,6 +103,53 @@ def create_report(app: App, match_id: int, *, kind: str, cutoff: datetime, creat
                level="warning" if kind == "late" else "success", match_id=match_id, report_id=rid)
     return {"report_id": rid, "path": str(path), "sha256": digest, "snapshot_ids": fr["snapshot_ids"],
             "created_at_utc": fr["created_at_utc"], "data_cutoff_utc": to_iso(cutoff), "kind": kind}
+
+
+def lineup_checkpoints(app: App) -> list[int]:
+    """Minuter före avspark då startelvor hämtas, t.ex. [40, 36, 32] med T−30-rapport och startpunkt T−40.
+    API-Football publicerar elvor 20–40 minuter före avspark, så flera försök behövs före datagränsen."""
+    off = int(offset(app).total_seconds() // 60)
+    lead = max(int(app.get_setting("lineup_fetch_minutes") or 40), off + 2)
+    return sorted({p for p in (lead, lead - 4, off + 2) if p >= off + 2}, reverse=True)
+
+
+def _lineups_confirmed(app: App, match_id: int) -> bool:
+    r = app.db.one("""SELECT COUNT(DISTINCT l.team_id) AS n FROM lineups l JOIN matches m ON m.id=l.match_id
+        WHERE l.match_id=? AND l.status='confirmed' AND l.team_id IN (m.home_team_id, m.away_team_id)""", (match_id,))
+    return bool(r and r["n"] >= 2)
+
+
+def lineup_window(app: App, sync_fn) -> int:
+    """Hämta startelvor vid kontrollpunkterna (standard T−40, T−36, T−32) för matcher med väntande T−30-jobb.
+    Varje kontrollpunkt ger högst ett anrop per match, och hämtningen slutar när båda elvorna är bekräftade.
+    Startar appen sent tas de passerade kontrollpunkterna igen med ett enda anrop."""
+    now = app.clock.now()
+    points = lineup_checkpoints(app)
+    off = offset(app)
+    rows = app.db.query("""SELECT match_id, kickoff_utc FROM report_jobs WHERE status='pending' AND kind='T-30'
+        AND kickoff_utc>? AND kickoff_utc<=?""", (to_iso(now + off), to_iso(now + timedelta(minutes=points[0]))))
+    n = 0
+    for r in rows:
+        mins = (parse_iso(r["kickoff_utc"]) - now).total_seconds() / 60  # type: ignore[operator]
+        passed = sum(1 for p in points if mins <= p)
+        st = app.db.one("SELECT calls_today FROM sync_state WHERE source_id='scheduler' AND job='lineups' AND scope=?",
+                        (str(r["match_id"]),))
+        done = int(st["calls_today"]) if st else 0
+        if passed <= done:
+            continue
+        app.db.execute("""INSERT INTO sync_state (source_id, job, scope, last_run_utc, last_status, calls_today)
+            VALUES ('scheduler','lineups',?,?,?,?) ON CONFLICT(source_id, job, scope) DO UPDATE SET
+            last_run_utc=excluded.last_run_utc, last_status=excluded.last_status, calls_today=excluded.calls_today""",
+                       (str(r["match_id"]), to_iso(now), "confirmed" if _lineups_confirmed(app, r["match_id"])
+                        else "fetching", passed))
+        if _lineups_confirmed(app, r["match_id"]):
+            continue
+        try:
+            sync_fn(r["match_id"])
+            n += 1
+        except Exception as e:  # noqa: BLE001
+            log.warning("Hämtning av startelvor misslyckades: %s", e)
+    return n
 
 
 def run_due_jobs(app: App, sync_fn=None) -> list[dict]:
@@ -184,19 +231,11 @@ def refresh_outcomes(app: App) -> int:
 def tick(app: App, sync_fn=None) -> dict:
     """Ett varv i schemaläggaren. Säker att anropa när som helst (idempotent)."""
     j = ensure_jobs(app)
-    if sync_fn:
-        # sista synk strax före T−30 för jobb som snart förfaller
-        now = app.clock.now()
-        soon = app.db.query("SELECT match_id FROM report_jobs WHERE status='pending' AND due_at_utc>? AND due_at_utc<=?",
-                            (to_iso(now), to_iso(now + PRE_SYNC)))
-        for s in soon:
-            try:
-                sync_fn(s["match_id"])
-            except Exception as e:  # noqa: BLE001
-                log.warning("Synk före T−30 misslyckades: %s", e)
+    lineup_syncs = lineup_window(app, sync_fn) if sync_fn else 0
     reports = run_due_jobs(app, sync_fn)
     outcomes = refresh_outcomes(app)
-    state = {"last_tick_utc": to_iso(app.clock.now()), "jobs": j, "reports": len(reports), "outcomes": outcomes}
+    state = {"last_tick_utc": to_iso(app.clock.now()), "jobs": j, "reports": len(reports), "outcomes": outcomes,
+             "lineup_syncs": lineup_syncs}
     app.extras["scheduler_state"] = state
     return state
 
@@ -216,6 +255,7 @@ def status(app: App) -> dict:
         "job_counts": counts,
         "last": app.extras.get("scheduler_state"),
         "offset_minutes": int(offset(app).total_seconds() // 60),
+        "lineup_checkpoints": lineup_checkpoints(app),
     }
 
 

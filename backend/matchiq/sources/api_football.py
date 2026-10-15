@@ -46,7 +46,7 @@ def _num(v):
 class ApiFootballAdapter(Adapter):
     source_id = "api_football"
     label = "API-Football"
-    jobs = ("fixtures", "lineups", "injuries", "statistics")
+    jobs = ("fixtures", "details", "lineups", "injuries", "statistics")
 
     def _headers(self) -> dict:
         key = secrets_store.get_secret("api_football")
@@ -87,6 +87,8 @@ class ApiFootballAdapter(Adapter):
             days_back: int = 3, days_ahead: int = 14, seasons: list[int] | None = None, progress=None) -> dict:
         if job == "backfill":
             return self.backfill(competitions, seasons, progress)
+        if job == "details":
+            return self.recent_details()
         if job == "fixtures":
             now = self.now()
             for comp in competitions or list(LEAGUES):
@@ -187,14 +189,24 @@ class ApiFootballAdapter(Adapter):
             return [(r["fid"], r["mid"]) for r in rows]
         ids = pending()
         self.counts["details_todo"] += len(ids)
+
+        def label(done: int, total: int) -> None:
+            if progress:
+                progress(f"API-Football {comp} {season_label(season, cal)}: matchdetaljer {done}/{total}", i, n)
+        self._fetch_details(ids, "backfill", label)
+        return len(pending()) == 0
+
+    def _fetch_details(self, ids: list[tuple[str, int]], job: str, label=None, final=None) -> None:
+        """Statistik, startelvor och spelarstatistik för matcherna i ``ids`` [(API-Football-ID, match-ID)].
+        Med abonnemang som tillåter ``ids`` hämtas 20 matcher per anrop, annars statistik per match.
+        ``final(fid)`` avgör om en match utan statistik ska markeras så att den inte efterfrågas igen."""
         use_ids = self.app.get_setting("api_football_ids_supported") is not False
         for k in range(0, len(ids), 20):
             batch = ids[k:k + 20]
-            if progress:
-                progress(f"API-Football {comp} {season_label(season, cal)}: matchdetaljer {k + len(batch)}/{len(ids)}",
-                         i, n)
+            if label:
+                label(k + len(batch), len(ids))
             if use_ids:
-                res, items, errs = self._get2("/fixtures", {"ids": "-".join(str(f) for f, _ in batch)}, "backfill")
+                res, items, errs = self._get2("/fixtures", {"ids": "-".join(str(f) for f, _ in batch)}, job)
                 if errs and ("ids" in errs or "plan" in errs):
                     # Abonnemanget tillåter inte ids: växla till ett anrop per match (statistik)
                     self.app.set_setting("api_football_ids_supported", False)
@@ -210,19 +222,41 @@ class ApiFootballAdapter(Adapter):
                             self.counts["details_missing"] += 1
                             continue
                         self.store_details(it, mid, res.fetch_id)
-                        if not it.get("statistics"):
+                        if not it.get("statistics") and (final is None or final(fid)):
                             self._mark_no_stats(fid)
                     self.http.finish(res.fetch_id, "ok", {"inserted": len(items)})
                     continue
             for fid, mid in batch:
-                res, items, errs = self._get2("/fixtures/statistics", {"fixture": fid}, "backfill")
+                res, items, errs = self._get2("/fixtures/statistics", {"fixture": fid}, job)
                 if errs:
                     self.counts["details_errors"] += 1
                     continue
-                if not items:
+                if not items and (final is None or final(fid)):
                     self._mark_no_stats(fid)
                 self.store_statistics(items, mid, res.fetch_id)
-        return len(pending()) == 0
+
+    def recent_details(self, days: int = 7) -> dict:
+        """Efter varje matchdag: statistik, startelvor och spelarstatistik för matcher som spelats de senaste
+        dagarna och ännu saknar statistik från API-Football. Inga anrop görs när inget saknas. API-Football
+        publicerar statistiken under och strax efter matchen; saknas den fortfarande två dygn efter avspark
+        markeras matchen så att kvoten inte förbrukas igen."""
+        now = self.now()
+        rows = self.app.db.query("""SELECT s.source_match_id fid, m.id mid, m.kickoff_utc ko FROM match_source_ids s
+            JOIN matches m ON m.id = s.match_id
+            WHERE s.source_id = ? AND m.status = 'finished' AND m.kickoff_utc >= ? AND m.kickoff_utc <= ?
+              AND NOT EXISTS (SELECT 1 FROM team_match_stats t WHERE t.match_id = m.id AND t.source_id = ?)
+              AND NOT EXISTS (SELECT 1 FROM sync_state x WHERE x.source_id = ? AND x.job = '_nostats'
+                              AND x.scope = s.source_match_id)
+            ORDER BY m.kickoff_utc""", (self.source_id, (now - timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                        (now - timedelta(hours=2)).strftime("%Y-%m-%dT%H:%M:%SZ"), self.source_id,
+                                        self.source_id))
+        ids = [(r["fid"], r["mid"]) for r in rows]
+        kickoff = {r["fid"]: parse_iso(r["ko"]) for r in rows}
+        self.counts["details_todo"] += len(ids)
+        if ids:
+            self._fetch_details(ids, "details",
+                                final=lambda fid: now - kickoff[fid] > timedelta(hours=48))  # type: ignore[operator]
+        return self.summary()
 
     def _mark_no_stats(self, fid: str) -> None:
         """Källan har ingen statistik för matchen – kom ihåg det så att kvoten inte förbrukas igen."""

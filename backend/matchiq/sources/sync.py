@@ -28,8 +28,11 @@ ADAPTERS: dict[str, type[Adapter]] = {
 }
 # Historikhämtning: OpenFootball först (spelscheman och resultat som övriga källors lag kopplas mot).
 BACKFILL_ORDER = ["openfootball", "wyscout_public", "statsbomb_open", "api_football"]
+# api_football/details: efter varje matchdag hämtas statistik, startelvor och spelarstatistik för nyss spelade
+# matcher (inga anrop när inget saknas).
 GLOBAL_JOBS = [("openfootball", "fixtures_results"), ("football_data_org", "fixtures"), ("api_football", "fixtures"),
-               ("the_odds_api", "odds"), ("statsbomb_open", "matches"), ("football_data_couk", "results")]
+               ("api_football", "details"), ("the_odds_api", "odds"), ("statsbomb_open", "matches"),
+               ("football_data_couk", "results")]
 
 
 def nearest_kickoff_delta(app: App) -> timedelta | None:
@@ -45,6 +48,8 @@ def interval_for(source_id: str, job: str, delta: timedelta | None) -> timedelta
     """Pollningsintervall: tätare nära avspark, glesare annars. Källans minsta intervall gäller alltid."""
     if job == "matches":            # StatsBomb – sällan uppdaterat
         return timedelta(days=7)
+    if job == "details":            # matchdata efter slutsignal – kostar inga anrop när inget saknas
+        return timedelta(hours=1)
     if job == "results" and source_id == "football_data_couk":
         return timedelta(days=3)
     if delta is None:
@@ -175,17 +180,33 @@ def sync_cycle(app: App, http: HttpClient | None = None) -> list[dict]:
     resumed = resume_pending_backfill(app, http)
     if resumed is not None:
         out.append({"source": "backfill", "job": "resume", "status": "ok", "result": resumed})
+    if out:
+        try:
+            from ..verification import notify_new_discrepancies
+            notify_new_discrepancies(app)
+        except Exception:  # noqa: BLE001 - verifieringen får aldrig stoppa synken
+            log.error("Verifiering misslyckades: %s", traceback.format_exc())
     return out
 
 
 def sync_match(app: App, match_id: int, http: HttpClient | None = None) -> list[dict]:
-    """Riktad uppdatering inför T−30: elvor och frånvaro från källor som är aktiverade."""
+    """Riktad uppdatering inför T−30: elvor och frånvaro från källor som är aktiverade.
+    Elvor hämtas inte igen när båda redan är bekräftade, och frånvarolistan högst en gång per halvtimme."""
     enabled = {r["id"] for r in app.db.query("SELECT id FROM sources WHERE enabled=1")}
+    now = app.clock.now()
+    confirmed = app.db.one("""SELECT COUNT(DISTINCT l.team_id) AS n FROM lineups l JOIN matches m ON m.id=l.match_id
+        WHERE l.match_id=? AND l.status='confirmed' AND l.team_id IN (m.home_team_id, m.away_team_id)""", (match_id,))
     out = []
     for source_id, job in (("api_football", "lineups"), ("api_football", "injuries"), ("uefa", "lineups")):
-        if source_id in enabled:
-            out.append({"source": source_id, "job": job,
-                        **run_source(app, source_id, job, http, match_id=match_id)})
+        if source_id not in enabled:
+            continue
+        if job == "lineups" and confirmed and confirmed["n"] >= 2:
+            continue
+        if job == "injuries":
+            last = _state(app, source_id, job, str(match_id)).get("last_run_utc")
+            if last and now - parse_iso(last) < timedelta(minutes=30):  # type: ignore[operator]
+                continue
+        out.append({"source": source_id, "job": job, **run_source(app, source_id, job, http, match_id=match_id)})
     return out
 
 

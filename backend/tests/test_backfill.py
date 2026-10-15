@@ -203,6 +203,9 @@ class ApiFootballBackfillTests(unittest.TestCase):
                                              "shots": {"total": 3, "on": 1}, "goals": {"total": 1}}]},
                             {"player": {"id": 2, "name": "B. Bänk"},
                              "statistics": [{"games": {"minutes": None, "substitute": True}}]}]}]})
+                if getattr(self, "no_stats", False):
+                    for o in out:
+                        o["statistics"] = []
                 return FakeResponse(200, {"errors": [], "response": out})
             if params.get("season") == 2023:
                 return FakeResponse(200, {"errors": {"plan": "Free plans do not have access to this season, "
@@ -233,6 +236,50 @@ class ApiFootballBackfillTests(unittest.TestCase):
         n = len(self.calls)
         ApiFootballAdapter(self.app, http).run("backfill", competitions=["ENG1"], seasons=[2024, 2023])
         self.assertEqual([c for c in self.calls[n:] if "ids" in c], [])
+
+    def test_matchday_details_are_imported_automatically(self):
+        http = HttpClient(self.app, self.session, sleep=lambda s: None)
+        ApiFootballAdapter(self.app, http).run("backfill", competitions=["ENG1"], seasons=[2024])
+        # Senaste matchen: spelschema och resultat finns (fixtures-jobbet), men ännu ingen statistik
+        last = self.app.db.one("""SELECT m.id, m.kickoff_utc, s.source_match_id FROM matches m JOIN match_source_ids s
+            ON s.match_id=m.id AND s.source_id='api_football' ORDER BY m.kickoff_utc DESC LIMIT 1""")
+        for t in ("team_match_stats", "player_match_stats"):
+            self.app.db.execute(f"DELETE FROM {t} WHERE match_id=? AND source_id='api_football'", (last["id"],))
+        ko = datetime.fromisoformat(last["kickoff_utc"].replace("Z", "+00:00"))
+        self.app.clock.set(ko + timedelta(hours=1))           # matchen pågår fortfarande
+        n = len(self.calls)
+        ApiFootballAdapter(self.app, http).run("details")
+        self.assertEqual(self.calls[n:], [])
+        self.app.clock.set(ko + timedelta(hours=3))           # efter slutsignal: ett anrop för den matchen
+        res = ApiFootballAdapter(self.app, http).run("details")
+        self.assertEqual([c.get("ids") for c in self.calls[n:]], [last["source_match_id"]])
+        self.assertEqual(res.get("details_todo"), 1)
+        self.assertEqual(self.app.db.scalar("""SELECT COUNT(*) FROM team_match_stats WHERE match_id=?
+                                               AND source_id='api_football'""", (last["id"],)), 2)
+        self.assertEqual(self.app.db.scalar("""SELECT COUNT(*) FROM player_match_stats WHERE match_id=?
+                                               AND source_id='api_football'""", (last["id"],)), 1)
+        n = len(self.calls)
+        ApiFootballAdapter(self.app, http).run("details")    # inget saknas -> inga anrop
+        self.assertEqual(self.calls[n:], [])
+
+    def test_unpublished_statistics_are_retried_for_two_days(self):
+        http = HttpClient(self.app, self.session, sleep=lambda s: None)
+        ApiFootballAdapter(self.app, http).run("backfill", competitions=["ENG1"], seasons=[2024])
+        last = self.app.db.one("""SELECT m.id, m.kickoff_utc, s.source_match_id FROM matches m JOIN match_source_ids s
+            ON s.match_id=m.id AND s.source_id='api_football' ORDER BY m.kickoff_utc DESC LIMIT 1""")
+        self.app.db.execute("DELETE FROM team_match_stats WHERE match_id=? AND source_id='api_football'", (last["id"],))
+        ko = datetime.fromisoformat(last["kickoff_utc"].replace("Z", "+00:00"))
+        self.no_stats = True
+        self.app.clock.set(ko + timedelta(hours=3))
+        ApiFootballAdapter(self.app, http).run("details")
+        nostats = "SELECT COUNT(*) FROM sync_state WHERE source_id='api_football' AND job='_nostats' AND scope=?"
+        self.assertEqual(self.app.db.scalar(nostats, (last["source_match_id"],)), 0)   # försök igen senare
+        self.app.clock.set(ko + timedelta(hours=50))
+        ApiFootballAdapter(self.app, http).run("details")
+        self.assertEqual(self.app.db.scalar(nostats, (last["source_match_id"],)), 1)   # ge upp efter två dygn
+        n = len(self.calls)
+        ApiFootballAdapter(self.app, http).run("details")
+        self.assertEqual(self.calls[n:], [])
 
 
 class OperationalTests(unittest.TestCase):

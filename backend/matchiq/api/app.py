@@ -22,7 +22,7 @@ from starlette.requests import Request
 from starlette.responses import FileResponse, JSONResponse, Response
 from starlette.routing import Route
 
-from .. import __version__, analytics, catalog, forecast, scheduler, secrets_store
+from .. import __version__, analytics, catalog, forecast, scheduler, secrets_store, verification
 from ..core import App
 from ..db import latest_schema_version, rows_to_dicts
 from ..importers import generic, workbook_ucl
@@ -486,6 +486,15 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
         comps = request.query_params.get("competitions")
         return JSON(analytics.operational_status(ctx, comps.split(",") if comps else None))
 
+    async def verification_view(request: Request):
+        qp = request.query_params
+        days = max(1, min(int(qp.get("days") or 30), 3650))
+        return JSON(verification.verify(ctx, competition=qp.get("competition") or None, days=days,
+                                        only=qp.get("only") or None))
+
+    async def verification_match(request: Request):
+        return JSON(verification.verify_match(ctx, request.path_params["mid"]))
+
     async def backfill_start(request: Request):
         b = await body(request)
         srcs = b.get("sources") or None
@@ -735,13 +744,15 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
     async def settings_put(request: Request):
         b = await body(request)
         allowed = {"theme", "background_mode", "autostart", "report_offset_minutes", "notify_os",
-                   "default_competition", "first_run_done", "counts_max_age_days"}
+                   "default_competition", "first_run_done", "counts_max_age_days", "lineup_fetch_minutes"}
         for k, v in b.items():
             if k in allowed:
                 if k == "report_offset_minutes" and int(v) != 30:
                     return err("Rapporttiden är låst till T−30 enligt kravspecifikationen.")
                 if k == "counts_max_age_days" and not (90 <= int(v) <= 3650):
                     return err("Maxåldern för räknemått måste vara mellan 90 och 3 650 dagar.")
+                if k == "lineup_fetch_minutes" and not (32 <= int(v) <= 90):
+                    return err("Startelvor kan hämtas från T−90 till T−32.")
                 ctx.set_setting(k, v)
         return JSON(ctx.all_settings())
 
@@ -808,6 +819,8 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
     routes = [
         Route("/api/health", health), Route("/api/meta", meta),
         Route("/api/operational", operational), Route("/api/backfill", backfill_start, methods=["POST"]),
+        Route("/api/verification", verification_view),
+        Route("/api/matches/{mid:int}/verification", verification_match),
         Route("/api/backfill/state", backfill_state),
         Route("/api/sources/{sid}/backfill/reset", backfill_reset, methods=["POST"]),
         Route("/api/sources/{sid}/quota", source_quota, methods=["PUT"]),

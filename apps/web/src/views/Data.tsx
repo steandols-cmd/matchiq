@@ -4,7 +4,7 @@ import { navigate, type Competition, type Route } from "../App";
 import { fmtFull, num, pct } from "../format";
 import { ErrorBox, Icon, Loading, Meter, Modal, Panel, StatusBadge, Switch } from "../ui";
 
-const TABS: [string, string][] = [["kallor", "Källor & licenser"], ["historik", "Hämta historik"], ["tackning", "Täckning"], ["import", "Import"], ["hamtlogg", "Hämtlogg"], ["andringar", "Ändringslogg"]];
+const TABS: [string, string][] = [["kallor", "Källor & licenser"], ["historik", "Hämta historik"], ["verifiering", "Verifiering"], ["tackning", "Täckning"], ["import", "Import"], ["hamtlogg", "Hämtlogg"], ["andringar", "Ändringslogg"]];
 
 export function DataView({ route, comps, onChanged }: { route: Route; comps: Competition[]; onChanged: () => void }) {
   const tab = route.params.get("tab") || "kallor";
@@ -14,6 +14,7 @@ export function DataView({ route, comps, onChanged }: { route: Route; comps: Com
         <button key={k} className={`tab ${tab === k ? "active" : ""}`} onClick={() => navigate(`data?tab=${k}`)}>{l}</button>))}</div>
       {tab === "kallor" && <Sources />}
       {tab === "historik" && <History comps={comps} onChanged={onChanged} />}
+      {tab === "verifiering" && <Verification comps={comps} />}
       {tab === "tackning" && <Coverage comps={comps} route={route} />}
       {tab === "import" && <Import onChanged={onChanged} />}
       {tab === "hamtlogg" && <FetchLog />}
@@ -367,6 +368,95 @@ function Import({ onChanged }: { onChanged: () => void }) {
         {history.length === 0 ? <div className="empty">Inga importer ännu.</div> : (
           <table className="t"><thead><tr><th>Fil</th><th>Profil</th><th>Start</th><th>Status</th></tr></thead>
             <tbody>{history.map((h) => <tr key={h.id}><td>{h.file_name}<div className="mono tiny muted">{h.file_sha256.slice(0, 16)}…</div></td><td>{h.profile}</td><td>{fmtFull(h.started_at_utc)}</td><td>{h.status === "done" ? <StatusBadge kind="ok">klar</StatusBadge> : h.status === "error" ? <StatusBadge kind="err">fel</StatusBadge> : h.status}</td></tr>)}</tbody></table>)}
+      </Panel>
+    </div>
+  );
+}
+
+const VER_KIND: Record<string, "ok" | "err" | "warn" | "neutral"> = { bekraftad: "ok", avvikelse: "err", en_kalla: "warn", saknas: "neutral" };
+const SIDE: Record<string, string> = { home: "Hemma", away: "Borta" };
+
+function VerCell({ part }: { part: any }) {
+  if (!part || part.status === "saknas") return <span className="muted">–</span>;
+  if (part.key === "lineups") {
+    const names = (part.sources || []).map((s: any) => s.name).join(", ");
+    if (part.status === "avvikelse")
+      return <div className="col" style={{ gap: 2, alignItems: "flex-start" }}><StatusBadge kind="err">Avvikelse</StatusBadge>{part.differences.filter((d: any) => d.players > 0).map((d: any, i: number) => (
+        <span key={i} className="tiny">{SIDE[d.side]}: {d.players} spelare skiljer ({d.a} / {d.b})</span>))}</div>;
+    return <div className="col" style={{ gap: 2, alignItems: "flex-start" }}><StatusBadge kind={VER_KIND[part.status]}>{part.status === "bekraftad" ? "Stämmer" : "En källa"}</StatusBadge><span className="tiny muted">{names}</span></div>;
+  }
+  const v = part.values || [];
+  if (part.status === "avvikelse")
+    return <div className="col" style={{ gap: 2, alignItems: "flex-start" }}><StatusBadge kind="err">Avvikelse</StatusBadge>{v.map((x: any) => <span key={x.source_id} className="tiny nowrap"><b>{x.home}–{x.away}</b> {x.source}</span>)}</div>;
+  return <div className="col" style={{ gap: 2, alignItems: "flex-start" }}><span className="nowrap"><b>{v[0].home}–{v[0].away}</b></span>
+    <span className="tiny muted" title={v.map((x: any) => x.source).join(", ")}>{part.status === "bekraftad" ? `${v.length} källor stämmer` : v[0].source}</span></div>;
+}
+
+function Verification({ comps }: { comps: Competition[] }) {
+  const [comp, setComp] = useState("");
+  const [days, setDays] = useState(30);
+  const [only, setOnly] = useState("");
+  const [data, setData] = useState<any>(null);
+  const [srcs, setSrcs] = useState<any[] | null>(null);
+  const [lead, setLead] = useState("");
+  const [msg, setMsg] = useState<{ kind: string; text: string } | null>(null);
+  useEffect(() => {
+    setData(null);
+    api(`/verification?days=${days}${comp ? `&competition=${comp}` : ""}${only ? `&only=${only}` : ""}`).then(setData).catch(() => setData({ counts: {}, matches: [] }));
+  }, [comp, days, only]);
+  useEffect(() => {
+    api("/sources").then(setSrcs).catch(() => setSrcs([]));
+    api("/settings").then((s) => setLead(String(s.lineup_fetch_minutes ?? 40))).catch(() => setLead("40"));
+  }, []);
+  const af = srcs?.find((s) => s.id === "api_football");
+  const afReady = !!(af && af.enabled && af.api_key_configured);
+  const tabComps = comps.filter((c) => c.show_in_tabs).sort((a, b) => (a.tab_order || 99) - (b.tab_order || 99));
+  const saveLead = async () => {
+    try { await api("/settings", { method: "PUT", body: { lineup_fetch_minutes: Number(lead) } }); setMsg({ kind: "ok", text: `Startelvor hämtas nu från T−${lead}.` }); }
+    catch (e: any) { setMsg({ kind: "err", text: e.message }); }
+  };
+  const c = data?.counts || {};
+  return (
+    <div className="col" style={{ gap: 14 }}>
+      <Panel title="Automatik varje matchdag" icon={Icon.clock()} right={<span className="small muted">Körs i appen så länge den är igång</span>}>
+        <div className="panel-pad col" style={{ gap: 10 }}>
+          {!srcs ? <Loading /> : afReady
+            ? <div className="callout ok small"><span className="ic">{Icon.check()}</span><div><b>API-Football är aktiverad.</b> Spelschema, startelvor och matchstatistik hämtas automatiskt enligt stegen nedan.</div></div>
+            : <div className="callout warn small"><span className="ic">{Icon.warn()}</span><div><b>API-Football behöver en nyckel</b> (Inställningar → API-nycklar) och aktiveras under Källor &amp; licenser. Tills dess görs inga automatiska hämtningar av elvor och matchstatistik.</div></div>}
+          <table className="t"><tbody>
+            <tr><td className="nowrap"><b>Spelschema och resultat</b></td><td className="small">Hämtas oftare ju närmare avspark, var 15:e minut de sista tre timmarna.</td></tr>
+            <tr><td className="nowrap"><b>Startelvor</b></td><td className="small"><div className="row wrap" style={{ gap: 6 }}>Från T−<input className="in" style={{ width: 60 }} value={lead} onChange={(e) => setLead(e.target.value)} /> med nya försök fram till T−32, tills båda elvorna är bekräftade. <button className="btn sm" onClick={saveLead}>Spara</button></div>
+              <div className="tiny muted">API-Football publicerar elvorna 20–40 minuter före avspark. T−30-rapporten använder bara det som fanns vid T−30. Saknas en elva står det i rapporten.</div></td></tr>
+            <tr><td className="nowrap"><b>Efter slutsignal</b></td><td className="small">Skott, skott på mål, hörnor, startelvor och spelarstatistik importeras automatiskt. Appen försöker en gång i timmen tills uppgifterna finns, i högst två dygn.</td></tr>
+            <tr><td className="nowrap"><b>Verifiering</b></td><td className="small">Varje spelad match jämförs mellan alla källor som har värden, även din egen import och Eftermatch. Avvikelser aviseras en gång per match.</td></tr>
+          </tbody></table>
+          {msg && <div className={`callout ${msg.kind} small`}>{msg.text}</div>}
+          <div className="tiny muted">UEFA, Sofascore och Forza Football hämtas inte automatiskt. UEFA:s villkor förbjuder automatisk insamling, och för Sofascore och Forza Football saknas villkor som tillåter att datan återanvänds.</div>
+        </div>
+      </Panel>
+      <Panel title="Verifiering mellan källor" icon={Icon.shield()} right={<span className="small muted">Inga värden räknas om – varje källas värde visas</span>}>
+        <div className="panel-pad col" style={{ gap: 10 }}>
+          <div className="row wrap" style={{ gap: 6 }}>
+            <button className={`chip ${comp === "" ? "on" : ""}`} onClick={() => setComp("")}>Alla</button>
+            {tabComps.map((x) => <button key={x.code} className={`chip ${comp === x.code ? "on" : ""}`} onClick={() => setComp(x.code)}>{x.name}</button>)}
+            <select className="in" value={days} onChange={(e) => setDays(Number(e.target.value))}>{[7, 30, 90, 365].map((n) => <option key={n} value={n}>Senaste {n} dagarna</option>)}</select>
+            <select className="in" value={only} onChange={(e) => setOnly(e.target.value)}><option value="">Alla matcher</option><option value="avvikelse">Bara avvikelser</option><option value="en_kalla">Bara en källa</option><option value="bekraftad">Bara bekräftade</option></select>
+          </div>
+          <div className="row wrap" style={{ gap: 8 }}>
+            <StatusBadge kind="ok">Bekräftade {c.bekraftad ?? 0}</StatusBadge><StatusBadge kind="err">Avvikelser {c.avvikelse ?? 0}</StatusBadge>
+            <StatusBadge kind="warn">En källa {c.en_kalla ?? 0}</StatusBadge><StatusBadge kind="neutral">Saknas {c.saknas ?? 0}</StatusBadge>
+          </div>
+          <div className="tiny muted">Bekräftad = minst två källor har samma värde. Avvikelse = källorna skiljer sig, och du kan rätta under Eftermatch. Startelvor jämförs på tröjnummer.</div>
+        </div>
+        {!data ? <Loading /> : data.matches.length === 0 ? <div className="empty">Inga spelade matcher i urvalet.</div> : (
+          <div className="scroll-x"><table className="t">
+            <thead><tr><th>Datum</th><th>Match</th><th>Status</th><th>Resultat</th><th>Hörnor</th><th>Skott</th><th>Skott på mål</th><th>Startelvor</th></tr></thead>
+            <tbody>{data.matches.map((m: any) => { const part = (k: string) => m.parts.find((p: any) => p.key === k); return (
+              <tr key={m.id} className="click" title="Öppna matchen" onClick={() => navigate(`match/${m.id}`)}><td className="nowrap small">{fmtFull(m.kickoff_utc)}</td>
+                <td><b>{m.home} – {m.away}</b><div className="tiny muted">{m.comp_name}</div></td>
+                <td><StatusBadge kind={VER_KIND[m.status]}>{m.status_label}</StatusBadge></td>
+                <td><VerCell part={part("result")} /></td><td><VerCell part={part("corners")} /></td><td><VerCell part={part("shots")} /></td>
+                <td><VerCell part={part("sot")} /></td><td><VerCell part={part("lineups")} /></td></tr>); })}</tbody></table></div>)}
       </Panel>
     </div>
   );

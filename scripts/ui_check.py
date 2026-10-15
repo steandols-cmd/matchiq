@@ -46,6 +46,7 @@ REQUIRED_TEXT = {
     "datakallor_tackning": ["Källregister", "Spärrad från prognoserna", "Används i prognoserna", "Licens"],
     "utfall_kalibrering": ["walk-forward", "EXPERIMENTELL", "BASLINJE", "Frysta prognoser mot faktiskt utfall"],
     "hamta_historik": ["Driftstatus per serie och mått", "Hämta historik", "Wyscout"],
+    "verifiering": ["Automatik varje matchdag", "Startelvor", "Verifiering mellan källor"],
 }
 
 
@@ -159,6 +160,7 @@ def main() -> None:
         "match_datakvalitet": f"#/match/{match['id']}?flik=datakvalitet",
         "datatackning": "#/data?tab=tackning",
         "hamta_historik": "#/data?tab=historik",
+        "verifiering": "#/data?tab=verifiering",
     }
     from playwright.sync_api import sync_playwright
     report: dict = {"match": f"{match['home']} – {match['away']}", "checks": {}, "comparisons": {}, "errors": []}
