@@ -1,0 +1,2704 @@
+{
+ "name": "statsbomb",
+ "finished_utc": "2026-10-15T13:22:27Z",
+ "runs": [
+  {
+   "source": "openfootball",
+   "status": "ok",
+   "error": null,
+   "result": {
+    "files_in_scope": 96,
+    "inserted": 30225,
+    "updated": 0,
+    "unchanged": 0,
+    "skipped": 0,
+    "files_imported": 96
+   },
+   "next_run_utc": "2026-10-16T00:47:08Z",
+   "seconds": 202
+  },
+  {
+   "source": "wyscout_public",
+   "status": "error",
+   "error": "ValueError(\"Taggen 'key_pass' finns inte i tags2name.csv – importen avbryts\")",
+   "result": {},
+   "next_run_utc": "2026-10-16T00:47:25Z",
+   "seconds": 17
+  },
+  {
+   "source": "statsbomb_open",
+   "status": "blocked",
+   "error": "Dygnskvoten för StatsBomb Open Data (Hudl) (2000 anrop) är förbrukad – hämtningen fortsätter automatiskt nästa dygn.",
+   "result": {
+    "teams_linked": 119,
+    "matches_todo": 2187,
+    "match_updated": 1672,
+    "events_imported": 1954,
+    "match_inserted": 283
+   },
+   "next_run_utc": "2026-10-16T01:22:27Z",
+   "seconds": 2102
+  }
+ ],
+ "operational": {
+  "max_age_days": 450,
+  "operative_min": 100,
+  "limited_min": 20,
+  "as_of_utc": "2026-10-15T13:22:27Z",
+  "competitions": [
+   {
+    "competition": "UCL",
+    "metrics": {
+     "goals": {
+      "label": "Mål / 1X2",
+      "status": "operativ",
+      "reason": "188 matcher med värde de senaste 450 dagarna.",
+      "needs": [],
+      "recent_allowed": 188,
+      "recent_any": 188,
+      "total_allowed": 1985,
+      "last_allowed": "2026-05-06T19:00:00Z",
+      "last_any": "2026-05-06T19:00:00Z",
+      "by_source": {
+       "OpenFootball (football.json, champions-league, europe m.fl.)": 1985,
+       "StatsBomb Open Data (Hudl)": 14
+      }
+     },
+     "corners": {
+      "label": "Hörnor",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen.",
+       "UEFA-data från arbetsboken kan användas efter ditt beslut under Källor & licenser."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2019-06-01T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 18
+      }
+     },
+     "shots": {
+      "label": "Skott",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen.",
+       "UEFA-data från arbetsboken kan användas efter ditt beslut under Källor & licenser."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2019-06-01T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 18
+      }
+     },
+     "sot": {
+      "label": "Skott på mål",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen.",
+       "UEFA-data från arbetsboken kan användas efter ditt beslut under Källor & licenser."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2019-06-01T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 18
+      }
+     }
+    }
+   },
+   {
+    "competition": "SWE1",
+    "metrics": {
+     "goals": {
+      "label": "Mål / 1X2",
+      "status": "inaktuell",
+      "reason": "Senaste tillåtna data är från 2025-05-04 – äldre än 450 dagar och används därför inte.",
+      "needs": [
+       "Kör historikhämtningen (OpenFootball, CC0) under Data & källor → Hämta historik."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 533,
+      "last_allowed": "2025-05-04T14:30:00Z",
+      "last_any": "2025-05-04T14:30:00Z",
+      "by_source": {
+       "OpenFootball (football.json, champions-league, europe m.fl.)": 533
+      }
+     },
+     "corners": {
+      "label": "Hörnor",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": null,
+      "by_source": {}
+     },
+     "shots": {
+      "label": "Skott",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": null,
+      "by_source": {}
+     },
+     "sot": {
+      "label": "Skott på mål",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": null,
+      "by_source": {}
+     }
+    }
+   },
+   {
+    "competition": "ENG1",
+    "metrics": {
+     "goals": {
+      "label": "Mål / 1X2",
+      "status": "operativ",
+      "reason": "398 matcher med värde de senaste 450 dagarna.",
+      "needs": [],
+      "recent_allowed": 398,
+      "recent_any": 398,
+      "total_allowed": 6098,
+      "last_allowed": "2026-09-20T15:30:00Z",
+      "last_any": "2026-09-20T15:30:00Z",
+      "by_source": {
+       "OpenFootball (football.json, champions-league, europe m.fl.)": 6098,
+       "StatsBomb Open Data (Hudl)": 418
+      }
+     },
+     "corners": {
+      "label": "Hörnor",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2016-05-17T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 418
+      }
+     },
+     "shots": {
+      "label": "Skott",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2016-05-17T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 418
+      }
+     },
+     "sot": {
+      "label": "Skott på mål",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2016-05-17T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 418
+      }
+     }
+    }
+   },
+   {
+    "competition": "ESP1",
+    "metrics": {
+     "goals": {
+      "label": "Mål / 1X2",
+      "status": "operativ",
+      "reason": "429 matcher med värde de senaste 450 dagarna.",
+      "needs": [],
+      "recent_allowed": 429,
+      "recent_any": 429,
+      "total_allowed": 5359,
+      "last_allowed": "2026-09-20T19:00:00Z",
+      "last_any": "2026-09-20T19:00:00Z",
+      "by_source": {
+       "OpenFootball (football.json, champions-league, europe m.fl.)": 5359,
+       "StatsBomb Open Data (Hudl)": 867
+      }
+     },
+     "corners": {
+      "label": "Hörnor",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2021-05-16T16:30:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 867
+      }
+     },
+     "shots": {
+      "label": "Skott",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2021-05-16T16:30:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 867
+      }
+     },
+     "sot": {
+      "label": "Skott på mål",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2021-05-16T16:30:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 867
+      }
+     }
+    }
+   },
+   {
+    "competition": "GER1",
+    "metrics": {
+     "goals": {
+      "label": "Mål / 1X2",
+      "status": "operativ",
+      "reason": "327 matcher med värde de senaste 450 dagarna.",
+      "needs": [],
+      "recent_allowed": 327,
+      "recent_any": 327,
+      "total_allowed": 4917,
+      "last_allowed": "2026-09-20T17:30:00Z",
+      "last_any": "2026-09-20T17:30:00Z",
+      "by_source": {
+       "OpenFootball (football.json, champions-league, europe m.fl.)": 4917,
+       "StatsBomb Open Data (Hudl)": 68
+      }
+     },
+     "corners": {
+      "label": "Hörnor",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2024-05-18T13:30:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 68
+      }
+     },
+     "shots": {
+      "label": "Skott",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2024-05-18T13:30:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 68
+      }
+     },
+     "sot": {
+      "label": "Skott på mål",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2024-05-18T13:30:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 68
+      }
+     }
+    }
+   },
+   {
+    "competition": "ITA1",
+    "metrics": {
+     "goals": {
+      "label": "Mål / 1X2",
+      "status": "operativ",
+      "reason": "394 matcher med värde de senaste 450 dagarna.",
+      "needs": [],
+      "recent_allowed": 394,
+      "recent_any": 394,
+      "total_allowed": 4944,
+      "last_allowed": "2026-09-20T18:45:00Z",
+      "last_any": "2026-09-20T18:45:00Z",
+      "by_source": {
+       "OpenFootball (football.json, champions-league, europe m.fl.)": 4944,
+       "StatsBomb Open Data (Hudl)": 148
+      }
+     },
+     "corners": {
+      "label": "Hörnor",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2016-05-15T18:45:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 148
+      }
+     },
+     "shots": {
+      "label": "Skott",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2016-05-15T18:45:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 148
+      }
+     },
+     "sot": {
+      "label": "Skott på mål",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2016-05-15T18:45:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 148
+      }
+     }
+    }
+   },
+   {
+    "competition": "FRA1",
+    "metrics": {
+     "goals": {
+      "label": "Mål / 1X2",
+      "status": "operativ",
+      "reason": "323 matcher med värde de senaste 450 dagarna.",
+      "needs": [],
+      "recent_allowed": 323,
+      "recent_any": 323,
+      "total_allowed": 4254,
+      "last_allowed": "2026-09-20T18:45:00Z",
+      "last_any": "2026-09-20T18:45:00Z",
+      "by_source": {
+       "OpenFootball (football.json, champions-league, europe m.fl.)": 4254,
+       "StatsBomb Open Data (Hudl)": 435
+      }
+     },
+     "corners": {
+      "label": "Hörnor",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2023-06-03T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 435
+      }
+     },
+     "shots": {
+      "label": "Skott",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2023-06-03T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 435
+      }
+     },
+     "sot": {
+      "label": "Skott på mål",
+      "status": "saknas",
+      "reason": "Ingen data för måttet i någon tillåten källa.",
+      "needs": [
+       "API-Football med API-nyckel: lagstatistik per match (skott, skott på mål, hörnor). Vilka säsonger abonnemanget omfattar visas efter första hämtningen."
+      ],
+      "recent_allowed": 0,
+      "recent_any": 0,
+      "total_allowed": 0,
+      "last_allowed": null,
+      "last_any": "2023-06-03T19:00:00Z",
+      "by_source": {
+       "StatsBomb Open Data (Hudl)": 435
+      }
+     }
+    }
+   }
+  ]
+ },
+ "coverage": [
+  {
+   "comp": "ENG1",
+   "season": "2003/04",
+   "matches": 38,
+   "finished": 38,
+   "first": "2003-08-16",
+   "last": "2004-05-15",
+   "results": {
+    "statsbomb_open": 38
+   },
+   "corners": {
+    "statsbomb_open": 38
+   },
+   "shots": {
+    "statsbomb_open": 38
+   },
+   "sot": {
+    "statsbomb_open": 38
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 38,
+     "players": 371,
+     "rows": 1014
+    }
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2010/11",
+   "matches": 380,
+   "finished": 380,
+   "first": "2010-08-14",
+   "last": "2011-05-22",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2011/12",
+   "matches": 380,
+   "finished": 380,
+   "first": "2011-08-13",
+   "last": "2012-05-13",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2012/13",
+   "matches": 380,
+   "finished": 380,
+   "first": "2012-08-18",
+   "last": "2013-05-19",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2013/14",
+   "matches": 380,
+   "finished": 380,
+   "first": "2013-08-17",
+   "last": "2014-05-11",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2014/15",
+   "matches": 380,
+   "finished": 380,
+   "first": "2014-08-16",
+   "last": "2015-05-24",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2015/16",
+   "matches": 380,
+   "finished": 380,
+   "first": "2015-08-08",
+   "last": "2016-05-17",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 380
+   },
+   "corners": {
+    "statsbomb_open": 380
+   },
+   "shots": {
+    "statsbomb_open": 380
+   },
+   "sot": {
+    "statsbomb_open": 380
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 380,
+     "players": 550,
+     "rows": 10469
+    }
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2016/17",
+   "matches": 380,
+   "finished": 380,
+   "first": "2016-08-13",
+   "last": "2017-05-21",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2017/18",
+   "matches": 380,
+   "finished": 380,
+   "first": "2017-08-11",
+   "last": "2018-05-13",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2018/19",
+   "matches": 380,
+   "finished": 380,
+   "first": "2018-08-10",
+   "last": "2019-05-12",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2019/20",
+   "matches": 380,
+   "finished": 380,
+   "first": "2019-07-01",
+   "last": "2020-06-30",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2020/21",
+   "matches": 380,
+   "finished": 380,
+   "first": "2020-09-12",
+   "last": "2021-05-23",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2021/22",
+   "matches": 380,
+   "finished": 380,
+   "first": "2021-08-13",
+   "last": "2022-05-22",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2022/23",
+   "matches": 380,
+   "finished": 380,
+   "first": "2022-08-05",
+   "last": "2023-05-28",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2023/24",
+   "matches": 380,
+   "finished": 380,
+   "first": "2023-08-11",
+   "last": "2024-05-19",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2024/25",
+   "matches": 380,
+   "finished": 380,
+   "first": "2024-08-16",
+   "last": "2025-05-25",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2025/26",
+   "matches": 380,
+   "finished": 353,
+   "first": "2025-08-15",
+   "last": "2026-05-24",
+   "results": {
+    "openfootball": 353
+   }
+  },
+  {
+   "comp": "ENG1",
+   "season": "2026/27",
+   "matches": 380,
+   "finished": 45,
+   "first": "2026-08-21",
+   "last": "2027-05-30",
+   "results": {
+    "openfootball": 45
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "1973/1974",
+   "matches": 1,
+   "finished": 1,
+   "first": "1974-02-17",
+   "last": "1974-02-17",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 24,
+     "rows": 24
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2004/05",
+   "matches": 7,
+   "finished": 7,
+   "first": "2004-10-16",
+   "last": "2005-05-01",
+   "results": {
+    "statsbomb_open": 7
+   },
+   "corners": {
+    "statsbomb_open": 7
+   },
+   "shots": {
+    "statsbomb_open": 7
+   },
+   "sot": {
+    "statsbomb_open": 7
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 7,
+     "players": 113,
+     "rows": 191
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2005/06",
+   "matches": 17,
+   "finished": 17,
+   "first": "2005-10-01",
+   "last": "2006-02-25",
+   "results": {
+    "statsbomb_open": 17
+   },
+   "corners": {
+    "statsbomb_open": 17
+   },
+   "shots": {
+    "statsbomb_open": 17
+   },
+   "sot": {
+    "statsbomb_open": 17
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 17,
+     "players": 240,
+     "rows": 465
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2006/07",
+   "matches": 26,
+   "finished": 26,
+   "first": "2006-08-28",
+   "last": "2007-06-17",
+   "results": {
+    "statsbomb_open": 26
+   },
+   "corners": {
+    "statsbomb_open": 26
+   },
+   "shots": {
+    "statsbomb_open": 26
+   },
+   "sot": {
+    "statsbomb_open": 26
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 26,
+     "players": 314,
+     "rows": 713
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2007/08",
+   "matches": 27,
+   "finished": 27,
+   "first": "2007-08-26",
+   "last": "2008-05-17",
+   "results": {
+    "statsbomb_open": 27
+   },
+   "corners": {
+    "statsbomb_open": 27
+   },
+   "shots": {
+    "statsbomb_open": 27
+   },
+   "sot": {
+    "statsbomb_open": 27
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 27,
+     "players": 337,
+     "rows": 750
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2008/09",
+   "matches": 31,
+   "finished": 31,
+   "first": "2008-08-31",
+   "last": "2009-05-10",
+   "results": {
+    "statsbomb_open": 31
+   },
+   "corners": {
+    "statsbomb_open": 31
+   },
+   "shots": {
+    "statsbomb_open": 31
+   },
+   "sot": {
+    "statsbomb_open": 31
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 31,
+     "players": 338,
+     "rows": 860
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2009/10",
+   "matches": 35,
+   "finished": 35,
+   "first": "2009-09-12",
+   "last": "2010-05-16",
+   "results": {
+    "statsbomb_open": 35
+   },
+   "corners": {
+    "statsbomb_open": 35
+   },
+   "shots": {
+    "statsbomb_open": 35
+   },
+   "sot": {
+    "statsbomb_open": 35
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 35,
+     "players": 362,
+     "rows": 965
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2010/11",
+   "matches": 33,
+   "finished": 33,
+   "first": "2010-08-29",
+   "last": "2011-05-11",
+   "results": {
+    "statsbomb_open": 33
+   },
+   "corners": {
+    "statsbomb_open": 33
+   },
+   "shots": {
+    "statsbomb_open": 33
+   },
+   "sot": {
+    "statsbomb_open": 33
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 33,
+     "players": 355,
+     "rows": 917
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2011/12",
+   "matches": 37,
+   "finished": 37,
+   "first": "2011-08-29",
+   "last": "2012-05-12",
+   "results": {
+    "statsbomb_open": 37
+   },
+   "corners": {
+    "statsbomb_open": 37
+   },
+   "shots": {
+    "statsbomb_open": 37
+   },
+   "sot": {
+    "statsbomb_open": 37
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 37,
+     "players": 383,
+     "rows": 1033
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2012/13",
+   "matches": 381,
+   "finished": 381,
+   "first": "2012-08-18",
+   "last": "2013-06-01",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 32
+   },
+   "corners": {
+    "statsbomb_open": 32
+   },
+   "shots": {
+    "statsbomb_open": 32
+   },
+   "sot": {
+    "statsbomb_open": 32
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 32,
+     "players": 354,
+     "rows": 893
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2013/14",
+   "matches": 381,
+   "finished": 381,
+   "first": "2013-08-17",
+   "last": "2014-05-18",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 31
+   },
+   "corners": {
+    "statsbomb_open": 31
+   },
+   "shots": {
+    "statsbomb_open": 31
+   },
+   "sot": {
+    "statsbomb_open": 31
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 31,
+     "players": 351,
+     "rows": 861
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2014/15",
+   "matches": 380,
+   "finished": 380,
+   "first": "2014-08-23",
+   "last": "2015-05-23",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 38
+   },
+   "corners": {
+    "statsbomb_open": 38
+   },
+   "shots": {
+    "statsbomb_open": 38
+   },
+   "sot": {
+    "statsbomb_open": 38
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 38,
+     "players": 373,
+     "rows": 1056
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2015/16",
+   "matches": 380,
+   "finished": 380,
+   "first": "2015-08-21",
+   "last": "2016-05-15",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 380
+   },
+   "corners": {
+    "statsbomb_open": 380
+   },
+   "shots": {
+    "statsbomb_open": 380
+   },
+   "sot": {
+    "statsbomb_open": 380
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 380,
+     "players": 540,
+     "rows": 10558
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2016/17",
+   "matches": 382,
+   "finished": 382,
+   "first": "2016-08-19",
+   "last": "2017-05-21",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 34
+   },
+   "corners": {
+    "statsbomb_open": 34
+   },
+   "shots": {
+    "statsbomb_open": 34
+   },
+   "sot": {
+    "statsbomb_open": 34
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 34,
+     "players": 360,
+     "rows": 932
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2017/18",
+   "matches": 382,
+   "finished": 382,
+   "first": "2017-08-18",
+   "last": "2018-05-20",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 36
+   },
+   "corners": {
+    "statsbomb_open": 36
+   },
+   "shots": {
+    "statsbomb_open": 36
+   },
+   "sot": {
+    "statsbomb_open": 36
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 36,
+     "players": 365,
+     "rows": 1002
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2018/19",
+   "matches": 384,
+   "finished": 384,
+   "first": "2018-08-17",
+   "last": "2019-05-19",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 34
+   },
+   "corners": {
+    "statsbomb_open": 34
+   },
+   "shots": {
+    "statsbomb_open": 34
+   },
+   "sot": {
+    "statsbomb_open": 34
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 34,
+     "players": 362,
+     "rows": 948
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2019/20",
+   "matches": 384,
+   "finished": 384,
+   "first": "2019-08-16",
+   "last": "2020-07-19",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 33
+   },
+   "corners": {
+    "statsbomb_open": 33
+   },
+   "shots": {
+    "statsbomb_open": 33
+   },
+   "sot": {
+    "statsbomb_open": 33
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 33,
+     "players": 370,
+     "rows": 952
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2020/21",
+   "matches": 380,
+   "finished": 380,
+   "first": "2020-09-12",
+   "last": "2021-05-23",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 35
+   },
+   "corners": {
+    "statsbomb_open": 35
+   },
+   "shots": {
+    "statsbomb_open": 35
+   },
+   "sot": {
+    "statsbomb_open": 35
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 35,
+     "players": 383,
+     "rows": 1071
+    }
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2021/22",
+   "matches": 380,
+   "finished": 380,
+   "first": "2021-08-13",
+   "last": "2022-05-22",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2022/23",
+   "matches": 380,
+   "finished": 380,
+   "first": "2022-08-12",
+   "last": "2023-06-04",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2023/24",
+   "matches": 380,
+   "finished": 380,
+   "first": "2023-08-11",
+   "last": "2024-05-26",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2024/25",
+   "matches": 380,
+   "finished": 370,
+   "first": "2024-08-15",
+   "last": "2025-05-25",
+   "results": {
+    "openfootball": 370
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2025/26",
+   "matches": 380,
+   "finished": 365,
+   "first": "2025-08-15",
+   "last": "2026-05-24",
+   "results": {
+    "openfootball": 365
+   }
+  },
+  {
+   "comp": "ESP1",
+   "season": "2026/27",
+   "matches": 380,
+   "finished": 64,
+   "first": "2026-08-15",
+   "last": "2027-05-30",
+   "results": {
+    "openfootball": 64
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2014/15",
+   "matches": 380,
+   "finished": 380,
+   "first": "2014-08-08",
+   "last": "2015-05-23",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2015/16",
+   "matches": 380,
+   "finished": 380,
+   "first": "2015-08-07",
+   "last": "2016-05-14",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 377
+   },
+   "corners": {
+    "statsbomb_open": 377
+   },
+   "shots": {
+    "statsbomb_open": 377
+   },
+   "sot": {
+    "statsbomb_open": 377
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 377,
+     "players": 574,
+     "rows": 10480
+    }
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2016/17",
+   "matches": 380,
+   "finished": 380,
+   "first": "2016-08-12",
+   "last": "2017-05-20",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2017/18",
+   "matches": 380,
+   "finished": 380,
+   "first": "2017-08-04",
+   "last": "2018-05-19",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2018/19",
+   "matches": 380,
+   "finished": 380,
+   "first": "2018-08-10",
+   "last": "2019-05-24",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2019/20",
+   "matches": 380,
+   "finished": 279,
+   "first": "2019-08-09",
+   "last": "2020-05-23",
+   "results": {
+    "openfootball": 279
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2020/21",
+   "matches": 380,
+   "finished": 380,
+   "first": "2020-08-21",
+   "last": "2021-05-23",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2021/22",
+   "matches": 382,
+   "finished": 382,
+   "first": "2021-08-06",
+   "last": "2022-05-21",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 26
+   },
+   "corners": {
+    "statsbomb_open": 26
+   },
+   "shots": {
+    "statsbomb_open": 26
+   },
+   "sot": {
+    "statsbomb_open": 26
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 26,
+     "players": 328,
+     "rows": 773
+    }
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2022/23",
+   "matches": 381,
+   "finished": 381,
+   "first": "2022-08-05",
+   "last": "2023-06-03",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 32
+   },
+   "corners": {
+    "statsbomb_open": 32
+   },
+   "shots": {
+    "statsbomb_open": 32
+   },
+   "sot": {
+    "statsbomb_open": 32
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 32,
+     "players": 387,
+     "rows": 972
+    }
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2023/24",
+   "matches": 306,
+   "finished": 306,
+   "first": "2023-08-11",
+   "last": "2024-05-19",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2024/25",
+   "matches": 306,
+   "finished": 306,
+   "first": "2024-08-16",
+   "last": "2025-05-17",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2025/26",
+   "matches": 306,
+   "finished": 282,
+   "first": "2025-08-15",
+   "last": "2026-05-17",
+   "results": {
+    "openfootball": 282
+   }
+  },
+  {
+   "comp": "FRA1",
+   "season": "2026/27",
+   "matches": 306,
+   "finished": 41,
+   "first": "2026-08-21",
+   "last": "2027-05-29",
+   "results": {
+    "openfootball": 41
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2010/11",
+   "matches": 306,
+   "finished": 306,
+   "first": "2010-08-20",
+   "last": "2011-05-14",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2011/12",
+   "matches": 306,
+   "finished": 306,
+   "first": "2011-08-05",
+   "last": "2012-05-05",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2012/13",
+   "matches": 306,
+   "finished": 306,
+   "first": "2012-08-24",
+   "last": "2013-05-18",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2013/14",
+   "matches": 306,
+   "finished": 306,
+   "first": "2013-08-09",
+   "last": "2014-05-10",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2014/15",
+   "matches": 306,
+   "finished": 306,
+   "first": "2014-08-22",
+   "last": "2015-05-23",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2015/16",
+   "matches": 310,
+   "finished": 310,
+   "first": "2015-08-14",
+   "last": "2016-05-14",
+   "results": {
+    "openfootball": 306,
+    "statsbomb_open": 34
+   },
+   "corners": {
+    "statsbomb_open": 34
+   },
+   "shots": {
+    "statsbomb_open": 34
+   },
+   "sot": {
+    "statsbomb_open": 34
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 34,
+     "players": 346,
+     "rows": 948
+    }
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2016/17",
+   "matches": 306,
+   "finished": 306,
+   "first": "2016-08-26",
+   "last": "2017-05-20",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2017/18",
+   "matches": 306,
+   "finished": 306,
+   "first": "2017-08-18",
+   "last": "2018-05-12",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2018/19",
+   "matches": 306,
+   "finished": 306,
+   "first": "2018-08-24",
+   "last": "2019-05-18",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2019/20",
+   "matches": 306,
+   "finished": 306,
+   "first": "2019-08-16",
+   "last": "2020-06-27",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2020/21",
+   "matches": 306,
+   "finished": 306,
+   "first": "2020-09-18",
+   "last": "2021-05-22",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2021/22",
+   "matches": 306,
+   "finished": 306,
+   "first": "2021-08-13",
+   "last": "2022-05-14",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2022/23",
+   "matches": 306,
+   "finished": 306,
+   "first": "2022-08-05",
+   "last": "2023-05-27",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2023/24",
+   "matches": 306,
+   "finished": 306,
+   "first": "2023-08-18",
+   "last": "2024-05-18",
+   "results": {
+    "openfootball": 306,
+    "statsbomb_open": 34
+   },
+   "corners": {
+    "statsbomb_open": 34
+   },
+   "shots": {
+    "statsbomb_open": 34
+   },
+   "sot": {
+    "statsbomb_open": 34
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 34,
+     "players": 373,
+     "rows": 1049
+    }
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2024/25",
+   "matches": 306,
+   "finished": 306,
+   "first": "2024-08-23",
+   "last": "2025-05-17",
+   "results": {
+    "openfootball": 306
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2025/26",
+   "matches": 306,
+   "finished": 294,
+   "first": "2025-08-22",
+   "last": "2026-05-16",
+   "results": {
+    "openfootball": 294
+   }
+  },
+  {
+   "comp": "GER1",
+   "season": "2026/27",
+   "matches": 306,
+   "finished": 33,
+   "first": "2026-08-28",
+   "last": "2027-05-22",
+   "results": {
+    "openfootball": 33
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2013/14",
+   "matches": 380,
+   "finished": 380,
+   "first": "2013-08-24",
+   "last": "2014-05-18",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2014/15",
+   "matches": 380,
+   "finished": 380,
+   "first": "2014-08-30",
+   "last": "2015-05-31",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2015/16",
+   "matches": 380,
+   "finished": 380,
+   "first": "2015-08-22",
+   "last": "2016-05-15",
+   "results": {
+    "openfootball": 380,
+    "statsbomb_open": 148
+   },
+   "corners": {
+    "statsbomb_open": 148
+   },
+   "shots": {
+    "statsbomb_open": 148
+   },
+   "sot": {
+    "statsbomb_open": 148
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 148,
+     "players": 521,
+     "rows": 4124
+    }
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2016/17",
+   "matches": 380,
+   "finished": 380,
+   "first": "2016-08-20",
+   "last": "2017-05-28",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2017/18",
+   "matches": 380,
+   "finished": 380,
+   "first": "2017-08-19",
+   "last": "2018-05-20",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2018/19",
+   "matches": 380,
+   "finished": 380,
+   "first": "2018-08-18",
+   "last": "2019-05-26",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2019/20",
+   "matches": 380,
+   "finished": 380,
+   "first": "2019-08-24",
+   "last": "2020-08-02",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2020/21",
+   "matches": 380,
+   "finished": 380,
+   "first": "2020-09-19",
+   "last": "2021-05-23",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2021/22",
+   "matches": 380,
+   "finished": 380,
+   "first": "2021-08-21",
+   "last": "2022-05-22",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2022/23",
+   "matches": 380,
+   "finished": 380,
+   "first": "2022-08-13",
+   "last": "2023-06-04",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2023/24",
+   "matches": 380,
+   "finished": 380,
+   "first": "2023-08-19",
+   "last": "2024-06-02",
+   "results": {
+    "openfootball": 380
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2024/25",
+   "matches": 380,
+   "finished": 370,
+   "first": "2024-08-17",
+   "last": "2025-05-25",
+   "results": {
+    "openfootball": 370
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2025/26",
+   "matches": 380,
+   "finished": 344,
+   "first": "2025-08-23",
+   "last": "2026-05-24",
+   "results": {
+    "openfootball": 344
+   }
+  },
+  {
+   "comp": "ITA1",
+   "season": "2026/27",
+   "matches": 380,
+   "finished": 50,
+   "first": "2026-08-22",
+   "last": "2027-05-30",
+   "results": {
+    "openfootball": 50
+   }
+  },
+  {
+   "comp": "SWE1",
+   "season": "2023",
+   "matches": 240,
+   "finished": 240,
+   "first": "2023-04-01",
+   "last": "2023-11-12",
+   "results": {
+    "openfootball": 240
+   }
+  },
+  {
+   "comp": "SWE1",
+   "season": "2024",
+   "matches": 240,
+   "finished": 240,
+   "first": "2024-03-30",
+   "last": "2024-11-10",
+   "results": {
+    "openfootball": 240
+   }
+  },
+  {
+   "comp": "SWE1",
+   "season": "2025",
+   "matches": 240,
+   "finished": 53,
+   "first": "2025-03-29",
+   "last": "2025-11-09",
+   "results": {
+    "openfootball": 53
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "1970/1971",
+   "matches": 1,
+   "finished": 1,
+   "first": "1971-06-02",
+   "last": "1971-06-02",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 24,
+     "rows": 24
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "1971/1972",
+   "matches": 1,
+   "finished": 1,
+   "first": "1972-05-31",
+   "last": "1972-05-31",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 24,
+     "rows": 24
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "1972/1973",
+   "matches": 1,
+   "finished": 1,
+   "first": "1973-05-30",
+   "last": "1973-05-30",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 24,
+     "rows": 24
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "1999/00",
+   "matches": 1,
+   "finished": 1,
+   "first": "1999-11-23",
+   "last": "1999-11-23",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 28,
+     "rows": 28
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2003/04",
+   "matches": 1,
+   "finished": 1,
+   "first": "2004-05-26",
+   "last": "2004-05-26",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 28,
+     "rows": 28
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2004/05",
+   "matches": 1,
+   "finished": 1,
+   "first": "2005-05-25",
+   "last": "2005-05-25",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 27,
+     "rows": 27
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2006/07",
+   "matches": 1,
+   "finished": 1,
+   "first": "2007-05-23",
+   "last": "2007-05-23",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 28,
+     "rows": 28
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2008/09",
+   "matches": 1,
+   "finished": 1,
+   "first": "2009-05-27",
+   "last": "2009-05-27",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 27,
+     "rows": 27
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2009/10",
+   "matches": 1,
+   "finished": 1,
+   "first": "2010-05-22",
+   "last": "2010-05-22",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 27,
+     "rows": 27
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2010/11",
+   "matches": 1,
+   "finished": 1,
+   "first": "2011-05-28",
+   "last": "2011-05-28",
+   "results": {
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 27,
+     "rows": 27
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2011/12",
+   "matches": 125,
+   "finished": 125,
+   "first": "2011-09-13",
+   "last": "2012-05-19",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 25,
+     "rows": 25
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2012/13",
+   "matches": 125,
+   "finished": 125,
+   "first": "2012-09-18",
+   "last": "2013-05-25",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 26,
+     "rows": 26
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2013/14",
+   "matches": 125,
+   "finished": 125,
+   "first": "2013-09-17",
+   "last": "2014-05-24",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 28,
+     "rows": 28
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2014/15",
+   "matches": 125,
+   "finished": 125,
+   "first": "2014-09-16",
+   "last": "2015-06-06",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 28,
+     "rows": 28
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2015/16",
+   "matches": 125,
+   "finished": 125,
+   "first": "2015-09-15",
+   "last": "2016-05-28",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 26,
+     "rows": 26
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2016/17",
+   "matches": 125,
+   "finished": 125,
+   "first": "2016-09-13",
+   "last": "2017-06-03",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 28,
+     "rows": 28
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2017/18",
+   "matches": 125,
+   "finished": 125,
+   "first": "2017-09-12",
+   "last": "2018-05-26",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 27,
+     "rows": 27
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2018/19",
+   "matches": 125,
+   "finished": 125,
+   "first": "2018-09-18",
+   "last": "2019-06-01",
+   "results": {
+    "openfootball": 125,
+    "statsbomb_open": 1
+   },
+   "corners": {
+    "statsbomb_open": 1
+   },
+   "shots": {
+    "statsbomb_open": 1
+   },
+   "sot": {
+    "statsbomb_open": 1
+   },
+   "players": {
+    "statsbomb_open": {
+     "matches": 1,
+     "players": 28,
+     "rows": 28
+    }
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2019/20",
+   "matches": 119,
+   "finished": 119,
+   "first": "2019-09-17",
+   "last": "2020-08-23",
+   "results": {
+    "openfootball": 119
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2020/21",
+   "matches": 125,
+   "finished": 125,
+   "first": "2020-10-20",
+   "last": "2021-05-29",
+   "results": {
+    "openfootball": 125
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2021/22",
+   "matches": 125,
+   "finished": 125,
+   "first": "2021-09-14",
+   "last": "2022-05-28",
+   "results": {
+    "openfootball": 125
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2022/23",
+   "matches": 125,
+   "finished": 125,
+   "first": "2022-09-06",
+   "last": "2023-06-10",
+   "results": {
+    "openfootball": 125
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2023/24",
+   "matches": 125,
+   "finished": 125,
+   "first": "2023-09-19",
+   "last": "2024-06-01",
+   "results": {
+    "openfootball": 125
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2024/25",
+   "matches": 189,
+   "finished": 189,
+   "first": "2024-09-17",
+   "last": "2025-05-31",
+   "results": {
+    "openfootball": 189
+   }
+  },
+  {
+   "comp": "UCL",
+   "season": "2025/26",
+   "matches": 189,
+   "finished": 189,
+   "first": "2025-09-16",
+   "last": "2026-05-30",
+   "results": {
+    "openfootball": 189
+   }
+  },
+  {
+   "comp": "UCLQ",
+   "season": "2024/25",
+   "matches": 90,
+   "finished": 90,
+   "first": "2024-07-09",
+   "last": "2024-08-28",
+   "results": {
+    "openfootball": 90
+   }
+  },
+  {
+   "comp": "UCLQ",
+   "season": "2025/26",
+   "matches": 92,
+   "finished": 92,
+   "first": "2025-07-08",
+   "last": "2025-08-27",
+   "results": {
+    "openfootball": 92
+   }
+  }
+ ],
+ "links": {
+  "teams_created_by_source": {
+   "openfootball": 223,
+   "seed": 157,
+   "statsbomb_open": 14
+  },
+  "team_ids_linked_by_source": {
+   "statsbomb_open": 143,
+   "uefa": 114
+  },
+  "teams_needing_review": 68,
+  "matches_only_in_event_source_where_openfootball_covers_season": [
+   {
+    "comp": "ESP1",
+    "season": "2012/13",
+    "src": "statsbomb_open",
+    "n": 1
+   },
+   {
+    "comp": "ESP1",
+    "season": "2013/14",
+    "src": "statsbomb_open",
+    "n": 1
+   },
+   {
+    "comp": "ESP1",
+    "season": "2016/17",
+    "src": "statsbomb_open",
+    "n": 2
+   },
+   {
+    "comp": "ESP1",
+    "season": "2017/18",
+    "src": "statsbomb_open",
+    "n": 2
+   },
+   {
+    "comp": "ESP1",
+    "season": "2018/19",
+    "src": "statsbomb_open",
+    "n": 4
+   },
+   {
+    "comp": "ESP1",
+    "season": "2019/20",
+    "src": "statsbomb_open",
+    "n": 4
+   },
+   {
+    "comp": "FRA1",
+    "season": "2021/22",
+    "src": "statsbomb_open",
+    "n": 2
+   },
+   {
+    "comp": "FRA1",
+    "season": "2022/23",
+    "src": "statsbomb_open",
+    "n": 1
+   },
+   {
+    "comp": "GER1",
+    "season": "2015/16",
+    "src": "statsbomb_open",
+    "n": 4
+   }
+  ],
+  "teams_created_by_event_sources": [
+   {
+    "name": "Albacete",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "CD Numancia de Soria",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Charlton Athletic",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Gimnàstic Tarragona",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Hércules",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Metz",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Middlesbrough",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Portsmouth",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Racing Santander",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Real Murcia CF",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Recreativo Huelva",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Strasbourg",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Tenerife",
+    "src": "statsbomb_open"
+   },
+   {
+    "name": "Xerez",
+    "src": "statsbomb_open"
+   }
+  ],
+  "result_conflicts_between_sources": [
+   {
+    "match_id": 27451,
+    "h1": 3,
+    "a1": 4,
+    "s1": "openfootball",
+    "h2": 1,
+    "a2": 1,
+    "s2": "statsbomb_open"
+   },
+   {
+    "match_id": 27701,
+    "h1": 4,
+    "a1": 1,
+    "s1": "openfootball",
+    "h2": 1,
+    "a2": 1,
+    "s2": "statsbomb_open"
+   },
+   {
+    "match_id": 27951,
+    "h1": 5,
+    "a1": 3,
+    "s1": "openfootball",
+    "h2": 1,
+    "a2": 1,
+    "s2": "statsbomb_open"
+   }
+  ],
+  "result_conflicts_total": 3
+ },
+ "fetches": {
+  "openfootball": {
+   "n": 102,
+   "failed": 0,
+   "bytes": 8232339
+  },
+  "statsbomb_open": {
+   "n": 2000,
+   "failed": 0,
+   "bytes": 6031887889
+  },
+  "wyscout_public": {
+   "n": 18,
+   "failed": 0,
+   "bytes": 2484422
+  }
+ }
+}
