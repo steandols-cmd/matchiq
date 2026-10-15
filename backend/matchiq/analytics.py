@@ -287,7 +287,7 @@ def operational_status(app: App, competitions: list[str] | None = None) -> dict:
                                                "dagarna – prognosen bygger mest på ligasnittet.")
             elif recent_any >= LIMITED_MIN:
                 blocked = sorted(names.get(x, x) for x in blocked_recent)
-                status, reason = "spärrad", ("Aktuell data finns men källan är spärrad från träning: "
+                status, reason = "spärrad", ("Aktuell data finns men källan är spärrad från prognoserna: "
                                              + ", ".join(blocked) + ". Godkänn villkoren under Källor & licenser.")
             elif total_allowed:
                 status, reason = "inaktuell", (f"Senaste tillåtna data är från {last_allowed[:10]} – äldre än "

@@ -106,7 +106,7 @@ export function LineupBadge({ status }: { status: string }) {
 // ------------------------------------------------------------------ 1X2
 export function ProbCards({ p, compact = false }: { p: { p_home: number; p_draw: number; p_away: number } | null; compact?: boolean }) {
   if (!p) {
-    return <div className="callout warn" style={{ marginTop: 14 }}><span className="ic">{Icon.warn()}</span>1X2 saknas – för lite tillåten träningsdata för tävlingen. Inget värde visas som 0.</div>;
+    return <div className="callout warn" style={{ marginTop: 14 }}><span className="ic">{Icon.warn()}</span>1X2 saknas – för lite tillåtet underlag för tävlingen. Inget värde visas som 0.</div>;
   }
   const r = roundTo100([p.p_home, p.p_draw, p.p_away]);
   const bar = (cls: string, color: string) => (

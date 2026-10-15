@@ -25,8 +25,8 @@ export function DataView({ route, comps, onChanged }: { route: Route; comps: Com
 function trainingBadge(s: any) {
   if (s.training_allowed && s.training_policy !== "allowed")
     return <span title={s.training_approval_note || ""}><StatusBadge kind="info">Godkänd av användare</StatusBadge></span>;
-  if (s.training_allowed) return <StatusBadge kind="ok">Träning tillåten</StatusBadge>;
-  return <StatusBadge kind={s.training_policy === "blocked" ? "err" : "warn"}>Spärrad från träning</StatusBadge>;
+  if (s.training_allowed) return <StatusBadge kind="ok">Används i prognoserna</StatusBadge>;
+  return <StatusBadge kind={s.training_policy === "blocked" ? "err" : "warn"}>Spärrad från prognoserna</StatusBadge>;
 }
 
 function Sources() {
@@ -57,9 +57,9 @@ function Sources() {
   };
   return (
     <div className="col" style={{ gap: 14 }}>
-      <Panel title="Källregister" icon={Icon.db()} right={<span className="small muted">Data används för träning endast när licensen tillåter det</span>}>
+      <Panel title="Källregister" icon={Icon.db()} right={<span className="small muted">Data används som underlag i prognoserna bara när licensen tillåter det eller efter ditt dokumenterade beslut</span>}>
         <div className="scroll-x"><table className="t">
-          <thead><tr><th>Källa</th><th>Licens / villkor</th><th>Träning</th><th>Hämtning</th><th>Senast hämtad</th><th className="num">Hämtningar</th><th className="num">Fel</th></tr></thead>
+          <thead><tr><th>Källa</th><th>Licens / villkor</th><th>Prognosunderlag</th><th>Hämtning</th><th>Senast hämtad</th><th className="num">Hämtningar</th><th className="num">Fel</th></tr></thead>
           <tbody>{list.map((s) => (
             <tr key={s.id}><td><b>{s.name}</b><div className="tiny muted">{s.owner}</div></td><td className="small" style={{ maxWidth: 320 }}>{s.license}</td>
               <td>{trainingBadge(s)}</td>
@@ -73,10 +73,10 @@ function Sources() {
             <div className="panel-pad col small">
               <div><b>Ägare:</b> {s.owner} · <a href={s.url} target="_blank" rel="noreferrer">{s.url}</a></div>
               <div><b>Licens/villkor:</b> {s.license}{s.terms_url ? <> · <a href={s.terms_url} target="_blank" rel="noreferrer">villkor</a></> : null}</div>
-              <div><b>Tillåtna användningar:</b> <span className="chips" style={{ display: "inline-flex" }}>{s.allowed_uses.length ? s.allowed_uses.map((u: string) => <span key={u} className="badge neutral">{({ display: "visning", training: "träning", evaluation: "utvärdering", benchmark: "marknadsjämförelse", sanity_check: "rimlighetskontroll" } as any)[u] || u}</span>) : <span className="badge neutral">ingen datainsamling</span>}</span></div>
+              <div><b>Tillåtna användningar:</b> <span className="chips" style={{ display: "inline-flex" }}>{s.allowed_uses.length ? s.allowed_uses.map((u: string) => <span key={u} className="badge neutral">{({ display: "visning", training: "prognosunderlag", evaluation: "utvärdering", benchmark: "marknadsjämförelse", sanity_check: "rimlighetskontroll" } as any)[u] || u}</span>) : <span className="badge neutral">ingen datainsamling</span>}</span></div>
               <div><b>Täckning:</b> {s.coverage}</div>
               <div><b>Uppdatering:</b> {s.update_frequency} · minsta intervall {s.min_interval_seconds}s{s.daily_quota ? ` · max ${s.daily_quota} anrop/dygn` : ""}</div>
-              <div><b>Träning:</b> {s.training_status}{s.training_approval_note ? <span className="muted"> – ”{s.training_approval_note}” ({fmtFull(s.training_approval_at_utc)})</span> : null}</div>
+              <div><b>Används i prognoserna:</b> {s.training_status}{s.training_approval_note ? <span className="muted"> – ”{s.training_approval_note}” ({fmtFull(s.training_approval_at_utc)})</span> : null}</div>
               {s.attribution && s.attribution !== "–" && <div><b>Attribution:</b> {s.attribution}</div>}
               {s.notes && <div className="muted">{s.notes}</div>}
               {s.requires_api_key ? <div><b>API-nyckel:</b> {s.api_key_configured ? <StatusBadge kind="ok">Konfigurerad</StatusBadge> : <><StatusBadge kind="warn">Saknas</StatusBadge> <a href="#/installningar">Ange under Inställningar</a></>}</div> : null}
@@ -90,18 +90,18 @@ function Sources() {
                 {s.enabled && s.automated_fetch !== "manual_only" ? <button className="btn sm" onClick={() => sync(s)}>{Icon.refresh(14)} Hämta nu</button> : null}
                 {s.training_policy !== "allowed" && s.data_kinds.length > 0 && !["workbook_legacy", "the_odds_api"].includes(s.id) ? (
                   s.training_allowed
-                    ? <button className="btn sm danger" onClick={() => setDialog({ kind: "training", s, approve: false })}>Återkalla träning</button>
-                    : <button className="btn sm" onClick={() => setDialog({ kind: "training", s, approve: true })}>Godkänn för träning…</button>) : null}
+                    ? <button className="btn sm danger" onClick={() => setDialog({ kind: "training", s, approve: false })}>Sluta använda i prognoserna</button>
+                    : <button className="btn sm" onClick={() => setDialog({ kind: "training", s, approve: true })}>Använd i prognoserna…</button>) : null}
               </div>
             </div>
           </Panel>))}
       </div>
       {dialog && (
-        <Modal title={dialog.kind === "training" ? (dialog.approve ? `Godkänn ${dialog.s.name} för modellträning` : "Återkalla träning") : `Aktivera automatisk hämtning från ${dialog.s.name}`} onClose={() => setDialog(null)}>
+        <Modal title={dialog.kind === "training" ? (dialog.approve ? `Använd ${dialog.s.name} i prognosmodulen` : "Sluta använda i prognoserna") : `Aktivera automatisk hämtning från ${dialog.s.name}`} onClose={() => setDialog(null)}>
           <div className="col">
             {dialog.kind === "training" && dialog.approve && (
               <div className="callout warn"><span className="ic">{Icon.warn()}</span><div>
-                {dialog.s.training_policy === "blocked" ? "Källans villkor förbjuder uttryckligen träning. Godkänn endast om du har ett skriftligt tillstånd som medger det – ange referens nedan." :
+                {dialog.s.training_policy === "blocked" ? "Källans villkor tillåter inte att datan används i modeller eller beräkningar. Beslutet är ditt: godkänn bara om du har rätt att använda datan så (t.ex. ett skriftligt tillstånd) och ange grunden nedan. Beslutet och motiveringen loggas." :
                   dialog.s.training_policy === "unclear" ? "Rättigheterna är oklara. Dokumentera vilken bedömning eller vilket tillstånd beslutet bygger på." :
                     "Läs källans villkor innan du godkänner. Beslutet loggas med tid."}</div></div>)}
             {dialog.kind === "enabled" && <div className="callout warn"><span className="ic">{Icon.warn()}</span><div>Automatisk hämtning är avstängd som standard för den här källan ({dialog.s.notes}). Aktivera bara om du har granskat villkoren.</div></div>}
@@ -139,7 +139,7 @@ export function OperationalGrid({ comps, compact = false }: { comps: Competition
               {!compact && <div className="tiny muted" style={{ marginTop: 3 }}>{m.recent_allowed} i fönstret{m.last_allowed ? ` · senast ${m.last_allowed.slice(0, 10)}` : ""}</div>}
             </td>); })}
         </tr>))}</tbody></table>
-      {!compact && <div className="small muted panel-pad">Operativ = minst {op.operative_min} spelade matcher med värde från en källa som får användas för träning de senaste {op.max_age_days} dagarna. Äldre räknemått används inte – prognosen visas då som saknad i stället för att bygga på inaktuell data. Håll muspekaren över en status för orsak och vad som behövs.</div>}
+      {!compact && <div className="small muted panel-pad">Operativ = minst {op.operative_min} spelade matcher med värde från en källa som får användas i prognoserna de senaste {op.max_age_days} dagarna. Äldre räknemått används inte – prognosen visas då som saknad i stället för att bygga på inaktuell data. Håll muspekaren över en status för orsak och vad som behövs.</div>}
     </div>
   );
 }
@@ -240,13 +240,13 @@ function Coverage({ comps, route }: { comps: Competition[]; route: Route }) {
           <Panel title="Täckning per säsong och mått" icon={Icon.db()}>
             {cov.seasons.length === 0 ? <div className="empty">Ingen data för tävlingen. Aktivera en källa eller importera en fil.</div> : (
               <div className="scroll-x"><table className="t">
-                <thead><tr><th>Säsong</th><th className="num">Matcher</th><th className="num">Spelade</th>{metrics.map(([k, l]) => <th key={k}>{l} (träning / alla)</th>)}</tr></thead>
+                <thead><tr><th>Säsong</th><th className="num">Matcher</th><th className="num">Spelade</th>{metrics.map(([k, l]) => <th key={k}>{l} (prognoser / alla)</th>)}</tr></thead>
                 <tbody>{cov.seasons.slice().reverse().map((s: any) => (
                   <tr key={s.season} className="click" onClick={() => setSeason(s.season)}><td><b>{s.season}</b></td><td className="num">{s.matches}</td><td className="num">{s.finished}</td>
                     {metrics.map(([k]) => { const m = s.metrics[k]; return (
                       <td key={k}><div className="row small"><div style={{ width: 70 }}><Meter value={m.pct_training} /></div><span>{pct(m.pct_training)}</span><span className="muted">/ {pct(m.pct_any)}</span>{m.missing > 0 && <span className="tiny muted">({m.missing} saknas)</span>}</div></td>); })}
                   </tr>))}</tbody></table></div>)}
-            <div className="small muted panel-pad">Träning = källor som får användas för modellträning enligt källregistret (just nu: {(cov.training_sources || []).join(", ") || "inga"}). Klicka en säsong för lagvis täckning.</div>
+            <div className="small muted panel-pad">Prognoser = källor som får användas som underlag i prognoserna enligt källregistret (just nu: {(cov.training_sources || []).join(", ") || "inga"}). Klicka en säsong för lagvis täckning.</div>
           </Panel>
           <Panel title={`Täckning per lag${season ? ` – ${season}` : " – alla säsonger"}`} icon={Icon.users()} right={season ? <button className="btn sm" onClick={() => setSeason("")}>Visa alla</button> : null}>
             <div className="scroll-x" style={{ maxHeight: 520, overflow: "auto" }}><table className="t">
@@ -339,7 +339,7 @@ function Import({ onChanged }: { onChanged: () => void }) {
                 {["user_file", "openfootball", "uefa", "football_data_couk", "statsbomb_open", "api_football", "football_data_org", "manual"].map((s) => <option key={s}>{s}</option>)}</select></label>
               <label className="row small">Tidszon för lokala tider <input className="in" value={opts.timezone} onChange={(e) => setOpts({ ...opts, timezone: e.target.value })} style={{ width: 170 }} /></label>
             </div>
-            <div className="small muted">Ursprungskällan avgör licens och träningsspärr. Okänt ursprung ("user_file") spärras från träning.</div>
+            <div className="small muted">Ursprungskällan avgör licens och träningsspärr. Okänt ursprung ("user_file") spärras från prognoserna tills du beslutat.</div>
             <div className="layout-3">{fields.map((f: string) => (
               <label key={f} className="col" style={{ gap: 3 }}><span className="small">{info.targets[target].labels[f]}{info.targets[target].required.includes(f) ? " *" : ""}</span>
                 <select className="in" value={mapping[f] || ""} onChange={(e) => setMapping({ ...mapping, [f]: e.target.value })}>

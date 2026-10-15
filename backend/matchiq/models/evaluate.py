@@ -38,7 +38,10 @@ class Target:
 
 
 def evaluation_source_ids(db: Database) -> set[str]:
-    out = set()
+    """Källor vars utfall får användas för att utvärdera modellerna: licensen tillåter utvärdering, eller
+    användaren har med ett dokumenterat beslut godkänt källan som underlag i prognoserna."""
+    from ..catalog import training_source_ids
+    out = set(training_source_ids(db))
     for r in db.query("SELECT id, allowed_uses FROM sources"):
         if "evaluation" in json.loads(r["allowed_uses"] or "[]"):
             out.add(r["id"])

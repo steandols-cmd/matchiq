@@ -91,9 +91,13 @@ modellträning** tills du dokumenterar ett beslut (anteckning krävs och loggas)
 
 > **Viktigt om arbetsbokens CL-historik:** de 2 024 CL-matcherna kommer från UEFA. UEFA:s allmänna villkor
 > ([avsnitt 6.2](https://www.uefa.com/termsconditions/)) förbjuder automatisk insamling och att innehållet används
-> för att utveckla eller träna mjukvara, modeller eller AI. UEFA-data visas därför i appen men används aldrig för
-> träning eller utvärdering, och hämtas aldrig automatiskt. Ett tidigare godkännande återkallas automatiskt vid
-> uppdatering. Träning kan bara aktiveras med en referens till ett skriftligt tillstånd från UEFA.
+> för att utveckla eller träna mjukvara, modeller eller algoritmer. MatchIQ hämtar därför aldrig något från UEFA.
+> Den UEFA-data du själv har importerat används i prognoserna först efter ditt dokumenterade beslut under
+> *Källor & licenser → UEFA → Använd i prognoserna*. Beslutet och motiveringen loggas.
+>
+> *Underlag i prognoserna* (i koden kallat träning) betyder att modellerna räknar ut lagens nivå ur datan, till
+> exempel snittet av skott och hörnor i de senaste matcherna. Det är så prognosmodulen använder data. Datan
+> används inte till något annat.
 
 ### 5. Kör modellval och validering
 
@@ -215,7 +219,7 @@ Fullständigt register: **[docs/KALLREGISTER.md](docs/KALLREGISTER.md)** (genere
 | Wyscout öppna händelsedata (CC BY 4.0) | Skott, skott på mål, hörnor, spelare och startelvor 2017/18 i de fem stora ligorna | Tillåten |
 | Manuell inmatning | Utfall, startelvor | Tillåten |
 | StatsBomb Open Data | Urval av matcher med händelsedata (attribution krävs) | Spärrad tills villkoren godkänts |
-| UEFA | Endast visning av data du själv importerat. Villkoren förbjuder automatisk insamling och träning | Spärrad – kräver skriftligt tillstånd |
+| UEFA | Data du själv importerat. Villkoren förbjuder automatisk insamling och användning i modeller | Spärrad tills du fattat ett dokumenterat beslut |
 | API-Football, football-data.org | Fixturer, startelvor, frånvaro, statistik (API-nyckel) | Spärrad tills villkoren godkänts |
 | Football-Data.co.uk | Endast visning/jämförelse; villkoren utesluter AI-träning | Spärrad – kräver skriftligt tillstånd |
 | The Odds API | Odds för jämförelse | Aldrig träning |
@@ -260,8 +264,8 @@ GitHub Actions (*Datakällor – inventering och nedladdning*) vid ändringar oc
   CL 2011/12–2025/26).
 * **Allsvenskan finns bara delvis.** Den finns för 2023–2025, och 2025 bara till och med maj.
 * **Hörnor och skott finns bara för äldre säsonger.** Det gäller Wyscout 2017/18 och StatsBomb för valda
-  matcher, och den datan är äldre än 450 dagar. För aktuella säsonger, även i Champions League, krävs
-  API-Football.
+  matcher, och den datan är äldre än 450 dagar. För aktuella säsonger krävs API-Football. I Champions League
+  räcker din importerade UEFA-data, efter ditt beslut.
 
 ---
 
@@ -465,9 +469,9 @@ python scripts/gen_docs.py                         # uppdaterar docs/KALLREGISTE
 * **Klubbmärken:** officiella klubbmärken är varumärkesskyddade och följer inte med. Appen ritar en sköld i
   klubbens färger med initialer. Du kan ladda upp ett märke per lag under *Lag & spelare*.
 * **Odds:** oddsfliken är tom tills en oddskälla med nyckel aktiverats. Inga odds hittas på.
-* **UEFA:** UEFA:s villkor förbjuder automatisk insamling och träning av modeller. Data som du själv importerat
-  (arbetsboken) visas, men används inte av modellerna. Champions League-statistik för modellerna kräver
-  API-Football.
+* **UEFA:** UEFA:s villkor förbjuder automatisk insamling, så nya UEFA-data hämtas aldrig. Ny Champions
+  League-statistik kommer från API-Football, från en import av fil eller från manuell inmatning under
+  *Eftermatch*. Data som du själv importerat används i prognoserna efter ditt beslut.
 * **Arbetsboken V3** innehåller inte bladen för trupp/målskyttar, Football-Data, football.json, Europe, StatsBomb
   och manifestet över misslyckade hämtningar. De kontrollvärdena redovisas som *saknas i filen*. De som finns
   stämmer exakt (2 024 CL-matcher, 15 340 inhemska matcher och alla kontrollerade saknade värden).

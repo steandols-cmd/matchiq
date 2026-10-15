@@ -43,7 +43,7 @@ REQUIRED_TEXT = {
     "matchlista": ["Champions League", "Kommande", "Matchanalys"],
     "matchprognos": ["Hemma", "Borta", "Rättvisa odds", "BASLINJE", "Startelvor", "Förväntade hörnor", "Skott på mål"],
     "lag_spelare_startelva": ["Startelvor", "Snitt för / emot", "Identitet"],
-    "datakallor_tackning": ["Källregister", "Spärrad från träning", "Träning tillåten", "Licens"],
+    "datakallor_tackning": ["Källregister", "Spärrad från prognoserna", "Används i prognoserna", "Licens"],
     "utfall_kalibrering": ["walk-forward", "EXPERIMENTELL", "BASLINJE", "Frysta prognoser mot faktiskt utfall"],
     "hamta_historik": ["Driftstatus per serie och mått", "Hämta historik", "Wyscout"],
 }

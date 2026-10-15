@@ -105,9 +105,10 @@ SOURCES: list[dict] = [
         "min_interval_seconds": 5.0,
         "daily_quota": 0,
         "data_kinds": ["fixtures", "results", "lineups", "team_stats"],
-        "notes": "Granskat 2026-10-15 mot https://www.uefa.com/termsconditions/: automatisk insamling och användning "
-                 "för att träna modeller är uttryckligen förbjudna. Träning kan bara aktiveras med en referens till "
-                 "ett skriftligt tillstånd från UEFA. Lagliga alternativ: API-Football (licensierat API) för "
+        "notes": "Granskat 2026-10-15 mot https://www.uefa.com/termsconditions/: automatisk insamling är förbjuden och "
+                 "innehållet får inte användas för att utveckla eller träna mjukvara, modeller eller algoritmer. "
+                 "MatchIQ hämtar därför aldrig från UEFA. Data som du själv importerat kan användas i prognoserna "
+                 "först efter ditt dokumenterade beslut (det loggas). Alternativ med licens: API-Football för "
                  "Champions League-statistik och startelvor, OpenFootball (CC0) för spelschema och resultat.",
     },
     {
@@ -359,16 +360,16 @@ def seed(db: Database, now: datetime) -> None:
                     allowed_uses=?, training_policy=?, automated_fetch=?, requires_api_key=?, update_frequency=?,
                     coverage=?, min_interval_seconds=?, daily_quota=?, data_kinds=?, notes=?, updated_at_utc=?
                     WHERE id=?""", values + (s["id"],))
-                # Strängare villkor efter granskning: ett godkännande som gavs under svagare villkor återkallas
-                # automatiskt (kravet: spärra data från träning när rättigheter saknas), med revisionspost.
+                # Strängare villkor efter granskning: ett beslut som användaren redan fattat står kvar (det är
+                # användarens data och beslut), men användaren informeras om villkoren och det loggas.
                 if s["training_policy"] == "blocked" and old[0] != "blocked" and old[1] == "approved":
-                    c.execute("UPDATE sources SET training_approval='revoked' WHERE id=?", (s["id"],))
-                    msg = (f"Villkoren för {s['name']} har granskats och förbjuder träning. Det tidigare "
-                           "godkännandet återkallades automatiskt. Kräver skriftligt tillstånd från rättighetsägaren.")
+                    msg = (f"Villkoren för {s['name']} har granskats: de tillåter inte att datan används i modeller "
+                           "eller beräkningar. Ditt tidigare beslut att använda datan du själv importerat i "
+                           "prognoserna gäller fortfarande. Ändra det under Data & källor om du vill.")
                     c.execute("INSERT INTO source_audit (source_id, action, detail, at_utc) VALUES (?,?,?,?)",
-                              (s["id"], "träning återkallad (villkor)", msg, ts))
+                              (s["id"], "villkor granskade – beslutet kvarstår", msg, ts))
                     c.execute("INSERT INTO notifications (created_at_utc, level, title, body) VALUES (?,?,?,?)",
-                              (ts, "warning", f"{s['name']}: spärrad från träning", msg))
+                              (ts, "warning", f"{s['name']}: villkoren granskade", msg))
                 if s["automated_fetch"] == "manual_only" and old[3]:
                     c.execute("UPDATE sources SET enabled=0 WHERE id=?", (s["id"],))
                     c.execute("INSERT INTO source_audit (source_id, action, detail, at_utc) VALUES (?,?,?,?)",
@@ -410,7 +411,7 @@ def training_allowed(source: dict) -> bool:
 
 
 TRAINING_TEXT_OVERRIDE = {
-    "uefa": "Spärrad – UEFA:s villkor förbjuder träning av modeller (kräver skriftligt tillstånd)",
+    "uefa": "Spärrad – UEFA:s villkor tillåter inte användning i modeller; kräver ditt dokumenterade beslut",
     "workbook_legacy": "Prognoser – används aldrig som träningsdata",
     "sofascore_reference": "Ingen data samlas in",
     "the_odds_api": "Odds används aldrig för modellträning",

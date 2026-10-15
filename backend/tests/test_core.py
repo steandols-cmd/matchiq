@@ -181,25 +181,30 @@ class LicensingTests(unittest.TestCase):
                                    "Villkoren granskade 2026-10-15")
         self.assertEqual(self.app.db.scalar("SELECT enabled FROM sources WHERE id='statmuse_legacy'"), 1)
 
-    def test_uefa_terms_block_fetching_and_revoke_earlier_training_approval(self):
-        # Före granskningen: källan var "oklar" och användaren godkände träning med en anteckning
+    def test_uefa_terms_block_fetching_but_keep_users_documented_decision(self):
+        # Före granskningen: källan var "oklar" och användaren beslutade att använda sin importerade data
         self.app.db.execute("""UPDATE sources SET training_policy='unclear', automated_fetch='disabled', enabled=1,
-            training_approval='approved', training_approval_note='Godkänt av mig för egen analys' WHERE id='uefa'""")
-        self.assertTrue(catalog.training_allowed(dict(self.app.db.one("SELECT * FROM sources WHERE id='uefa'"))))
+            training_approval='approved', training_approval_note='Egen import, för prognosmodulen' WHERE id='uefa'""")
         catalog.seed(self.app.db, self.clock.now())  # ny version med granskade villkor
         src = dict(self.app.db.one("SELECT * FROM sources WHERE id='uefa'"))
-        self.assertFalse(catalog.training_allowed(src))
-        self.assertEqual((src["training_policy"], src["training_approval"], src["enabled"]), ("blocked", "revoked", 0))
+        # Automatisk hämtning är avstängd och kan inte slås på; användarens beslut om sin data står kvar
+        self.assertEqual((src["training_policy"], src["automated_fetch"], src["enabled"]), ("blocked", "manual_only", 0))
+        self.assertTrue(catalog.training_allowed(src))
         self.assertEqual(json.loads(src["allowed_uses"]), ["display"])
-        self.assertTrue(self.app.db.scalar("SELECT COUNT(*) FROM notifications WHERE title LIKE 'UEFA%'"))
+        from matchiq.models.evaluate import evaluation_source_ids
+        self.assertIn("uefa", evaluation_source_ids(self.app.db))
+        self.assertEqual(self.app.db.scalar("SELECT COUNT(*) FROM notifications WHERE title LIKE 'UEFA%'"), 1)
         self.assertTrue(self.app.db.scalar(
-            "SELECT COUNT(*) FROM source_audit WHERE source_id='uefa' AND action LIKE 'träning återkallad%'"))
+            "SELECT COUNT(*) FROM source_audit WHERE source_id='uefa' AND action LIKE 'villkor granskade%'"))
         with self.assertRaises(ValueError):
             catalog.set_source_enabled(self.app.db, "uefa", True, self.clock.now(), "Jag vill hämta från UEFA")
-        # Ny seed ändrar inget mer (idempotent)
+        # Ny start ändrar inget mer (idempotent)
         catalog.seed(self.app.db, self.clock.now())
         self.assertEqual(self.app.db.scalar("SELECT COUNT(*) FROM notifications WHERE title LIKE 'UEFA%'"), 1)
-
+        # Utan beslut är UEFA-data spärrad från prognoserna
+        catalog.set_training_approval(self.app.db, "uefa", False, "", self.clock.now())
+        self.assertFalse(catalog.training_allowed(dict(self.app.db.one("SELECT * FROM sources WHERE id='uefa'"))))
+        self.assertNotIn("uefa", evaluation_source_ids(self.app.db))
 
 if __name__ == "__main__":
     unittest.main()

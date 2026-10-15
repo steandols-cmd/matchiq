@@ -282,7 +282,7 @@ def build_report(snapshots: list[dict], out_path: Path, *, kind: str, created_at
                                _table(lrow, [W / 2, W / 2], zebra=False)]))
 
     # ---- datatäckning
-    story.append(Paragraph("Datatäckning (träningsdata före datagränsen)", S["h2"]))
+    story.append(Paragraph("Datatäckning (underlag före datagränsen)", S["h2"]))
     cov_rows = [[Paragraph(h, S["head"]) for h in ("Mått", "Matcher i tävlingen", f"{match['home_name']} (V2-fönster)",
                                                      f"{match['away_name']} (V2-fönster)", "Status",
                                                      "Källor (antal matcher)")]]
@@ -309,13 +309,13 @@ def build_report(snapshots: list[dict], out_path: Path, *, kind: str, created_at
 
     # ---- källor och modeller
     story.append(Paragraph("Källor, licenser och modellversioner", S["h2"]))
-    src_txt = "<b>Träningsdata från:</b> " + (", ".join(pl.get("training_sources") or []) or "ingen")
+    src_txt = "<b>Prognosunderlag från:</b> " + (", ".join(pl.get("training_sources") or []) or "ingen")
     for t in pl.get("training_detail") or []:
         if t.get("policy") != "allowed" and t.get("approval_note"):
             src_txt += (f"<br/><font color='#B7791F'>{t['name']}: används efter användarens dokumenterade beslut "
                         f"({fmt_local(t.get('approved_at_utc'))}) – ”{t['approval_note']}”</font>")
     if pl.get("blocked_sources"):
-        src_txt += "<br/><b>Spärrade från träning:</b> " + "; ".join(
+        src_txt += "<br/><b>Spärrade från prognoserna:</b> " + "; ".join(
             f"{b['name']} – {b['reason']}" for b in pl["blocked_sources"])
     story.append(Paragraph(src_txt, S["cell"]))
     story.append(Spacer(1, 1.5 * mm))

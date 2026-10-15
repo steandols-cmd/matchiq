@@ -250,11 +250,11 @@ function CoverageMini({ comp }: { comp: string }) {
           <tbody>{cov.seasons.slice().reverse().map((s: any) => (
             <tr key={s.season}><td>{s.season}</td><td className="num">{s.finished}</td>
               {["goals", "shots", "sot", "corners"].map((m) => (
-                <td key={m} title={`Alla källor: ${pct(s.metrics[m].pct_any)} · tillåtna för träning: ${pct(s.metrics[m].pct_training)}`}>
+                <td key={m} title={`Alla källor: ${pct(s.metrics[m].pct_any)} · tillåtna i prognoserna: ${pct(s.metrics[m].pct_training)}`}>
                   <div className="row small"><span style={{ width: 44 }}>{pct(s.metrics[m].pct_training)}</span><span className="muted">({pct(s.metrics[m].pct_any)})</span></div>
                 </td>))}
             </tr>))}</tbody></table></div>)}
-      <div className="small muted panel-pad">Första siffran = andel matcher med värde från källor som får användas för träning; inom parentes = alla källor. Saknade värden lagras tomma, aldrig som 0.</div>
+      <div className="small muted panel-pad">Första siffran = andel matcher med värde från källor som får användas i prognoserna; inom parentes = alla källor. Saknade värden lagras tomma, aldrig som 0.</div>
     </Panel>
     </div>
   );

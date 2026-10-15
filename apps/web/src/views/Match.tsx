@@ -152,7 +152,7 @@ function StatCard({ title, icon, blk, home, away, digits = 1, note }: { title: s
           <span className="k">Totalt</span><span className="v tot">{num(blk.total.mean, digits)}</span><span className="iv">{iv(blk.total)}</span>
         </div>
       ) : (
-        <div><div className="missing">Saknas</div><div className="missing-note">Ingen tillåten träningsdata för måttet (spärrad källa eller för få matcher). Visas aldrig som 0.</div></div>
+        <div><div className="missing">Saknas</div><div className="missing-note">Inget tillåtet underlag för måttet (spärrad källa eller för få matcher). Visas aldrig som 0.</div></div>
       )}
     </div>
   );
@@ -317,7 +317,7 @@ function OddsTab({ d, model, fam }: { d: any; model: any; fam: Fam }) {
       <Panel title="Oddsjämförelse" icon={Icon.scale()}>
         <div className="empty">
           Inga marknadsodds finns för matchen.
-          <div className="small" style={{ marginTop: 8 }}>Aktivera <b>The Odds API</b> (kräver nyckel) under Data &amp; källor eller importera odds från fil. Odds används endast för jämförelse – aldrig som träningsdata.</div>
+          <div className="small" style={{ marginTop: 8 }}>Aktivera <b>The Odds API</b> (kräver nyckel) under Data &amp; källor eller importera odds från fil. Odds används endast för jämförelse – aldrig som prognosunderlaga.</div>
         </div>
       </Panel>
     );
@@ -397,11 +397,11 @@ function QualityTab({ d, ctx, fam, models }: { d: any; ctx: any; fam: Fam; model
         </Panel>
         <Panel title="Källor och licenser" icon={Icon.shield()}>
           <div className="panel-pad col small">
-            <div><b>Träningsdata från:</b> {ctx.training.join(", ") || "ingen"}</div>
+            <div><b>Prognosunderlag från:</b> {ctx.training.join(", ") || "ingen"}</div>
             {Object.entries<any>(ctx.used || {}).map(([k, v]) => (
               <div key={k}>{({ goals: "Mål", shots: "Skott", sot: "Skott på mål", corners: "Hörnor" } as any)[k]}: {Object.keys(v).length ? Object.entries(v).map(([s, n]) => `${s} (${n})`).join(", ") : <span className="missing">ingen tillåten källa</span>}</div>
             ))}
-            {ctx.blocked.length > 0 && <div><b>Spärrade från träning:</b>{ctx.blocked.map((b: any) => <div key={b.id} className="muted">· {b.name}: {b.reason}</div>)}</div>}
+            {ctx.blocked.length > 0 && <div><b>Spärrade från prognoserna:</b>{ctx.blocked.map((b: any) => <div key={b.id} className="muted">· {b.name}: {b.reason}</div>)}</div>}
             <a href="#/data?tab=kallor">Hantera källor och licenser →</a>
           </div>
         </Panel>

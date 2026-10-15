@@ -63,7 +63,7 @@ export function EvaluationView({ route }: { route: Route }) {
         <button className="btn sm" onClick={runSel} disabled={!!job && job.status === "running"}>{Icon.refresh(14)} Kör modellval &amp; validering</button></>}>
         <div className="panel-pad col small">
           {job && <div className="callout"><span className="ic">{Icon.clock()}</span>{job.message} {job.total ? `(${job.done}/${job.total})` : ""}</div>}
-          {cfg ? <div className="muted">Expanding window per matchdag ({cfg.cutoff_rule}). Modellval på {cfg.validation.join(", ")}; orörd holdout {cfg.test.join(", ")}. Träningskällor: {cfg.train_sources.join(", ")}. Körd {fmtFull(bt[order[0]].created_at_utc)}.</div>
+          {cfg ? <div className="muted">Expanding window per matchdag ({cfg.cutoff_rule}). Modellval på {cfg.validation.join(", ")}; orörd holdout {cfg.test.join(", ")}. Underlag från: {cfg.train_sources.join(", ")}. Körd {fmtFull(bt[order[0]].created_at_utc)}.</div>
             : <div className="muted">Ingen walk-forward-körning ännu. Kör modellval (kräver historik med tillåtna källor).</div>}
         </div>
         {order.length > 0 && (
