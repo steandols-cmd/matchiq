@@ -84,12 +84,7 @@ function TeamDetail({ id }: { id: number }) {
             </div>))}</div>)}
       </Panel>
       <div className="layout-2">
-        <Panel title="Spelarstatistik (där tillåten källa finns)" icon={Icon.users()}>
-          {d.players.length === 0 ? <div className="empty">Ingen spelarstatistik. Källan StatsBomb Open Data täcker bara utvalda matcher.</div> : (
-            <div className="scroll-x"><table className="t"><thead><tr><th>Spelare</th><th className="num">Matcher</th><th className="num">Minuter*</th><th className="num">Mål</th><th className="num">Skott</th><th className="num">xG</th></tr></thead>
-              <tbody>{d.players.map((p: any) => <tr key={p.name}><td>{p.name}</td><td className="num">{p.apps}</td><td className="num">{p.minutes == null ? "saknas" : Math.round(p.minutes)}</td><td className="num">{p.goals ?? "–"}</td><td className="num">{p.shots ?? "–"}</td><td className="num">{num(p.xg, 2)}</td></tr>)}</tbody></table></div>)}
-          <div className="tiny muted panel-pad">* Minuter i händelsedata är uppskattade ur händelseklockan.</div>
-        </Panel>
+        <PlayerHistory players={d.players} />
         <Panel title="Frånvaro" icon={Icon.shield()}>
           {d.absences.length === 0 ? <div className="empty">Inga registrerade skador eller avstängningar.</div> : (
             <table className="t"><tbody>{d.absences.map((a: any) => (
@@ -126,5 +121,23 @@ function TeamDetail({ id }: { id: number }) {
         </div>
       </Panel>
     </div>
+  );
+}
+
+
+function PlayerHistory({ players }: { players: any[] }) {
+  const keys = Array.from(new Set(players.map((p) => `${p.comp} ${p.season}`)));
+  const [sel, setSel] = useState<string>(keys[0] || "");
+  const rows = players.filter((p) => `${p.comp} ${p.season}` === sel);
+  return (
+    <Panel title="Spelarhistorik per tävling och säsong" icon={Icon.users()} right={keys.length > 0 ? (
+      <select className="in" value={sel} onChange={(e) => setSel(e.target.value)}>{keys.map((k) => <option key={k} value={k}>{k}</option>)}</select>) : null}>
+      {players.length === 0 ? <div className="empty">Ingen spelarstatistik ännu. Den hämtas under Data &amp; källor → Hämta historik (Wyscout 2017/18, StatsBomb för utvalda matcher, API-Football med nyckel).</div> : (
+        <div className="scroll-x" style={{ maxHeight: 460, overflow: "auto" }}><table className="t"><thead><tr><th>Spelare</th><th className="num">Matcher</th><th className="num">Från start</th><th className="num">Minuter</th><th className="num">Mål</th><th className="num">Skott</th><th className="num">På mål</th><th className="num">xG</th><th>Källa</th></tr></thead>
+          <tbody>{rows.map((p: any) => <tr key={`${p.name}-${p.source_id}`}><td>{p.name}</td><td className="num">{p.apps}</td><td className="num">{p.starts ?? "–"}</td>
+            <td className="num">{p.minutes == null ? "saknas" : `${Math.round(p.minutes)}${p.est ? "*" : ""}`}</td><td className="num">{p.goals ?? "–"}</td><td className="num">{p.shots ?? "–"}</td>
+            <td className="num">{p.sot ?? "–"}</td><td className="num">{num(p.xg, 2)}</td><td className="tiny muted">{p.source_id}</td></tr>)}</tbody></table></div>)}
+      <div className="tiny muted panel-pad">* Minuter uppskattade ur startelva och byten (Wyscout) eller händelseklockan (StatsBomb). Spelare som inte deltog har ingen rad. Saknade värden visas som – eller saknas, aldrig som 0.</div>
+    </Panel>
   );
 }

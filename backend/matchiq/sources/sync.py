@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+import threading
 import traceback
 from datetime import datetime, timedelta
 
@@ -94,23 +95,69 @@ def run_source(app: App, source_id: str, job: str | None = None, http: HttpClien
     return {"status": status, "error": err, "result": res, "next_run_utc": to_iso(nxt)}
 
 
+_backfill_lock = threading.Lock()
+
+
 def run_backfill(app: App, source_ids: list[str] | None = None, http: HttpClient | None = None, progress=None,
                  competitions: list[str] | None = None, seasons: list[int] | None = None) -> list[dict]:
     """Hämta historik från de valda källorna i rätt ordning. Avstängda källor och källor utan nyckel
-    redovisas med orsak i stället för att hoppas över tyst."""
-    enabled = {r["id"] for r in app.db.query("SELECT id FROM sources WHERE enabled=1")}
-    out = []
-    for sid in [s for s in BACKFILL_ORDER if source_ids is None or s in source_ids]:
-        if sid not in enabled:
-            out.append({"source": sid, "status": "skipped", "error": "Källan är inte aktiverad"})
+    redovisas med orsak i stället för att hoppas över tyst. Stoppas en källa av en anropsgräns eller
+    dygnskvot sparas den som "väntande" och återupptas automatiskt av bakgrundssynken."""
+    if not _backfill_lock.acquire(blocking=False):
+        return [{"source": "*", "status": "skipped", "error": "En historikhämtning pågår redan"}]
+    try:
+        enabled = {r["id"] for r in app.db.query("SELECT id FROM sources WHERE enabled=1")}
+        out = []
+        for sid in [s for s in BACKFILL_ORDER if source_ids is None or s in source_ids]:
+            if sid not in enabled:
+                out.append({"source": sid, "status": "skipped", "error": "Källan är inte aktiverad"})
+                continue
+            scope: dict = {"progress": progress}
+            if competitions:
+                scope["competitions"] = competitions
+            if seasons and sid in ("openfootball", "api_football"):
+                scope["seasons"] = seasons
+            out.append({"source": sid, **run_source(app, sid, "backfill", http, **scope)})
+        _update_pending(app, out, competitions, seasons)
+        return out
+    finally:
+        _backfill_lock.release()
+
+
+def _update_pending(app: App, results: list[dict], competitions, seasons) -> None:
+    now = app.clock.now()
+    waiting = []
+    next_at = None
+    for r in results:
+        err = str(r.get("error") or "")
+        if r.get("status") != "blocked":
             continue
-        scope: dict = {"progress": progress}
-        if competitions:
-            scope["competitions"] = competitions
-        if seasons and sid in ("openfootball", "api_football"):
-            scope["seasons"] = seasons
-        out.append({"source": sid, **run_source(app, sid, "backfill", http, **scope)})
-    return out
+        if "anropsgräns" in err:
+            at = now + timedelta(minutes=15)
+        elif "Dygnskvoten" in err or "request limit" in err.lower():
+            at = (now + timedelta(days=1)).replace(hour=0, minute=5, second=0, microsecond=0)
+        else:
+            continue  # t.ex. saknad nyckel – väntar på användaren, inte på tiden
+        waiting.append(r["source"])
+        next_at = at if next_at is None else min(next_at, at)
+    prev = app.get_setting("backfill_pending") or {}
+    done = {r["source"] for r in results if r.get("status") == "ok"}
+    keep = sorted((set(prev.get("sources") or []) - done) | set(waiting))
+    if keep:
+        app.set_setting("backfill_pending", {"sources": keep, "competitions": competitions or prev.get("competitions"),
+                                             "seasons": seasons or prev.get("seasons"),
+                                             "next_utc": to_iso(next_at or now + timedelta(minutes=15))})
+    else:
+        app.set_setting("backfill_pending", None)
+
+
+def resume_pending_backfill(app: App, http: HttpClient | None = None) -> list[dict] | None:
+    p = app.get_setting("backfill_pending")
+    if not p or not p.get("sources"):
+        return None
+    if parse_iso(p["next_utc"]) > app.clock.now():  # type: ignore[operator]
+        return None
+    return run_backfill(app, p["sources"], http, None, p.get("competitions"), p.get("seasons"))
 
 
 def sync_cycle(app: App, http: HttpClient | None = None) -> list[dict]:
@@ -125,6 +172,9 @@ def sync_cycle(app: App, http: HttpClient | None = None) -> list[dict]:
         if st.get("next_run_utc") and parse_iso(st["next_run_utc"]) > now:  # type: ignore[operator]
             continue
         out.append({"source": source_id, "job": job, **run_source(app, source_id, job, http)})
+    resumed = resume_pending_backfill(app, http)
+    if resumed is not None:
+        out.append({"source": "backfill", "job": "resume", "status": "ok", "result": resumed})
     return out
 
 

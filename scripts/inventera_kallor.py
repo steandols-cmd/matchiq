@@ -176,6 +176,25 @@ def wyscout(net: Net) -> dict:
     return out
 
 
+def robots(net: Net) -> dict:
+    """robots.txt för värdarna som adaptrarna använder (för att visa att reglerna följs)."""
+    import urllib.robotparser
+    hosts = {"https://api.github.com": "/repos/openfootball/football.json/contents/2024-25/en.1.json",
+             "https://raw.githubusercontent.com": "/openfootball/football.json/master/2024-25/en.1.json",
+             "https://api.figshare.com": "/v2/collections/4415000/articles",
+             "https://ndownloader.figshare.com": "/files/14464685",
+             "https://v3.football.api-sports.io": "/fixtures"}
+    out = {}
+    for base, path in hosts.items():
+        r = net.get(base + "/robots.txt")
+        txt = r.text if r is not None and r.status_code == 200 else ""
+        rp = urllib.robotparser.RobotFileParser()
+        rp.parse(txt.splitlines())
+        out[base] = {"status": None if r is None else r.status_code, "robots_txt": txt[:800],
+                     "matchiq_allowed": rp.can_fetch("MatchIQ", base + path)}
+    return out
+
+
 def write_md(rep: dict, path: Path) -> None:
     L = [f"# Källinventering ({rep['generated_utc']})", "",
          "Allt nedan är räknat ur källornas egna filer av `scripts/inventera_kallor.py` i GitHub Actions.", ""]
@@ -200,6 +219,10 @@ def write_md(rep: dict, path: Path) -> None:
                  ", ".join(f"{f['name']} ({f['size'] / 1e6:.1f} MB)" for f in a["files"]))
     if wy.get("error"):
         L.append(f"- Fel: {wy['error']}")
+    L += ["", "## robots.txt för värdar som används", ""]
+    for host, r in rep.get("robots", {}).items():
+        L.append(f"- **{host}** – HTTP {r['status']}, MatchIQ tillåten: {'ja' if r['matchiq_allowed'] else 'NEJ'}"
+                 + (f" – `{r['robots_txt'][:200].strip()}`".replace("\n", " ⏎ ") if r["robots_txt"] else ""))
     fails = [x for x in rep["http_log"] if x.get("status") != 200]
     L += ["", f"## Anrop: {len(rep['http_log'])} totalt, {len(fails)} utan HTTP 200", ""]
     L += [f"- {x.get('status')} {x['url']}" for x in fails[:60]]
@@ -217,6 +240,7 @@ def main() -> None:
     rep["openfootball"] = openfootball(net)
     rep["statsbomb"] = statsbomb(net)
     rep["wyscout"] = wyscout(net)
+    rep["robots"] = robots(net)
     rep["http_log"] = net.log
     (out / "kallinventering.json").write_text(json.dumps(rep, ensure_ascii=False, indent=1), encoding="utf-8")
     write_md(rep, out / "kallinventering.md")

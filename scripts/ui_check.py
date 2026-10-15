@@ -45,6 +45,7 @@ REQUIRED_TEXT = {
     "lag_spelare_startelva": ["Startelvor", "Snitt för / emot", "Identitet"],
     "datakallor_tackning": ["Källregister", "Spärrad från träning", "Träning tillåten", "Licens"],
     "utfall_kalibrering": ["walk-forward", "EXPERIMENTELL", "BASLINJE", "Frysta prognoser mot faktiskt utfall"],
+    "hamta_historik": ["Driftstatus per serie och mått", "Hämta historik", "Wyscout"],
 }
 
 
@@ -157,6 +158,7 @@ def main() -> None:
         "match_odds": f"#/match/{match['id']}?flik=odds",
         "match_datakvalitet": f"#/match/{match['id']}?flik=datakvalitet",
         "datatackning": "#/data?tab=tackning",
+        "hamta_historik": "#/data?tab=historik",
     }
     from playwright.sync_api import sync_playwright
     report: dict = {"match": f"{match['home']} – {match['away']}", "checks": {}, "comparisons": {}, "errors": []}
@@ -177,7 +179,7 @@ def main() -> None:
                     report["errors"].append(f"{name} ({orient}): laddades inte klart inom 15 s")
                 fname = out / "skarmbilder" / f"{name}_{orient}.png"
                 page.screenshot(path=str(fname), full_page=False)
-                if name in REQUIRED_TEXT and orient == "liggande":
+                if name in REQUIRED_TEXT and orient == "liggande" and name not in report["checks"]:
                     body = page.inner_text("body")
                     missing = [t for t in REQUIRED_TEXT[name] if t not in body]
                     report["checks"][name] = {"ok": not missing, "missing": missing}

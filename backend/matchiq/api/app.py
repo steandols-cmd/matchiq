@@ -361,10 +361,15 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
             lu["players"] = rows_to_dicts(ctx.db.query(
                 "SELECT slot, name_original name, shirt_number number, position FROM lineup_players WHERE lineup_id=? "
                 "ORDER BY slot", (lu["id"],)))
-        players = rows_to_dicts(ctx.db.query("""SELECT p.name, COUNT(*) apps, SUM(ps.minutes) minutes,
-            SUM(ps.minutes_estimated) est, SUM(ps.goals) goals, SUM(ps.shots) shots, SUM(ps.xg) xg, ps.source_id
-            FROM player_match_stats ps JOIN players p ON p.id=ps.player_id WHERE ps.team_id=?
-            GROUP BY p.id ORDER BY apps DESC LIMIT 40""", (tid,)))
+        # Spelarhistorik per tävling och säsong (en rad per spelare, tävling, säsong och källa)
+        players = rows_to_dicts(ctx.db.query("""SELECT p.name, c.code comp, COALESCE(se.label,'') season,
+            ps.source_id, COUNT(*) apps, SUM(ps.started) starts, SUM(ps.minutes) minutes,
+            MAX(ps.minutes_estimated) est, SUM(ps.goals) goals, SUM(ps.assists) assists, SUM(ps.shots) shots,
+            SUM(ps.shots_on_target) sot, SUM(ps.xg) xg
+            FROM player_match_stats ps JOIN players p ON p.id=ps.player_id JOIN matches m ON m.id=ps.match_id
+            JOIN competitions c ON c.id=m.competition_id LEFT JOIN seasons se ON se.id=m.season_id
+            WHERE ps.team_id=? GROUP BY p.id, c.code, se.label, ps.source_id
+            ORDER BY se.label DESC, apps DESC LIMIT 600""", (tid,)))
         return JSON({
             "team": dict(t),
             "aliases": rows_to_dicts(ctx.db.query("SELECT * FROM team_aliases WHERE team_id=? ORDER BY alias", (tid,))),
@@ -499,7 +504,8 @@ def create_app(ctx: App, token: str, *, extra_hosts: set[str] | None = None, all
             (SELECT COUNT(*) FROM player_match_stats p WHERE p.source_id=s.source_id) player_rows
             FROM match_source_ids s GROUP BY s.source_id"""))
         return JSON({"scopes": rows, "files": files, "per_source": per_source,
-                     "ids_supported": ctx.get_setting("api_football_ids_supported")})
+                     "ids_supported": ctx.get_setting("api_football_ids_supported"),
+                     "pending": ctx.get_setting("backfill_pending")})
 
     async def backfill_reset(request: Request):
         sid = request.path_params["sid"]

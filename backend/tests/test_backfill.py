@@ -277,3 +277,24 @@ class OperationalTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ResumeTests(unittest.TestCase):
+    def test_rate_limited_backfill_resumes_automatically(self):
+        from test_sources import of_routes, EPL_JSON
+        app, clock, _ = make_app(datetime(2026, 10, 15, 8, 0, tzinfo=UTC))
+        routes = of_routes({("football.json", "2026-27/en.1.json"): FakeResponse(200, EPL_JSON)})
+        limited = dict(routes)
+        limited["https://api.github.com/repos/openfootball/football.json"] = FakeResponse(
+            403, b"{}", headers={"X-RateLimit-Remaining": "0", "X-RateLimit-Reset": "1792065600"})
+        r = sync.run_backfill(app, ["openfootball"], HttpClient(app, FakeSession(limited), sleep=lambda s: None))
+        self.assertEqual(r[0]["status"], "blocked")
+        pending = app.get_setting("backfill_pending")
+        self.assertEqual(pending["sources"], ["openfootball"])
+        # För tidigt: inget händer
+        self.assertIsNone(sync.resume_pending_backfill(app, HttpClient(app, FakeSession(routes), sleep=lambda s: None)))
+        clock.advance(minutes=16)
+        res = sync.resume_pending_backfill(app, HttpClient(app, FakeSession(routes), sleep=lambda s: None))
+        self.assertEqual(res[0]["status"], "ok")
+        self.assertIsNone(app.get_setting("backfill_pending"))
+        self.assertEqual(app.db.scalar("SELECT COUNT(*) FROM matches"), 2)
