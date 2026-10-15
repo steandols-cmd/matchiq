@@ -24,6 +24,11 @@ def esc_prop(s: str) -> str:
 
 
 def main() -> None:
+    # Windows-runnern skriver annars med cp1252 och kraschar på tecken som "•" och "⨯" i byggloggen.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[attr-defined]
+    except (AttributeError, ValueError):
+        pass
     path = Path(sys.argv[1])
     title = sys.argv[2] if len(sys.argv) > 2 else "Testfel"
     text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else f"Loggfilen {path} saknas"
