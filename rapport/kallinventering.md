@@ -1,4 +1,4 @@
-# Källinventering (2026-10-15T13:22:49Z)
+# Källinventering (2026-10-15T13:26:13Z)
 
 Allt nedan är räknat ur källornas egna filer av `scripts/inventera_kallor.py` i GitHub Actions.
 
@@ -107,6 +107,68 @@ Allt nedan är räknat ur källornas egna filer av `scripts/inventera_kallor.py`
 
 Repon i organisationen: 36. Fel: inga
 
+### Matcher idag och kommande 7 dagar enligt OpenFootball (57 st)
+
+| Datum | Tid (lokal) | Tävling | Hemma | Borta | Omgång |
+|---|---|---|---|---|---|
+| 2026-10-16 | 20:30 | GER1 | Eintracht Frankfurt | 1. FC Köln | Matchday 6 |
+| 2026-10-16 | 20:45 | FRA1 | Le Mans FC | Toulouse FC | Matchday 7 |
+| 2026-10-16 | 20:45 | ITA1 | Frosinone Calcio | US Sassuolo Calcio | Matchday 7 |
+| 2026-10-16 | 21:00 | ESP1 | RC Deportivo La Coruña | Levante UD | Matchday 9 |
+| 2026-10-17 | 12:30 | ENG1 | Everton FC | Chelsea FC | Matchday 7 |
+| 2026-10-17 | 14:00 | ESP1 | RCD Espanyol de Barcelona | Club Atlético de Madrid | Matchday 9 |
+| 2026-10-17 | 15:00 | ENG1 | Fulham FC | Hull City AFC | Matchday 7 |
+| 2026-10-17 | 15:00 | ENG1 | Manchester City FC | Ipswich Town FC | Matchday 7 |
+| 2026-10-17 | 15:00 | ENG1 | Brentford FC | Liverpool FC | Matchday 7 |
+| 2026-10-17 | 15:00 | ITA1 | Venezia FC | SSC Napoli | Matchday 7 |
+| 2026-10-17 | 15:30 | GER1 | 1. FC Union Berlin | Borussia Dortmund | Matchday 6 |
+| 2026-10-17 | 15:30 | GER1 | Hamburger SV | VfB Stuttgart | Matchday 6 |
+| 2026-10-17 | 15:30 | GER1 | SV Werder Bremen | SC Paderborn 07 | Matchday 6 |
+| 2026-10-17 | 15:30 | GER1 | SV 07 Elversberg | FC Augsburg | Matchday 6 |
+| 2026-10-17 | 15:30 | GER1 | FC Schalke 04 | 1. FSV Mainz 05 | Matchday 6 |
+| 2026-10-17 | 16:15 | ESP1 | Villarreal CF | Elche CF | Matchday 9 |
+| 2026-10-17 | 17:15 | FRA1 | RC Strasbourg Alsace | Paris Saint-Germain FC | Matchday 7 |
+| 2026-10-17 | 17:30 | ENG1 | Newcastle United FC | Aston Villa FC | Matchday 7 |
+| 2026-10-17 | 18:00 | ITA1 | Bologna FC 1909 | FC Internazionale Milano | Matchday 7 |
+| 2026-10-17 | 18:30 | ESP1 | Real Betis Balompié | FC Barcelona | Matchday 9 |
+| 2026-10-17 | 18:30 | GER1 | FC Bayern München | RB Leipzig | Matchday 6 |
+| 2026-10-17 | 20:45 | FRA1 | ES Troyes AC | Racing Club de Lens | Matchday 7 |
+| 2026-10-17 | 20:45 | FRA1 | Lille OSC | Stade Brestois 29 | Matchday 7 |
+| 2026-10-17 | 20:45 | ITA1 | AS Roma | Genoa CFC | Matchday 7 |
+| 2026-10-17 | 21:00 | ESP1 | Valencia CF | Athletic Club | Matchday 9 |
+| 2026-10-18 | 12:30 | ITA1 | Udinese Calcio | US Lecce | Matchday 7 |
+| 2026-10-18 | 14:00 | ENG1 | AFC Bournemouth | Sunderland AFC | Matchday 7 |
+| 2026-10-18 | 14:00 | ENG1 | Leeds United FC | Manchester United FC | Matchday 7 |
+| 2026-10-18 | 14:00 | ENG1 | Brighton & Hove Albion FC | Crystal Palace FC | Matchday 7 |
+| 2026-10-18 | 14:00 | ESP1 | CA Osasuna | Real Racing Club de Santander | Matchday 9 |
+| 2026-10-18 | 15:00 | FRA1 | Angers SCO | Olympique de Marseille | Matchday 7 |
+| 2026-10-18 | 15:00 | ITA1 | ACF Fiorentina | Como 1907 | Matchday 7 |
+| 2026-10-18 | 15:30 | GER1 | Bayer 04 Leverkusen | SC Freiburg | Matchday 6 |
+| 2026-10-18 | 16:15 | ESP1 | RC Celta de Vigo | Deportivo Alavés | Matchday 9 |
+| 2026-10-18 | 16:30 | ENG1 | Nottingham Forest FC | Arsenal FC | Matchday 7 |
+| 2026-10-18 | 17:15 | FRA1 | FC Lorient | AS Monaco FC | Matchday 7 |
+| 2026-10-18 | 17:15 | FRA1 | Paris FC | Stade Rennais FC 1901 | Matchday 7 |
+| 2026-10-18 | 17:15 | FRA1 | Le Havre AC | AJ Auxerre | Matchday 7 |
+| 2026-10-18 | 17:30 | GER1 | Borussia Mönchengladbach | TSG 1899 Hoffenheim | Matchday 6 |
+| 2026-10-18 | 18:00 | ITA1 | AC Milan | Atalanta BC | Matchday 7 |
+| 2026-10-18 | 18:30 | ESP1 | Málaga CF | Real Sociedad de Fútbol | Matchday 9 |
+| 2026-10-18 | 20:45 | FRA1 | Olympique Lyonnais | OGC Nice | Matchday 7 |
+| 2026-10-18 | 20:45 | ITA1 | Juventus FC | SS Lazio | Matchday 7 |
+| 2026-10-18 | 21:00 | ESP1 | Real Madrid CF | Sevilla FC | Matchday 9 |
+| 2026-10-19 | – | SWE1? | Hammarby IF | AIK Solna | Matchday 27 |
+| 2026-10-19 | – | SWE1? | IF Elfsborg | Östers IF | Matchday 27 |
+| 2026-10-19 | – | SWE1? | GAIS Göteborg | Djurgårdens IF | Matchday 27 |
+| 2026-10-19 | – | SWE1? | IFK Göteborg | Mjällby AIF | Matchday 27 |
+| 2026-10-19 | – | SWE1? | BK Häcken | IK Sirius | Matchday 27 |
+| 2026-10-19 | – | SWE1? | IFK Norrköping | Malmö FF | Matchday 27 |
+| 2026-10-19 | – | SWE1? | Degerfors IF | Halmstads BK | Matchday 27 |
+| 2026-10-19 | – | SWE1? | IFK Värnamo | IF Brommapojkarna | Matchday 27 |
+| 2026-10-19 | 18:30 | ITA1 | AC Monza | Cagliari Calcio | Matchday 7 |
+| 2026-10-19 | 20:00 | ENG1 | Tottenham Hotspur FC | Coventry City FC | Matchday 7 |
+| 2026-10-19 | 20:45 | ITA1 | Parma Calcio 1913 | Torino FC | Matchday 7 |
+| 2026-10-19 | 21:00 | ESP1 | Getafe CF | Rayo Vallecano de Madrid | Matchday 9 |
+| 2026-10-21 | 20:00 | ESP1 | Levante UD | Athletic Club | Matchday 6 |
+
 ## StatsBomb Open Data
 
 | Tävling | Säsong | Matcher | Lag | Första | Sista |
@@ -177,5 +239,18 @@ Villkor (utdrag ur README):
 - **Events** – licens CC BY 4.0 – events.zip (77.3 MB)
 - **Matches** – licens CC BY 4.0 – matches.zip (0.6 MB)
 
-## Anrop: 162 totalt, 0 utan HTTP 200
+## robots.txt för värdar som används
 
+- **https://api.github.com** – HTTP 404, MatchIQ tillåten: ja
+- **https://raw.githubusercontent.com** – HTTP 404, MatchIQ tillåten: ja
+- **https://api.figshare.com** – HTTP 404, MatchIQ tillåten: ja
+- **https://ndownloader.figshare.com** – HTTP 404, MatchIQ tillåten: ja
+- **https://v3.football.api-sports.io** – HTTP 403, MatchIQ tillåten: ja
+
+## Anrop: 167 totalt, 5 utan HTTP 200
+
+- 404 https://api.github.com/robots.txt
+- 404 https://raw.githubusercontent.com/robots.txt
+- 404 https://api.figshare.com/robots.txt
+- 404 https://ndownloader.figshare.com/robots.txt
+- 403 https://v3.football.api-sports.io/robots.txt
