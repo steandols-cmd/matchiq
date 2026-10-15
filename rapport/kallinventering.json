@@ -1,0 +1,3190 @@
+{
+ "generated_utc": "2026-10-15T12:24:06Z",
+ "openfootball": {
+  "repos": {
+   "clubs": {
+    "default_branch": "master",
+    "pushed_at": "2025-01-03T18:08:49Z",
+    "license": "CC0-1.0"
+   },
+   "austria": {
+    "default_branch": "master",
+    "pushed_at": "2026-10-01T15:12:33Z",
+    "license": "CC0-1.0"
+   },
+   "deutschland": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-21T10:35:58Z",
+    "license": "CC0-1.0"
+   },
+   "openfootball.github.io": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-22T18:33:00Z",
+    "license": null
+   },
+   "euro": {
+    "default_branch": "master",
+    "pushed_at": "2026-06-26T16:40:38Z",
+    "license": "CC0-1.0"
+   },
+   "england": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-21T10:35:50Z",
+    "license": "CC0-1.0"
+   },
+   "north-america-gold-cup": {
+    "default_branch": "master",
+    "pushed_at": "2026-05-29T14:22:41Z",
+    "license": "CC0-1.0"
+   },
+   "internationals.more": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-12T10:21:44Z",
+    "license": "CC0-1.0"
+   },
+   "worldcup": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-22T18:08:37Z",
+    "license": "CC0-1.0"
+   },
+   "espana": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-21T10:35:54Z",
+    "license": "CC0-1.0"
+   },
+   "players": {
+    "default_branch": "master",
+    "pushed_at": "2024-06-17T10:39:47Z",
+    "license": "CC0-1.0"
+   },
+   "south-america": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-21T10:36:10Z",
+    "license": "CC0-1.0"
+   },
+   "italy": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-21T10:36:02Z",
+    "license": "CC0-1.0"
+   },
+   "sandbox": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-19T16:28:50Z",
+    "license": "CC0-1.0"
+   },
+   "v0-format": {
+    "default_branch": "master",
+    "pushed_at": "2026-03-18T16:36:43Z",
+    "license": "CC0-1.0"
+   },
+   "belgium": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-09T13:10:27Z",
+    "license": "CC0-1.0"
+   },
+   "champions-league": {
+    "default_branch": "master",
+    "pushed_at": "2026-07-02T15:56:14Z",
+    "license": "CC0-1.0",
+    "n_files": 34,
+    "truncated": false
+   },
+   "copa-america": {
+    "default_branch": "master",
+    "pushed_at": "2026-05-29T14:49:04Z",
+    "license": "CC0-1.0"
+   },
+   "help": {
+    "default_branch": "master",
+    "pushed_at": "2020-12-12T19:30:27Z",
+    "license": null
+   },
+   "internationals": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-24T17:31:32Z",
+    "license": "CC0-1.0"
+   },
+   "world.more": {
+    "default_branch": "master",
+    "pushed_at": "2026-05-29T14:06:19Z",
+    "license": "CC0-1.0"
+   },
+   "club-worldcup": {
+    "default_branch": "master",
+    "pushed_at": "2026-05-31T17:24:54Z",
+    "license": "CC0-1.0"
+   },
+   "leagues": {
+    "default_branch": "master",
+    "pushed_at": "2025-12-04T15:44:25Z",
+    "license": "CC0-1.0"
+   },
+   "europe": {
+    "default_branch": "master",
+    "pushed_at": "2026-10-06T10:56:02Z",
+    "license": "CC0-1.0",
+    "n_files": 221,
+    "truncated": false
+   },
+   "spec": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-16T16:48:59Z",
+    "license": "CC0-1.0"
+   },
+   "world": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-23T11:34:28Z",
+    "license": "CC0-1.0"
+   },
+   "docs": {
+    "default_branch": "master",
+    "pushed_at": "2020-06-25T20:15:25Z",
+    "license": null
+   },
+   "schema.sql": {
+    "default_branch": "master",
+    "pushed_at": "2020-09-26T17:30:00Z",
+    "license": "CC0-1.0"
+   },
+   "euro.json": {
+    "default_branch": "master",
+    "pushed_at": "2026-03-21T14:12:46Z",
+    "license": "CC0-1.0"
+   },
+   "quick-starter": {
+    "default_branch": "master",
+    "pushed_at": "2026-05-28T16:24:45Z",
+    "license": "CC0-1.0"
+   },
+   "schema": {
+    "default_branch": "master",
+    "pushed_at": "2017-01-13T20:13:14Z",
+    "license": null
+   },
+   "awesome-football": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-30T10:56:35Z",
+    "license": null
+   },
+   "league-starter": {
+    "default_branch": "master",
+    "pushed_at": "2026-01-27T17:44:12Z",
+    "license": "CC0-1.0"
+   },
+   "football.json": {
+    "default_branch": "master",
+    "pushed_at": "2026-09-22T09:33:50Z",
+    "license": "CC0-1.0",
+    "n_files": 294,
+    "truncated": false
+   },
+   "worldcup.json": {
+    "default_branch": "master",
+    "pushed_at": "2026-08-11T11:38:25Z",
+    "license": "CC0-1.0"
+   },
+   "opendata-theme": {
+    "default_branch": "master",
+    "pushed_at": "2026-06-17T15:18:49Z",
+    "license": null
+   }
+  },
+  "files": [
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2011-12/cl.txt",
+    "competition": "UCL",
+    "season": "2011-12",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2011-09-13",
+    "last_date": "2012-05-19",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2012-13/cl.txt",
+    "competition": "UCL",
+    "season": "2012-13",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2012-09-18",
+    "last_date": "2013-05-25",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2013-14/cl.txt",
+    "competition": "UCL",
+    "season": "2013-14",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2013-09-17",
+    "last_date": "2014-05-24",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2014-15/cl.txt",
+    "competition": "UCL",
+    "season": "2014-15",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2014-09-16",
+    "last_date": "2015-06-06",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2015-16/cl.txt",
+    "competition": "UCL",
+    "season": "2015-16",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2015-09-15",
+    "last_date": "2016-05-28",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2016-17/cl.txt",
+    "competition": "UCL",
+    "season": "2016-17",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2016-09-13",
+    "last_date": "2017-06-03",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2017-18/cl.txt",
+    "competition": "UCL",
+    "season": "2017-18",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2017-09-12",
+    "last_date": "2018-05-26",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2018-19/cl.txt",
+    "competition": "UCL",
+    "season": "2018-19",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2018-09-18",
+    "last_date": "2019-06-01",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2019-20/cl.txt",
+    "competition": "UCL",
+    "season": "2019-20",
+    "status": 200,
+    "matches": 119,
+    "with_score": 119,
+    "unparsed_lines": 0,
+    "first_date": "2019-09-17",
+    "last_date": "2020-08-23",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2020-21/cl.txt",
+    "competition": "UCL",
+    "season": "2020-21",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2020-10-20",
+    "last_date": "2021-05-29",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2021-22/cl.txt",
+    "competition": "UCL",
+    "season": "2021-22",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2021-09-14",
+    "last_date": "2022-05-28",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2022-23/cl.txt",
+    "competition": "UCL",
+    "season": "2022-23",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2022-09-06",
+    "last_date": "2023-06-10",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2023-24/cl.txt",
+    "competition": "UCL",
+    "season": "2023-24",
+    "status": 200,
+    "matches": 125,
+    "with_score": 125,
+    "unparsed_lines": 0,
+    "first_date": "2023-09-19",
+    "last_date": "2024-06-01",
+    "teams": 32
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2024-25/cl.txt",
+    "competition": "UCL",
+    "season": "2024-25",
+    "status": 200,
+    "matches": 189,
+    "with_score": 189,
+    "unparsed_lines": 0,
+    "first_date": "2024-09-17",
+    "last_date": "2025-05-31",
+    "teams": 36
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2024-25/clq.txt",
+    "competition": "UCL",
+    "season": "2024-25",
+    "status": 200,
+    "matches": 90,
+    "with_score": 90,
+    "unparsed_lines": 0,
+    "first_date": "2024-07-09",
+    "last_date": "2024-08-28",
+    "teams": 52
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2025-26/cl.txt",
+    "competition": "UCL",
+    "season": "2025-26",
+    "status": 200,
+    "matches": 189,
+    "with_score": 189,
+    "unparsed_lines": 0,
+    "first_date": "2025-09-16",
+    "last_date": "2026-05-30",
+    "teams": 36
+   },
+   {
+    "repo": "champions-league",
+    "branch": "master",
+    "path": "2025-26/clq.txt",
+    "competition": "UCL",
+    "season": "2025-26",
+    "status": 200,
+    "matches": 92,
+    "with_score": 92,
+    "unparsed_lines": 0,
+    "first_date": "2025-07-08",
+    "last_date": "2025-08-27",
+    "teams": 53
+   },
+   {
+    "repo": "europe",
+    "branch": "master",
+    "path": "sweden/2023_se1.txt",
+    "competition": "SWE1?",
+    "season": "2023",
+    "status": 200,
+    "matches": 240,
+    "with_score": 240,
+    "unparsed_lines": 0,
+    "first_date": "2023-04-01",
+    "last_date": "2024-11-12",
+    "teams": 16
+   },
+   {
+    "repo": "europe",
+    "branch": "master",
+    "path": "sweden/2024_se1.txt",
+    "competition": "SWE1?",
+    "season": "2024",
+    "status": 200,
+    "matches": 240,
+    "with_score": 240,
+    "unparsed_lines": 0,
+    "first_date": "2024-03-30",
+    "last_date": "2025-11-10",
+    "teams": 16
+   },
+   {
+    "repo": "europe",
+    "branch": "master",
+    "path": "sweden/2025_se1.txt",
+    "competition": "SWE1?",
+    "season": "2025",
+    "status": 200,
+    "matches": 240,
+    "with_score": 53,
+    "unparsed_lines": 0,
+    "first_date": "2025-03-29",
+    "last_date": "2026-11-09",
+    "teams": 18
+   },
+   {
+    "repo": "europe",
+    "branch": "master",
+    "path": "sweden/2025_se2.txt",
+    "competition": "SWE1?",
+    "season": "2025",
+    "status": 200,
+    "matches": 240,
+    "with_score": 45,
+    "unparsed_lines": 0,
+    "first_date": "2025-03-29",
+    "last_date": "2025-11-08",
+    "teams": 16
+   },
+   {
+    "repo": "europe",
+    "branch": "master",
+    "path": "sweden/2025_se3s.txt",
+    "competition": "SWE1?",
+    "season": "2025",
+    "status": 200,
+    "matches": 240,
+    "with_score": 47,
+    "unparsed_lines": 0,
+    "first_date": "2025-03-28",
+    "last_date": "2025-11-09",
+    "teams": 16
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2010-11/de.1.json",
+    "competition": "GER1",
+    "season": "2010-11",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2010-08-20",
+    "last_date": "2011-05-14",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2010-11/en.1.json",
+    "competition": "ENG1",
+    "season": "2010-11",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2010-08-14",
+    "last_date": "2011-05-22",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2011-12/de.1.json",
+    "competition": "GER1",
+    "season": "2011-12",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2011-08-05",
+    "last_date": "2012-05-05",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2011-12/en.1.json",
+    "competition": "ENG1",
+    "season": "2011-12",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2011-08-13",
+    "last_date": "2012-05-13",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2012-13/de.1.json",
+    "competition": "GER1",
+    "season": "2012-13",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2012-08-24",
+    "last_date": "2013-05-18",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2012-13/en.1.json",
+    "competition": "ENG1",
+    "season": "2012-13",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2012-08-18",
+    "last_date": "2013-05-19",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2012-13/es.1.json",
+    "competition": "ESP1",
+    "season": "2012-13",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2012-08-18",
+    "last_date": "2013-06-01",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2013-14/de.1.json",
+    "competition": "GER1",
+    "season": "2013-14",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2013-08-09",
+    "last_date": "2014-05-10",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2013-14/en.1.json",
+    "competition": "ENG1",
+    "season": "2013-14",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2013-08-17",
+    "last_date": "2014-05-11",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2013-14/es.1.json",
+    "competition": "ESP1",
+    "season": "2013-14",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2013-08-17",
+    "last_date": "2014-05-18",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2013-14/it.1.json",
+    "competition": "ITA1",
+    "season": "2013-14",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2013-08-24",
+    "last_date": "2014-05-18",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2014-15/de.1.json",
+    "competition": "GER1",
+    "season": "2014-15",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2014-08-22",
+    "last_date": "2015-05-23",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2014-15/en.1.json",
+    "competition": "ENG1",
+    "season": "2014-15",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2014-08-16",
+    "last_date": "2015-05-24",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2014-15/es.1.json",
+    "competition": "ESP1",
+    "season": "2014-15",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2014-08-23",
+    "last_date": "2015-05-23",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2014-15/fr.1.json",
+    "competition": "FRA1",
+    "season": "2014-15",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2014-08-08",
+    "last_date": "2015-05-23",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2014-15/it.1.json",
+    "competition": "ITA1",
+    "season": "2014-15",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2014-08-30",
+    "last_date": "2015-05-31",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2015-16/de.1.json",
+    "competition": "GER1",
+    "season": "2015-16",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2015-08-14",
+    "last_date": "2016-05-14",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2015-16/en.1.json",
+    "competition": "ENG1",
+    "season": "2015-16",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2015-08-08",
+    "last_date": "2016-05-17",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2015-16/es.1.json",
+    "competition": "ESP1",
+    "season": "2015-16",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2015-08-21",
+    "last_date": "2016-05-15",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2015-16/fr.1.json",
+    "competition": "FRA1",
+    "season": "2015-16",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2015-08-07",
+    "last_date": "2016-05-14",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2015-16/it.1.json",
+    "competition": "ITA1",
+    "season": "2015-16",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2015-08-22",
+    "last_date": "2016-05-15",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2016-17/de.1.json",
+    "competition": "GER1",
+    "season": "2016-17",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2016-08-26",
+    "last_date": "2017-05-20",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2016-17/en.1.json",
+    "competition": "ENG1",
+    "season": "2016-17",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2016-08-13",
+    "last_date": "2017-05-21",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2016-17/es.1.json",
+    "competition": "ESP1",
+    "season": "2016-17",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2016-08-19",
+    "last_date": "2017-05-21",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2016-17/fr.1.json",
+    "competition": "FRA1",
+    "season": "2016-17",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2016-08-12",
+    "last_date": "2017-05-20",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2016-17/it.1.json",
+    "competition": "ITA1",
+    "season": "2016-17",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2016-08-20",
+    "last_date": "2017-05-28",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2017-18/de.1.json",
+    "competition": "GER1",
+    "season": "2017-18",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2017-08-18",
+    "last_date": "2018-05-12",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2017-18/en.1.json",
+    "competition": "ENG1",
+    "season": "2017-18",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2017-08-11",
+    "last_date": "2018-05-13",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2017-18/es.1.json",
+    "competition": "ESP1",
+    "season": "2017-18",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2017-08-18",
+    "last_date": "2018-05-20",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2017-18/fr.1.json",
+    "competition": "FRA1",
+    "season": "2017-18",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2017-08-04",
+    "last_date": "2018-05-19",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2017-18/it.1.json",
+    "competition": "ITA1",
+    "season": "2017-18",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2017-08-19",
+    "last_date": "2018-05-20",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2018-19/de.1.json",
+    "competition": "GER1",
+    "season": "2018-19",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2018-08-24",
+    "last_date": "2019-05-18",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2018-19/en.1.json",
+    "competition": "ENG1",
+    "season": "2018-19",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2018-08-10",
+    "last_date": "2019-05-12",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2018-19/es.1.json",
+    "competition": "ESP1",
+    "season": "2018-19",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2018-08-17",
+    "last_date": "2019-05-19",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2018-19/fr.1.json",
+    "competition": "FRA1",
+    "season": "2018-19",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2018-08-10",
+    "last_date": "2019-05-24",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2018-19/it.1.json",
+    "competition": "ITA1",
+    "season": "2018-19",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2018-08-18",
+    "last_date": "2019-05-26",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2019-20/de.1.json",
+    "competition": "GER1",
+    "season": "2019-20",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2019-08-16",
+    "last_date": "2020-06-27",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2019-20/en.1.json",
+    "competition": "ENG1",
+    "season": "2019-20",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2019-07-01",
+    "last_date": "2020-06-30",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2019-20/es.1.json",
+    "competition": "ESP1",
+    "season": "2019-20",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2019-08-16",
+    "last_date": "2020-07-19",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2019-20/fr.1.json",
+    "competition": "FRA1",
+    "season": "2019-20",
+    "status": 200,
+    "matches": 380,
+    "with_score": 279,
+    "unparsed_lines": 0,
+    "first_date": "2019-08-09",
+    "last_date": "2020-05-23",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2019-20/it.1.json",
+    "competition": "ITA1",
+    "season": "2019-20",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2019-08-24",
+    "last_date": "2020-08-02",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2020-21/de.1.json",
+    "competition": "GER1",
+    "season": "2020-21",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2020-09-18",
+    "last_date": "2021-05-22",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2020-21/en.1.json",
+    "competition": "ENG1",
+    "season": "2020-21",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2020-09-12",
+    "last_date": "2021-05-23",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2020-21/es.1.json",
+    "competition": "ESP1",
+    "season": "2020-21",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2020-09-12",
+    "last_date": "2021-05-23",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2020-21/fr.1.json",
+    "competition": "FRA1",
+    "season": "2020-21",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2020-08-21",
+    "last_date": "2021-05-23",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2020-21/it.1.json",
+    "competition": "ITA1",
+    "season": "2020-21",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2020-09-19",
+    "last_date": "2021-05-23",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2021-22/de.1.json",
+    "competition": "GER1",
+    "season": "2021-22",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2021-08-13",
+    "last_date": "2022-05-14",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2021-22/en.1.json",
+    "competition": "ENG1",
+    "season": "2021-22",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2021-08-13",
+    "last_date": "2022-05-22",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2021-22/es.1.json",
+    "competition": "ESP1",
+    "season": "2021-22",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2021-08-13",
+    "last_date": "2022-05-22",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2021-22/fr.1.json",
+    "competition": "FRA1",
+    "season": "2021-22",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2021-08-06",
+    "last_date": "2022-05-21",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2021-22/it.1.json",
+    "competition": "ITA1",
+    "season": "2021-22",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2021-08-21",
+    "last_date": "2022-05-22",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2022-23/de.1.json",
+    "competition": "GER1",
+    "season": "2022-23",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2022-08-05",
+    "last_date": "2023-05-27",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2022-23/en.1.json",
+    "competition": "ENG1",
+    "season": "2022-23",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2022-08-05",
+    "last_date": "2023-05-28",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2022-23/es.1.json",
+    "competition": "ESP1",
+    "season": "2022-23",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2022-08-12",
+    "last_date": "2023-06-04",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2022-23/fr.1.json",
+    "competition": "FRA1",
+    "season": "2022-23",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2022-08-05",
+    "last_date": "2023-06-03",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2022-23/it.1.json",
+    "competition": "ITA1",
+    "season": "2022-23",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2022-08-13",
+    "last_date": "2023-06-04",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2023-24/de.1.json",
+    "competition": "GER1",
+    "season": "2023-24",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2023-08-18",
+    "last_date": "2024-05-18",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2023-24/en.1.json",
+    "competition": "ENG1",
+    "season": "2023-24",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2023-08-11",
+    "last_date": "2024-05-19",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2023-24/es.1.json",
+    "competition": "ESP1",
+    "season": "2023-24",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2023-08-11",
+    "last_date": "2024-05-26",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2023-24/fr.1.json",
+    "competition": "FRA1",
+    "season": "2023-24",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2023-08-11",
+    "last_date": "2024-05-19",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2023-24/it.1.json",
+    "competition": "ITA1",
+    "season": "2023-24",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2023-08-19",
+    "last_date": "2024-06-02",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2024-25/de.1.json",
+    "competition": "GER1",
+    "season": "2024-25",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2024-08-23",
+    "last_date": "2025-05-17",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2024-25/en.1.json",
+    "competition": "ENG1",
+    "season": "2024-25",
+    "status": 200,
+    "matches": 380,
+    "with_score": 380,
+    "unparsed_lines": 0,
+    "first_date": "2024-08-16",
+    "last_date": "2025-05-25",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2024-25/es.1.json",
+    "competition": "ESP1",
+    "season": "2024-25",
+    "status": 200,
+    "matches": 380,
+    "with_score": 370,
+    "unparsed_lines": 0,
+    "first_date": "2024-08-15",
+    "last_date": "2025-05-25",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2024-25/fr.1.json",
+    "competition": "FRA1",
+    "season": "2024-25",
+    "status": 200,
+    "matches": 306,
+    "with_score": 306,
+    "unparsed_lines": 0,
+    "first_date": "2024-08-16",
+    "last_date": "2025-05-17",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2024-25/it.1.json",
+    "competition": "ITA1",
+    "season": "2024-25",
+    "status": 200,
+    "matches": 380,
+    "with_score": 370,
+    "unparsed_lines": 0,
+    "first_date": "2024-08-17",
+    "last_date": "2025-05-25",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2025-26/de.1.json",
+    "competition": "GER1",
+    "season": "2025-26",
+    "status": 200,
+    "matches": 306,
+    "with_score": 294,
+    "unparsed_lines": 0,
+    "first_date": "2025-08-22",
+    "last_date": "2026-05-16",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2025-26/en.1.json",
+    "competition": "ENG1",
+    "season": "2025-26",
+    "status": 200,
+    "matches": 380,
+    "with_score": 353,
+    "unparsed_lines": 0,
+    "first_date": "2025-08-15",
+    "last_date": "2026-05-24",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2025-26/es.1.json",
+    "competition": "ESP1",
+    "season": "2025-26",
+    "status": 200,
+    "matches": 380,
+    "with_score": 365,
+    "unparsed_lines": 0,
+    "first_date": "2025-08-15",
+    "last_date": "2026-05-24",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2025-26/fr.1.json",
+    "competition": "FRA1",
+    "season": "2025-26",
+    "status": 200,
+    "matches": 306,
+    "with_score": 282,
+    "unparsed_lines": 0,
+    "first_date": "2025-08-15",
+    "last_date": "2026-05-17",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2025-26/it.1.json",
+    "competition": "ITA1",
+    "season": "2025-26",
+    "status": 200,
+    "matches": 380,
+    "with_score": 344,
+    "unparsed_lines": 0,
+    "first_date": "2025-08-23",
+    "last_date": "2026-05-24",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2026-27/de.1.json",
+    "competition": "GER1",
+    "season": "2026-27",
+    "status": 200,
+    "matches": 306,
+    "with_score": 33,
+    "unparsed_lines": 0,
+    "first_date": "2026-08-28",
+    "last_date": "2027-05-22",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2026-27/en.1.json",
+    "competition": "ENG1",
+    "season": "2026-27",
+    "status": 200,
+    "matches": 380,
+    "with_score": 45,
+    "unparsed_lines": 0,
+    "first_date": "2026-08-21",
+    "last_date": "2027-05-30",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2026-27/es.1.json",
+    "competition": "ESP1",
+    "season": "2026-27",
+    "status": 200,
+    "matches": 380,
+    "with_score": 64,
+    "unparsed_lines": 0,
+    "first_date": "2026-08-15",
+    "last_date": "2027-05-30",
+    "teams": 20
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2026-27/fr.1.json",
+    "competition": "FRA1",
+    "season": "2026-27",
+    "status": 200,
+    "matches": 306,
+    "with_score": 41,
+    "unparsed_lines": 0,
+    "first_date": "2026-08-21",
+    "last_date": "2027-05-29",
+    "teams": 18
+   },
+   {
+    "repo": "football.json",
+    "branch": "master",
+    "path": "2026-27/it.1.json",
+    "competition": "ITA1",
+    "season": "2026-27",
+    "status": 200,
+    "matches": 380,
+    "with_score": 50,
+    "unparsed_lines": 0,
+    "first_date": "2026-08-22",
+    "last_date": "2027-05-30",
+    "teams": 20
+   }
+  ],
+  "errors": []
+ },
+ "statsbomb": {
+  "competitions": [
+   {
+    "competition": "GER1",
+    "name": "1. Bundesliga",
+    "season": "2023/2024",
+    "competition_id": 9,
+    "season_id": 281,
+    "matches": 34,
+    "teams": 18,
+    "first_date": "2023-08-19",
+    "last_date": "2024-05-18",
+    "match_updated": "2024-09-28T20:46:38.893391",
+    "data_version": "2024-09-28T20:46:38.893391",
+    "full_season_guess": false
+   },
+   {
+    "competition": "GER1",
+    "name": "1. Bundesliga",
+    "season": "2015/2016",
+    "competition_id": 9,
+    "season_id": 27,
+    "matches": 34,
+    "teams": 18,
+    "first_date": "2015-08-15",
+    "last_date": "2016-05-14",
+    "match_updated": "2024-05-19T11:11:14.192381",
+    "data_version": "2024-05-19T11:11:14.192381",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2018/2019",
+    "competition_id": 16,
+    "season_id": 4,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2019-06-01",
+    "last_date": "2019-06-01",
+    "match_updated": "2026-05-15T15:54:04.598614",
+    "data_version": "2026-05-15T15:54:04.598614",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2017/2018",
+    "competition_id": 16,
+    "season_id": 1,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2018-05-26",
+    "last_date": "2018-05-26",
+    "match_updated": "2024-02-13T02:35:28.134882",
+    "data_version": "2024-02-13T02:35:28.134882",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2016/2017",
+    "competition_id": 16,
+    "season_id": 2,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2017-06-03",
+    "last_date": "2017-06-03",
+    "match_updated": "2024-02-13T02:37:32.205154",
+    "data_version": "2024-02-13T02:37:32.205154",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2015/2016",
+    "competition_id": 16,
+    "season_id": 27,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2016-05-28",
+    "last_date": "2016-05-28",
+    "match_updated": "2024-06-12T07:45:38.786894",
+    "data_version": "2024-06-12T07:45:38.786894",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2014/2015",
+    "competition_id": 16,
+    "season_id": 26,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2015-06-06",
+    "last_date": "2015-06-06",
+    "match_updated": "2024-02-12T12:49:54.914228",
+    "data_version": "2024-02-12T12:49:54.914228",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2013/2014",
+    "competition_id": 16,
+    "season_id": 25,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2014-05-24",
+    "last_date": "2014-05-24",
+    "match_updated": "2024-02-12T12:48:48.479157",
+    "data_version": "2024-02-12T12:48:48.479157",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2012/2013",
+    "competition_id": 16,
+    "season_id": 24,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2013-05-25",
+    "last_date": "2013-05-25",
+    "match_updated": "2024-02-12T12:47:34.340413",
+    "data_version": "2024-02-12T12:47:34.340413",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2011/2012",
+    "competition_id": 16,
+    "season_id": 23,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2012-05-19",
+    "last_date": "2012-05-19",
+    "match_updated": "2024-02-13T02:36:35.698340",
+    "data_version": "2024-02-13T02:36:35.698340",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2010/2011",
+    "competition_id": 16,
+    "season_id": 22,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2011-05-28",
+    "last_date": "2011-05-28",
+    "match_updated": "2024-02-12T12:53:03.944320",
+    "data_version": "2024-02-12T12:53:03.944320",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2009/2010",
+    "competition_id": 16,
+    "season_id": 21,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2010-05-22",
+    "last_date": "2010-05-22",
+    "match_updated": "2024-02-12T12:49:25.017694",
+    "data_version": "2024-02-12T12:49:25.017694",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2008/2009",
+    "competition_id": 16,
+    "season_id": 41,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2009-05-27",
+    "last_date": "2009-05-27",
+    "match_updated": "2024-02-13T07:02:54.657056",
+    "data_version": "2024-02-13T07:02:54.657056",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2006/2007",
+    "competition_id": 16,
+    "season_id": 39,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2007-05-23",
+    "last_date": "2007-05-23",
+    "match_updated": "2024-02-12T13:48:23.967222",
+    "data_version": "2024-02-12T13:48:23.967222",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2004/2005",
+    "competition_id": 16,
+    "season_id": 37,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2005-05-25",
+    "last_date": "2005-05-25",
+    "match_updated": "2025-06-24T09:44:09.039471",
+    "data_version": "2025-06-24T09:44:09.039471",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "2003/2004",
+    "competition_id": 16,
+    "season_id": 44,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "2004-05-26",
+    "last_date": "2004-05-26",
+    "match_updated": "2025-06-24T13:57:37.321382",
+    "data_version": "2025-06-24T13:57:37.321382",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "1999/2000",
+    "competition_id": 16,
+    "season_id": 76,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "1999-11-23",
+    "last_date": "1999-11-23",
+    "match_updated": "2025-06-23T12:34:36.649637",
+    "data_version": "2025-06-23T12:34:36.649637",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "1972/1973",
+    "competition_id": 16,
+    "season_id": 277,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "1973-05-30",
+    "last_date": "1973-05-30",
+    "match_updated": "2024-02-13T14:25:16.532771",
+    "data_version": "2024-02-13T14:25:16.532771",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "1971/1972",
+    "competition_id": 16,
+    "season_id": 71,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "1972-05-31",
+    "last_date": "1972-05-31",
+    "match_updated": "2024-02-12T14:25:01.735880",
+    "data_version": "2024-02-12T14:25:01.735880",
+    "full_season_guess": false
+   },
+   {
+    "competition": "UCL",
+    "name": "Champions League",
+    "season": "1970/1971",
+    "competition_id": 16,
+    "season_id": 276,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "1971-06-02",
+    "last_date": "1971-06-02",
+    "match_updated": "2024-02-13T14:24:12.213582",
+    "data_version": "2024-02-13T14:24:12.213582",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2020/2021",
+    "competition_id": 11,
+    "season_id": 90,
+    "matches": 35,
+    "teams": 19,
+    "first_date": "2020-09-27",
+    "last_date": "2021-05-16",
+    "match_updated": "2025-11-02T03:55:19.577958",
+    "data_version": "2025-11-02T03:55:19.577958",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2019/2020",
+    "competition_id": 11,
+    "season_id": 42,
+    "matches": 33,
+    "teams": 20,
+    "first_date": "2019-09-21",
+    "last_date": "2020-07-19",
+    "match_updated": "2024-12-16T16:51:06.833054",
+    "data_version": "2024-12-16T16:51:06.833054",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2018/2019",
+    "competition_id": 11,
+    "season_id": 4,
+    "matches": 34,
+    "teams": 20,
+    "first_date": "2018-08-18",
+    "last_date": "2019-05-19",
+    "match_updated": "2026-04-06T04:49:09.959011",
+    "data_version": "2026-04-06T04:49:09.959011",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2017/2018",
+    "competition_id": 11,
+    "season_id": 1,
+    "matches": 36,
+    "teams": 20,
+    "first_date": "2017-08-20",
+    "last_date": "2018-05-20",
+    "match_updated": "2025-07-14T10:01:16.674864",
+    "data_version": "2025-07-14T10:01:16.674864",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2016/2017",
+    "competition_id": 11,
+    "season_id": 2,
+    "matches": 34,
+    "teams": 20,
+    "first_date": "2016-08-20",
+    "last_date": "2017-05-21",
+    "match_updated": "2025-03-09T16:03:54.962718",
+    "data_version": "2025-03-09T16:03:54.962718",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2015/2016",
+    "competition_id": 11,
+    "season_id": 27,
+    "matches": 380,
+    "teams": 20,
+    "first_date": "2015-08-21",
+    "last_date": "2016-05-15",
+    "match_updated": "2025-04-23T13:59:22.835792",
+    "data_version": "2025-04-23T13:59:22.835792",
+    "full_season_guess": true
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2014/2015",
+    "competition_id": 11,
+    "season_id": 26,
+    "matches": 38,
+    "teams": 20,
+    "first_date": "2014-08-24",
+    "last_date": "2015-05-23",
+    "match_updated": "2025-06-24T13:39:01.068680",
+    "data_version": "2025-06-24T13:39:01.068680",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2013/2014",
+    "competition_id": 11,
+    "season_id": 25,
+    "matches": 31,
+    "teams": 20,
+    "first_date": "2013-08-18",
+    "last_date": "2014-05-17",
+    "match_updated": "2025-06-24T09:52:44.048585",
+    "data_version": "2025-06-24T09:52:44.048585",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2012/2013",
+    "competition_id": 11,
+    "season_id": 24,
+    "matches": 32,
+    "teams": 20,
+    "first_date": "2012-08-19",
+    "last_date": "2013-05-12",
+    "match_updated": "2025-06-24T13:53:14.047130",
+    "data_version": "2025-06-24T13:53:14.047130",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2011/2012",
+    "competition_id": 11,
+    "season_id": 23,
+    "matches": 37,
+    "teams": 20,
+    "first_date": "2011-08-29",
+    "last_date": "2012-05-12",
+    "match_updated": "2025-06-24T13:38:10.764259",
+    "data_version": "2025-06-24T13:38:10.764259",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2010/2011",
+    "competition_id": 11,
+    "season_id": 22,
+    "matches": 33,
+    "teams": 20,
+    "first_date": "2010-08-29",
+    "last_date": "2011-05-11",
+    "match_updated": "2025-06-24T13:51:54.910296",
+    "data_version": "2025-06-24T13:51:54.910296",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2009/2010",
+    "competition_id": 11,
+    "season_id": 21,
+    "matches": 35,
+    "teams": 20,
+    "first_date": "2009-09-12",
+    "last_date": "2010-05-16",
+    "match_updated": "2025-06-24T13:43:36.379754",
+    "data_version": "2025-06-24T13:43:36.379754",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2008/2009",
+    "competition_id": 11,
+    "season_id": 41,
+    "matches": 31,
+    "teams": 19,
+    "first_date": "2008-08-31",
+    "last_date": "2009-05-10",
+    "match_updated": "2025-09-08T13:42:24.627088",
+    "data_version": "2025-09-08T13:42:24.627088",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2007/2008",
+    "competition_id": 11,
+    "season_id": 40,
+    "matches": 27,
+    "teams": 20,
+    "first_date": "2007-08-26",
+    "last_date": "2008-05-17",
+    "match_updated": "2026-05-26T13:35:19.781918",
+    "data_version": "2025-08-15T14:05:12.751913",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2006/2007",
+    "competition_id": 11,
+    "season_id": 39,
+    "matches": 26,
+    "teams": 20,
+    "first_date": "2006-08-28",
+    "last_date": "2007-06-17",
+    "match_updated": "2025-06-24T13:52:50.824119",
+    "data_version": "2025-06-24T13:52:50.824119",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2005/2006",
+    "competition_id": 11,
+    "season_id": 38,
+    "matches": 17,
+    "teams": 17,
+    "first_date": "2005-10-01",
+    "last_date": "2006-02-25",
+    "match_updated": "2025-06-24T14:05:07.849675",
+    "data_version": "2025-06-24T14:05:07.849675",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "2004/2005",
+    "competition_id": 11,
+    "season_id": 37,
+    "matches": 7,
+    "teams": 7,
+    "first_date": "2004-10-16",
+    "last_date": "2005-05-01",
+    "match_updated": "2025-06-24T13:48:43.998096",
+    "data_version": "2025-06-24T13:48:43.998096",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ESP1",
+    "name": "La Liga",
+    "season": "1973/1974",
+    "competition_id": 11,
+    "season_id": 278,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "1974-02-17",
+    "last_date": "1974-02-17",
+    "match_updated": "2023-07-06T12:50:48.807820",
+    "data_version": "2023-07-06T12:50:48.807820",
+    "full_season_guess": false
+   },
+   {
+    "competition": "FRA1",
+    "name": "Ligue 1",
+    "season": "2022/2023",
+    "competition_id": 7,
+    "season_id": 235,
+    "matches": 32,
+    "teams": 20,
+    "first_date": "2022-08-06",
+    "last_date": "2023-06-03",
+    "match_updated": "2026-04-06T18:51:07.770289",
+    "data_version": "2026-04-06T18:51:07.770289",
+    "full_season_guess": false
+   },
+   {
+    "competition": "FRA1",
+    "name": "Ligue 1",
+    "season": "2021/2022",
+    "competition_id": 7,
+    "season_id": 108,
+    "matches": 26,
+    "teams": 18,
+    "first_date": "2021-08-29",
+    "last_date": "2022-05-21",
+    "match_updated": "2026-04-25T22:22:46.370056",
+    "data_version": "2026-04-25T22:22:46.370056",
+    "full_season_guess": false
+   },
+   {
+    "competition": "FRA1",
+    "name": "Ligue 1",
+    "season": "2015/2016",
+    "competition_id": 7,
+    "season_id": 27,
+    "matches": 377,
+    "teams": 20,
+    "first_date": "2015-08-07",
+    "last_date": "2016-05-14",
+    "match_updated": "2026-05-12T22:46:54.722768",
+    "data_version": "2026-05-12T22:46:54.722768",
+    "full_season_guess": true
+   },
+   {
+    "competition": "ENG1",
+    "name": "Premier League",
+    "season": "2015/2016",
+    "competition_id": 2,
+    "season_id": 27,
+    "matches": 380,
+    "teams": 20,
+    "first_date": "2015-08-08",
+    "last_date": "2016-05-17",
+    "match_updated": "2025-12-17T14:38:00.447595",
+    "data_version": "2025-12-17T14:38:00.447595",
+    "full_season_guess": true
+   },
+   {
+    "competition": "ENG1",
+    "name": "Premier League",
+    "season": "2003/2004",
+    "competition_id": 2,
+    "season_id": 44,
+    "matches": 38,
+    "teams": 20,
+    "first_date": "2003-08-16",
+    "last_date": "2004-05-15",
+    "match_updated": "2025-06-24T13:53:07.585114",
+    "data_version": "2025-06-24T13:53:07.585114",
+    "full_season_guess": false
+   },
+   {
+    "competition": "ITA1",
+    "name": "Serie A",
+    "season": "2015/2016",
+    "competition_id": 12,
+    "season_id": 27,
+    "matches": 380,
+    "teams": 20,
+    "first_date": "2015-08-22",
+    "last_date": "2016-05-15",
+    "match_updated": "2025-08-15T14:28:50.169562",
+    "data_version": "2025-08-15T14:28:50.169562",
+    "full_season_guess": true
+   },
+   {
+    "competition": "ITA1",
+    "name": "Serie A",
+    "season": "1986/1987",
+    "competition_id": 12,
+    "season_id": 86,
+    "matches": 1,
+    "teams": 2,
+    "first_date": "1986-11-09",
+    "last_date": "1986-11-09",
+    "match_updated": "2025-11-23T11:00:00.442491",
+    "data_version": "2025-11-23T11:00:00.442491",
+    "full_season_guess": false
+   }
+  ],
+  "terms_excerpt": [
+   "## Terms & Conditions",
+   "If you publish, share or distribute any research, analysis or insights based on this data, please state the data source as StatsBomb and use our logo, available in our [Media Pack](https://statsbomb.com/media-pack/)."
+  ]
+ },
+ "wyscout": {
+  "articles": [
+   {
+    "id": 11743836,
+    "title": "Mapping of event identifiers to event names",
+    "doi": "10.6084/m9.figshare.11743836.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "eventid2name.csv",
+      "size": 1001,
+      "url": "https://ndownloader.figshare.com/files/21385245"
+     }
+    ]
+   },
+   {
+    "id": 11743818,
+    "title": "Mapping of tag identifiers to tag names",
+    "doi": "10.6084/m9.figshare.11743818.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "tags2name.csv",
+      "size": 1754,
+      "url": "https://ndownloader.figshare.com/files/21385239"
+     }
+    ]
+   },
+   {
+    "id": 11473374,
+    "title": "Data paper on soccer-logs",
+    "doi": "10.6084/m9.figshare.11473374.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "data_paper_soccer_nsd.pdf",
+      "size": 4594739,
+      "url": "https://ndownloader.figshare.com/files/20479902"
+     }
+    ]
+   },
+   {
+    "id": 11473365,
+    "title": "Plots replication code of Nature Scientific Data paper",
+    "doi": "10.6084/m9.figshare.11473365.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "soccer_nsd_code.ipynb",
+      "size": 874788,
+      "url": "https://ndownloader.figshare.com/files/20479890"
+     }
+    ]
+   },
+   {
+    "id": 9361148,
+    "title": "PlayeRanks",
+    "doi": "10.6084/m9.figshare.9361148.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "playerank.json",
+      "size": 6241757,
+      "url": "https://ndownloader.figshare.com/files/16972010"
+     }
+    ]
+   },
+   {
+    "id": 8082665,
+    "title": "Referees",
+    "doi": "10.6084/m9.figshare.8082665.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "referees.json",
+      "size": 196709,
+      "url": "https://ndownloader.figshare.com/files/15074030"
+     }
+    ]
+   },
+   {
+    "id": 8082650,
+    "title": "Coaches",
+    "doi": "10.6084/m9.figshare.8082650.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "coaches.json",
+      "size": 70664,
+      "url": "https://ndownloader.figshare.com/files/15073868"
+     }
+    ]
+   },
+   {
+    "id": 7765196,
+    "title": "Players",
+    "doi": "10.6084/m9.figshare.7765196.v3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "players.json",
+      "size": 1737347,
+      "url": "https://ndownloader.figshare.com/files/15073721"
+     }
+    ]
+   },
+   {
+    "id": 7765310,
+    "title": "Teams",
+    "doi": "10.6084/m9.figshare.7765310.v3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "teams.json",
+      "size": 27404,
+      "url": "https://ndownloader.figshare.com/files/15073697"
+     }
+    ]
+   },
+   {
+    "id": 7765316,
+    "title": "Competitions",
+    "doi": "10.6084/m9.figshare.7765316.v4",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "competitions.json",
+      "size": 1209,
+      "url": "https://ndownloader.figshare.com/files/15073685"
+     }
+    ]
+   },
+   {
+    "id": 7770599,
+    "title": "Events",
+    "doi": "10.6084/m9.figshare.7770599.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "events.zip",
+      "size": 77323413,
+      "url": "https://ndownloader.figshare.com/files/14464685"
+     }
+    ]
+   },
+   {
+    "id": 7770422,
+    "title": "Matches",
+    "doi": "10.6084/m9.figshare.7770422.v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "files": [
+     {
+      "name": "matches.zip",
+      "size": 645097,
+      "url": "https://ndownloader.figshare.com/files/14464622"
+     }
+    ]
+   }
+  ]
+ },
+ "http_log": [
+  {
+   "url": "https://api.github.com/orgs/openfootball/repos?per_page=100&page=1",
+   "status": 200,
+   "bytes": 203690
+  },
+  {
+   "url": "https://api.github.com/repos/openfootball/champions-league/git/trees/master?recursive=1",
+   "status": 200,
+   "bytes": 11448
+  },
+  {
+   "url": "https://api.github.com/repos/openfootball/europe/git/trees/master?recursive=1",
+   "status": 200,
+   "bytes": 62558
+  },
+  {
+   "url": "https://api.github.com/repos/openfootball/football.json/git/trees/master?recursive=1",
+   "status": 200,
+   "bytes": 74163
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2011-12/cl.txt",
+   "status": 200,
+   "bytes": 10477
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2012-13/cl.txt",
+   "status": 200,
+   "bytes": 10400
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2013-14/cl.txt",
+   "status": 200,
+   "bytes": 10476
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2014-15/cl.txt",
+   "status": 200,
+   "bytes": 10454
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2015-16/cl.txt",
+   "status": 200,
+   "bytes": 10471
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2016-17/cl.txt",
+   "status": 200,
+   "bytes": 10446
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2017-18/cl.txt",
+   "status": 200,
+   "bytes": 10389
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2018-19/cl.txt",
+   "status": 200,
+   "bytes": 10379
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2019-20/cl.txt",
+   "status": 200,
+   "bytes": 9967
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2020-21/cl.txt",
+   "status": 200,
+   "bytes": 10495
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2021-22/cl.txt",
+   "status": 200,
+   "bytes": 10428
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2022-23/cl.txt",
+   "status": 200,
+   "bytes": 10399
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2023-24/cl.txt",
+   "status": 200,
+   "bytes": 10428
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2024-25/cl.txt",
+   "status": 200,
+   "bytes": 15374
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2024-25/clq.txt",
+   "status": 200,
+   "bytes": 7157
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2025-26/cl.txt",
+   "status": 200,
+   "bytes": 15265
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/champions-league/master/2025-26/clq.txt",
+   "status": 200,
+   "bytes": 7287
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/europe/master/sweden/2023_se1.txt",
+   "status": 200,
+   "bytes": 19555
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/europe/master/sweden/2024_se1.txt",
+   "status": 200,
+   "bytes": 19679
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/europe/master/sweden/2025_se1.txt",
+   "status": 200,
+   "bytes": 15062
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/europe/master/sweden/2025_se2.txt",
+   "status": 200,
+   "bytes": 15011
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/europe/master/sweden/2025_se3s.txt",
+   "status": 200,
+   "bytes": 15017
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2010-11/de.1.json",
+   "status": 200,
+   "bytes": 92871
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2010-11/en.1.json",
+   "status": 200,
+   "bytes": 114555
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2011-12/de.1.json",
+   "status": 200,
+   "bytes": 92083
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2011-12/en.1.json",
+   "status": 200,
+   "bytes": 114481
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2012-13/de.1.json",
+   "status": 200,
+   "bytes": 92807
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2012-13/en.1.json",
+   "status": 200,
+   "bytes": 113425
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2012-13/es.1.json",
+   "status": 200,
+   "bytes": 113155
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2013-14/de.1.json",
+   "status": 200,
+   "bytes": 92927
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2013-14/en.1.json",
+   "status": 200,
+   "bytes": 113569
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2013-14/es.1.json",
+   "status": 200,
+   "bytes": 112269
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2013-14/it.1.json",
+   "status": 200,
+   "bytes": 111886
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2014-15/de.1.json",
+   "status": 200,
+   "bytes": 91713
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2014-15/en.1.json",
+   "status": 200,
+   "bytes": 113725
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2014-15/es.1.json",
+   "status": 200,
+   "bytes": 112533
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2014-15/fr.1.json",
+   "status": 200,
+   "bytes": 112903
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2014-15/it.1.json",
+   "status": 200,
+   "bytes": 111266
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2015-16/de.1.json",
+   "status": 200,
+   "bytes": 92107
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2015-16/en.1.json",
+   "status": 200,
+   "bytes": 113631
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2015-16/es.1.json",
+   "status": 200,
+   "bytes": 113118
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2015-16/fr.1.json",
+   "status": 200,
+   "bytes": 113093
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2015-16/it.1.json",
+   "status": 200,
+   "bytes": 111286
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2016-17/de.1.json",
+   "status": 200,
+   "bytes": 92285
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2016-17/en.1.json",
+   "status": 200,
+   "bytes": 113759
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2016-17/es.1.json",
+   "status": 200,
+   "bytes": 112929
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2016-17/fr.1.json",
+   "status": 200,
+   "bytes": 112889
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2016-17/it.1.json",
+   "status": 200,
+   "bytes": 112044
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2017-18/de.1.json",
+   "status": 200,
+   "bytes": 91935
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2017-18/en.1.json",
+   "status": 200,
+   "bytes": 114087
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2017-18/es.1.json",
+   "status": 200,
+   "bytes": 112607
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2017-18/fr.1.json",
+   "status": 200,
+   "bytes": 113289
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2017-18/it.1.json",
+   "status": 200,
+   "bytes": 112024
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2018-19/de.1.json",
+   "status": 200,
+   "bytes": 92533
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2018-19/en.1.json",
+   "status": 200,
+   "bytes": 114723
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2018-19/es.1.json",
+   "status": 200,
+   "bytes": 112417
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2018-19/fr.1.json",
+   "status": 200,
+   "bytes": 113091
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2018-19/it.1.json",
+   "status": 200,
+   "bytes": 111802
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2019-20/de.1.json",
+   "status": 200,
+   "bytes": 92983
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2019-20/en.1.json",
+   "status": 200,
+   "bytes": 114817
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2019-20/es.1.json",
+   "status": 200,
+   "bytes": 112137
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2019-20/fr.1.json",
+   "status": 200,
+   "bytes": 103330
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2019-20/it.1.json",
+   "status": 200,
+   "bytes": 112416
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/de.1.json",
+   "status": 200,
+   "bytes": 93089
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/en.1.json",
+   "status": 200,
+   "bytes": 115947
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/es.1.json",
+   "status": 200,
+   "bytes": 113635
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/fr.1.json",
+   "status": 200,
+   "bytes": 113541
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/it.1.json",
+   "status": 200,
+   "bytes": 113906
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/de.1.json",
+   "status": 200,
+   "bytes": 93609
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/en.1.json",
+   "status": 200,
+   "bytes": 115863
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/es.1.json",
+   "status": 200,
+   "bytes": 113895
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/fr.1.json",
+   "status": 200,
+   "bytes": 113767
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2021-22/it.1.json",
+   "status": 200,
+   "bytes": 113576
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/de.1.json",
+   "status": 200,
+   "bytes": 93189
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/en.1.json",
+   "status": 200,
+   "bytes": 116149
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/es.1.json",
+   "status": 200,
+   "bytes": 114885
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/fr.1.json",
+   "status": 200,
+   "bytes": 113237
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2022-23/it.1.json",
+   "status": 200,
+   "bytes": 113460
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/de.1.json",
+   "status": 200,
+   "bytes": 93743
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/en.1.json",
+   "status": 200,
+   "bytes": 116669
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/es.1.json",
+   "status": 200,
+   "bytes": 114187
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/fr.1.json",
+   "status": 200,
+   "bytes": 92104
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2023-24/it.1.json",
+   "status": 200,
+   "bytes": 113014
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/de.1.json",
+   "status": 200,
+   "bytes": 88232
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/en.1.json",
+   "status": 200,
+   "bytes": 110141
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/es.1.json",
+   "status": 200,
+   "bytes": 108296
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/fr.1.json",
+   "status": 200,
+   "bytes": 87793
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2024-25/it.1.json",
+   "status": 200,
+   "bytes": 105098
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/de.1.json",
+   "status": 200,
+   "bytes": 88247
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/en.1.json",
+   "status": 200,
+   "bytes": 108493
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/es.1.json",
+   "status": 200,
+   "bytes": 108642
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/fr.1.json",
+   "status": 200,
+   "bytes": 85845
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2025-26/it.1.json",
+   "status": 200,
+   "bytes": 105202
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/de.1.json",
+   "status": 200,
+   "bytes": 40409
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json",
+   "status": 200,
+   "bytes": 55359
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/es.1.json",
+   "status": 200,
+   "bytes": 50771
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/fr.1.json",
+   "status": 200,
+   "bytes": 39943
+  },
+  {
+   "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/it.1.json",
+   "status": 200,
+   "bytes": 47608
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/README.md",
+   "status": 200,
+   "bytes": 1753
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/competitions.json",
+   "status": 200,
+   "bytes": 34887
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/9/281.json",
+   "status": 200,
+   "bytes": 63079
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/9/27.json",
+   "status": 200,
+   "bytes": 61666
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/4.json",
+   "status": 200,
+   "bytes": 1878
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/1.json",
+   "status": 200,
+   "bytes": 1817
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/2.json",
+   "status": 200,
+   "bytes": 1756
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/27.json",
+   "status": 200,
+   "bytes": 1786
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/26.json",
+   "status": 200,
+   "bytes": 1783
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/25.json",
+   "status": 200,
+   "bytes": 1781
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/24.json",
+   "status": 200,
+   "bytes": 1759
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/23.json",
+   "status": 200,
+   "bytes": 1753
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/22.json",
+   "status": 200,
+   "bytes": 1774
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/21.json",
+   "status": 200,
+   "bytes": 1786
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/41.json",
+   "status": 200,
+   "bytes": 1850
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/39.json",
+   "status": 200,
+   "bytes": 1850
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/37.json",
+   "status": 200,
+   "bytes": 1703
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/44.json",
+   "status": 200,
+   "bytes": 1712
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/76.json",
+   "status": 200,
+   "bytes": 1418
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/277.json",
+   "status": 200,
+   "bytes": 1690
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/71.json",
+   "status": 200,
+   "bytes": 1842
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/16/276.json",
+   "status": 200,
+   "bytes": 1819
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/90.json",
+   "status": 200,
+   "bytes": 64041
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/42.json",
+   "status": 200,
+   "bytes": 57716
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/4.json",
+   "status": 200,
+   "bytes": 61284
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/1.json",
+   "status": 200,
+   "bytes": 66269
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/2.json",
+   "status": 200,
+   "bytes": 61437
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/27.json",
+   "status": 200,
+   "bytes": 702673
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/26.json",
+   "status": 200,
+   "bytes": 68347
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/25.json",
+   "status": 200,
+   "bytes": 56279
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/24.json",
+   "status": 200,
+   "bytes": 46389
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/23.json",
+   "status": 200,
+   "bytes": 68456
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/22.json",
+   "status": 200,
+   "bytes": 60918
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/21.json",
+   "status": 200,
+   "bytes": 64638
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/41.json",
+   "status": 200,
+   "bytes": 56770
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/40.json",
+   "status": 200,
+   "bytes": 49855
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/39.json",
+   "status": 200,
+   "bytes": 47197
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/38.json",
+   "status": 200,
+   "bytes": 30064
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/37.json",
+   "status": 200,
+   "bytes": 12950
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/11/278.json",
+   "status": 200,
+   "bytes": 1243
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/7/235.json",
+   "status": 200,
+   "bytes": 58817
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/7/108.json",
+   "status": 200,
+   "bytes": 48647
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/7/27.json",
+   "status": 200,
+   "bytes": 667360
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/2/27.json",
+   "status": 200,
+   "bytes": 698179
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/2/44.json",
+   "status": 200,
+   "bytes": 63192
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/12/27.json",
+   "status": 200,
+   "bytes": 686900
+  },
+  {
+   "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/12/86.json",
+   "status": 200,
+   "bytes": 1797
+  },
+  {
+   "url": "https://api.figshare.com/v2/collections/4415000/articles?page_size=100",
+   "status": 200,
+   "bytes": 9528
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/11743836",
+   "status": 200,
+   "bytes": 4917
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/11743818",
+   "status": 200,
+   "bytes": 4368
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/11473374",
+   "status": 200,
+   "bytes": 5783
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/11473365",
+   "status": 200,
+   "bytes": 4495
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/9361148",
+   "status": 200,
+   "bytes": 5463
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/8082665",
+   "status": 200,
+   "bytes": 4746
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/8082650",
+   "status": 200,
+   "bytes": 4883
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/7765196",
+   "status": 200,
+   "bytes": 5107
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/7765310",
+   "status": 200,
+   "bytes": 4493
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/7765316",
+   "status": 200,
+   "bytes": 4758
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/7770599",
+   "status": 200,
+   "bytes": 5983
+  },
+  {
+   "url": "https://api.figshare.com/v2/articles/7770422",
+   "status": 200,
+   "bytes": 7087
+  }
+ ]
+}
