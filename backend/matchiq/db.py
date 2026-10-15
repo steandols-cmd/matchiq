@@ -12,8 +12,8 @@ import csv
 import hashlib
 import io
 import json
+import os
 import re
-import shutil
 import sqlite3
 import threading
 import zipfile
@@ -56,11 +56,16 @@ class Database:
         self.backups_dir = backups_dir or self.path.parent / "backups"
         self._local = threading.local()
         self.write_lock = threading.RLock()
+        self._conns: list[sqlite3.Connection] = []  # alla öppna anslutningar (alla trådar)
+        self._conns_lock = threading.Lock()
+        self._gen = 0  # ökas av close_all(); trådar med äldre anslutning öppnar en ny
         self.path.parent.mkdir(parents=True, exist_ok=True)
 
     # -- anslutningar ---------------------------------------------------------
     def conn(self) -> sqlite3.Connection:
         c = getattr(self._local, "conn", None)
+        if c is not None and getattr(self._local, "gen", -1) != self._gen:
+            c = None  # stängd av close_all()
         if c is None:
             c = sqlite3.connect(str(self.path), timeout=30, isolation_level=None,
                                 check_same_thread=False)
@@ -70,13 +75,32 @@ class Database:
             c.execute("PRAGMA busy_timeout = 30000")
             c.execute("PRAGMA synchronous = NORMAL")
             self._local.conn = c
+            self._local.gen = self._gen
+            with self._conns_lock:
+                self._conns.append(c)
         return c
 
     def close(self) -> None:
+        """Stäng den här trådens anslutning."""
         c = getattr(self._local, "conn", None)
         if c is not None:
             c.close()
             self._local.conn = None
+            with self._conns_lock:
+                if c in self._conns:
+                    self._conns.remove(c)
+
+    def close_all(self) -> None:
+        """Stäng alla trådars anslutningar (krävs i Windows innan databasfilen kan ersättas)."""
+        with self.write_lock, self._conns_lock:
+            for c in self._conns:
+                try:
+                    c.close()
+                except sqlite3.Error:
+                    pass
+            self._conns.clear()
+            self._gen += 1
+        self._local.conn = None
 
     @contextmanager
     def tx(self) -> Iterator[sqlite3.Connection]:
@@ -155,8 +179,11 @@ class Database:
         safe = re.sub(r"[^a-zA-Z0-9_.-]+", "-", reason)[:60]
         target = dest or self.backups_dir / f"matchiq-{stamp}-{safe}.sqlite"
         src = self.conn()
-        with sqlite3.connect(str(target)) as dst:
+        dst = sqlite3.connect(str(target))
+        try:
             src.backup(dst)
+        finally:
+            dst.close()  # stäng uttryckligen – annars är filen låst i Windows tills skräpsamlingen körs
         return target
 
     # -- export/import ----------------------------------------------------------
@@ -232,9 +259,10 @@ class Database:
             data = z.read("matchiq.sqlite")
         tmp = self.path.with_suffix(".incoming")
         tmp.write_bytes(data)
+        self.close_all()
         for suffix in ("-wal", "-shm"):
             Path(str(self.path) + suffix).unlink(missing_ok=True)
-        shutil.move(str(tmp), str(self.path))
+        os.replace(tmp, self.path)
         applied = self.migrate()  # migrera framåt till appens schemaversion
         return {"manifest": manifest, "backup": str(backup), "migrations_applied": applied}
 

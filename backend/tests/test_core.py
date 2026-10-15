@@ -126,9 +126,18 @@ class DbTests(unittest.TestCase):
         self.assertEqual(manifest["tables"]["matches"]["rows"], n)
         Database.verify_bundle(out)
         app2, _, _ = make_app()
+        # en anslutning i en annan tråd (som API-servern) måste stängas före ersättningen och öppnas på nytt efteråt
+        import threading
+        seen: list[int] = []
+        t = threading.Thread(target=lambda: seen.append(app2.db.scalar("SELECT COUNT(*) FROM matches")))
+        t.start(); t.join()
         res = app2.db.import_bundle(out)
         self.assertEqual(app2.db.scalar("SELECT COUNT(*) FROM matches"), n)
         self.assertTrue(res["backup"])
+        self.assertFalse(out.with_suffix(".tmp.sqlite").exists())
+        t = threading.Thread(target=lambda: seen.append(app2.db.scalar("SELECT COUNT(*) FROM matches")))
+        t.start(); t.join()
+        self.assertEqual(seen, [0, n])
 
     def test_backup_before_migration(self):
         db = Database(self.tmp / "other.sqlite", self.tmp / "bk")
