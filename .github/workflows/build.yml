@@ -189,9 +189,18 @@ jobs:
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
+          set -o pipefail
           if [ -z "$CSC_LINK" ]; then export CSC_IDENTITY_AUTO_DISCOVERY=false; fi
-          npm run build
-          npx electron-builder ${{ matrix.target }} --publish never
+          # Electron ligger i arbetsytans gemensamma node_modules (npm workspaces). electron-builder letar bara i
+          # apps/desktop/node_modules och kan inte läsa en version som "^38", så den installerade versionen anges.
+          ELECTRON_VERSION=$(node -p "require('electron/package.json').version")
+          echo "Electron $ELECTRON_VERSION"
+          { npm run build && npx electron-builder ${{ matrix.target }} --publish never \
+              -c.electronVersion="$ELECTRON_VERSION"; } 2>&1 | tee "$RUNNER_TEMP/builder-output.txt"
+      - name: Visa byggfel som anteckningar
+        if: failure()
+        shell: bash
+        run: python scripts/ci_annotate.py "$RUNNER_TEMP/builder-output.txt" "Installationspaket (${{ matrix.name }})"
       - name: Ad hoc-signering (macOS utan certifikat)
         # Apple Silicon kräver en signatur för att appen ska starta. Utan Developer ID-certifikat signeras appen
         # ad hoc och dmg/zip byggs om. Gatekeeper kräver då "Öppna ändå" första gången (se README).
