@@ -1,0 +1,45 @@
+name: Datakällor – inventering och nedladdning
+
+# Körs i GitHub Actions eftersom runnern har internetåtkomst. Rapporterna (bara räknade siffror, inga
+# rådata från licensierade källor) publiceras på grenen "datarapport".
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/inventera_kallor.py"
+      - "scripts/hamta_oppen_data.py"
+      - "scripts/publicera_rapport.sh"
+      - ".github/workflows/data.yml"
+      - "backend/matchiq/sources/**"
+      - "backend/matchiq/linking.py"
+  schedule:
+    - cron: "17 4 * * 1"   # måndagar 04:17 UTC – ny inventering varje vecka
+
+permissions:
+  contents: write
+
+concurrency:
+  group: datarapport
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  inventering:
+    name: Inventera öppna källor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r backend/requirements.txt
+      - name: Inventera OpenFootball, StatsBomb Open Data och Wyscout/figshare
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONIOENCODING: utf-8
+        run: python scripts/inventera_kallor.py --out rapport
+      - name: Publicera rapport
+        run: bash scripts/publicera_rapport.sh rapport "Källinventering"
