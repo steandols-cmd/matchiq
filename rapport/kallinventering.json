@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-15T15:06:40Z",
+ "generated_utc": "2026-10-19T09:55:02Z",
  "openfootball": {
   "repos": {
    "clubs": {
@@ -1630,148 +1630,140 @@
     "competition": "SWE1?"
    },
    {
-    "date": "2026-10-16",
+    "date": "2026-10-26",
+    "time": null,
+    "home": "AIK Solna",
+    "away": "BK Häcken",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-26",
+    "time": null,
+    "home": "Djurgårdens IF",
+    "away": "IFK Värnamo",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-26",
+    "time": null,
+    "home": "IF Brommapojkarna",
+    "away": "GAIS Göteborg",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-26",
+    "time": null,
+    "home": "Östers IF",
+    "away": "Degerfors IF",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-26",
+    "time": null,
+    "home": "Malmö FF",
+    "away": "Hammarby IF",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-26",
+    "time": null,
+    "home": "Mjällby AIF",
+    "away": "IFK Norrköping",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-26",
+    "time": null,
+    "home": "IK Sirius",
+    "away": "IF Elfsborg",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-26",
+    "time": null,
+    "home": "Halmstads BK",
+    "away": "IFK Göteborg",
+    "round": "Matchday 28",
+    "competition": "SWE1?"
+   },
+   {
+    "date": "2026-10-23",
     "time": "20:30",
-    "home": "Eintracht Frankfurt",
-    "away": "1. FC Köln",
-    "round": "Matchday 6",
+    "home": "VfB Stuttgart",
+    "away": "Borussia Mönchengladbach",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
     "time": "15:30",
-    "home": "1. FC Union Berlin",
-    "away": "Borussia Dortmund",
-    "round": "Matchday 6",
+    "home": "1. FSV Mainz 05",
+    "away": "SV Werder Bremen",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
     "time": "15:30",
-    "home": "Hamburger SV",
-    "away": "VfB Stuttgart",
-    "round": "Matchday 6",
+    "home": "1. FC Köln",
+    "away": "FC Schalke 04",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
     "time": "15:30",
-    "home": "SV Werder Bremen",
-    "away": "SC Paderborn 07",
-    "round": "Matchday 6",
+    "home": "RB Leipzig",
+    "away": "SV 07 Elversberg",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
     "time": "15:30",
-    "home": "SV 07 Elversberg",
-    "away": "FC Augsburg",
-    "round": "Matchday 6",
+    "home": "SC Paderborn 07",
+    "away": "Hamburger SV",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
     "time": "15:30",
-    "home": "FC Schalke 04",
-    "away": "1. FSV Mainz 05",
-    "round": "Matchday 6",
+    "home": "FC Augsburg",
+    "away": "1. FC Union Berlin",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
     "time": "18:30",
-    "home": "FC Bayern München",
-    "away": "RB Leipzig",
-    "round": "Matchday 6",
+    "home": "Borussia Dortmund",
+    "away": "Eintracht Frankfurt",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-18",
+    "date": "2026-10-25",
     "time": "15:30",
-    "home": "Bayer 04 Leverkusen",
-    "away": "SC Freiburg",
-    "round": "Matchday 6",
+    "home": "TSG 1899 Hoffenheim",
+    "away": "Bayer 04 Leverkusen",
+    "round": "Matchday 7",
     "competition": "GER1"
    },
    {
-    "date": "2026-10-18",
+    "date": "2026-10-25",
     "time": "17:30",
-    "home": "Borussia Mönchengladbach",
-    "away": "TSG 1899 Hoffenheim",
-    "round": "Matchday 6",
+    "home": "SC Freiburg",
+    "away": "FC Bayern München",
+    "round": "Matchday 7",
     "competition": "GER1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "12:30",
-    "home": "Everton FC",
-    "away": "Chelsea FC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "15:00",
-    "home": "Fulham FC",
-    "away": "Hull City AFC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "15:00",
-    "home": "Manchester City FC",
-    "away": "Ipswich Town FC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "15:00",
-    "home": "Brentford FC",
-    "away": "Liverpool FC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "17:30",
-    "home": "Newcastle United FC",
-    "away": "Aston Villa FC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "14:00",
-    "home": "AFC Bournemouth",
-    "away": "Sunderland AFC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "14:00",
-    "home": "Leeds United FC",
-    "away": "Manchester United FC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "14:00",
-    "home": "Brighton & Hove Albion FC",
-    "away": "Crystal Palace FC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "16:30",
-    "home": "Nottingham Forest FC",
-    "away": "Arsenal FC",
-    "round": "Matchday 7",
-    "competition": "ENG1"
    },
    {
     "date": "2026-10-19",
@@ -1782,76 +1774,84 @@
     "competition": "ENG1"
    },
    {
-    "date": "2026-10-16",
-    "time": "21:00",
-    "home": "RC Deportivo La Coruña",
-    "away": "Levante UD",
-    "round": "Matchday 9",
-    "competition": "ESP1"
+    "date": "2026-10-23",
+    "time": "20:00",
+    "home": "Ipswich Town FC",
+    "away": "Nottingham Forest FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
+    "time": "12:30",
+    "home": "Aston Villa FC",
+    "away": "Manchester City FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
+   },
+   {
+    "date": "2026-10-24",
+    "time": "15:00",
+    "home": "Arsenal FC",
+    "away": "Everton FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
+   },
+   {
+    "date": "2026-10-24",
+    "time": "15:00",
+    "home": "Coventry City FC",
+    "away": "Fulham FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
+   },
+   {
+    "date": "2026-10-24",
+    "time": "17:30",
+    "home": "Chelsea FC",
+    "away": "Tottenham Hotspur FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
+   },
+   {
+    "date": "2026-10-25",
     "time": "14:00",
-    "home": "RCD Espanyol de Barcelona",
-    "away": "Club Atlético de Madrid",
-    "round": "Matchday 9",
-    "competition": "ESP1"
+    "home": "Liverpool FC",
+    "away": "Brighton & Hove Albion FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
    },
    {
-    "date": "2026-10-17",
-    "time": "16:15",
-    "home": "Villarreal CF",
-    "away": "Elche CF",
-    "round": "Matchday 9",
-    "competition": "ESP1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "18:30",
-    "home": "Real Betis Balompié",
-    "away": "FC Barcelona",
-    "round": "Matchday 9",
-    "competition": "ESP1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "21:00",
-    "home": "Valencia CF",
-    "away": "Athletic Club",
-    "round": "Matchday 9",
-    "competition": "ESP1"
-   },
-   {
-    "date": "2026-10-18",
+    "date": "2026-10-25",
     "time": "14:00",
-    "home": "CA Osasuna",
-    "away": "Real Racing Club de Santander",
-    "round": "Matchday 9",
-    "competition": "ESP1"
+    "home": "Crystal Palace FC",
+    "away": "Newcastle United FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
    },
    {
-    "date": "2026-10-18",
-    "time": "16:15",
-    "home": "RC Celta de Vigo",
-    "away": "Deportivo Alavés",
-    "round": "Matchday 9",
-    "competition": "ESP1"
+    "date": "2026-10-25",
+    "time": "14:00",
+    "home": "Manchester United FC",
+    "away": "AFC Bournemouth",
+    "round": "Matchday 8",
+    "competition": "ENG1"
    },
    {
-    "date": "2026-10-18",
-    "time": "18:30",
-    "home": "Málaga CF",
-    "away": "Real Sociedad de Fútbol",
-    "round": "Matchday 9",
-    "competition": "ESP1"
+    "date": "2026-10-25",
+    "time": "14:00",
+    "home": "Hull City AFC",
+    "away": "Brentford FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
    },
    {
-    "date": "2026-10-18",
-    "time": "21:00",
-    "home": "Real Madrid CF",
-    "away": "Sevilla FC",
-    "round": "Matchday 9",
-    "competition": "ESP1"
+    "date": "2026-10-25",
+    "time": "16:30",
+    "home": "Sunderland AFC",
+    "away": "Leeds United FC",
+    "round": "Matchday 8",
+    "competition": "ENG1"
    },
    {
     "date": "2026-10-19",
@@ -1870,140 +1870,156 @@
     "competition": "ESP1"
    },
    {
-    "date": "2026-10-16",
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Rayo Vallecano de Madrid",
+    "away": "Elche CF",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Deportivo Alavés",
+    "away": "Málaga CF",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Athletic Club",
+    "away": "Getafe CF",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Sevilla FC",
+    "away": "CA Osasuna",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Valencia CF",
+    "away": "Villarreal CF",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "FC Barcelona",
+    "away": "Real Madrid CF",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Club Atlético de Madrid",
+    "away": "RC Deportivo La Coruña",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "RC Celta de Vigo",
+    "away": "Real Betis Balompié",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Real Sociedad de Fútbol",
+    "away": "Levante UD",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": null,
+    "home": "Real Racing Club de Santander",
+    "away": "RCD Espanyol de Barcelona",
+    "round": "Matchday 10",
+    "competition": "ESP1"
+   },
+   {
+    "date": "2026-10-23",
     "time": "20:45",
-    "home": "Le Mans FC",
-    "away": "Toulouse FC",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "17:15",
-    "home": "RC Strasbourg Alsace",
-    "away": "Paris Saint-Germain FC",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "20:45",
-    "home": "ES Troyes AC",
-    "away": "Racing Club de Lens",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-17",
-    "time": "20:45",
-    "home": "Lille OSC",
-    "away": "Stade Brestois 29",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "15:00",
-    "home": "Angers SCO",
-    "away": "Olympique de Marseille",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "17:15",
-    "home": "FC Lorient",
-    "away": "AS Monaco FC",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "17:15",
-    "home": "Paris FC",
-    "away": "Stade Rennais FC 1901",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "17:15",
-    "home": "Le Havre AC",
-    "away": "AJ Auxerre",
-    "round": "Matchday 7",
-    "competition": "FRA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "20:45",
-    "home": "Olympique Lyonnais",
+    "home": "Stade Brestois 29",
     "away": "OGC Nice",
-    "round": "Matchday 7",
+    "round": "Matchday 8",
     "competition": "FRA1"
    },
    {
-    "date": "2026-10-16",
-    "time": "20:45",
-    "home": "Frosinone Calcio",
-    "away": "US Sassuolo Calcio",
-    "round": "Matchday 7",
-    "competition": "ITA1"
+    "date": "2026-10-24",
+    "time": "17:15",
+    "home": "Toulouse FC",
+    "away": "ES Troyes AC",
+    "round": "Matchday 8",
+    "competition": "FRA1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-24",
+    "time": "20:45",
+    "home": "Racing Club de Lens",
+    "away": "Paris FC",
+    "round": "Matchday 8",
+    "competition": "FRA1"
+   },
+   {
+    "date": "2026-10-25",
     "time": "15:00",
-    "home": "Venezia FC",
-    "away": "SSC Napoli",
-    "round": "Matchday 7",
-    "competition": "ITA1"
+    "home": "AS Monaco FC",
+    "away": "Lille OSC",
+    "round": "Matchday 8",
+    "competition": "FRA1"
    },
    {
-    "date": "2026-10-17",
-    "time": "18:00",
-    "home": "Bologna FC 1909",
-    "away": "FC Internazionale Milano",
-    "round": "Matchday 7",
-    "competition": "ITA1"
+    "date": "2026-10-25",
+    "time": "17:15",
+    "home": "Olympique de Marseille",
+    "away": "Le Havre AC",
+    "round": "Matchday 8",
+    "competition": "FRA1"
    },
    {
-    "date": "2026-10-17",
+    "date": "2026-10-25",
+    "time": "17:15",
+    "home": "Stade Rennais FC 1901",
+    "away": "RC Strasbourg Alsace",
+    "round": "Matchday 8",
+    "competition": "FRA1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": "17:15",
+    "home": "Angers SCO",
+    "away": "FC Lorient",
+    "round": "Matchday 8",
+    "competition": "FRA1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": "17:15",
+    "home": "AJ Auxerre",
+    "away": "Le Mans FC",
+    "round": "Matchday 8",
+    "competition": "FRA1"
+   },
+   {
+    "date": "2026-10-25",
     "time": "20:45",
-    "home": "AS Roma",
-    "away": "Genoa CFC",
-    "round": "Matchday 7",
-    "competition": "ITA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "12:30",
-    "home": "Udinese Calcio",
-    "away": "US Lecce",
-    "round": "Matchday 7",
-    "competition": "ITA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "15:00",
-    "home": "ACF Fiorentina",
-    "away": "Como 1907",
-    "round": "Matchday 7",
-    "competition": "ITA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "18:00",
-    "home": "AC Milan",
-    "away": "Atalanta BC",
-    "round": "Matchday 7",
-    "competition": "ITA1"
-   },
-   {
-    "date": "2026-10-18",
-    "time": "20:45",
-    "home": "Juventus FC",
-    "away": "SS Lazio",
-    "round": "Matchday 7",
-    "competition": "ITA1"
+    "home": "Paris Saint-Germain FC",
+    "away": "Olympique Lyonnais",
+    "round": "Matchday 8",
+    "competition": "FRA1"
    },
    {
     "date": "2026-10-19",
@@ -2019,6 +2035,86 @@
     "home": "Parma Calcio 1913",
     "away": "Torino FC",
     "round": "Matchday 7",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-23",
+    "time": "20:45",
+    "home": "Torino FC",
+    "away": "AC Monza",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-24",
+    "time": "15:00",
+    "home": "Cagliari Calcio",
+    "away": "Bologna FC 1909",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-24",
+    "time": "15:00",
+    "home": "Como 1907",
+    "away": "US Sassuolo Calcio",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-24",
+    "time": "18:00",
+    "home": "SSC Napoli",
+    "away": "AS Roma",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-24",
+    "time": "20:45",
+    "home": "SS Lazio",
+    "away": "Parma Calcio 1913",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": "12:30",
+    "home": "FC Internazionale Milano",
+    "away": "ACF Fiorentina",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": "15:00",
+    "home": "Atalanta BC",
+    "away": "Frosinone Calcio",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": "15:00",
+    "home": "Genoa CFC",
+    "away": "Venezia FC",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": "18:00",
+    "home": "US Lecce",
+    "away": "Juventus FC",
+    "round": "Matchday 8",
+    "competition": "ITA1"
+   },
+   {
+    "date": "2026-10-25",
+    "time": "20:45",
+    "home": "Udinese Calcio",
+    "away": "AC Milan",
+    "round": "Matchday 8",
     "competition": "ITA1"
    }
   ]
