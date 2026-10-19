@@ -1,4 +1,4 @@
-# Hämtad data – oppen_data (2026-10-15T15:11:10Z)
+# Hämtad data – oppen_data (2026-10-19T09:59:40Z)
 
 Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i GitHub Actions.
 
@@ -7,7 +7,7 @@ Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i G
 | Källa | Status | Tid (s) | Resultat |
 |---|---|---|---|
 | openfootball | ok | 202 | {"files_in_scope": 96, "inserted": 30225, "updated": 0, "unchanged": 0, "skipped": 0, "files_imported": 96} |
-| wyscout_public | ok | 37 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
+| wyscout_public | ok | 42 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
 
 Händelsetyper i wyscout_public (topp 40):
 
