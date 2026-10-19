@@ -1,6 +1,6 @@
 {
  "name": "statsbomb",
- "finished_utc": "2026-10-15T14:08:02Z",
+ "finished_utc": "2026-10-19T10:38:09Z",
  "runs": [
   {
    "source": "openfootball",
@@ -14,7 +14,7 @@
     "skipped": 0,
     "files_imported": 96
    },
-   "next_run_utc": "2026-10-16T01:32:00Z",
+   "next_run_utc": "2026-10-19T13:03:56Z",
    "seconds": 202
   },
   {
@@ -73,8 +73,8 @@
      "Foul / Violent Foul": 74
     }
    },
-   "next_run_utc": "2026-10-16T01:32:49Z",
-   "seconds": 49
+   "next_run_utc": "2026-10-19T13:04:48Z",
+   "seconds": 52
   },
   {
    "source": "statsbomb_open",
@@ -83,19 +83,19 @@
    "result": {
     "teams_linked": 119,
     "matches_todo": 2187,
-    "match_updated": 1672,
-    "events_imported": 1954,
+    "match_updated": 1671,
+    "events_imported": 1953,
     "match_inserted": 283
    },
-   "next_run_utc": "2026-10-16T02:08:02Z",
-   "seconds": 2112
+   "next_run_utc": "2026-10-19T13:38:09Z",
+   "seconds": 2001
   }
  ],
  "operational": {
   "max_age_days": 450,
   "operative_min": 100,
   "limited_min": 20,
-  "as_of_utc": "2026-10-15T14:08:02Z",
+  "as_of_utc": "2026-10-19T10:38:09Z",
   "competitions": [
    {
     "competition": "UCL",
@@ -463,7 +463,7 @@
       "by_source": {
        "OpenFootball (football.json, champions-league, europe m.fl.)": 4944,
        "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
-       "StatsBomb Open Data (Hudl)": 148
+       "StatsBomb Open Data (Hudl)": 147
       }
      },
      "corners": {
@@ -480,7 +480,7 @@
       "last_any": "2018-05-20T18:45:00Z",
       "by_source": {
        "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
-       "StatsBomb Open Data (Hudl)": 148
+       "StatsBomb Open Data (Hudl)": 147
       }
      },
      "shots": {
@@ -497,7 +497,7 @@
       "last_any": "2018-05-20T18:45:00Z",
       "by_source": {
        "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
-       "StatsBomb Open Data (Hudl)": 148
+       "StatsBomb Open Data (Hudl)": 147
       }
      },
      "sot": {
@@ -514,7 +514,7 @@
       "last_any": "2018-05-20T18:45:00Z",
       "by_source": {
        "Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare)": 380,
-       "StatsBomb Open Data (Hudl)": 148
+       "StatsBomb Open Data (Hudl)": 147
       }
      }
     }
@@ -1892,22 +1892,22 @@
    "last": "2016-05-15",
    "results": {
     "openfootball": 380,
-    "statsbomb_open": 148
+    "statsbomb_open": 147
    },
    "corners": {
-    "statsbomb_open": 148
+    "statsbomb_open": 147
    },
    "shots": {
-    "statsbomb_open": 148
+    "statsbomb_open": 147
    },
    "sot": {
-    "statsbomb_open": 148
+    "statsbomb_open": 147
    },
    "players": {
     "statsbomb_open": {
-     "matches": 148,
+     "matches": 147,
      "players": 521,
-     "rows": 4124
+     "rows": 4096
     }
    }
   },
@@ -2842,7 +2842,7 @@
   "statsbomb_open": {
    "n": 2000,
    "failed": 0,
-   "bytes": 6031887889
+   "bytes": 6029056819
   },
   "wyscout_public": {
    "n": 19,
