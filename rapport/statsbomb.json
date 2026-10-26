@@ -1,6 +1,6 @@
 {
  "name": "statsbomb",
- "finished_utc": "2026-10-19T10:38:09Z",
+ "finished_utc": "2026-10-26T10:52:30Z",
  "runs": [
   {
    "source": "openfootball",
@@ -14,7 +14,7 @@
     "skipped": 0,
     "files_imported": 96
    },
-   "next_run_utc": "2026-10-19T13:03:56Z",
+   "next_run_utc": "2026-10-26T22:18:13Z",
    "seconds": 202
   },
   {
@@ -73,8 +73,8 @@
      "Foul / Violent Foul": 74
     }
    },
-   "next_run_utc": "2026-10-19T13:04:48Z",
-   "seconds": 52
+   "next_run_utc": "2026-10-26T22:19:02Z",
+   "seconds": 49
   },
   {
    "source": "statsbomb_open",
@@ -87,15 +87,15 @@
     "events_imported": 1953,
     "match_inserted": 283
    },
-   "next_run_utc": "2026-10-19T13:38:09Z",
-   "seconds": 2001
+   "next_run_utc": "2026-10-26T22:52:30Z",
+   "seconds": 2008
   }
  ],
  "operational": {
   "max_age_days": 450,
   "operative_min": 100,
   "limited_min": 20,
-  "as_of_utc": "2026-10-19T10:38:09Z",
+  "as_of_utc": "2026-10-26T10:52:30Z",
   "competitions": [
    {
     "competition": "UCL",

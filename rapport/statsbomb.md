@@ -1,4 +1,4 @@
-# Hämtad data – statsbomb (2026-10-19T10:38:09Z)
+# Hämtad data – statsbomb (2026-10-26T10:52:30Z)
 
 Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i GitHub Actions.
 
@@ -7,8 +7,8 @@ Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i G
 | Källa | Status | Tid (s) | Resultat |
 |---|---|---|---|
 | openfootball | ok | 202 | {"files_in_scope": 96, "inserted": 30225, "updated": 0, "unchanged": 0, "skipped": 0, "files_imported": 96} |
-| wyscout_public | ok | 52 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
-| statsbomb_open | blocked – Dygnskvoten för StatsBomb Open Data (Hudl) (2000 anrop) är förbrukad – hämtningen fortsätter automatiskt nästa dygn. | 2001 | {"teams_linked": 119, "matches_todo": 2187, "match_updated": 1671, "events_imported": 1953, "match_inserted": 283} |
+| wyscout_public | ok | 49 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
+| statsbomb_open | blocked – Dygnskvoten för StatsBomb Open Data (Hudl) (2000 anrop) är förbrukad – hämtningen fortsätter automatiskt nästa dygn. | 2008 | {"teams_linked": 119, "matches_todo": 2187, "match_updated": 1671, "events_imported": 1953, "match_inserted": 283} |
 
 Händelsetyper i wyscout_public (topp 40):
 
