@@ -1,4 +1,4 @@
-# Hämtad data – statsbomb (2026-11-02T13:08:33Z)
+# Hämtad data – statsbomb (2026-11-09T13:37:56Z)
 
 Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i GitHub Actions.
 
@@ -6,9 +6,9 @@ Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i G
 
 | Källa | Status | Tid (s) | Resultat |
 |---|---|---|---|
-| openfootball | ok | 202 | {"files_in_scope": 96, "inserted": 30225, "updated": 0, "unchanged": 0, "skipped": 0, "files_imported": 96} |
-| wyscout_public | ok | 49 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
-| statsbomb_open | blocked – Dygnskvoten för StatsBomb Open Data (Hudl) (2000 anrop) är förbrukad – hämtningen fortsätter automatiskt nästa dygn. | 2000 | {"teams_linked": 119, "matches_todo": 2187, "match_updated": 1671, "events_imported": 1953, "match_inserted": 283} |
+| openfootball | ok | 238 | {"files_in_scope": 96, "inserted": 30225, "updated": 0, "unchanged": 0, "skipped": 0, "files_imported": 96} |
+| wyscout_public | ok | 46 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
+| statsbomb_open | blocked – Dygnskvoten för StatsBomb Open Data (Hudl) (2000 anrop) är förbrukad – hämtningen fortsätter automatiskt nästa dygn. | 2076 | {"teams_linked": 119, "matches_todo": 2187, "match_updated": 1671, "events_imported": 1953, "match_inserted": 283} |
 
 Händelsetyper i wyscout_public (topp 40):
 
@@ -63,11 +63,11 @@ Fönster: 450 dagar. Operativ = minst 100 matcher med värde från en källa som
 | SWE1 | Hörnor | saknas | 0 | 0 | – | – |
 | SWE1 | Skott | saknas | 0 | 0 | – | – |
 | SWE1 | Skott på mål | saknas | 0 | 0 | – | – |
-| ENG1 | Mål / 1X2 | operativ | 398 | 6098 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 6098, StatsBomb Open Data (Hudl): 418, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
+| ENG1 | Mål / 1X2 | operativ | 397 | 6098 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 6098, StatsBomb Open Data (Hudl): 418, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ENG1 | Hörnor | inaktuell | 0 | 380 | 2018-05-13 | StatsBomb Open Data (Hudl): 418, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ENG1 | Skott | inaktuell | 0 | 380 | 2018-05-13 | StatsBomb Open Data (Hudl): 418, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ENG1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-13 | StatsBomb Open Data (Hudl): 418, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
-| ESP1 | Mål / 1X2 | operativ | 429 | 5359 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 5359, StatsBomb Open Data (Hudl): 867, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
+| ESP1 | Mål / 1X2 | operativ | 427 | 5359 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 5359, StatsBomb Open Data (Hudl): 867, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ESP1 | Hörnor | inaktuell | 0 | 380 | 2018-05-20 | StatsBomb Open Data (Hudl): 867, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ESP1 | Skott | inaktuell | 0 | 380 | 2018-05-20 | StatsBomb Open Data (Hudl): 867, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ESP1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-20 | StatsBomb Open Data (Hudl): 867, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
@@ -79,7 +79,7 @@ Fönster: 450 dagar. Operativ = minst 100 matcher med värde från en källa som
 | ITA1 | Hörnor | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380, StatsBomb Open Data (Hudl): 147 |
 | ITA1 | Skott | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380, StatsBomb Open Data (Hudl): 147 |
 | ITA1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380, StatsBomb Open Data (Hudl): 147 |
-| FRA1 | Mål / 1X2 | operativ | 323 | 4254 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 4254, StatsBomb Open Data (Hudl): 435, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
+| FRA1 | Mål / 1X2 | operativ | 322 | 4254 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 4254, StatsBomb Open Data (Hudl): 435, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | FRA1 | Hörnor | inaktuell | 0 | 380 | 2018-05-19 | StatsBomb Open Data (Hudl): 435, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | FRA1 | Skott | inaktuell | 0 | 380 | 2018-05-19 | StatsBomb Open Data (Hudl): 435, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | FRA1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-19 | StatsBomb Open Data (Hudl): 435, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
