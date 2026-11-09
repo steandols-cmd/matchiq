@@ -1,4 +1,4 @@
-# Hämtad data – oppen_data (2026-11-02T12:30:09Z)
+# Hämtad data – oppen_data (2026-11-09T12:57:45Z)
 
 Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i GitHub Actions.
 
@@ -7,7 +7,7 @@ Siffrorna är räknade ur databasen som byggdes av appens egna källadaptrar i G
 | Källa | Status | Tid (s) | Resultat |
 |---|---|---|---|
 | openfootball | ok | 202 | {"files_in_scope": 96, "inserted": 30225, "updated": 0, "unchanged": 0, "skipped": 0, "files_imported": 96} |
-| wyscout_public | ok | 42 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
+| wyscout_public | ok | 43 | {"matches_in_source": 1826, "teams_linked_ENG1": 20, "teams_unlinked": 0, "link_conflicts": 0, "teams_linked_FRA1": 20, "teams_linked_GER1": 18, "teams_linked_ITA1": 20, "teams_linked_ESP1": 20, "match_unchanged": 1803, "match_updated": 23, "teamstats_inserted": 3652, "lineups": 3652} |
 
 Händelsetyper i wyscout_public (topp 40):
 
@@ -62,11 +62,11 @@ Fönster: 450 dagar. Operativ = minst 100 matcher med värde från en källa som
 | SWE1 | Hörnor | saknas | 0 | 0 | – | – |
 | SWE1 | Skott | saknas | 0 | 0 | – | – |
 | SWE1 | Skott på mål | saknas | 0 | 0 | – | – |
-| ENG1 | Mål / 1X2 | operativ | 398 | 6098 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 6098, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
+| ENG1 | Mål / 1X2 | operativ | 397 | 6098 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 6098, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ENG1 | Hörnor | inaktuell | 0 | 380 | 2018-05-13 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ENG1 | Skott | inaktuell | 0 | 380 | 2018-05-13 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ENG1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-13 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
-| ESP1 | Mål / 1X2 | operativ | 429 | 5359 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 5359, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
+| ESP1 | Mål / 1X2 | operativ | 427 | 5359 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 5359, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ESP1 | Hörnor | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ESP1 | Skott | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ESP1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
@@ -78,7 +78,7 @@ Fönster: 450 dagar. Operativ = minst 100 matcher med värde från en källa som
 | ITA1 | Hörnor | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ITA1 | Skott | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | ITA1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-20 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
-| FRA1 | Mål / 1X2 | operativ | 323 | 4254 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 4254, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
+| FRA1 | Mål / 1X2 | operativ | 322 | 4254 | 2026-09-20 | OpenFootball (football.json, champions-league, europe m.fl.): 4254, Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | FRA1 | Hörnor | inaktuell | 0 | 380 | 2018-05-19 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | FRA1 | Skott | inaktuell | 0 | 380 | 2018-05-19 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |
 | FRA1 | Skott på mål | inaktuell | 0 | 380 | 2018-05-19 | Wyscout öppna händelsedata (Pappalardo m.fl. 2019, figshare): 380 |

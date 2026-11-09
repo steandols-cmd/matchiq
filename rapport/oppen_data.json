@@ -1,6 +1,6 @@
 {
  "name": "oppen_data",
- "finished_utc": "2026-11-02T12:30:09Z",
+ "finished_utc": "2026-11-09T12:57:45Z",
  "runs": [
   {
    "source": "openfootball",
@@ -14,7 +14,7 @@
     "skipped": 0,
     "files_imported": 96
    },
-   "next_run_utc": "2026-11-02T15:29:27Z",
+   "next_run_utc": "2026-11-10T12:57:02Z",
    "seconds": 202
   },
   {
@@ -73,15 +73,15 @@
      "Foul / Violent Foul": 74
     }
    },
-   "next_run_utc": "2026-11-02T15:30:09Z",
-   "seconds": 42
+   "next_run_utc": "2026-11-10T12:57:45Z",
+   "seconds": 43
   }
  ],
  "operational": {
   "max_age_days": 450,
   "operative_min": 100,
   "limited_min": 20,
-  "as_of_utc": "2026-11-02T12:30:09Z",
+  "as_of_utc": "2026-11-09T12:57:45Z",
   "competitions": [
    {
     "competition": "UCL",
@@ -216,10 +216,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "398 matcher med värde de senaste 450 dagarna.",
+      "reason": "397 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 398,
-      "recent_any": 398,
+      "recent_allowed": 397,
+      "recent_any": 397,
       "total_allowed": 6098,
       "last_allowed": "2026-09-20T15:30:00Z",
       "last_any": "2026-09-20T15:30:00Z",
@@ -284,10 +284,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "429 matcher med värde de senaste 450 dagarna.",
+      "reason": "427 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 429,
-      "recent_any": 429,
+      "recent_allowed": 427,
+      "recent_any": 427,
       "total_allowed": 5359,
       "last_allowed": "2026-09-20T19:00:00Z",
       "last_any": "2026-09-20T19:00:00Z",
@@ -488,10 +488,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "323 matcher med värde de senaste 450 dagarna.",
+      "reason": "322 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 323,
-      "recent_any": 323,
+      "recent_allowed": 322,
+      "recent_any": 322,
       "total_allowed": 4254,
       "last_allowed": "2026-09-20T18:45:00Z",
       "last_any": "2026-09-20T18:45:00Z",
