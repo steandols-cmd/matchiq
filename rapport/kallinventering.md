@@ -1,4 +1,4 @@
-# Källinventering (2026-11-02T12:25:36Z)
+# Källinventering (2026-11-09T12:53:11Z)
 
 Allt nedan är räknat ur källornas egna filer av `scripts/inventera_kallor.py` i GitHub Actions.
 
@@ -107,69 +107,10 @@ Allt nedan är räknat ur källornas egna filer av `scripts/inventera_kallor.py`
 
 Repon i organisationen: 36. Fel: inga
 
-### Matcher idag och kommande 7 dagar enligt OpenFootball (67 st)
+### Matcher idag och kommande 7 dagar enligt OpenFootball (8 st)
 
 | Datum | Tid (lokal) | Tävling | Hemma | Borta | Omgång |
 |---|---|---|---|---|---|
-| 2026-11-02 | – | SWE1? | Djurgårdens IF | IFK Göteborg | Matchday 29 |
-| 2026-11-02 | – | SWE1? | IF Elfsborg | AIK Solna | Matchday 29 |
-| 2026-11-02 | – | SWE1? | GAIS Göteborg | Östers IF | Matchday 29 |
-| 2026-11-02 | – | SWE1? | BK Häcken | Malmö FF | Matchday 29 |
-| 2026-11-02 | – | SWE1? | IFK Norrköping | IK Sirius | Matchday 29 |
-| 2026-11-02 | – | SWE1? | Halmstads BK | IF Brommapojkarna | Matchday 29 |
-| 2026-11-02 | – | SWE1? | Degerfors IF | Hammarby IF | Matchday 29 |
-| 2026-11-02 | – | SWE1? | IFK Värnamo | Mjällby AIF | Matchday 29 |
-| 2026-11-02 | 18:30 | ITA1 | US Sassuolo Calcio | ACF Fiorentina | Matchday 10 |
-| 2026-11-02 | 20:00 | ENG1 | Newcastle United FC | Everton FC | Matchday 9 |
-| 2026-11-02 | 20:45 | ITA1 | Atalanta BC | Parma Calcio 1913 | Matchday 10 |
-| 2026-11-06 | 20:30 | GER1 | Hamburger SV | Borussia Mönchengladbach | Matchday 9 |
-| 2026-11-06 | 20:45 | FRA1 | Toulouse FC | RC Strasbourg Alsace | Matchday 10 |
-| 2026-11-06 | 20:45 | ITA1 | Venezia FC | Udinese Calcio | Matchday 11 |
-| 2026-11-07 | 15:00 | ENG1 | Arsenal FC | Hull City AFC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Nottingham Forest FC | Manchester City FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Leeds United FC | Tottenham Hotspur FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Fulham FC | Newcastle United FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Everton FC | Coventry City FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Crystal Palace FC | Liverpool FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Sunderland AFC | Chelsea FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Ipswich Town FC | AFC Bournemouth | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Brighton & Hove Albion FC | Brentford FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ENG1 | Manchester United FC | Aston Villa FC | Matchday 10 |
-| 2026-11-07 | 15:00 | ITA1 | Torino FC | US Lecce | Matchday 11 |
-| 2026-11-07 | 15:00 | ITA1 | Cagliari Calcio | Frosinone Calcio | Matchday 11 |
-| 2026-11-07 | 15:30 | GER1 | RB Leipzig | FC Augsburg | Matchday 9 |
-| 2026-11-07 | 15:30 | GER1 | Borussia Dortmund | SV 07 Elversberg | Matchday 9 |
-| 2026-11-07 | 15:30 | GER1 | 1. FSV Mainz 05 | FC Bayern München | Matchday 9 |
-| 2026-11-07 | 15:30 | GER1 | SC Paderborn 07 | Eintracht Frankfurt | Matchday 9 |
-| 2026-11-07 | 17:15 | FRA1 | AJ Auxerre | Paris FC | Matchday 10 |
-| 2026-11-07 | 18:00 | ITA1 | Parma Calcio 1913 | Bologna FC 1909 | Matchday 11 |
-| 2026-11-07 | 18:30 | GER1 | VfB Stuttgart | SV Werder Bremen | Matchday 9 |
-| 2026-11-07 | 20:45 | FRA1 | Paris Saint-Germain FC | ES Troyes AC | Matchday 10 |
-| 2026-11-07 | 20:45 | ITA1 | AS Roma | US Sassuolo Calcio | Matchday 11 |
-| 2026-11-08 | – | ESP1 | Elche CF | Real Betis Balompié | Matchday 12 |
-| 2026-11-08 | – | ESP1 | CA Osasuna | Athletic Club | Matchday 12 |
-| 2026-11-08 | – | ESP1 | Sevilla FC | Deportivo Alavés | Matchday 12 |
-| 2026-11-08 | – | ESP1 | Valencia CF | Real Madrid CF | Matchday 12 |
-| 2026-11-08 | – | ESP1 | RC Celta de Vigo | Levante UD | Matchday 12 |
-| 2026-11-08 | – | ESP1 | Real Sociedad de Fútbol | Rayo Vallecano de Madrid | Matchday 12 |
-| 2026-11-08 | – | ESP1 | Málaga CF | Real Racing Club de Santander | Matchday 12 |
-| 2026-11-08 | – | ESP1 | RCD Espanyol de Barcelona | RC Deportivo La Coruña | Matchday 12 |
-| 2026-11-08 | – | ESP1 | Club Atlético de Madrid | FC Barcelona | Matchday 12 |
-| 2026-11-08 | – | ESP1 | Villarreal CF | Getafe CF | Matchday 12 |
-| 2026-11-08 | 12:30 | ITA1 | SSC Napoli | SS Lazio | Matchday 11 |
-| 2026-11-08 | 15:00 | FRA1 | Stade Rennais FC 1901 | Lille OSC | Matchday 10 |
-| 2026-11-08 | 15:00 | ITA1 | Genoa CFC | AC Milan | Matchday 11 |
-| 2026-11-08 | 15:00 | ITA1 | AC Monza | Atalanta BC | Matchday 11 |
-| 2026-11-08 | 15:30 | GER1 | 1. FC Köln | Bayer 04 Leverkusen | Matchday 9 |
-| 2026-11-08 | 17:15 | FRA1 | Le Mans FC | AS Monaco FC | Matchday 10 |
-| 2026-11-08 | 17:15 | FRA1 | Stade Brestois 29 | Olympique Lyonnais | Matchday 10 |
-| 2026-11-08 | 17:15 | FRA1 | Le Havre AC | FC Lorient | Matchday 10 |
-| 2026-11-08 | 17:15 | FRA1 | Angers SCO | OGC Nice | Matchday 10 |
-| 2026-11-08 | 17:30 | GER1 | SC Freiburg | 1. FC Union Berlin | Matchday 9 |
-| 2026-11-08 | 18:00 | ITA1 | FC Internazionale Milano | Como 1907 | Matchday 11 |
-| 2026-11-08 | 19:30 | GER1 | TSG 1899 Hoffenheim | FC Schalke 04 | Matchday 9 |
-| 2026-11-08 | 20:45 | FRA1 | Racing Club de Lens | Olympique de Marseille | Matchday 10 |
-| 2026-11-08 | 20:45 | ITA1 | ACF Fiorentina | Juventus FC | Matchday 11 |
 | 2026-11-09 | – | SWE1? | AIK Solna | Halmstads BK | Matchday 30 |
 | 2026-11-09 | – | SWE1? | Hammarby IF | IF Elfsborg | Matchday 30 |
 | 2026-11-09 | – | SWE1? | IF Brommapojkarna | Degerfors IF | Matchday 30 |
