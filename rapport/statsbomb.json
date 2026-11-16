@@ -1,6 +1,6 @@
 {
  "name": "statsbomb",
- "finished_utc": "2026-11-09T13:37:56Z",
+ "finished_utc": "2026-11-16T13:29:01Z",
  "runs": [
   {
    "source": "openfootball",
@@ -14,8 +14,8 @@
     "skipped": 0,
     "files_imported": 96
    },
-   "next_run_utc": "2026-11-10T13:02:34Z",
-   "seconds": 238
+   "next_run_utc": "2026-11-17T00:54:59Z",
+   "seconds": 204
   },
   {
    "source": "wyscout_public",
@@ -73,8 +73,8 @@
      "Foul / Violent Foul": 74
     }
    },
-   "next_run_utc": "2026-11-10T13:03:20Z",
-   "seconds": 46
+   "next_run_utc": "2026-11-17T00:55:40Z",
+   "seconds": 41
   },
   {
    "source": "statsbomb_open",
@@ -87,15 +87,15 @@
     "events_imported": 1953,
     "match_inserted": 283
    },
-   "next_run_utc": "2026-11-10T13:37:56Z",
-   "seconds": 2076
+   "next_run_utc": "2026-11-17T01:29:01Z",
+   "seconds": 2001
   }
  ],
  "operational": {
   "max_age_days": 450,
   "operative_min": 100,
   "limited_min": 20,
-  "as_of_utc": "2026-11-09T13:37:56Z",
+  "as_of_utc": "2026-11-16T13:29:01Z",
   "competitions": [
    {
     "competition": "UCL",
@@ -237,10 +237,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "397 matcher med värde de senaste 450 dagarna.",
+      "reason": "388 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 397,
-      "recent_any": 397,
+      "recent_allowed": 388,
+      "recent_any": 388,
       "total_allowed": 6098,
       "last_allowed": "2026-09-20T15:30:00Z",
       "last_any": "2026-09-20T15:30:00Z",
@@ -309,10 +309,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "427 matcher med värde de senaste 450 dagarna.",
+      "reason": "418 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 427,
-      "recent_any": 427,
+      "recent_allowed": 418,
+      "recent_any": 418,
       "total_allowed": 5359,
       "last_allowed": "2026-09-20T19:00:00Z",
       "last_any": "2026-09-20T19:00:00Z",
@@ -381,10 +381,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "327 matcher med värde de senaste 450 dagarna.",
+      "reason": "326 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 327,
-      "recent_any": 327,
+      "recent_allowed": 326,
+      "recent_any": 326,
       "total_allowed": 4917,
       "last_allowed": "2026-09-20T17:30:00Z",
       "last_any": "2026-09-20T17:30:00Z",
@@ -525,10 +525,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "322 matcher med värde de senaste 450 dagarna.",
+      "reason": "313 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 322,
-      "recent_any": 322,
+      "recent_allowed": 313,
+      "recent_any": 313,
       "total_allowed": 4254,
       "last_allowed": "2026-09-20T18:45:00Z",
       "last_any": "2026-09-20T18:45:00Z",
@@ -2835,14 +2835,14 @@
  },
  "fetches": {
   "openfootball": {
-   "n": 103,
-   "failed": 1,
+   "n": 102,
+   "failed": 0,
    "bytes": 8232339
   },
   "statsbomb_open": {
    "n": 2000,
    "failed": 0,
-   "bytes": 6029056819
+   "bytes": 6029056822
   },
   "wyscout_public": {
    "n": 19,
