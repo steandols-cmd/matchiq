@@ -1,6 +1,6 @@
 {
  "name": "oppen_data",
- "finished_utc": "2026-11-16T12:50:34Z",
+ "finished_utc": "2026-11-23T14:44:35Z",
  "runs": [
   {
    "source": "openfootball",
@@ -14,7 +14,7 @@
     "skipped": 0,
     "files_imported": 96
    },
-   "next_run_utc": "2026-11-17T00:49:47Z",
+   "next_run_utc": "2026-11-23T14:58:48Z",
    "seconds": 202
   },
   {
@@ -73,15 +73,15 @@
      "Foul / Violent Foul": 74
     }
    },
-   "next_run_utc": "2026-11-17T00:50:34Z",
-   "seconds": 47
+   "next_run_utc": "2026-11-23T14:59:35Z",
+   "seconds": 46
   }
  ],
  "operational": {
   "max_age_days": 450,
   "operative_min": 100,
   "limited_min": 20,
-  "as_of_utc": "2026-11-16T12:50:35Z",
+  "as_of_utc": "2026-11-23T14:44:35Z",
   "competitions": [
    {
     "competition": "UCL",
@@ -216,10 +216,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "388 matcher med värde de senaste 450 dagarna.",
+      "reason": "375 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 388,
-      "recent_any": 388,
+      "recent_allowed": 375,
+      "recent_any": 375,
       "total_allowed": 6098,
       "last_allowed": "2026-09-20T15:30:00Z",
       "last_any": "2026-09-20T15:30:00Z",
@@ -284,10 +284,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "418 matcher med värde de senaste 450 dagarna.",
+      "reason": "406 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 418,
-      "recent_any": 418,
+      "recent_allowed": 406,
+      "recent_any": 406,
       "total_allowed": 5359,
       "last_allowed": "2026-09-20T19:00:00Z",
       "last_any": "2026-09-20T19:00:00Z",
@@ -352,10 +352,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "326 matcher med värde de senaste 450 dagarna.",
+      "reason": "314 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 326,
-      "recent_any": 326,
+      "recent_allowed": 314,
+      "recent_any": 314,
       "total_allowed": 4917,
       "last_allowed": "2026-09-20T17:30:00Z",
       "last_any": "2026-09-20T17:30:00Z",
@@ -420,10 +420,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "394 matcher med värde de senaste 450 dagarna.",
+      "reason": "383 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 394,
-      "recent_any": 394,
+      "recent_allowed": 383,
+      "recent_any": 383,
       "total_allowed": 4944,
       "last_allowed": "2026-09-20T18:45:00Z",
       "last_any": "2026-09-20T18:45:00Z",
@@ -488,10 +488,10 @@
      "goals": {
       "label": "Mål / 1X2",
       "status": "operativ",
-      "reason": "313 matcher med värde de senaste 450 dagarna.",
+      "reason": "304 matcher med värde de senaste 450 dagarna.",
       "needs": [],
-      "recent_allowed": 313,
-      "recent_any": 313,
+      "recent_allowed": 304,
+      "recent_any": 304,
       "total_allowed": 4254,
       "last_allowed": "2026-09-20T18:45:00Z",
       "last_any": "2026-09-20T18:45:00Z",
